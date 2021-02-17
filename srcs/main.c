@@ -1,7 +1,7 @@
-#include "libft.h"
+#include <minishell.h>
 
-int main(void)
+int main(int argc, char const **argv, char const **envp)
 {
-	ft_putstr_fd("Hello world!\n", 1);
+
 	return (0);
 }

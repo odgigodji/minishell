@@ -20,8 +20,8 @@ int	get_next_line(int fd, char **line)
 
 	buf = '\0';
 	if (NULL == (*line = malloc(10000)))
-		return (NULL);
-	*line = '\0';
+		return (0);
+	**line = '\0';
 	count = 0;
 	while (1)
 	{

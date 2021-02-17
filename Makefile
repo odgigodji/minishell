@@ -18,6 +18,8 @@ LFT_DIR	=	libft
 
 SRC		:=	$(addprefix srcs/,		\
 			main.c					\
+			get_next_line.c			\
+			pre_executer.c			\
 			)
 
 
@@ -25,7 +27,8 @@ HEADER	=	minishell.h
 
 OBJ		=	$(SRC:.c=.o)
 
-CC		=	gcc -Wall -Wextra -Werror -Iincludes -Ilibft
+#	-Wall -Wextra -Werror
+CC		=	gcc -Iincludes -Ilibft
 
 .PHONY:		all clean fclean re
 
