@@ -11,7 +11,7 @@
 
 # include "libft.h"
 
-int	get_next_line(int fd, char **line);
+int		get_next_line(int fd, char **line);
 
 void	pre_executer(int argc, char **argv, char **envp);
 

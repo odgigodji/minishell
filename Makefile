@@ -8,6 +8,7 @@ SRC		:=	$(addprefix srcs/,		\
 			main.c					\
 			get_next_line.c			\
 			pre_executer.c			\
+			ft_echo.c				\
 			)
 
 
@@ -24,10 +25,11 @@ all			:$(NAME)
 
 %.o			:%.c $(HEADER)
 
-$(LFT_DIR)/($LFT):
+$(LFT_DIR)/$(LFT):
 			$(MAKE) -C $(LFT_DIR)
 
 $(NAME):	$(OBJ) $(LFT_DIR)/$(LFT) includes/$(HEADER)
+			$(MAKE) -C $(LFT_DIR)
 			$(CC) -L$(LFT_DIR) -lft -o $(NAME) $(OBJ) $(LFT_DIR)/$(LFT)
 
 clean:

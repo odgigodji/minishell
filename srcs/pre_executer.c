@@ -1,24 +1,8 @@
 #include "minishell.h"
 
-//int	pid;
-//int rv;
-//
-//pid = fork();
-//wait(&rv);
-//if (pid != 0)
-//{
-//printf("I'm a parent	(pid != 0, rv = %d)\n", rv);
-//}
-//else
-//{
-//printf("I'm a child	(pid == 0, rv = %d)\n", rv);
-//}
-//return (0);
-
 /*
 ** Функция которая исполняет команду в форке
 */
-//void	fork_execution(char **command, char **envp)
 
 void	fork_execution(char **command, char **envp)
 {
@@ -44,6 +28,7 @@ void	fork_execution(char **command, char **envp)
 			ft_strlcat(link, path[count], 1000);
 			ft_strlcat(link, "/", 1000);
 			ft_strlcat(link, command[0], 1000);
+			printf("[%d]	%s\n", count, link);
 			execve(link, command, envp);
 			count++;
 			link[0] = '\0';
@@ -58,7 +43,8 @@ void	pre_executer(int argc, char **argv, char **envp)
 	count = 0;
 	while (ft_strncmp(envp[count], "PATH", 4))
 		count++;
-	char* command[]={"ls", "-l", NULL};
+//	char* command[]={"ls", "-l", "-a", "-G", NULL};
+	char* command[]={"cat", "-e", "file", NULL};
 	fork_execution(command, envp);
-	printf("test\n");
+	printf("|-->\ntest\n");
 }
