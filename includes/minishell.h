@@ -16,8 +16,7 @@
 **	Describe a simple command and arguments
 */
 
-char	**arguments;
-
+char			**arguments;
 
 /*
 **	Describe a complete command with the multiple pipes if any
@@ -26,20 +25,17 @@ char	**arguments;
 
 typedef struct	s_command
 {
-	int					number_of_available_simple_commands;
-	int 				number_of_simple_commands;
-	char				***simple_commands;
-	char				*out_file;
-	char 				*input_file;
-	char 				*err_file;
-	int 				background;
-
-
+	int			number_of_available_simple_commands;
+	int 		number_of_simple_commands;
+	char		***simple_commands;
+	char		*out_file;
+	char 		*input_file;
+	char 		*err_file;
+	int 		background;
 }				t_command;
 
 
-int		get_next_line(int fd, char **line);
-
-void	pre_executer(int argc, char **argv, char **envp);
+int				get_next_line(int fd, char **line);
+void			pre_executer(int argc, char **argv, char **envp);
 
 #endif

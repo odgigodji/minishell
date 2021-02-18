@@ -4,18 +4,54 @@
 #include <stdlib.h>
 #include "../../libft/libft.h"
 
-
-
-int	main(int argc, char **argv, char **envp)
+char	***parser_temp(void)
 {
-	char*	command_ls[]={"/bin/ls", "-l", NULL};
-	char*	command_cat[]={"/bin/cat", "-e", NULL};
-	char*	command_grep[]={"/usr/bin/grep", "pipe", NULL};
-	char	**command_table[5];
+	char	***command_table = malloc(sizeof(char **) * 5);
+	int		command_len = 50;
+
+	char	**command_ls = malloc(sizeof(char *) * 10);
+	command_ls[0] = malloc(sizeof(char) * command_len);
+	ft_strlcpy(command_ls[0], "/bin/ls", command_len);
+	command_ls[1] = malloc(sizeof(char) * command_len);
+	ft_strlcpy(command_ls[1], "-l", command_len);
+	command_ls[2] = NULL;
+
+	char	**command_cat = malloc(sizeof(char *) * 10);
+	command_cat[0] = malloc(sizeof(char) * command_len);
+	ft_strlcpy(command_cat[0], "/bin/cat", command_len);
+	command_cat[1] = malloc(sizeof(char) * command_len);
+	ft_strlcpy(command_cat[1], "-e", command_len);
+	command_cat[2] = NULL;
+
+	char	**command_grep = malloc(sizeof(char *) * 10);
+	command_grep[0] = malloc(sizeof(char) * command_len);
+	ft_strlcpy(command_grep[0], "/usr/bin/grep", command_len);
+	command_grep[1] = malloc(sizeof(char) * command_len);
+	ft_strlcpy(command_grep[1], "Make", command_len);
+	command_grep[2] = NULL;
+
 	command_table[0] = command_ls;
 	command_table[1] = command_cat;
 	command_table[2] = command_grep;
 	command_table[3] = NULL;
+
+	return (command_table);
+}
+
+size_t	ft_command_table_len(char ***command_table)
+{
+	size_t	count;
+
+	count = 0;
+	while (command_table[count])
+		count++;
+	return (count);
+}
+
+int		main(int argc, char **argv, char **envp)
+{
+	char	***command_table = parser_temp();
+	int		command_table_len = ft_command_table_len(command_table);
 
 	//	save in/out
 	int 	tmpin = dup(0);
@@ -36,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 		dup2(fdin, 0);
 		close(fdin);
 
-		if (command_table_count == 2)
+		if (command_table_count == command_table_len - 1)
 		{
 			// use default output
 			fdout = dup(tmpout);
@@ -59,7 +95,7 @@ int	main(int argc, char **argv, char **envp)
 		if (ret == 0)
 		{
 			execve(command_table[command_table_count][0], command_table[command_table_count], envp);
-			perror(command_table[command_table_count][0]);
+			printf("|%s|\n", command_table[command_table_count][0]);
 			perror("execve child. Command not executed\n");
 			exit(0);
 		}
