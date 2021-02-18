@@ -4,13 +4,20 @@ LFT		=	libft.a
 
 LFT_DIR	=	libft
 
-SRC		:=	$(addprefix srcs/,		\
-			main.c					\
-			get_next_line.c			\
-			pre_executer.c			\
-			ft_echo.c				\
-			)
+SRC_CMN	:= $(addprefix srcs/,				\
+					main.c					\
+					get_next_line.c			\
+					)
 
+SRC_PSR := 	$(addprefix srcs/parser/,		\
+           			)
+
+SRC_EXR := 	$(addprefix srcs/executor/,		\
+           			pre_executer.c			\
+           			ft_echo.c				\
+           			)
+
+SRC		=	$(SRC_CMN) $(SRC_PSR) $(SRC_EXR)
 
 HEADER	=	minishell.h
 
