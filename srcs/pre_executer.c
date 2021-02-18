@@ -1,43 +1,64 @@
 #include "minishell.h"
 
-void	pre_executer(int argc, char **argv, char **envp)
+//int	pid;
+//int rv;
+//
+//pid = fork();
+//wait(&rv);
+//if (pid != 0)
+//{
+//printf("I'm a parent	(pid != 0, rv = %d)\n", rv);
+//}
+//else
+//{
+//printf("I'm a child	(pid == 0, rv = %d)\n", rv);
+//}
+//return (0);
+
+/*
+** Функция которая исполняет команду в форке
+*/
+//void	fork_execution(char **command, char **envp)
+
+void	fork_execution(char **command, char **envp)
 {
-	char	**test;
-	char	*ls = "/ls";
-	char	*key = "-l";
-	int		count = 0;
 	char	**path;
-	char	*command;
-	int		len;
+	int		count;
+	char	link[1000];
 
-	path = ft_split(envp[0], ':');
-	while (path[count])
-		printf("[%d] |%s|\n", count, path[count++]);
-	count = 0;
+	int	pid;
+	int rv;
 
-	len = (int)ft_strlen(path[count]) + (int)ft_strlen(ls) + 1;
-	command = malloc(len);
-	*command = '\0';
-	int	check;
-	while (path)
+	pid = fork();
+	wait(&rv);
+	if (pid == 0)
 	{
-		ft_strlcat(command, path[count], (len));
-		ft_strlcat(command, ls, (len));
-		check = execve(command, argv, envp);
-		printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[%d] %s\n", check, command);
-//		printf("[%d] %s\n", count, command[count++]);
-		command[0] = '\0';
-		path++;
+		count = 0;
+		link[0] = '\0';
+		while (ft_strncmp(envp[count], "PATH", 4))
+			count++;
+		path = ft_split(envp[count], ':');
+		count = 0;
+		while (path[count])
+		{
+			ft_strlcat(link, path[count], 1000);
+			ft_strlcat(link, "/", 1000);
+			ft_strlcat(link, command[0], 1000);
+			execve(link, command, envp);
+			count++;
+			link[0] = '\0';
+		}
 	}
 }
 
-//	pre_executer(argc, argv, envp);
-//int count;
-//
-//count = 0;
-//while (!ft_strncmp(envp[count], "PATH", 4))
-//count++;
-//printf("{%s}\n", envp[count]);
-////	char* arglist[]={"/bin/ls", "-a", "-G", "-l", NULL};
-//char* arglist[]={"/bin/echo", envp[count], NULL};
-//execve(arglist[0], arglist, envp);
+void	pre_executer(int argc, char **argv, char **envp)
+{
+	int count;
+
+	count = 0;
+	while (ft_strncmp(envp[count], "PATH", 4))
+		count++;
+	char* command[]={"ls", "-l", NULL};
+	fork_execution(command, envp);
+	printf("test\n");
+}
