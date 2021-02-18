@@ -16,15 +16,7 @@
 **	Describe a simple command and arguments
 */
 
-typedef struct	s_simple_command
-{
-	//	Available space for arguments currently preallocated
-	int		number_of_available_arguments;
-	//	Number of arguments
-	int		number_of_arguments;
-	//	Array of arguments
-	char	**arguments;
-}				t_simple_command;
+char	**arguments;
 
 
 /*
@@ -36,7 +28,7 @@ typedef struct	s_command
 {
 	int					number_of_available_simple_commands;
 	int 				number_of_simple_commands;
-	t_simple_command	**simple_commands;
+	char				***simple_commands;
 	char				*out_file;
 	char 				*input_file;
 	char 				*err_file;

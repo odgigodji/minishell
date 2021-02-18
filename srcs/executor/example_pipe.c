@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include "../../libft/libft.h"
 
+
+
 int	main(int argc, char **argv, char **envp)
 {
 	char*	command_ls[]={"/bin/ls", "-l", NULL};
@@ -58,7 +60,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			execve(command_table[command_table_count][0], command_table[command_table_count], envp);
 			perror(command_table[command_table_count][0]);
-			perror("execve child\n");
+			perror("execve child. Command not executed\n");
 			exit(0);
 		}
 		command_table_count++;
