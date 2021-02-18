@@ -28,7 +28,7 @@ void	fork_execution(char **command, char **envp)
 			ft_strlcat(link, path[count], 1000);
 			ft_strlcat(link, "/", 1000);
 			ft_strlcat(link, command[0], 1000);
-			printf("[%d]	%s\n", count, link);
+//			printf("[%d]	%s\n", count, link);
 			execve(link, command, envp);
 			count++;
 			link[0] = '\0';
@@ -43,8 +43,13 @@ void	pre_executer(int argc, char **argv, char **envp)
 	count = 0;
 	while (ft_strncmp(envp[count], "PATH", 4))
 		count++;
-//	char* command[]={"ls", "-l", "-a", "-G", NULL};
-	char* command[]={"cat", "-e", "file", NULL};
-	fork_execution(command, envp);
-	printf("|-->\ntest\n");
+	char *command_ls[] = {"ls", "-a", "-G", NULL};
+	char *command_cat[] = {"cat", "-e", "file", NULL};
+	char ***command_table = malloc(sizeof(char **) * 3);
+
+	command_table[0] = command_ls;
+	command_table[1] = command_cat;
+	command_table[2] = NULL;
+	fork_execution(command_table[0], envp);
+//	printf("|-->\ntest\n");
 }
