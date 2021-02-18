@@ -39,6 +39,12 @@ $(NAME):	$(OBJ) $(LFT_DIR)/$(LFT) includes/$(HEADER)
 			$(MAKE) -C $(LFT_DIR)
 			$(CC) -L$(LFT_DIR) -lft -o $(NAME) $(OBJ) $(LFT_DIR)/$(LFT)
 
+exa_pip		= srcs/executor/example_pipe.c
+
+srcs/executor/example_pipe.o	:	$(exa_pip) libft/libft.h
+
+example_pipe	:	srcs/executor/example_pipe.o
+					$(CC) -L$(LFT_DIR) -lft -o example_pipe srcs/executor/example_pipe.o $(LFT_DIR)/$(LFT)
 clean:
 			-rm -f $(OBJ)
 

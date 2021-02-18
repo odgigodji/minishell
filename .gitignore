@@ -7,3 +7,4 @@ srcs/*.o
 *.a
 minishell
 file
+example_pipe
