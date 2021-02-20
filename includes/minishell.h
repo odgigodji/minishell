@@ -37,5 +37,6 @@ typedef struct	s_command
 
 int				get_next_line(int fd, char **line);
 void			pre_executer(int argc, char **argv, char **envp);
-
+void			ft_parser(void);
+int				ft_lexer(char *line);
 #endif

@@ -10,6 +10,7 @@ SRC_CMN	:= $(addprefix srcs/,				\
 					)
 
 SRC_PSR := 	$(addprefix srcs/parser/,		\
+						parser.c			\
            			)
 
 SRC_EXR := 	$(addprefix srcs/executor/,		\
