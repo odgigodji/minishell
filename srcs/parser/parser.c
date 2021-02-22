@@ -3,13 +3,17 @@
 
 int ft_lexer(char *line)
 {
-	return 0;
+	return (0);
 }
 
-void ft_parser(void)
+int	ft_parser(void)
 {
 	char *line;
-	get_next_line(1, &line);
+	int		gnl_rv;
+
+	ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
+	gnl_rv = get_next_line(1, &line);
 	ft_lexer(line);
 	printf("%s", line);
+	return (gnl_rv);
 }

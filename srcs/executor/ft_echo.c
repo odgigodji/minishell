@@ -8,9 +8,9 @@ void	*ft_echo(void)
 {
 	char *line;
 
-	while (get_next_line(0, &line))
+	while (get_next_line(STDOUT_FILENO, &line))
 	{
-		puts(line);
+		ft_putstr_fd(line, STDIN_FILENO);
 		free(line);
 	}
 	return (NULL);

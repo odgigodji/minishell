@@ -48,14 +48,12 @@ size_t	ft_command_table_len(char ***command_table)
 	return (count);
 }
 
-int		main(int argc, char **argv, char **envp)
+void	ft_pipe(char ***command_table, char **envp)
 {
-	char	***command_table = parser_temp();
 	int		command_table_len = ft_command_table_len(command_table);
-
 	//	save in/out
-	int 	tmpin = dup(0);
-	int		tmpout = dup(1);
+	int 	tmpin = dup(STDIN_FILENO);
+	int		tmpout = dup(STDOUT_FILENO);
 
 	//	set the initial input
 	int		fdin;
@@ -87,7 +85,7 @@ int		main(int argc, char **argv, char **envp)
 			fdin = fdpipe[0];
 		}
 		// Redirect output
-		dup2(fdout, 1);
+		dup2(fdout, STDOUT_FILENO);
 		close(fdout);
 
 		// Create child process
@@ -102,11 +100,17 @@ int		main(int argc, char **argv, char **envp)
 		command_table_count++;
 	}
 	//	restore in/out defaults
-	dup2(tmpin, 0);
-	dup2(tmpout, 1);
+	dup2(tmpin, STDIN_FILENO);
+	dup2(tmpout, STDOUT_FILENO);
 	close(tmpin);
 	close(tmpout);
 	waitpid(ret, NULL, WUNTRACED);
+}
 
+int		main(int argc, char **argv, char **envp)
+{
+	char	***command_table = parser_temp();
+
+	ft_pipe(command_table, envp);
 	return (0);
 }
