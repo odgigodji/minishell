@@ -14,6 +14,7 @@ int	ft_parser(void)
 	ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
 	gnl_rv = get_next_line(1, &line);
 	ft_lexer(line);
-	printf("%s", line);
+	if (!ft_strncmp(line, "exit", 4))
+		return (0);
 	return (gnl_rv);
 }

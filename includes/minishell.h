@@ -34,9 +34,28 @@ typedef struct	s_command
 	int 		background;
 }				t_command;
 
+typedef struct	s_common
+{
+	t_command	command;
+	char 		**env_variables;
+}				t_common;
 
 int				get_next_line(int fd, char **line);
-void			pre_executer(int argc, char **argv, char **envp);
 int				ft_parser(void);
 int				ft_lexer(char *line);
+
+/*
+** executor
+*/
+
+void			pre_executer(int argc, char **argv, char **envp);
+
+
+/*
+** utils
+*/
+
+char			**copy_envp(char const **envp);
+size_t			list_len(const char **list);
+
 #endif

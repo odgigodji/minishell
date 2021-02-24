@@ -63,11 +63,12 @@ void	ft_pipe(char ***command_table, char **envp)
 	int		ret;
 	int		fdout;
 	int		command_table_count = 0;
+	int 	fdpipe[2];
 
 	while (command_table[command_table_count])
 	{
 		// redirect input
-		dup2(fdin, 0);
+		dup2(fdin, STDIN_FILENO);
 		close(fdin);
 
 		if (command_table_count == command_table_len - 1)
@@ -79,7 +80,6 @@ void	ft_pipe(char ***command_table, char **envp)
 		{
 			// simple command
 			// create pipe
-			int fdpipe[2];
 			pipe(fdpipe);
 			fdout = fdpipe[1];
 			fdin = fdpipe[0];
