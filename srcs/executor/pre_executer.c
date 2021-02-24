@@ -36,7 +36,7 @@ void	fork_execution(char **command, char **envp)
 	}
 }
 
-void	pre_executer(int argc, char **argv, char **envp)
+void	pre_executor(int argc, char **argv, char **envp)
 {
 	int count;
 

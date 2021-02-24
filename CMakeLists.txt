@@ -2,12 +2,14 @@ cmake_minimum_required(VERSION 3.17)
 project(minishell C)
 set(CMAKE_C_STANDARD 99)
 
-include_directories(${CMAKE_SOURCE_DIR}/libft ${CMAKE_SOURCE_DIR}/includes )
-link_directories(${CMAKE_SOURCE_DIR}/libft )
+include_directories(${CMAKE_SOURCE_DIR}/libft ${CMAKE_SOURCE_DIR}/includes)
+link_directories(${CMAKE_SOURCE_DIR}/libft)
+
 add_executable(minishell
         srcs/main.c
         srcs/executor/ft_echo.c
         srcs/executor/pre_executer.c
+        srcs/executor/executor.c
         srcs/parser/parser.c
         srcs/utils/get_next_line.c
         srcs/utils/copy_envp.c

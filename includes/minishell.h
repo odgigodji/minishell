@@ -53,15 +53,15 @@ typedef struct	s_common
 }				t_common;
 
 int				get_next_line(int fd, char **line);
-int				ft_parser(void);
+int				ft_parser(t_common *common);
 int				ft_lexer(char *line);
 
 /*
 ** executor
 */
 
-void			pre_executer(int argc, char **argv, char **envp);
-
+void			pre_executor(int argc, char **argv, char **envp);
+void 			executor(t_common common);
 
 /*
 ** utils
