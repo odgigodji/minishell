@@ -57,5 +57,7 @@ void			pre_executer(int argc, char **argv, char **envp);
 
 char			**copy_envp(char const **envp);
 size_t			list_len(const char **list);
+void			ft_putenv(char **envp);
+void			ft_putenv_arg(char *line);
 
 #endif
