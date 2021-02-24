@@ -1,5 +1,5 @@
-cmake-build-debug
-cmake-build-debug/*
+#cmake-build-debug
+#cmake-build-debug/*
 .*
 *.o
 **/*.o
@@ -8,3 +8,4 @@ srcs/*.o
 minishell
 file
 example_pipe
+#CMakeLists.txt

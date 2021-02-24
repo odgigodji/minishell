@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <sys/wait.h>
 #include <stdlib.h>
-#include "../../libft/libft.h"
+#include "libft.h"
 
 char	***parser_temp(void)
 {

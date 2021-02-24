@@ -1,9 +1,26 @@
 #include <stdio.h>
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 int ft_lexer(char *line)
 {
-	return (0);
+	int i;
+	char *res;
+	int j;
+
+	i = 0;
+	j = 0;
+	printf("|%s|", line);
+	while(line[i] != '\n')
+	{
+		if (line[i] == ' ')
+			i++;
+//		if (line[i] == )
+	}
+}
+
+void ft_error(void)
+{
+	;
 }
 
 int	ft_parser(void)
