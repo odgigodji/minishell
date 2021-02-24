@@ -5,11 +5,11 @@ int main(int argc, char const **argv, char const **envp)
 {
 	t_common	common;
 	int 		count = 0;
-	char 		**temp = common.env_variables;
+	char 		**temp;
 
 	common.env_variables = copy_envp(envp);
-		ft_putenv(temp);
-		count++;
+	temp = common.env_variables;
+	ft_putenv(temp);
 //	}
 //	while (ft_parser())
 //	{
