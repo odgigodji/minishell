@@ -13,7 +13,7 @@ add_executable(minishell
         srcs/parser/parser.c
         srcs/utils/get_next_line.c
         srcs/utils/copy_envp.c
-        )
+        srcs/utils/new_command.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m
