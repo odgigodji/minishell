@@ -38,7 +38,7 @@ typedef struct	s_command
 	int 		number_of_simple_commands;
 
 	char		***simple_commands;
-	t_simple_command		**simple_commands_struct;	//fixme
+	t_simple_command		*simple_commands_struct;	//fixme
 
 	char		*out_file;
 	char 		*input_file;
@@ -62,6 +62,12 @@ int				ft_lexer(char *line);
 
 void			pre_executor(int argc, char **argv, char **envp);
 void 			executor(t_common common);
+
+/*
+ * pre_executor
+ */
+
+void			fork_execution(char **command, char **envp);
 
 /*
 ** utils
