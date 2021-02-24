@@ -15,8 +15,17 @@
 /*
 **	Describe a simple command and arguments
 */
+typedef struct	s_simple_command
+{
+	int		number_of_available_arguments;	//	Available space for arguments currently preallocated
 
-char			**arguments;
+	int 	number_of_arguments;			//	Number of arguments
+
+	char	**arguments;					//	Array of arguments
+
+	//	SimpleCommand();
+	//	void insertArgument( char * argument );
+}				t_simple_command;
 
 /*
 **	Describe a complete command with the multiple pipes if any
@@ -27,7 +36,10 @@ typedef struct	s_command
 {
 	int			number_of_available_simple_commands;
 	int 		number_of_simple_commands;
+
 	char		***simple_commands;
+	t_simple_command		**simple_commands_struct;
+
 	char		*out_file;
 	char 		*input_file;
 	char 		*err_file;
