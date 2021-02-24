@@ -21,7 +21,7 @@ typedef struct	s_simple_command
 
 	int 	number_of_arguments;			//	Number of arguments
 
-	char	**arguments;					//	Array of arguments
+	char	**arguments;					//	fixme Array of arguments
 
 	//	SimpleCommand();
 	//	void insertArgument( char * argument );
@@ -38,7 +38,7 @@ typedef struct	s_command
 	int 		number_of_simple_commands;
 
 	char		***simple_commands;
-	t_simple_command		**simple_commands_struct;
+	t_simple_command		**simple_commands_struct;	//fixme
 
 	char		*out_file;
 	char 		*input_file;

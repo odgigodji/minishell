@@ -9,13 +9,14 @@ int ft_lexer(char *line)
 
 	i = 0;
 	j = 0;
-	printf("|%s|", line);
-	while(line[i] != '\n')
-	{
-		if (line[i] == ' ')
-			i++;
-//		if (line[i] == )
-	}
+	printf("|%s|\n", line);
+//	while(line[i] != '\n')
+//	{
+//		if (line[i] == ' ')
+//			i++;
+////		if (line[i] == )
+//	}
+	return (1);
 }
 
 void ft_error(void)
@@ -25,7 +26,7 @@ void ft_error(void)
 
 int	ft_parser(void)
 {
-	char *line;
+	char	*line;
 	int		gnl_rv;
 
 	ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
