@@ -67,7 +67,7 @@ void	execute_command(t_common common, char **envp)
 	int		command_table_count = 0;
 	int 	fdpipe[2];
 
-	while (common.command.simple_commands_struct->arguments[command_table_count])
+	while (common.command.simple_commands_struct[0]->arguments[command_table_count])
 	{
 		//	redirect input
 		dup2(fdin, STDIN_FILENO);		// подменяем stdin (fd = 0) на ранее созданный fdin
@@ -111,8 +111,8 @@ void	execute_command(t_common common, char **envp)
 			{
 				ft_strlcat(command, path[count], 100);
 				ft_strlcat(command, "/", 100);
-				ft_strlcat(command, common.command.simple_commands_struct->arguments[0], 100);
-				execve(common.command.simple_commands_struct->arguments[0], common.command.simple_commands_struct->arguments, envp);
+				ft_strlcat(command, common.command.simple_commands_struct[0]->arguments[0], 100);
+				execve(common.command.simple_commands_struct[0]->arguments[0], common.command.simple_commands_struct[0]->arguments, envp);
 				count++;
 			}
 			perror("execve child. Command not executed (no such command?)\n");

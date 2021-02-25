@@ -86,5 +86,10 @@ void			free_line_list(char **split_list);
 
 t_common		common_init(char **envp);
 t_command		command_init(void);
+t_simple_command	*simple_command_init(
+		char **arguments,
+		int number_of_arguments,
+		int number_of_available_arguments
+);
 
 #endif

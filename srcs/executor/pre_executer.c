@@ -17,11 +17,8 @@ void	fork_execution(char **command, char **envp)
 	wait(&rv);
 	if (pid == 0)
 	{
-		count = 0;
 		link[0] = '\0';
-		while (ft_strncmp(envp[count], "PATH", 4))
-			count++;
-		path = ft_split(envp[count], ':');
+		path = split_path(envp);
 		count = 0;
 		while (path[count])
 		{
