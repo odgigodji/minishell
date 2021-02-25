@@ -1,8 +1,4 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-#include "libft.h"
+#include "minishell.h"
 
 char	***parser_temp(void)
 {
@@ -51,14 +47,17 @@ size_t	ft_command_table_len(char ***command_table)
 void	ft_pipe(char ***command_table, char **envp)
 {
 	int		command_table_len = ft_command_table_len(command_table);
-	//	save in/out
-	int 	tmpin = dup(STDIN_FILENO);
-	int		tmpout = dup(STDOUT_FILENO);
 
-	//	set the initial input
+	int 	tmpin = dup(STDIN_FILENO);		//	save in
+	int		tmpout = dup(STDOUT_FILENO);	//	save out
+
 	int		fdin;
 	int		infile = 0;
-	fdin = dup(tmpin); // use default input
+	int		outfile = 0;
+	if (infile)
+		fdin = open(infile, O_RDONLY);				//	получаем ввод из файла
+	else											//	set the initial input
+		fdin = dup(tmpin);	// use default input	//	используем стандартный ввод
 
 	int		ret;
 	int		fdout;
@@ -67,24 +66,33 @@ void	ft_pipe(char ***command_table, char **envp)
 
 	while (command_table[command_table_count])
 	{
-		// redirect input
-		dup2(fdin, STDIN_FILENO);
+		//	redirect input
+		dup2(fdin, STDIN_FILENO);		// подменяем stdin (fd = 0) на ранее созданный fdin
 		close(fdin);
 
-		if (command_table_count == command_table_len - 1)
+		//	Выбираем направление ввода и вывода
+		/*		подмена стандартного ввода на fd файла с именем "file"
+		**	int newfd=open("file",O_RDONLY);
+		**	dup2(newfd, 0);										// теперь если писать в fd = 0 то запись будет производится в file
+		**	close(newfd);
+		*/
+		if (command_table_count == command_table_len - 1)	//	если это последняя simple_command
 		{
-			// use default output
-			fdout = dup(tmpout);
+			if (outfile)
+				fdout = open(outfile, O_WRONLY, O_APPEND);
+			else
+				fdout = dup(tmpout);	//	то назначаем stdout (сохранённый ранее), результат вывода будем писать в стандартный вывод
 		}
-		else
+		else							//	иначе
 		{
+			// not last
 			// simple command
 			// create pipe
-			pipe(fdpipe);
-			fdout = fdpipe[1];
-			fdin = fdpipe[0];
+			pipe(fdpipe);				//	создаём pipe
+			fdout = fdpipe[1];			//	write fd назначаем на out
+			fdin = fdpipe[0];			//	read fd назначаем на in
 		}
-		// Redirect output
+		//	Redirect output
 		dup2(fdout, STDOUT_FILENO);
 		close(fdout);
 
@@ -107,10 +115,10 @@ void	ft_pipe(char ***command_table, char **envp)
 	waitpid(ret, NULL, WUNTRACED);
 }
 
-int		main(int argc, char **argv, char **envp)
-{
-	char	***command_table = parser_temp();
-
-	ft_pipe(command_table, envp);
-	return (0);
-}
+//int		main(int argc, char **argv, char **envp)
+//{
+//	char	***command_table = parser_temp();
+//
+//	ft_pipe(command_table, envp);
+//	return (0);
+//}
