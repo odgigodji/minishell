@@ -2,8 +2,10 @@
 
 char	***parser_temp(void)
 {
-	char	***command_table = malloc(sizeof(char **) * 5);
-	int		command_len = 50;
+	char				***command_table = malloc(sizeof(char **) * 5);
+	int					command_len = 50;
+	t_command			command;
+	t_simple_command	*simple_command;
 
 	char	**command_ls = malloc(sizeof(char *) * 10);
 	command_ls[0] = malloc(sizeof(char) * command_len);

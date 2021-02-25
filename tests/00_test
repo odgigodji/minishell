@@ -1,3 +1,5 @@
+ls -l > file > test
+
 cat -e < file < test
 cat < file < test | cat -e
 cat < file < test | sort

@@ -35,7 +35,7 @@ char	**copy_envp(char **envp)
 	int 	count;
 
 
-	envp_len = list_len(envp);
+	envp_len = list_len((char const**)envp);
 	count = 0;
 	if (NULL == (copy = malloc(sizeof(char *) * (envp_len + 1))))
 		return (NULL);
@@ -44,7 +44,7 @@ char	**copy_envp(char **envp)
 		line_len = ft_strlen(envp[count]);
 		if (NULL == (copy[count] = malloc(line_len + 1)))
 		{
-			// fixme очистить память списка
+			free_line_list(copy);
 			return (NULL);
 		}
 		ft_strlcpy(copy[count], envp[count], line_len + 1);
