@@ -75,9 +75,16 @@ void			ft_pipe(char ***command_table, char **envp);
 ** utils
 */
 
-char			**copy_envp(char const **envp);
+char			**copy_envp(char **envp);
 size_t			list_len(const char **list);
 void			ft_putenv(char **envp);
 void			ft_putenv_arg(char *line);
+
+char			**split_path(char **envp);
+
+void			free_line_list(char **split_list);
+
+t_common		common_init(char **envp);
+t_command		command_init(void);
 
 #endif

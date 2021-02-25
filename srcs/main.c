@@ -1,14 +1,20 @@
 #include "minishell.h"
 
-
-int main(int argc, char const **argv, char const **envp)
+void	minishell_loop(char **envp)
 {
 	t_common	common;
 
-	common.env_variables = copy_envp(envp);
+	common = common_init((char **)envp);
 	while (ft_parser(&common))
 	{
 		executor(common);
 	}
+}
+
+int main(int argc, char const **argv, char const **envp)
+{
+	(void)argc;
+	(void)argv;
+	minishell_loop((char **)envp);
 	return (0);
 }

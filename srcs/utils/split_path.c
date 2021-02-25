@@ -1,17 +1,17 @@
 #include "minishell.h"
 
 /*
-**	Функция принимает параметр envp из функции main (argc, argv, envp)
+**	Функция принимает параметр (char **) envp из функции main (argc, argv, envp)
 **	находит строку содержащую PATH
 **	разбивает её на части
- *	используя в качестве разделителя ':'
- *	и возвращает массив из строк
- *
- * 	Строка типа:
- *	PATH=/Users/mscot/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
- *
- *	Превращается в массив типа:
- *	{"/Users/mscot/.brew/bin", "/usr/local/bin", "/usr/bin", "/sbin", "/usr/local/munki"}
+**	используя в качестве разделителя ':'
+**	и возвращает массив из строк
+**
+** 	Строка типа:
+**	PATH=/Users/mscot/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
+**
+**	Превращается в массив типа:
+**	{"/Users/mscot/.brew/bin", "/usr/local/bin", "/usr/bin", "/bin", "/usr/sbin", "/sbin", "/usr/local/munki"}
 */
 
 char	**split_path(char **envp)

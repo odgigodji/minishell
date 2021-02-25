@@ -44,24 +44,7 @@ size_t	ft_command_table_len(char ***command_table)
 	return (count);
 }
 
-char	**split_path(char **envp)
-{
-	char 	**path;
-	int		count;
-	char	link[1000];
-
-	count = 0;
-	link[0] = '\0';
-
-	while (ft_strncmp(envp[count], "PATH", 4))
-		count++;
-	ft_strlcpy(link, ft_strrchr(envp[count], '=') + 1, 1000);
-	path = ft_split(link, ':');
-	return (path);
-}
-
-//void	ft_pipe(char ***command_table, char **envp)
-void	ft_pipe(t_common common, char **envp)
+void	execute_command(t_common common, char **envp)
 {
 	int		command_table_len = common.command.number_of_simple_commands;	//	возможно number_of_available_simple_commands
 
@@ -71,8 +54,9 @@ void	ft_pipe(t_common common, char **envp)
 	int		fdin;
 	int		infile = 0;		// на время пока не сделаны редиректы
 	int		outfile = 0;	// на время пока не сделаны редиректы
-	if (infile)
-		fdin = open(infile, O_RDONLY);				//	получаем ввод из файла
+
+	if (common.command.input_file)	//	if (infile)
+		fdin = open(common.command.input_file, O_RDONLY);				//	получаем ввод из файла
 	else											//	set the initial input
 		fdin = dup(tmpin);	// use default input	//	используем стандартный ввод
 
@@ -95,8 +79,8 @@ void	ft_pipe(t_common common, char **envp)
 		*/
 		if (command_table_count == command_table_len - 1)	//	если это последняя simple_command
 		{
-			if (outfile)
-				fdout = open(outfile, O_WRONLY, O_APPEND);
+			if (common.command.out_file)	//	if (outfile)
+				fdout = open(common.command.out_file, O_WRONLY, O_APPEND);
 			else
 				fdout = dup(tmpout);	//	то назначаем stdout (сохранённый ранее), результат вывода будем писать в стандартный вывод
 		}
@@ -117,9 +101,17 @@ void	ft_pipe(t_common common, char **envp)
 		ret = fork();
 		if (ret == 0)
 		{
-			while (1)
+			char	**path = split_path(common.env_variables);
+			int 	count = 0;
+			char	command[100];
+
+			while (path[count])
 			{
-				execve(command_table[command_table_count][0], command_table[command_table_count], envp);
+				ft_strlcat(command, path[count], 100);
+				ft_strlcat(command, "/", 100);
+				ft_strlcat(command, common.command.simple_commands_struct->arguments[0], 100);
+				execve(common.command.simple_commands_struct->arguments[0], common.command.simple_commands_struct->arguments, envp);
+				count++;
 			}
 			perror("execve child. Command not executed (no such command?)\n");
 			exit(0);
@@ -135,7 +127,7 @@ void	ft_pipe(t_common common, char **envp)
 }
 
 
-/*
+
 void	ft_pipe(char ***command_table, char **envp)
 {
 	int		command_table_len = ft_command_table_len(command_table);
@@ -206,7 +198,7 @@ void	ft_pipe(char ***command_table, char **envp)
 	close(tmpout);
 	waitpid(ret, NULL, WUNTRACED);
 }
-*/
+
 
 //int		main(int argc, char **argv, char **envp)
 //{

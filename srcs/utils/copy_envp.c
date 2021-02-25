@@ -27,7 +27,7 @@ size_t	list_len(const char **list)
 ** Возвращает указатель на скопированный список
 */
 
-char	**copy_envp(char const **envp)
+char	**copy_envp(char **envp)
 {
 	size_t	envp_len;
 	size_t	line_len;
