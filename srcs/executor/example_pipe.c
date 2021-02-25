@@ -49,6 +49,7 @@ size_t	ft_command_table_len(char ***command_table)
 void	execute_command(t_common common, char **envp)
 {
 	int		command_table_len = common.command.number_of_simple_commands;	//	возможно number_of_available_simple_commands
+//	int		command_table_len = 1;	//	возможно number_of_available_simple_commands
 
 	int 	tmpin = dup(STDIN_FILENO);		//	save in
 	int		tmpout = dup(STDOUT_FILENO);	//	save out
@@ -57,7 +58,7 @@ void	execute_command(t_common common, char **envp)
 	int		infile = 0;		// на время пока не сделаны редиректы
 	int		outfile = 0;	// на время пока не сделаны редиректы
 
-	if (common.command.input_file)	//	if (infile)
+	if (NULL != common.command.input_file)	//	if (infile)
 		fdin = open(common.command.input_file, O_RDONLY);				//	получаем ввод из файла
 	else											//	set the initial input
 		fdin = dup(tmpin);	// use default input	//	используем стандартный ввод
@@ -81,7 +82,7 @@ void	execute_command(t_common common, char **envp)
 		*/
 		if (command_table_count == command_table_len - 1)	//	если это последняя simple_command
 		{
-			if (common.command.out_file)	//	if (outfile)
+			if (NULL != common.command.out_file)	//	if (outfile)
 				fdout = open(common.command.out_file, O_WRONLY, O_APPEND);
 			else
 				fdout = dup(tmpout);	//	то назначаем stdout (сохранённый ранее), результат вывода будем писать в стандартный вывод
@@ -107,14 +108,18 @@ void	execute_command(t_common common, char **envp)
 			int 	count = 0;
 			char	command[100];
 
+			command[0] = '\0';
+			puts(path[0]);
 			while (path[count])
 			{
 				ft_strlcat(command, path[count], 100);
 				ft_strlcat(command, "/", 100);
 				ft_strlcat(command, common.command.simple_commands_struct[0]->arguments[0], 100);
-				execve(common.command.simple_commands_struct[0]->arguments[0], common.command.simple_commands_struct[0]->arguments, envp);
+				execve(command, common.command.simple_commands_struct[0]->arguments, envp);
 				count++;
+				command[0] = '\0';
 			}
+			perror(command);
 			perror("execve child. Command not executed (no such command?)\n");
 			exit(0);
 		}

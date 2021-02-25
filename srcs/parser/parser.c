@@ -39,5 +39,6 @@ int	ft_parser(t_common *common)
 		return (-1);
 	common->command.simple_commands_struct = malloc(sizeof(t_simple_command *) * 5);
 	common->command.simple_commands_struct[0] = simple_command;
+	common->command.number_of_simple_commands = 1; // максимум одна команда
 	return (gnl_rv);
 }

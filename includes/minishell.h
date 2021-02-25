@@ -61,6 +61,7 @@ int				ft_lexer(char *line);
 
 void			pre_executor(int argc, char **argv, char **envp);
 void 			executor(t_common common);
+void			execute_command(t_common common, char **envp);
 
 /*
  * pre_executor
