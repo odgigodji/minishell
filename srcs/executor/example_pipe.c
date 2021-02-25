@@ -44,6 +44,98 @@ size_t	ft_command_table_len(char ***command_table)
 	return (count);
 }
 
+char	**split_path(char **envp)
+{
+	char 	**path;
+	int		count;
+	char	link[1000];
+
+	count = 0;
+	link[0] = '\0';
+
+	while (ft_strncmp(envp[count], "PATH", 4))
+		count++;
+	ft_strlcpy(link, ft_strrchr(envp[count], '=') + 1, 1000);
+	path = ft_split(link, ':');
+	return (path);
+}
+
+//void	ft_pipe(char ***command_table, char **envp)
+void	ft_pipe(t_common common, char **envp)
+{
+	int		command_table_len = common.command.number_of_simple_commands;	//	возможно number_of_available_simple_commands
+
+	int 	tmpin = dup(STDIN_FILENO);		//	save in
+	int		tmpout = dup(STDOUT_FILENO);	//	save out
+
+	int		fdin;
+	int		infile = 0;		// на время пока не сделаны редиректы
+	int		outfile = 0;	// на время пока не сделаны редиректы
+	if (infile)
+		fdin = open(infile, O_RDONLY);				//	получаем ввод из файла
+	else											//	set the initial input
+		fdin = dup(tmpin);	// use default input	//	используем стандартный ввод
+
+	int		ret;
+	int		fdout;
+	int		command_table_count = 0;
+	int 	fdpipe[2];
+
+	while (common.command.simple_commands_struct->arguments[command_table_count])
+	{
+		//	redirect input
+		dup2(fdin, STDIN_FILENO);		// подменяем stdin (fd = 0) на ранее созданный fdin
+		close(fdin);
+
+		//	Выбираем направление ввода и вывода
+		/*		подмена стандартного ввода на fd файла с именем "file"
+		**	int newfd=open("file",O_RDONLY);
+		**	dup2(newfd, 0);										// теперь если писать в fd = 0 то запись будет производится в file
+		**	close(newfd);
+		*/
+		if (command_table_count == command_table_len - 1)	//	если это последняя simple_command
+		{
+			if (outfile)
+				fdout = open(outfile, O_WRONLY, O_APPEND);
+			else
+				fdout = dup(tmpout);	//	то назначаем stdout (сохранённый ранее), результат вывода будем писать в стандартный вывод
+		}
+		else							//	иначе
+		{
+			// not last
+			// simple command
+			// create pipe
+			pipe(fdpipe);				//	создаём pipe
+			fdout = fdpipe[1];			//	write fd назначаем на out
+			fdin = fdpipe[0];			//	read fd назначаем на in
+		}
+		//	Redirect output
+		dup2(fdout, STDOUT_FILENO);
+		close(fdout);
+
+		// Create child process
+		ret = fork();
+		if (ret == 0)
+		{
+			while (1)
+			{
+				execve(command_table[command_table_count][0], command_table[command_table_count], envp);
+			}
+			perror("execve child. Command not executed (no such command?)\n");
+			exit(0);
+		}
+		command_table_count++;
+	}
+	//	restore in/out defaults
+	dup2(tmpin, STDIN_FILENO);
+	dup2(tmpout, STDOUT_FILENO);
+	close(tmpin);
+	close(tmpout);
+	waitpid(ret, NULL, WUNTRACED);
+}
+
+
+/*
 void	ft_pipe(char ***command_table, char **envp)
 {
 	int		command_table_len = ft_command_table_len(command_table);
@@ -114,6 +206,7 @@ void	ft_pipe(char ***command_table, char **envp)
 	close(tmpout);
 	waitpid(ret, NULL, WUNTRACED);
 }
+*/
 
 //int		main(int argc, char **argv, char **envp)
 //{

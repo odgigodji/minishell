@@ -20,7 +20,7 @@ add_executable(minishell
         srcs/utils/get_next_line.c
         srcs/utils/copy_envp.c
         srcs/utils/new_command.c
-        )
+        srcs/utils/split_path.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m
