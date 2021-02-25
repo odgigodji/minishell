@@ -33,11 +33,11 @@ int	ft_parser(t_common *common)
 	ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
 	gnl_rv = get_next_line(0, &line);
 //	ft_lexer(line);
-	if (NULL == (simple_command = simple_command_init(ft_split(line, ' '), 1, 1)))
-		return (-1);
-	common->command.simple_commands_struct = malloc(sizeof(t_simple_command	*) * 5);
-	common->command.simple_commands_struct[0] = simple_command;
 	if (!ft_strncmp(line, "exit", 4))
 		return (0);
+	if (NULL == (simple_command = simple_command_init(ft_split(line, ' '), 1, 1)))
+		return (-1);
+	common->command.simple_commands_struct = malloc(sizeof(t_simple_command *) * 5);
+	common->command.simple_commands_struct[0] = simple_command;
 	return (gnl_rv);
 }
