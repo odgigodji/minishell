@@ -16,6 +16,31 @@ typedef struct			s_command
 }						t_command;
 */
 
+/*
+**	создание пустой структуры t_simple_command
+*/
+
+t_simple_command	*simple_command_init(
+		char **arguments,
+		int number_of_arguments,
+		int number_of_available_arguments
+		)
+{
+	t_simple_command	*simple_command;
+
+	simple_command = NULL;
+	if (NULL == (simple_command = malloc(sizeof(t_simple_command))))
+		return (NULL);
+	simple_command->arguments = arguments;
+	simple_command->number_of_arguments = number_of_arguments;
+	simple_command->number_of_available_arguments = number_of_available_arguments;
+	return (simple_command);
+}
+
+/*
+**	создание пустой структуры t_command
+*/
+
 t_command	command_init(void)
 {
 	t_command	command;
@@ -33,6 +58,10 @@ t_command	command_init(void)
 	command.background = 0;
 	return (command);
 }
+
+/*
+**	создание пустой структуры t_common
+*/
 
 t_common	common_init(char **envp)
 {

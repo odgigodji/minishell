@@ -37,7 +37,7 @@ typedef struct			s_command
 	int 				number_of_simple_commands;
 
 	char				***simple_commands;
-	t_simple_command	*simple_commands_struct;	//fixme
+	t_simple_command	**simple_commands_struct;	//fixme
 
 	char				*out_file;		// путь к файлу для записи в него результата (редирект ">")
 	char 				*input_file;	// путь к файлу для чтения из него ввода (редирект "<")
