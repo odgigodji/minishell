@@ -7,7 +7,7 @@ void	minishell_loop(char **envp)
 	common = common_init((char **)envp);
 	while (ft_parser(&common))
 	{
-		executor(common);
+		executor(&common);
 	}
 }
 

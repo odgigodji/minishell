@@ -26,11 +26,11 @@ typedef struct			s_command
 }						t_command;
 */
 
-void	executor(t_common common)
+void	executor(t_common *common)
 {
 //	fork_execution(
 //			common.command.simple_commands_struct[0]->arguments,
 //			common.env_variables
 //			);
-	execute_command(common, common.env_variables);
+	execute_command(common, common->env_variables);
 }

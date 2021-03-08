@@ -9,6 +9,9 @@
 # include <sys/wait.h>
 # include "libft.h"
 
+# define MAX_PATH 4096
+# define MAX_NAME 255
+
 /*
 **	Command Data structure
 */
@@ -59,8 +62,8 @@ int				ft_lexer(char *line);
 */
 
 void			pre_executor(int argc, char **argv, char **envp);
-void 			executor(t_common common);
-void			execute_command(t_common common, char **envp);
+void 			executor(t_common *common);
+void			execute_command(t_common *common, char **envp);
 
 /*
  * pre_executor
@@ -83,6 +86,7 @@ void			ft_putenv_arg(char *line);
 char			**split_path(char **envp);
 
 void			free_line_list(char **split_list);
+char			*get_envp_variable(t_common *common, char *var);
 
 t_common		common_init(char **envp);
 t_command		command_init(void);
@@ -91,6 +95,10 @@ t_simple_command	*simple_command_init(
 		int number_of_arguments,
 		int number_of_available_arguments
 );
+
+/*
+** buildins
+*/
 
 void			mini_pwd(char **envp);
 char			*get_pwd(char **envp);
