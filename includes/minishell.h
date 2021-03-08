@@ -36,8 +36,7 @@ typedef struct			s_command
 	int					number_of_available_simple_commands;
 	int 				number_of_simple_commands;
 
-	char				***simple_commands;
-	t_simple_command	**simple_commands_struct;	//fixme
+	t_simple_command	**simple_commands;	//fixme
 
 	char				*out_file;		// путь к файлу для записи в него результата (редирект ">")
 	char 				*input_file;	// путь к файлу для чтения из него ввода (редирект "<")
@@ -92,5 +91,8 @@ t_simple_command	*simple_command_init(
 		int number_of_arguments,
 		int number_of_available_arguments
 );
+
+void			mini_pwd(char **envp);
+char			*get_pwd(char **envp);
 
 #endif

@@ -48,7 +48,7 @@ t_command	command_init(void)
 	command.number_of_available_simple_commands = 0;
 	command.number_of_simple_commands = 0;
 
-	command.simple_commands_struct = NULL;
+	command.simple_commands = NULL;
 	command.simple_commands = NULL;
 
 	command.out_file = NULL;

@@ -37,8 +37,8 @@ int	ft_parser(t_common *common)
 		return (0);
 	if (NULL == (simple_command = simple_command_init(ft_split(line, ' '), 1, 1)))
 		return (-1);
-	common->command.simple_commands_struct = malloc(sizeof(t_simple_command *) * 5);
-	common->command.simple_commands_struct[0] = simple_command;
+	common->command.simple_commands = malloc(sizeof(t_simple_command *) * 5);
+	common->command.simple_commands[0] = simple_command;
 	common->command.number_of_simple_commands = 1; // максимум одна команда
 	return (gnl_rv);
 }
