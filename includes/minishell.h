@@ -53,54 +53,54 @@ typedef struct			s_common
 	char 				**env_variables;
 }						t_common;
 
-int				get_next_line(int fd, char **line);
-int				ft_parser(t_common *common);
-int				ft_lexer(char *line);
+int					get_next_line(int fd, char **line);
+int					ft_parser(t_common *common);
+int					ft_lexer(char *line);
 
 /*
 ** executor
 */
 
-void			pre_executor(int argc, char **argv, char **envp);
-void 			executor(t_common *common);
-void			execute_command(t_common *common, char **envp);
+void				pre_executor(int argc, char **argv, char **envp);
+void 				executor(t_common *common);
+void				execute_command(t_common *common, char **envp);
 
 /*
  * pre_executor
  */
 
-void			fork_execution(char **command, char **envp);
+void				fork_execution(char **command, char **envp);
 
-char			***parser_temp(void);
-void			ft_pipe(char ***command_table, char **envp);
+char				***parser_temp(void);
+void				ft_pipe(char ***command_table, char **envp);
 
 /*
 ** utils
 */
 
-char			**copy_envp(char **envp);
-size_t			list_len(const char **list);
-void			ft_putenv(char **envp);
-void			ft_putenv_arg(char *line);
+char				**copy_envp(char **envp);
+size_t				list_len(const char **list);
+void				ft_putenv(char **envp);
+void				ft_putenv_arg(char *line);
 
-char			**split_path(char **envp);
+char				**split_path(char **envp);
 
-void			free_line_list(char **split_list);
-char			*get_envp_variable(t_common *common, char *var);
+void				free_line_list(char **split_list);
+char				*get_envp_variable(t_common *common, char *var);
 
-t_common		common_init(char **envp);
-t_command		command_init(void);
+t_common			common_init(char **envp);
+t_command			command_init(void);
 t_simple_command	*simple_command_init(
-		char **arguments,
-		int number_of_arguments,
-		int number_of_available_arguments
+								char **arguments,
+								int number_of_arguments,
+								int number_of_available_arguments
 );
 
 /*
 ** buildins
 */
 
-void			mini_pwd(char **envp);
-char			*get_pwd(char **envp);
+void				mini_pwd(char **envp);
+char				*get_pwd(char **envp);
 
 #endif

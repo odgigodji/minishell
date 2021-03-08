@@ -4,7 +4,7 @@
 ** Функция которая исполняет команду в форке
 */
 
-void	fork_execution(char **command, char **envp)
+void		fork_execution(char **command, char **envp)
 {
 	char	**path;
 	int		count;
