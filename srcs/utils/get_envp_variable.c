@@ -96,5 +96,36 @@ char	*get_envp_line(t_common *common, char *line)
 	return (common->env_variables[count]);
 }
 
-void	update_envp_var(t_common *common, char *var, char *line)
-{}
+/*
+** возвращает индекс переменой в списке (char ***) envp
+** или -1 если такой переменной нет
+*/
+
+int		get_envp_var_index(t_common *common, char *var)
+{
+	int	count;
+
+	count = 0;
+	while (common->env_variables_list[count])
+	{
+		if (!ft_strncmp(common->env_variables_list[count][0], var, ft_strlen(var) + 1))
+			return (count);
+		count++;
+	}
+	return (-1);
+}
+
+int		update_envp_var(t_common *common, char *var, char *new_value)
+{
+	int	index;
+
+	index = get_envp_var_index(common, var);
+	if (-1 != index)
+	{
+		free(common->env_variables_list[index][1]);
+		common->env_variables_list[index][1] = new_value;
+		return (1);
+	}
+	else
+		return (0);
+}

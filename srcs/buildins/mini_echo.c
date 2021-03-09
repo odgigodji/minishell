@@ -10,6 +10,7 @@ void	mini_echo(char **simple_command)
 	{
 		if (!ft_strncmp(simple_command[count], "-n", 3))
 			return ;
+		count++;
 	}
 	ft_putchar_fd('\n', 1);
 }

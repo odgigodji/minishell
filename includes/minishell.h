@@ -101,6 +101,9 @@ t_simple_command	*simple_command_init(
 char				*get_envp_variable(t_common *common, char *var);
 char				*get_envp_line(t_common *common, char *line);
 char				***get_envp(char **envp);
+int					update_envp_var(t_common *common, char *var, char *new_value);
+int					get_envp_var_index(t_common *common, char *var);
+
 
 /*
 ** buildins
