@@ -56,9 +56,14 @@ typedef struct			s_common
 	char 				***env_variables_list;
 }						t_common;
 
+/*
+** parser
+*/
+
 int					get_next_line(int fd, char **line);
 int					ft_parser(t_common *common);
 int					ft_lexer(char *line);
+int					pars(t_common *common, char *line);
 
 /*
 ** executor

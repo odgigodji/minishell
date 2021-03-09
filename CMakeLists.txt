@@ -19,7 +19,7 @@ add_executable(minishell
         srcs/executor/example_pipe.c
         srcs/utils/get_next_line.c
         srcs/utils/copy_envp.c
-        srcs/utils/split_path.c srcs/utils/free_line_list.c srcs/utils/common_init.c srcs/buildins/mini_pwd.c srcs/buildins/mini_cd.c srcs/buildins/mini_echo.c srcs/utils/get_envp_variable.c srcs/buildins/mini_export.c)
+        srcs/utils/split_path.c srcs/utils/free_line_list.c srcs/utils/common_init.c srcs/buildins/mini_pwd.c srcs/buildins/mini_cd.c srcs/buildins/mini_echo.c srcs/utils/get_envp_variable.c srcs/buildins/mini_export.c srcs/parser/pars.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m

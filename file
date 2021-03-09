@@ -1,3 +1,12 @@
-test
-checkcheck
-hello world
+total 40
+-rw-r--r--   1 namerei  student   753 Feb 25 14:28 CMakeLists.txt
+-rw-r--r--   1 namerei  student  1126 Feb 24 17:57 Makefile
+drwxr-xr-x  10 namerei  student   340 Feb 25 14:28 cmake-build-debug
+-rwxr-xr-x   1 namerei  student  9244 Feb 24 17:57 example_pipe
+-rw-r--r--   1 namerei  student     0 Feb 25 15:02 file
+drwxr-xr-x   4 namerei  student   136 Feb 25 14:28 includes
+drwxr-xr-x  98 namerei  student  3332 Feb 18 17:10 libft
+drwxr-xr-x   8 namerei  student   272 Feb 25 14:29 srcs
+-rw-r--r--   1 namerei  student     0 Feb 25 15:02 test
+-rw-r--r--   1 namerei  student     0 Feb 25 15:02 test2
+drwxr-xr-x   3 namerei  student   102 Feb 25 14:28 tests

@@ -35,10 +35,12 @@ int	ft_parser(t_common *common)
 //	ft_lexer(line);
 	if (!ft_strncmp(line, "exit", 4))
 		return (0);
-	if (NULL == (simple_command = simple_command_init(ft_split(line, ' '), 1, 1)))
-		return (-1);
-	common->command.simple_commands = malloc(sizeof(t_simple_command *) * 5);
-	common->command.simple_commands[0] = simple_command;
-	common->command.number_of_simple_commands = 1; // максимум одна команда
+
+	pars(common, line);
+//	if (NULL == (simple_command = simple_command_init(ft_split(line, ' '), 1, 1)))
+//		return (-1);
+//	common->command.simple_commands = malloc(sizeof(t_simple_command *) * 5);
+//	common->command.simple_commands[0] = simple_command;
+//	common->command.number_of_simple_commands = 1; // максимум одна команда если есть пайпы
 	return (gnl_rv);
 }
