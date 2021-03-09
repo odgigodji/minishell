@@ -2,6 +2,8 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <string.h>
+#include <sys/errno.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <sys/types.h>
@@ -51,6 +53,7 @@ typedef struct			s_common
 {
 	t_command			command;
 	char 				**env_variables;
+	char 				***env_variables_list;
 }						t_common;
 
 int					get_next_line(int fd, char **line);
@@ -86,7 +89,6 @@ void				ft_putenv_arg(char *line);
 char				**split_path(char **envp);
 
 void				free_line_list(char **split_list);
-char				*get_envp_variable(t_common *common, char *var);
 
 t_common			common_init(char **envp);
 t_command			command_init(void);
@@ -95,6 +97,10 @@ t_simple_command	*simple_command_init(
 								int number_of_arguments,
 								int number_of_available_arguments
 );
+
+char				*get_envp_variable(t_common *common, char *var);
+char				*get_envp_line(t_common *common, char *line);
+char				***get_envp(char **envp);
 
 /*
 ** buildins

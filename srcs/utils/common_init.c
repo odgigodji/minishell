@@ -67,7 +67,8 @@ t_common	common_init(char **envp)
 {
 	t_common common;
 
-	common.env_variables = copy_envp(envp);
+	common.env_variables = copy_envp(envp);			//	просто копирует envp
+	common.env_variables_list = get_envp(envp);		//	разбивает envp на название переменной и значение переменной
 	common.command = command_init();
 	return (common);
 }
