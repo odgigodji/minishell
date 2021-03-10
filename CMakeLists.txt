@@ -30,6 +30,10 @@ add_executable(minishell
         srcs/buildins/mini_export.c
         )
 
+add_executable(executor_tests
+        srcs/utils/test.c
+        )
+
 target_link_libraries(minishell LINK_PUBLIC
         m
         ${CMAKE_SOURCE_DIR}/libft/libft.a
