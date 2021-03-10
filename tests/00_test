@@ -1,3 +1,7 @@
+echo test test
+
+
+
 ls -l > file > test
 
 cat -e < file < test

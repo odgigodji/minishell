@@ -82,6 +82,10 @@ void				pre_executor(int argc, char **argv, char **envp);
 void 				executor(t_common *common);
 void				execute_command(t_common *common, char **envp);
 
+void				execute_simple_command_buildin(t_common *common, t_simple_command *simple_command);
+void				execute_simple_command(t_common *common, t_simple_command *simple_command);
+int					is_buildin(t_simple_command *simple_command);
+
 /*
  * pre_executor
  */
