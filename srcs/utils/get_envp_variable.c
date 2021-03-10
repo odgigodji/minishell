@@ -115,6 +115,25 @@ int		get_envp_var_index(t_common *common, char *var)
 	return (-1);
 }
 
+char	*get_envp_var_pointer(t_common *common, char *var)
+{
+	int	count;
+	int count_index;
+
+	count = 0;
+	count_index = 0;
+	while (var[count_index] && var[count_index] != '=')
+		count_index++;
+	while (common->env_variables_list[count])
+	{
+		if (!ft_strncmp(common->env_variables_list[count][0], var, count_index + 1))
+			return (common->env_variables_list[count][1]);
+		count++;
+	}
+	return (NULL);
+}
+
+
 int		update_envp_var(t_common *common, char *var, char *new_value)
 {
 	int	index;

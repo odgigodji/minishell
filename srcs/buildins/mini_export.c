@@ -17,10 +17,9 @@ void	mini_export(t_common *common, char **simple_command)
 	int		env_list_len;
 	int 	count;
 	char	***env_copy;
-	int		var_index;
 
 	env_list_len = env_list_length(common);
-	if (-1 == (var_index = get_envp_var_index(common, "")))
+	if (NULL == get_envp_var_pointer(common, ""))
 		return ;
 	if (NULL == (env_copy = malloc(sizeof(char **) * (env_list_len + 2))))
 		return ;

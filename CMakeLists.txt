@@ -14,7 +14,6 @@ add_executable(minishell
         srcs/main.c
         srcs/parser/parser.c
         srcs/parser/pars.c
-        srcs/executor/ft_echo.c
         srcs/executor/pre_executer.c
         srcs/executor/executor.c
         srcs/executor/example_pipe.c
@@ -31,10 +30,33 @@ add_executable(minishell
         )
 
 add_executable(executor_tests
-        srcs/utils/test.c
+        srcs/executor/executor_tests/00_main_test.c
+        srcs/parser/parser.c
+        srcs/parser/pars.c
+        srcs/executor/pre_executer.c
+        srcs/executor/executor.c
+        srcs/executor/example_pipe.c
+        srcs/utils/get_next_line.c
+        srcs/utils/copy_envp.c
+        srcs/utils/split_path.c
+        srcs/utils/free_line_list.c
+        srcs/utils/common_init.c
+        srcs/buildins/mini_pwd.c
+        srcs/buildins/mini_cd.c
+        srcs/buildins/mini_echo.c
+        srcs/utils/get_envp_variable.c
+        srcs/buildins/mini_export.c
+
+        srcs/executor/executor_tests/01_test_get_envp_var_pointer.c
+        srcs/executor/executor_tests/executor_tests.h
         )
 
 target_link_libraries(minishell LINK_PUBLIC
+        m
+        ${CMAKE_SOURCE_DIR}/libft/libft.a
+        )
+
+target_link_libraries(executor_tests LINK_PUBLIC
         m
         ${CMAKE_SOURCE_DIR}/libft/libft.a
         )
