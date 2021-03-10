@@ -7,7 +7,7 @@ void	mini_echo(char **simple_command)
 
 	count = 0;
 	count_arg = 1;
-	if (ft_strncmp(simple_command[count_arg], "-n", 3))
+	if (!ft_strncmp(simple_command[count_arg], "-n", 3))
 		count_arg++;
 	while (simple_command[count_arg])
 	{
