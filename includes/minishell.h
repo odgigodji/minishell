@@ -52,7 +52,7 @@ typedef struct			s_command
 typedef struct			s_common
 {
 	t_command			command;
-	char 				**env_variables;
+	char 				**env_variables;		// не нужно удалять используется в функции execve() для исполнения команд
 	char 				***env_variables_list;
 }						t_common;
 
