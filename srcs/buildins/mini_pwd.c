@@ -10,6 +10,7 @@ void	mini_pwd(char **envp)
 		count++;
 	pwd = ft_strrchr(envp[count], '=') + 1;
 	ft_putstr_fd(pwd, 1);
+	ft_putchar_fd('\n', 1);
 }
 
 char	*get_pwd(char **envp)

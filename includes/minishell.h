@@ -14,6 +14,15 @@
 # define MAX_PATH 4096
 # define MAX_NAME 255
 
+#define RED   "\x1B[31m"
+#define GRN   "\x1B[32m"
+#define YEL   "\x1B[33m"
+#define BLU   "\x1B[34m"
+#define MAG   "\x1B[35m"
+#define CYN   "\x1B[36m"
+#define WHT   "\x1B[37m"
+#define RESET "\x1B[0m"
+
 /*
 **	Command Data structure
 */
@@ -92,6 +101,7 @@ void				ft_putenv(char **envp);
 void				ft_putenv_arg(char *line);
 
 char				**split_path(char **envp);
+void				ft_free_list(char ***split_list);
 
 void				free_line_list(char **split_list);
 
@@ -114,7 +124,11 @@ char				*get_envp_var_pointer(t_common *common, char *var);
 ** buildins
 */
 
+void				mini_cd(char **simple_command, t_common *common);
+void				mini_echo(char **simple_command);
 void				mini_pwd(char **envp);
+void				mini_export(t_common *common, char **simple_command);
+
 char				*get_pwd(char **envp);
 
 #endif

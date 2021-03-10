@@ -14,6 +14,20 @@
 **	{"/Users/mscot/.brew/bin", "/usr/local/bin", "/usr/bin", "/bin", "/usr/sbin", "/sbin", "/usr/local/munki"}
 */
 
+void	ft_free_list(char ***split_list)
+{
+	int		count;
+
+	count = 0;
+	while ((*split_list)[count] != NULL)
+	{
+		free((*split_list)[count]);
+		count++;
+	}
+	free((*split_list)[count]);
+	free(*split_list);
+}
+
 char	**split_path(char **envp)
 {
 	char 	**path;

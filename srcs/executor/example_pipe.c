@@ -11,19 +11,63 @@ typedef struct			s_pipe
 	int fdpipe[2];
 }						t_pipe;
 
-void	execute_simple_command(t_common *common)
+int		is_buildin(t_simple_command *simple_command)
 {
-	char	**path = split_path(common->env_variables);
-	int 	count = 0;
+	char	*list[8];
+	int 	count;
+
+	ft_bzero(list, 8);
+	list[0] = "cd";
+	list[1] = "pwd";
+//	list[2] = "echo";
+//	list[3] = "export";
+//	list[4] = "unset";
+//	list[5] = "env";
+//	list[6] = "exit";
+	count = 0;
+	while (list[count])
+	{
+		if (!ft_strncmp(list[count], simple_command->arguments[0], 100))
+			return (1);
+		count++;
+	}
+	return (0);
+}
+
+void	execute_simple_command_buildin(t_common *common, t_simple_command *simple_command)
+{
+	if (!ft_strncmp("cd", simple_command->arguments[0], 3))
+	{
+		printf(YEL "DEBAG: " RESET "не системная функция mini_cd\n");
+		mini_cd(simple_command->arguments, common);
+	}
+	if (!ft_strncmp("pwd", simple_command->arguments[0], 3))
+	{
+		printf(YEL "DEBAG: " RESET "не системная функция mini_pwd\n");
+		mini_pwd(common->env_variables);
+	}
+}
+
+void	execute_simple_command(t_common *common, t_simple_command *simple_command)
+{
+	char	**path;
+	int 	count;
 	char	command[100];
 
+	if (is_buildin(simple_command))
+	{
+		execute_simple_command_buildin(common, simple_command);
+		return ;
+	}
+	path = split_path(common->env_variables);
+	count = 0;
 	command[0] = '\0';
 	while (path[count])
 	{
 		ft_strlcat(command, path[count], 100);
 		ft_strlcat(command, "/", 100);
-		ft_strlcat(command, common->command.simple_commands[0]->arguments[0], 100);
-		execve(command, common->command.simple_commands[0]->arguments, common->env_variables);
+		ft_strlcat(command, simple_command->arguments[0], 100);
+		execve(command, simple_command->arguments, common->env_variables);
 		count++;
 		command[0] = '\0';
 	}
@@ -74,8 +118,8 @@ void	execute_command(t_common *common, char **envp)
 	int		ret;
 	t_pipe	pipe_variables;
 
-	pipe_init(&pipe_variables, common);
-	while (common->command.simple_commands[0]->arguments[command_table_count])
+	pipe_init(&pipe_variables, common);		// сохраняем stdin/stdout определяем откуда
+	while (common->command.simple_commands[command_table_count])
 	{
 		dup2(pipe_variables.fdin, STDIN_FILENO);			// подменяем stdin (fd = 0) на ранее созданный fdin
 		close(pipe_variables.fdin);
@@ -87,53 +131,14 @@ void	execute_command(t_common *common, char **envp)
 		dup2(pipe_variables.fdout, STDOUT_FILENO);
 		close(pipe_variables.fdout);
 		if (0 == (ret = fork()))							// Create child process
-			execute_simple_command(common);
+		{
+			execute_simple_command(common, common->command.simple_commands[command_table_count]);
+		}
 		command_table_count++;
 	}
 	restore_default_in_out_puts(&pipe_variables);
 	waitpid(ret, NULL, WUNTRACED);
 }
-
-//void	execute_command(t_common *common, char **envp)
-//{
-//	int		command_table_len = common->command.number_of_simple_commands;	//	возможно number_of_available_simple_commands
-//	int		command_table_count = 0;
-//	int		ret;
-//	t_pipe	pipe_variables;
-//
-//	pipe_init(&pipe_variables, common);
-//	while (common->command.simple_commands[0]->arguments[command_table_count])
-//	{
-//		//	redirect input
-//		dup2(pipe_variables.fdin, STDIN_FILENO);			// подменяем stdin (fd = 0) на ранее созданный fdin
-//		close(pipe_variables.fdin);
-//
-//		if (command_table_count == command_table_len - 1)	//	если это последняя simple_command
-//		{
-//			if (NULL != common->command.out_file)	//	if (outfile)
-//				pipe_variables.fdout = open(common->command.out_file, O_WRONLY, O_APPEND);
-//			else
-//				pipe_variables.fdout = dup(pipe_variables.tmpout);	//	то назначаем stdout (сохранённый ранее), результат вывода будем писать в стандартный вывод
-//		}
-//		else							//	иначе // not last simple command
-//		{
-//			do_a_pipe(&pipe_variables);
-//		}
-//		//	Redirect output
-//		dup2(pipe_variables.fdout, STDOUT_FILENO);
-//		close(pipe_variables.fdout);
-//
-//		// Create child process
-//		ret = fork();
-//		if (ret == 0)
-//			execute_simple_command(common);
-//		command_table_count++;
-//	}
-//	//	restore in/out defaults
-//	pipe_finish(&pipe_variables);
-//	waitpid(ret, NULL, WUNTRACED);
-//}
-
 
 //void	execute_command(t_common *common, char **envp)
 //{

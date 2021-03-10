@@ -33,4 +33,5 @@ void	executor(t_common *common)
 //			common.env_variables
 //			);
 	execute_command(common, common->env_variables);
+	(*common).command = command_init();
 }
