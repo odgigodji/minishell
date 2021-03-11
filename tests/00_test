@@ -1,5 +1,7 @@
 ls -l > file > test
 
+export test+=test
+
 cat -e < file < test
 cat < file < test | cat -e
 cat < file < test | sort

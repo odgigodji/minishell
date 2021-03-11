@@ -60,6 +60,7 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command)
 	path = split_path(common->env_variables);
 	count = 0;
 	command[0] = '\0';
+	execve(simple_command->arguments[0], simple_command->arguments, common->env_variables);
 	while (path[count])
 	{
 		ft_strlcat(command, path[count], 100);
