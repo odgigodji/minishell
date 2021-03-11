@@ -37,7 +37,7 @@ void	execute_simple_command_buildin(t_common *common, t_simple_command *simple_c
 	else if (!ft_strncmp("pwd", simple_command->arguments[0], 3))
 	{
 		printf(YEL "DEBAG: " RESET "не системная функция mini_pwd\n");
-		mini_pwd(common->env_variables);
+		mini_pwd(common);
 	}
 	else if (!ft_strncmp("echo", simple_command->arguments[0], 3))
 	{

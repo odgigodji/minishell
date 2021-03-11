@@ -130,7 +130,7 @@ char				*get_envp_var_pointer(t_common *common, char *var);
 
 void				mini_cd(char **simple_command, t_common *common);
 void				mini_echo(char **simple_command);
-void				mini_pwd(char **envp);
+void				mini_pwd(t_common *common);
 void				mini_export(t_common *common, char **simple_command);
 
 char				*get_pwd(char **envp);
