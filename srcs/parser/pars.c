@@ -117,16 +117,16 @@ int	ft_word_counter(char *s, int c)
 	count = 0;
 	while (*s)
 	{
-//		if ((*s == '"' || *s == '\'') && *(s - 1) != '\\')
-//		{
-//			quote_t = *s;
-//			s++;
-//			while(*s != quote_t)
-//			{
-//				s++;
-//			}
-//			s++;
-//		}
+		if ((*s == '"' || *s == '\''))// && *(s - 1) != '\\')
+		{
+			quote_t = *s;
+			s++;
+			while(*s != quote_t)
+			{
+				s++;
+			}
+			s++;
+		}
 		if ((*s != c && *(s + 1) == c) || (*s != c && (*(s + 1) == '\0')))
 			count++;
 		s++;
@@ -136,12 +136,12 @@ int	ft_word_counter(char *s, int c)
 
 void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 {
-	int i;
+//	int i;
 	int j;
 	int k;
 	int e;
 	int flag;
-	int command_count;
+//	int command_count;
 //	char **arguments;
 	char *f_line;
 	int len_for_calloc;
@@ -150,16 +150,16 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //	t_simple_command scmd;
 	t_command cmd;
 
-	i = 0;
+	sc->i = 0;
 	j = 0;
 	k = 0;
 	e = 0;
 	memory_allocated = 0;
 	f_line = ft_strtrim(line, " ");
-	command_count = ft_word_counter(f_line, ' '); // fixme quoters moment
-	sc->arguments = ft_calloc(sizeof(char *),command_count + 1 ); // память под двойной массив
+	sc->command_count = ft_word_counter(f_line, ' '); // 		fixme quoters moment
+	sc->arguments = ft_calloc(sizeof(char *),sc->command_count + 1 ); // память под двойной массив
 
-	printf("command_count = %d\n", command_count);
+	printf("command_count = %d\n", sc->command_count);
 	flag = 0; // нет попадания в пробел
 
 //	spec = " '|\"";
@@ -183,119 +183,79 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //	arguments[1] = "|-l|";
 //	arguments[2] = "|-a|";
 
-	sc->arguments[command_count] = NULL; // последний аргумент
+	sc->arguments[sc->command_count] = NULL; // последний аргумент
 
 	int fl = 0;
 //	int quotes = 0;
 	int h = 0;
-	while(f_line[i] && f_line[i] != ';' )
+	while(f_line[sc->i] && f_line[sc->i] != ';' )
 	{
-		if (f_line[i] == '"')
+//		if (f_line[i] == '"')
+//		{
+//			h = 0;
+//			i++;
+//			int ln = ft_strlen_to_char(f_line + i, '"');
+//			printf("ln after quotes id %d\n", ln);
+//			sc->arguments[k] = ft_calloc(sizeof(char), ln);
+////			ft_substr(f_line, i, ft_strlen_to_char(f_line + i, '"'));
+//			while(f_line[i] != '"')
+//			{
+//				sc->arguments[k][h] = f_line[i];
+////				printf("|-%c-|\n", arguments[k][h]);
+//				i++;
+//				h++;
+//			}
+//			sc->arguments[k][h] = '\0';
+//			printf("--%s--\n", sc->arguments[k]);
+//			if (k < command_count)
+//				k++; // 													fixme
+//			i++;
+//		}
+		if (f_line[sc->i] == ' ')
 		{
-			h = 0;
-			i++;
-			int ln = ft_strlen_to_char(f_line + i, '"');
-			printf("ln after quotes id %d\n", ln);
-			sc->arguments[k] = ft_calloc(sizeof(char), ln);
-//			ft_substr(f_line, i, ft_strlen_to_char(f_line + i, '"'));
-			while(f_line[i] != '"')
+			if (sc->k < sc->command_count && sc->flag == 0) // должны быть меньше количетсва аргументов ровно или - 1
 			{
-				sc->arguments[k][h] = f_line[i];
-//				printf("|-%c-|\n", arguments[k][h]);
-				i++;
-				h++;
-			}
-			sc->arguments[k][h] = '\0';
-			printf("--%s--\n", sc->arguments[k]);
-			k++;
-			i++;
-		}
-		if (f_line[i] == ' ')
-		{
-			if (k < command_count && flag == 0) // должны быть меньше количетсва аргументов ровно или - 1
-			{
-				flag  = 1;
-				j = 0;
-				k++;
-				memory_allocated = 0;
+				sc->flag  = 1;
+				sc->j = 0;
+				sc->k++;
+				sc->memory_allocated = 0;
 			}
 //			printf("k:%d\n", k);
 //			i++;
 		}
-		else if (f_line[i] == '$') //									fixme  work on that
+//		else if (f_line[i] == '$') //									fixme  work on that
+//		{
+////			char *res;
+//
+//			i++;
+//			sc->arguments[k] = do_dollar_key(f_line + i, env);
+//			k++;
+////			command_count++;
+//			i += ft_strlen_to_char(f_line + i, ' ');//4; //// 			fixme len of key name
+//			if (k == command_count)
+//				i+= ft_strlen(f_line + i);
+//			printf("len_of_$KEY:%d\n", (int)ft_strlen_to_char(f_line + i, ' '));
+////			i += ft_strlen_to_char(f_line[i], ' ');
+//			printf("after dollar:%s\n", sc->arguments[k]);
+//			printf("!!symbol after dollar rechange:%c\n", f_line[i]);
+//
+//		}
+		else if (f_line[sc->i])
 		{
-//			char *res;
-
-			i++;
-			sc->arguments[k] = do_dollar_key(f_line + i, env);
-			k++;
-//			command_count++;
-			i += ft_strlen_to_char(f_line + i, ' ');//4; //// 	fixme len of key name
-			if (k == command_count)
-				i+= ft_strlen(f_line + i);
-			printf("len_of_$KEY:%d\n", (int)ft_strlen_to_char(f_line + i, ' '));
-//			i += ft_strlen_to_char(f_line[i], ' ');
-			printf("after dollar:%s\n", sc->arguments[k]);
-			printf("!!symbol after dollar rechange:%c\n", f_line[i]);
-
+			make_arg(f_line, sc);
 		}
-		else if (f_line[i])
-		{
-			if (!memory_allocated)
-			{
-				len_for_calloc = (k == command_count - 1) ? \
-				ft_strlen(f_line + i) : ft_strlen_to_char(f_line + i, ' ');
-
-				sc->arguments[k] = ft_calloc(sizeof(char), len_for_calloc + 1); // +1 для \0
-
-				printf("for k= %d elem - len_for_calloc : %d\n", k , len_for_calloc);
-				memory_allocated = 1;
-			}
-//			printf("arguments[%d] len_for_calloc : %d\n", k, len_for_calloc);
-
-			sc->arguments[k][j] = f_line[i];
-//			printf("------\n");// заполняем строки
-//			printf("arguments[%d][%d] is '%c'\n", k, j, arguments[k][j]);
-//			printf("f_line[%d] is '%c'\n", i, f_line[i]);
-//			printf("------\n");
-			j++;
-			flag = 0;
-		}
-		else if (f_line[i])
-		{
-			if (!memory_allocated)
-			{
-				len_for_calloc = (k == command_count - 1) ? \
-				ft_strlen(f_line + i) : ft_strlen_to_char(f_line + i, ' ');
-
-				sc->arguments[k] = ft_calloc(sizeof(char), len_for_calloc + 1); // +1 для \0
-
-				printf("for k= %d elem - len_for_calloc : %d\n", k , len_for_calloc);
-				memory_allocated = 1;
-			}
-//			printf("arguments[%d] len_for_calloc : %d\n", k, len_for_calloc);
-
-			sc->arguments[k][j] = f_line[i];
-//			printf("------\n");// заполняем строки
-//			printf("arguments[%d][%d] is '%c'\n", k, j, arguments[k][j]);
-//			printf("f_line[
-//			%d] is '%c'\n", i, f_line[i]);
-//			printf("------\n");
-			j++;
-			flag = 0;
-		}
-		i++;
+		sc->i++;
 	}
 	free(f_line);
-//	sc->arguments[command_count] = NULL;
+	sc->arguments[sc->command_count] = NULL; //						fixme incorrect command_count
 //	arguments[4][7] = '\0';
 //	printf("%s\n", arguments[4]);
-	printf("i is: %d\n", i);
-//	arguments[k][j] = '\0';
+	printf("i is: %d\n", sc->i);
+//	sc->arguments[k][j] = '\0';
 //	arguments[2][10] = '\0';
 
 //	arguments[4] = NULL;
-	i = 0;
+	sc->i = 0;
 //	while(sc->arguments[i])
 //	{
 //		printf("%d argument is |%s|\n", i, sc->arguments[i]);
@@ -349,11 +309,11 @@ int pars(t_common *common, char *line)
 
 //	sc = simple_command_init(arguments, 1, 1);
 //	printf("%d argument is |%s|\n", 0, sc->arguments[0]);
-	while(sc->arguments[i])
-	{
-		printf("%d argument is |%s|\n", i, sc->arguments[i]);
-		i++;
-	}
+//	while(sc->arguments[i])
+//	{
+//		printf("%d argument is |%s|\n", i, sc->arguments[i]);
+//		i++;
+//	}
 
 	i = 0;
 	common->command.simple_commands = malloc(sizeof(t_simple_command *) * 5);

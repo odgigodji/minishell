@@ -35,6 +35,12 @@ typedef struct			s_simple_command
 	int					number_of_available_arguments;	//	Available space for arguments currently preallocated
 	int 				number_of_arguments;			//	Number of arguments
 	char				**arguments;					//	fixme Array of arguments
+	int 				memory_allocated;
+	int					i; // counter
+	int					flag;	//space flag;
+	int 				command_count; // количество аргументов
+	int 				k; // number of argument
+	int 				j; //счетчик символов по строке аргумента
 
 	//	SimpleCommand();								// функция для создания simple_command
 	//	void insertArgument(char *argument);			// функция для вставки аргумента в simple_command
@@ -73,6 +79,8 @@ int					get_next_line(int fd, char **line);
 int					ft_parser(t_common *common);
 int					ft_lexer(char *line);
 int					pars(t_common *common, char *line);
+size_t				ft_strlen_to_char(const char *s, char c);
+int					make_arg(char *f_line , t_simple_command *sc);
 
 /*
 ** executor

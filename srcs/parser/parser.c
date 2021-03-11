@@ -1,24 +1,6 @@
 #include <stdio.h>
 #include "minishell.h"
 
-int ft_lexer(char *line)
-{
-	int i;
-	char *res;
-	int j;
-
-	i = 0;
-	j = 0;
-	printf("|%s|\n", line);
-//	while(line[i] != '\n')
-//	{
-//		if (line[i] == ' ')
-//			i++;
-////		if (line[i] == )
-//	}
-	return (1);
-}
-
 void ft_error(void)
 {
 	;
@@ -37,6 +19,16 @@ int	ft_parser(t_common *common)
 		return (0);
 
 	pars(common, line);
+	int i =0;
+	while(common->command.simple_commands[0]->arguments[i])
+	{
+		printf("%d argument is |%s|\n", i, common->command.simple_commands[0]->arguments[i]);
+		i++;
+	}
+	if (common->command.simple_commands[0]->arguments[i] == NULL)
+		printf("%d argument is |null|\n", i);
+
+//	printf("result:");
 //	if (NULL == (simple_command = simple_command_init(ft_split(line, ' '), 1, 1)))
 //		return (-1);
 //	common->command.simple_commands = malloc(sizeof(t_simple_command *) * 5);
