@@ -10,7 +10,7 @@ int make_arg(char *f_line , t_simple_command *sc)
 //	printf("%d\n", sc->memory_allocated);
 	if (!sc->memory_allocated)
 	{
-		printf("2.3\n");
+//		printf("2.3\n");
 		len_for_calloc = (sc->k == sc->command_count - 1) ? \
 				ft_strlen(f_line + sc->i) : ft_strlen_to_char(f_line + sc->i, ' ');
 

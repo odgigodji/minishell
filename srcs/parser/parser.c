@@ -14,7 +14,9 @@ int	ft_parser(t_common *common)
 
 	line = NULL;
 	ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
+
 	gnl_rv = get_next_line(0, &line);
+//	printf("0\n");
 //	ft_lexer(line);
 	if (!ft_strncmp(line, "exit", 4))
 		return (0);
@@ -31,7 +33,7 @@ int	ft_parser(t_common *common)
 		printf("%d argument is |null|\n", i);
 //	while (1) ;
 
-//	free(line);
+	free(line);
 //	printf("result:");
 //	if (NULL == (simple_command = simple_command_init(ft_split(line, ' '), 1, 1)))
 //		return (-1);

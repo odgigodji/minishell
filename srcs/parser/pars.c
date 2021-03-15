@@ -154,8 +154,16 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 	sc->j = 0;
 	sc->k = 0;
 //	e = 0;
-	memory_allocated = 0;
+//	line = "echo f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v ";
+
+	sc->memory_allocated = 0;
+	printf("line:|%s|\n", line);
 	f_line = ft_strtrim(line, " ");
+
+	printf("line:|%s|\n", line);
+	printf("f_line:|%s|\n", f_line);
+
+//	return (0);
 	sc->command_count = ft_word_counter(f_line, ' '); // 			fixme quoters moment
 	sc->arguments = ft_calloc(sizeof(char *),sc->command_count + 1 ); // память под двойной массив
 
@@ -165,8 +173,7 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //	spec = " '|\"";
 
 //	printf("spec:%s\n", spec);
-	printf("line:|%s|\n", line);
-	printf("f_line:|%s|\n", f_line);
+
 //	printf("word number is: %d\n" , ft_word_counter(line, ' '));
 
 //	arguments[0] = ft_calloc(sizeof(char ), 10); // выделяем память под аргументы
@@ -184,7 +191,6 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //	arguments[2] = "|-a|";
 
 	sc->arguments[sc->command_count] = NULL; // последний аргумент
-	sc->memory_allocated = 0;
 	sc->quotes = 0;
 	int fl = 0;
 	int h = 0;
