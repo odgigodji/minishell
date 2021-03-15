@@ -140,7 +140,7 @@ void				mini_cd(char **simple_command, t_common *common);
 void				mini_echo(char **simple_command);
 void				mini_pwd(t_common *common);
 void				mini_export(t_common *common, char **simple_command);
-
+void				mini_env(t_common *common);
 char				*get_pwd(char **envp);
 
 #endif
