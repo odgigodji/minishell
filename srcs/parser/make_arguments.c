@@ -28,5 +28,7 @@ int make_arg(char *f_line , t_simple_command *sc)
 //			printf("------\n");
 	sc->j++;
 	sc->flag = 0;
+//	printf("-----%s----\n", sc->arguments[sc->k]);
 	return 0;
+	//echo " helo 1 2 3 4 wrld  " a b c
 }

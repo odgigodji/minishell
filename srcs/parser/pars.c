@@ -119,6 +119,7 @@ int	ft_word_counter(char *s, int c)
 	{
 		if ((*s == '"' || *s == '\''))// && *(s - 1) != '\\')
 		{
+			count++;
 			quote_t = *s;
 			s++;
 			while(*s != quote_t)
@@ -198,27 +199,27 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 	while(f_line[sc->i] && f_line[sc->i] != ';' )
 	{
 //		printf("2\n");
-//		if (f_line[i] == '"')
-//		{
-//			h = 0;
-//			i++;
-//			int ln = ft_strlen_to_char(f_line + i, '"');
-//			printf("ln after quotes id %d\n", ln);
-//			sc->arguments[k] = ft_calloc(sizeof(char), ln);
-////			ft_substr(f_line, i, ft_strlen_to_char(f_line + i, '"'));
-//			while(f_line[i] != '"')
-//			{
-//				sc->arguments[k][h] = f_line[i];
-////				printf("|-%c-|\n", arguments[k][h]);
-//				i++;
-//				h++;
-//			}
-//			sc->arguments[k][h] = '\0';
-//			printf("--%s--\n", sc->arguments[k]);
-//			if (k < command_count)
-//				k++; // 													fixme
-//			i++;
-//		}
+		if (f_line[sc->i] == '"')
+		{
+			h = 0;
+			sc->i++;
+			int ln = ft_strlen_to_char(f_line + sc->i, '"');
+			printf("ln after quotes is %d\n", ln);
+			sc->arguments[sc->k] = ft_calloc(sizeof(char), ln);
+//			ft_substr(f_line, i, ft_strlen_to_char(f_line + i, '"'));
+			while(f_line[sc->i] != '"')
+			{
+				sc->arguments[sc->k][h] = f_line[sc->i];
+//				printf("|-%c-|\n", arguments[k][h]);
+				sc->i++;
+				h++;
+			}
+			sc->arguments[sc->k][h] = '\0';
+			printf("--%s--\n", sc->arguments[sc->k]);
+			if (sc->k < sc->command_count)
+				sc->k++; // 													fixme
+			sc->i++;
+		}
 		if ((f_line[sc->i] == ' ' || f_line[sc->i] == '\t') && !sc->quotes)
 		{
 			if (sc->k < sc->command_count && sc->flag == 0) // должны быть меньше количетсва аргументов ровно или - 1
@@ -253,6 +254,7 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //			printf("2.1\n");
 			make_arg(f_line, sc);
 		}
+//		printf("-----%s----\n", sc->arguments[sc->k]);
 		sc->i++;
 	}
 //	printf("3\n");
