@@ -17,7 +17,9 @@ add_executable(minishell
         srcs/parser/make_arguments.c
         srcs/executor/executor.c
         srcs/executor/example_pipe.c
-        srcs/utils/get_next_line.c
+        srcs/get_next_line/get_next_line.c
+        srcs/get_next_line/get_next_line_utils.c
+#        srcs/utils/get_next_line.c
         srcs/utils/copy_envp.c
         srcs/utils/split_path.c
         srcs/utils/free_line_list.c
@@ -36,7 +38,8 @@ add_executable(executor_tests
         srcs/parser/pars.c
         srcs/executor/executor.c
         srcs/executor/example_pipe.c
-        srcs/utils/get_next_line.c
+#        srcs/utils/get_next_line.c
+        srcs/get_next_line/get_next_line.c
         srcs/utils/copy_envp.c
         srcs/utils/split_path.c
         srcs/utils/free_line_list.c

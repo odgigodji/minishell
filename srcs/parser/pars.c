@@ -137,34 +137,34 @@ int	ft_word_counter(char *s, int c)
 void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 {
 //	int i;
-	int j;
-	int k;
+//	int j;
+//	int k;
 	int e;
-	int flag;
+//	int flag;
 //	int command_count;
 //	char **arguments;
 	char *f_line;
 	int len_for_calloc;
-	char spec[5] = " '|\"\0";
+	char spec[5] = " '|\"";
 	int memory_allocated;
 //	t_simple_command scmd;
 	t_command cmd;
 
 	sc->i = 0;
-	j = 0;
-	k = 0;
-	e = 0;
+	sc->j = 0;
+	sc->k = 0;
+//	e = 0;
 	memory_allocated = 0;
 	f_line = ft_strtrim(line, " ");
-	sc->command_count = ft_word_counter(f_line, ' '); // 		fixme quoters moment
+	sc->command_count = ft_word_counter(f_line, ' '); // 			fixme quoters moment
 	sc->arguments = ft_calloc(sizeof(char *),sc->command_count + 1 ); // память под двойной массив
 
 	printf("command_count = %d\n", sc->command_count);
-	flag = 0; // нет попадания в пробел
+	sc->flag = 0; // нет попадания в пробел
 
 //	spec = " '|\"";
 
-	printf("spec:%s\n", spec);
+//	printf("spec:%s\n", spec);
 	printf("line:|%s|\n", line);
 	printf("f_line:|%s|\n", f_line);
 //	printf("word number is: %d\n" , ft_word_counter(line, ' '));
@@ -184,12 +184,14 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //	arguments[2] = "|-a|";
 
 	sc->arguments[sc->command_count] = NULL; // последний аргумент
-
+	sc->memory_allocated = 0;
+	sc->quotes = 0;
 	int fl = 0;
-//	int quotes = 0;
 	int h = 0;
+	printf("1\n");
 	while(f_line[sc->i] && f_line[sc->i] != ';' )
 	{
+		printf("2\n");
 //		if (f_line[i] == '"')
 //		{
 //			h = 0;
@@ -211,7 +213,7 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //				k++; // 													fixme
 //			i++;
 //		}
-		if (f_line[sc->i] == ' ')
+		if (f_line[sc->i] == ' ' && !sc->quotes)
 		{
 			if (sc->k < sc->command_count && sc->flag == 0) // должны быть меньше количетсва аргументов ровно или - 1
 			{
@@ -242,20 +244,22 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //		}
 		else if (f_line[sc->i])
 		{
+			printf("2.1\n");
 			make_arg(f_line, sc);
 		}
 		sc->i++;
 	}
+	printf("3\n");
 	free(f_line);
-	sc->arguments[sc->command_count] = NULL; //						fixme incorrect command_count
+	sc->arguments[sc->command_count] = NULL; //		ass				fixme incorrect command_count
 //	arguments[4][7] = '\0';
 //	printf("%s\n", arguments[4]);
-	printf("i is: %d\n", sc->i);
-//	sc->arguments[k][j] = '\0';
+//	printf("i is: %d\n", sc->i);
+//	sc->arguments[sc->k][sc->j] = '\0';
 //	arguments[2][10] = '\0';
 
 //	arguments[4] = NULL;
-	sc->i = 0;
+//	sc->i = 0;
 //	while(sc->arguments[i])
 //	{
 //		printf("%d argument is |%s|\n", i, sc->arguments[i]);
@@ -296,6 +300,7 @@ int pars(t_common *common, char *line)
 //		printf("%s\n", simple_command->arguments[i]);
 //		i++;
 //	}
+
 	env[0] = "PATH=/Users/namerei/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki";
 	env[1] = "SHELL=/bin/zsh";
 	env[2] = "SECURITYSESSIONID=186a8";
