@@ -6,8 +6,8 @@ int make_arg(char *f_line , t_simple_command *sc)
 //	int j;
 
 	len_for_calloc = 0;
-	printf("2.2\n");
-	printf("%d\n", sc->memory_allocated);
+//	printf("2.2\n");
+//	printf("%d\n", sc->memory_allocated);
 	if (!sc->memory_allocated)
 	{
 		printf("2.3\n");

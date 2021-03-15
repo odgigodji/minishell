@@ -188,10 +188,10 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 	sc->quotes = 0;
 	int fl = 0;
 	int h = 0;
-	printf("1\n");
+//	printf("1\n");
 	while(f_line[sc->i] && f_line[sc->i] != ';' )
 	{
-		printf("2\n");
+//		printf("2\n");
 //		if (f_line[i] == '"')
 //		{
 //			h = 0;
@@ -213,7 +213,7 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //				k++; // 													fixme
 //			i++;
 //		}
-		if (f_line[sc->i] == ' ' && !sc->quotes)
+		if ((f_line[sc->i] == ' ' || f_line[sc->i] == '\t') && !sc->quotes)
 		{
 			if (sc->k < sc->command_count && sc->flag == 0) // должны быть меньше количетсва аргументов ровно или - 1
 			{
@@ -244,12 +244,12 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //		}
 		else if (f_line[sc->i])
 		{
-			printf("2.1\n");
+//			printf("2.1\n");
 			make_arg(f_line, sc);
 		}
 		sc->i++;
 	}
-	printf("3\n");
+//	printf("3\n");
 	free(f_line);
 	sc->arguments[sc->command_count] = NULL; //		ass				fixme incorrect command_count
 //	arguments[4][7] = '\0';

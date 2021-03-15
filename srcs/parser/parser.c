@@ -29,6 +29,8 @@ int	ft_parser(t_common *common)
 	}
 	if (common->command.simple_commands[0]->arguments[i] == NULL)
 		printf("%d argument is |null|\n", i);
+//	while (1) ;
+
 //	free(line);
 //	printf("result:");
 //	if (NULL == (simple_command = simple_command_init(ft_split(line, ' '), 1, 1)))
