@@ -30,7 +30,8 @@ add_executable(minishell
         srcs/utils/get_envp_variable.c
         srcs/buildins/mini_export.c
         srcs/executor/execute_command.c
-        srcs/buildins/mini_env.c)
+        srcs/buildins/mini_env.c
+        )
 
 add_executable(executor_tests
         srcs/executor/executor_tests/00_main_test.c
