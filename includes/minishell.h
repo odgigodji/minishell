@@ -143,6 +143,7 @@ void				mini_echo(char **simple_command);
 void				mini_pwd(t_common *common);
 void				mini_export(t_common *common, char **simple_command);
 void				mini_env(t_common *common);
+void				mini_unset(t_common *common, char **keys);
 char				*get_pwd(char **envp);
 
 #endif

@@ -16,7 +16,8 @@
     - [ ] cd
         - [ ] проработать вариант когда удалены PWD и OLD_PWD
     - [x] pwd
-    - [x] export
+    - [ ] export
+      - [ ] добавить сортировку
     - [ ] unset
     - [x] env
     - [ ] exit

@@ -31,7 +31,7 @@ add_executable(minishell
         srcs/buildins/mini_export.c
         srcs/executor/execute_command.c
         srcs/buildins/mini_env.c
-        )
+        srcs/buildins/mini_unset.c)
 
 add_executable(executor_tests
         srcs/executor/executor_tests/00_main_test.c
@@ -54,7 +54,7 @@ add_executable(executor_tests
         srcs/executor/executor_tests/01_test_get_envp_var_pointer.c
         srcs/executor/executor_tests/executor_tests.h
         srcs/executor/execute_command.c
-        srcs/buildins/mini_env.c)
+        srcs/buildins/mini_env.c srcs/buildins/mini_unset.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m
