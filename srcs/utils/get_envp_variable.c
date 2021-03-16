@@ -227,7 +227,6 @@ int		update_envp_var(t_common *common, char *key, char *new_value, int append)
 	}
 	else
 	{
-		puts("arg");
 		add_argument(common, key, new_value);
 		return (0);
 	}
