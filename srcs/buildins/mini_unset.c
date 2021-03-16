@@ -19,7 +19,6 @@ void	mini_unset(t_common *common, char **keys)
 		{
 			if (!ft_strncmp(common->env_variables_list[count][0], keys[count_keys], ft_strlen(keys[count_keys]) + 1))
 			{
-				puts(GRN "here" RESET);
 				temp = common->env_variables_list[count];
 				free(temp[0]);
 				free(temp[1]);
