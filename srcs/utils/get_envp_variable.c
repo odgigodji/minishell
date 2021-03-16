@@ -51,11 +51,19 @@ char	**get_key_value(char *envp_line)
 	if (NULL == (var = malloc(sizeof(char *) * 3)))
 		return (NULL);
 	append_flag = 0;
-	key_len = (int)(ft_strchr(envp_line, '=') - envp_line);
-	if (envp_line[key_len - 1] == '+')
-		append_flag = 1;
-	var[0] = ft_substr(envp_line, 0, key_len - append_flag);
-	var[1] = ft_substr(envp_line, key_len + 1, ft_strlen(envp_line) - key_len);
+	if (ft_strchr(envp_line, '='))
+	{
+		key_len = (int) (ft_strchr(envp_line, '=') - envp_line);
+		if (envp_line[key_len - 1] == '+')
+			append_flag = 1;
+		var[0] = ft_substr(envp_line, 0, key_len - append_flag);
+		var[1] = ft_substr(envp_line, key_len + 1, ft_strlen(envp_line) - key_len);
+	}
+	else
+	{
+		var[0] = ft_substr(envp_line, 0, ft_strlen(envp_line));
+		var[1] = NULL;
+	}
 	var[2] = NULL;
 	return (var);
 }
@@ -192,7 +200,10 @@ char	***add_argument(t_common *common, char *new_key, char *new_value)
 	}
 	result[count] = malloc(sizeof(char **) * 3);
 	result[count][0] = ft_strdup(new_key);
-	result[count][1] = ft_strdup(new_value);
+	if (new_value)
+		result[count][1] = ft_strdup(new_value);
+	else
+		result[count][1] = NULL;
 	result[count][2] = NULL;
 	result[count + 1] = NULL;
 //	free(common->env_variables_list);

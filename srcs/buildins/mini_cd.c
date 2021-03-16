@@ -17,7 +17,7 @@ void	mini_cd(char **simple_command, t_common *common)
 			|| NULL == (new_pwd = malloc(sizeof(char) * MAX_PATH))
 			|| NULL == (getcwd(old_pwd, MAX_PATH)))
 			return ;
-		update_envp_var(common, "OLD_PWD", old_pwd, 0);
+		update_envp_var(common, "OLDPWD", old_pwd, 0);
 		if (-1 == chdir(simple_command[1]))
 			return ;
 		if (NULL == (getcwd(new_pwd, MAX_PATH)))
@@ -28,9 +28,10 @@ void	mini_cd(char **simple_command, t_common *common)
 	{
 		old_pwd = common->env_variables_list[get_envp_var_index(common, "PWD")][1];
 		common->env_variables_list[get_envp_var_index(common, "PWD")][1] =
-				common->env_variables_list[get_envp_var_index(common, "OLD_PWD")][1];
-		common->env_variables_list[get_envp_var_index(common, "OLD_PWD")][1] = old_pwd;
+				common->env_variables_list[get_envp_var_index(common, "OLDPWD")][1];
+		common->env_variables_list[get_envp_var_index(common, "OLDPWD")][1] = old_pwd;
 		ft_putstr_fd(common->env_variables_list[get_envp_var_index(common, "PWD")][1], 1);
+		ft_putstr_fd("\n", 1);
 		if (-1 == chdir(common->env_variables_list[get_envp_var_index(common, "PWD")][1]))
 		{
 			strerror((errno = ENOENT));

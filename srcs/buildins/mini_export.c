@@ -18,11 +18,13 @@ void	print_export(t_common *common)
 
 	count = 0;
 //	puts(GRN "test" RESET);
-
 	printf("declare -x %s=\"%s\"\n", common->env_variables_list[count][0], common->env_variables_list[count][1]);
 	while (common->env_variables_list[count])
 	{
-		printf("declare -x %s=\"%s\"\n", common->env_variables_list[count][0], common->env_variables_list[count][1]);
+		if (common->env_variables_list[count][1])
+			printf("declare -x %s=\"%s\"\n", common->env_variables_list[count][0], common->env_variables_list[count][1]);
+		else
+			printf("declare -x %s\n", common->env_variables_list[count][0]);
 		count++;
 	}
 //	puts(GRN "test" RESET);
@@ -30,7 +32,7 @@ void	print_export(t_common *common)
 
 int		is_append(char *arg)
 {
-	if (NULL == arg)
+	if (NULL == arg || NULL == ft_strchr(arg, '='))
 		return (0);
 	if (*(ft_strchr(arg, '=') - 1) == '+')
 		return (1);
