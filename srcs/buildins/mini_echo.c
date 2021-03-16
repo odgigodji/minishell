@@ -7,11 +7,6 @@ void	mini_echo(char **simple_command)
 	count_arg = 1;
 	if (!ft_strncmp(simple_command[count_arg], "-n", 3))
 		count_arg++;
-	if ((!ft_strncmp(simple_command[count_arg], "%?", 3)))
-	{
-		printf("%d\n", errno);
-		return ;
-	}
 	else
 	{
 		while (simple_command[count_arg])
