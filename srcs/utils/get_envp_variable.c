@@ -38,16 +38,24 @@ char	*get_envp_variable_from_char(char **envp, char *var)
 	return (ft_strrchr(envp[count], '=') + 1);
 }
 
-char	**get_var(char *envp_line)
+/*
+** первращает строку типа "USER=mscot" в массив [["USER"], ["mscot"]]
+*/
+
+char	**get_key_value(char *envp_line)
 {
 	char	**var;
-	int		var_name_len;
+	int		key_len;
+	int		append_flag;
 
 	if (NULL == (var = malloc(sizeof(char *) * 3)))
 		return (NULL);
-	var_name_len = (int)(ft_strchr(envp_line, '=') - envp_line);
-	var[0] = ft_substr(envp_line, 0, var_name_len);
-	var[1] = ft_substr(envp_line, var_name_len + 1, ft_strlen(envp_line) - var_name_len);
+	append_flag = 0;
+	key_len = (int)(ft_strchr(envp_line, '=') - envp_line);
+	if (envp_line[key_len - 1] == '+')
+		append_flag = 1;
+	var[0] = ft_substr(envp_line, 0, key_len - append_flag);
+	var[1] = ft_substr(envp_line, key_len + 1, ft_strlen(envp_line) - key_len);
 	var[2] = NULL;
 	return (var);
 }
@@ -69,7 +77,7 @@ char	***get_envp(char **envp)
 	count = 0;
 	while (envp[count])
 	{
-		result[count] = get_var(envp[count]);
+		result[count] = get_key_value(envp[count]);
 		count++;
 	}
 	return (result);
@@ -133,18 +141,94 @@ char	*get_envp_var_pointer(t_common *common, char *var)
 	return (NULL);
 }
 
-
-int		update_envp_var(t_common *common, char *var, char *new_value)
+int		args_list_len(char	***arg_list)
 {
-	int	index;
+	int	count;
 
-	index = get_envp_var_index(common, var);
+	count = 0;
+	while (arg_list[count])
+		count++;
+	return (count);
+}
+
+void	free_arg_list(char ****arg_list)
+{
+	int count;
+	int arg_count;
+
+	count = 0;
+	arg_count = 0;
+	while ((*arg_list)[count])
+	{
+		while ((*arg_list)[count][arg_count])
+		{
+			free((*arg_list)[count][arg_count]);
+			arg_count++;
+		}
+		free((*arg_list)[count]);
+		count++;
+	}
+	free(*arg_list);
+}
+
+/*
+** выделение копирование с выделением памяти списка char ***
+** и занесением нового аргумента в список
+** память выделяется на len + 2 аргументов для нового аргумента
+*/
+
+char	***add_argument(t_common *common, char *new_key, char *new_value)
+{
+	char	***result;
+	int		count;
+
+	if (NULL == (result = malloc(sizeof(char **) * (args_list_len(common->env_variables_list) + 2))))
+		return (NULL);
+	count = 0;
+	while (common->env_variables_list[count])
+	{
+		result[count] = common->env_variables_list[count];
+		count++;
+	}
+	result[count] = malloc(sizeof(char **) * 3);
+	result[count][0] = ft_strdup(new_key);
+	result[count][1] = ft_strdup(new_value);
+	result[count][2] = NULL;
+	result[count + 1] = NULL;
+//	free(common->env_variables_list);
+	common->env_variables_list = result;
+	return (result);
+}
+
+/*
+** назначение нового значения переменной в список char ***
+*/
+
+int		update_envp_var(t_common *common, char *key, char *new_value, int append)
+{
+	int		index;
+	char	*temp;
+
+	index = get_envp_var_index(common, key);
 	if (-1 != index)
 	{
-		free(common->env_variables_list[index][1]);
-		common->env_variables_list[index][1] = new_value;
+		if (append)
+		{
+			temp = common->env_variables_list[index][1];
+			common->env_variables_list[index][1] = ft_strjoin(common->env_variables_list[index][1], new_value);
+			free(temp);
+		}
+		else
+		{
+			free(common->env_variables_list[index][1]);
+			common->env_variables_list[index][1] = ft_strdup(new_value);
+		}
 		return (1);
 	}
 	else
+	{
+		puts("arg");
+		add_argument(common, key, new_value);
 		return (0);
+	}
 }

@@ -28,27 +28,37 @@ void	print_export(t_common *common)
 //	puts(GRN "test" RESET);
 }
 
+int		is_append(char *arg)
+{
+	if (NULL == arg)
+		return (0);
+	if (*(ft_strchr(arg, '=') - 1) == '+')
+		return (1);
+	else
+		return (0);
+}
+
 void	mini_export(t_common *common, char **simple_command)
 {
-	int		env_list_len;
-	int 	count;
-	char	***env_copy;
+	char	**key_value;
+	int		count;
 
-	env_list_len = env_list_length(common);
+	count = 1;
 	if (NULL == simple_command[1])
 	{
 //		puts(RED "test" RESET);
 		print_export(common);
 		return ;
 	}
-	if (NULL == get_envp_var_pointer(common, ""))
-		return ;
-	if (NULL == (env_copy = malloc(sizeof(char **) * (env_list_len + 2))))
-		return ;
-	count = 0;
-	while (common->env_variables_list[count])
+	else
 	{
-		env_copy[count] = common->env_variables_list[count];
-		count++;
+		while (simple_command[count])
+		{
+			key_value = get_key_value(simple_command[count]);
+			update_envp_var(common, key_value[0], key_value[1], is_append(simple_command[count]));
+			free(key_value[0]);
+			free(key_value[1]);
+			count++;
+		}
 	}
 }

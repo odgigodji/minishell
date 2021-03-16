@@ -17,12 +17,12 @@ void	mini_cd(char **simple_command, t_common *common)
 			|| NULL == (new_pwd = malloc(sizeof(char) * MAX_PATH))
 			|| NULL == (getcwd(old_pwd, MAX_PATH)))
 			return ;
-		update_envp_var(common, "OLD_PWD", old_pwd);
+		update_envp_var(common, "OLD_PWD", old_pwd, 0);
 		if (-1 == chdir(simple_command[1]))
 			return ;
 		if (NULL == (getcwd(new_pwd, MAX_PATH)))
 			return ;
-		update_envp_var(common, "PWD", new_pwd);
+		update_envp_var(common, "PWD", new_pwd, 0);
 	}
 	else // "cd -"
 	{
