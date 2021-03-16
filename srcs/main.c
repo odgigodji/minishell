@@ -8,6 +8,7 @@ void	minishell_loop(char **envp)
 	i = 0;
 	common = common_init((char **)envp);
 //	ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
+	signals_handler();
 	while (ft_parser(&common))
 	{
 //		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);

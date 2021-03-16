@@ -9,6 +9,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <sys/wait.h>
+# include <signal.h>
 # include "libft.h"
 
 # define MAX_PATH 4096
@@ -144,6 +145,13 @@ void				mini_pwd(t_common *common);
 void				mini_export(t_common *common, char **simple_command);
 void				mini_env(t_common *common);
 void				mini_unset(t_common *common, char **keys);
+void				mini_exit(t_common *common);
 char				*get_pwd(char **envp);
+
+/*
+** signals
+*/
+
+void				signals_handler(void);
 
 #endif

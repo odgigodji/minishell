@@ -16,7 +16,7 @@ int		is_buildin(t_simple_command *simple_command)
 	list[3] = "env";
 	list[4] = "export";
 	list[5] = "unset";
-//	list[6] = "exit";
+	list[6] = "exit_1";
 	count = 0;
 	while (list[count])
 	{
@@ -47,6 +47,8 @@ void	execute_simple_command_buildin(t_common *common, t_simple_command *simple_c
 		mini_export(common, simple_command->arguments);
 	else if (!ft_strncmp("unset", simple_command->arguments[0], 6))
 		mini_unset(common, simple_command->arguments);
+	else if (!ft_strncmp("exit_1", simple_command->arguments[0], 6))
+		mini_exit(common);
 }
 
 void	execute_simple_command(t_common *common, t_simple_command *simple_command)
