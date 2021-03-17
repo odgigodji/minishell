@@ -18,10 +18,10 @@ int	ft_parser(t_common *common)
 	gnl_rv = get_next_line(0, &line);
 //	printf("0\n");
 //	ft_lexer(line);
-	if (!ft_strncmp(line, "exit", 4))
-		return (0);
+
 //	printf("%s\n", line);
-	pars(common, line);
+//	pars(common, line);
+	new_pars(common, line);
 	printf("arguments:\n");
 	int i =0;
 	while(common->command.simple_commands[0]->arguments[i])
