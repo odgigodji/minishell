@@ -13,3 +13,5 @@ echo f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g s
 
 echo $?
 echo -n -n -n -n test
+echo kitty|cat -e
+echo kitty'|'cat -e

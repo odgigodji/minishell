@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.17)
 project(minishell C)
 set(CMAKE_C_STANDARD 99)
 
+set(CMAKE_C_FLAGS "")
+
 include_directories(
         ${CMAKE_SOURCE_DIR}/libft
         ${CMAKE_SOURCE_DIR}/includes
@@ -58,10 +60,12 @@ add_executable(executor_tests
 
 target_link_libraries(minishell LINK_PUBLIC
         m
+        termcap
         ${CMAKE_SOURCE_DIR}/libft/libft.a
         )
 
 target_link_libraries(executor_tests LINK_PUBLIC
         m
+        termcap
         ${CMAKE_SOURCE_DIR}/libft/libft.a
         )
