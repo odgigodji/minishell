@@ -12,6 +12,10 @@
 # include <signal.h>
 # include "libft.h"
 
+/*
+** Linux has a maximum filename length of 255 characters for most filesystems (including EXT4), and a maximum path of 4096 characters.
+*/
+
 # define MAX_PATH 4096
 # define MAX_NAME 255
 
