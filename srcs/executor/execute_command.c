@@ -16,17 +16,13 @@ int		is_buildin(t_simple_command *simple_command)
 	list[3] = "env";
 	list[4] = "export";
 	list[5] = "unset";
-	list[6] = "exit_1";
+	list[6] = "exit";
 	count = 0;
 	while (list[count])
 	{
 
-//		ft_putstr_fd(list[count], 0);
-//		ft_putstr_fd(RED" test\n" RESET, 0);
 		if (!strncmp(list[count], simple_command->arguments[0], 100))
-		{
 			return (1);
-		}
 		count++;
 	}
 	return (0);
@@ -47,7 +43,7 @@ void	execute_simple_command_buildin(t_common *common, t_simple_command *simple_c
 		mini_export(common, simple_command->arguments);
 	else if (!ft_strncmp("unset", simple_command->arguments[0], 6))
 		mini_unset(common, simple_command->arguments);
-	else if (!ft_strncmp("exit_1", simple_command->arguments[0], 6))
+	else if (!ft_strncmp("exit", simple_command->arguments[0], 6))
 		mini_exit(common);
 }
 
@@ -62,8 +58,6 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command)
 		execute_simple_command_buildin(common, simple_command);
 		return ;
 	}
-//	puts(RED "test\n" RESET);
-//	ft_putstr_fd(RED"test\n" RESET, 0);
 	printf("");
 	path = split_path(common->env_variables);
 	count = 0;
