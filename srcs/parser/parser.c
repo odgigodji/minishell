@@ -20,8 +20,8 @@ int	ft_parser(t_common *common)
 //	ft_lexer(line);
 
 //	printf("%s\n", line);
-//	pars(common, line);
-	new_pars(common, line);
+//	pars(common, line);     //-----------------старыый парсер
+	new_pars(common, line); //--------------- новый парсер
 	printf("arguments:\n");
 	int i =0;
 	while(common->command.simple_commands[0]->arguments[i])
