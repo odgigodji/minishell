@@ -113,7 +113,7 @@ void new_pars(t_common *common, char *line)
 {
 	char **arg;
 	int i;
-	static int k = 0;
+	static int k = 0; // number of argument
 
 	i = 0;
 //	int d = arg_counter(line);													//fixme написать функцию счетчика аргументов
@@ -121,13 +121,15 @@ void new_pars(t_common *common, char *line)
 //	ft_init_struct(common, d);
 //	common->command.simple_commands[0] = sc; //одна команда без пайпов
 //	common->command.number_of_simple_commands++;
-	while (i < 5)
-	{
-		k = ft_test_shit(k);
-		i++;
-	}
-	printf("%d\n", k);
-//	line_to_arg(common, line);
+
+//	while (i < 7)
+//	{
+//		k = ft_test_shit(k);
+//		i++;
+//	}
+//	printf("%d\n", k);
+
+	line_to_arg(common, line);
 //	while(i < 3)
 //	{
 //		printf("%s\n", common->command.simple_commands[0]->arguments[i]);
