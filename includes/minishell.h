@@ -152,6 +152,8 @@ char				*get_pwd(char **envp);
 ** signals
 */
 
-void				signals_handler(void);
+void				signal_processor(void);
+void				signal_handler(int num);
+void				signal_handler_command(int num);
 
 #endif

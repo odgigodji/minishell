@@ -65,6 +65,7 @@ void	execute_command(t_common *common, char **envp)
 		//	Redirect output
 		dup2(pipe_variables.fdout, STDOUT_FILENO);
 		close(pipe_variables.fdout);
+		signal(SIGINT, signal_handler_command);
 		if (0 == (ret = fork()))							// Create child process
 		{
 			execute_simple_command(common, common->command.simple_commands[command_table_count]);

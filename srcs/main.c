@@ -3,24 +3,15 @@
 void	minishell_loop(char **envp)
 {
 	t_common	common;
-	int i;
+	int			i;
 
 	i = 0;
 	common = common_init((char **)envp);
-//	ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
-//	signals_handler();
+	signal_processor();
+//	signal(SIGQUIT, handler_s);	// quit	Ctrl+|	выход из приложенияя
 	while (ft_parser(&common))
 	{
-//		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
 		executor(&common);
-//		while(common.command.simple_commands[0]->arguments[i])
-//		{
-//			free(common.command.simple_commands[0]->arguments[0]);
-//			free(common.command.simple_commands[0]->arguments[1]);
-//			i++;
-//		}
-//		free(common.command.simple_commands[0]);
-//		free(common.command.simple_commands);
 	}
 }
 

@@ -15,6 +15,7 @@
     - [x] echo
     - [x] cd
         - [ ] проработать вариант когда удалены PWD и OLDPWD
+        - [ ] No such file or directory
     - [x] pwd
     - [x] export
       - [ ] добавить сортировку при выводе списка
