@@ -10,7 +10,7 @@ int	ft_parser(t_common *common)
 {
 	char	*line;
 	int		gnl_rv;
-	t_simple_command *simple_command;
+//	t_simple_command *simple_command;
 
 	line = NULL;
 	ft_putstr_fd("\033[35mminishell$ \033[0m", 0);

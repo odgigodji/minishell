@@ -4,8 +4,10 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 {
 	char *res;
 	int i;
+	t_simple_command sc;
 
 	i = 0;
+//	static int k = 0;
 	res = ft_calloc(sizeof(char), len_for_calloc + 1);
 	while(len_for_calloc--)
 	{
@@ -14,9 +16,12 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 		increment++;
 	}
 	printf("---%s---\n", res);
-//	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->k] = res;
+	sc.arguments[0] = res;
+//	printf("%s\n", sc.arguments[0]);
+//	common->command.simple_commands[0]->arguments[0] = res;
+//	printf("%s\n", common->command.simple_commands[0]->arguments[0]);
 //	if (common->command.simple_commands[0]->k != common->command.simple_commands[0]->command_count)
-//		common->command.simple_commands[0]->k++;
+//		k++;
 	return (increment);
 }
 
@@ -43,6 +48,12 @@ int len_for_calloc(char *line, t_common *common, int increment, char *spec)
 	return (len_for_calloc);
 }
 
+int ft_test_shit(int k)
+{
+	k++;
+	return(k);
+}
+
 int	make_args(char *line, t_common *common, int increment)
 {
 	int i;
@@ -67,9 +78,9 @@ void line_to_arg(t_common *common, char *line)
 	int i;
 
 	i = 0;
-	common->command.simple_commands[0] = malloc(sizeof(t_simple_command) * 1);
-	common->command.simple_commands[0]->k = 0;
-	common->command.simple_commands[0]->command_count = 3; // command count
+//	common->command.simple_commands[0] = malloc(sizeof(t_simple_command) * 1);
+//	common->command.simple_commands[0]->k = 0;
+//	common->command.simple_commands[0]->command_count = 3; // command count
 	printf("|%s|\n", line);
 	while(line[i] && line[i] != ';')
 	{
@@ -86,20 +97,40 @@ void line_to_arg(t_common *common, char *line)
 	}
 }
 
+int arg_counter(char *line)														//fixme func
+{
+	return 5;
+}
+
+void ft_init_struct(t_common *common, int arg_count)
+{
+	common->command.simple_commands[0]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
+//	common->command = malloc(sizeof(t_command) * 1);
+	;
+}
+
 void new_pars(t_common *common, char *line)
 {
 	char **arg;
 	int i;
+	static int k = 0;
 
 	i = 0;
-	common->command.simple_commands = malloc(sizeof(t_simple_command *) * 5);
+//	int d = arg_counter(line);													//fixme написать функцию счетчика аргументов
+//	common->command.simple_commands = malloc(sizeof(t_simple_command *) * 5);
+//	ft_init_struct(common, d);
 //	common->command.simple_commands[0] = sc; //одна команда без пайпов
 //	common->command.number_of_simple_commands++;
-
-	line_to_arg(common, line);
+	while (i < 5)
+	{
+		k = ft_test_shit(k);
+		i++;
+	}
+	printf("%d\n", k);
+//	line_to_arg(common, line);
 //	while(i < 3)
 //	{
-//		printf("%s\n", common->command.simple_commands[0]->arguments[0]);
+//		printf("%s\n", common->command.simple_commands[0]->arguments[i]);
 //		i++;
 //	}
 //	printf("%s", line);
