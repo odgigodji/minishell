@@ -32,7 +32,7 @@ t_simple_command	*simple_command_init(
 	if (NULL == (simple_command = malloc(sizeof(t_simple_command))))
 		return (NULL);
 	simple_command->arguments = arguments;
-	simple_command->number_of_arguments = number_of_arguments;
+	simple_command->arg_number = number_of_arguments;
 	simple_command->number_of_available_arguments = number_of_available_arguments;
 	return (simple_command);
 }
