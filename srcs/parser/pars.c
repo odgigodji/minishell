@@ -165,7 +165,7 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 	printf("f_line:|%s|\n", f_line);
 
 //	return (0);
-	sc->arg_count = ft_word_counter(f_line, ' '); // 			fixme quoters moment
+	sc->arg_count = ft_word_counter(f_line, ' '); // 						fixme quoters moment
 	sc->arguments = ft_calloc(sizeof(char *),sc->arg_count + 1 ); // память под двойной массив
 
 	printf("command_count = %d\n", sc->arg_count);

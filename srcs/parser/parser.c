@@ -21,6 +21,8 @@ int	ft_parser(t_common *common)
 
 //	printf("%s\n", line);
 //	pars(common, line);     //-----------------старыый парсер
+
+// --------------добавить цикл для обработки точки c запятой--------------
 	new_pars(common, line); //--------------- новый парсер
 	printf("arguments:\n");
 	int i =0;
