@@ -1,5 +1,14 @@
 #include "minishell.h"
 
+void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res)
+{
+	static int nubmer_of_arg = 0;
+
+//	nubmer_of_arg = 0;
+	common->command.simple_commands[0]->arguments[nubmer_of_arg] = res;
+	nubmer_of_arg++;
+}
+
 int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 {
 	char *res;
@@ -19,8 +28,12 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 	printf("---%s---\n", res);
 //	sc.arguments[0] = res;
 //	printf("%s\n", sc.arguments[0]);
-	common->command.simple_commands[0]->arguments[0] = res;
+	ft_do_arg_and_switch_to_next_arg(common, res);
+//	common->command.simple_commands[0]->arguments[0] = res;
 	printf("<%s>\n", common->command.simple_commands[0]->arguments[0]);
+	printf("<%s>\n", common->command.simple_commands[0]->arguments[1]);
+	printf("<%s>\n", common->command.simple_commands[0]->arguments[2]);
+
 //	printf("%s\n", common->command.simple_commands[0]->arguments[0]);
 //	if (common->command.simple_commands[0]->k != common->command.simple_commands[0]->command_count)
 //		k++;
@@ -101,9 +114,32 @@ void line_to_arg(t_common *common, char *line)
 	}
 }
 
-int ft_arg_counter(char *line)													//fixme func
+int	ft_arg_counter(char *s)												//fixme
 {
-	return 5;
+	int		count;
+	int 	quote_t;
+	int		c;
+
+	c = ' ';
+	count = 0;
+	while (*s)
+	{
+		if ((*s == '"' || *s == '\''))// && *(s - 1) != '\\')
+		{
+			count++;
+			quote_t = *s;
+			s++;
+			while(*s != quote_t)
+			{
+				s++;
+			}
+			s++;
+		}
+		if ((*s != c && *(s + 1) == c) || (*s != c && (*(s + 1) == '\0')))
+			count++;
+		s++;
+	}
+	return (count);
 }
 
 void ft_init_struct(t_common *common)
