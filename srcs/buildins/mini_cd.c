@@ -26,16 +26,36 @@ void	mini_cd(char **simple_command, t_common *common)
 	}
 	else // "cd -"
 	{
-		old_pwd = common->env_variables_list[get_envp_var_index(common, "PWD")][1];
-		common->env_variables_list[get_envp_var_index(common, "PWD")][1] =
-				common->env_variables_list[get_envp_var_index(common, "OLDPWD")][1];
-		common->env_variables_list[get_envp_var_index(common, "OLDPWD")][1] = old_pwd;
-		ft_putstr_fd(common->env_variables_list[get_envp_var_index(common, "PWD")][1], 1);
-		ft_putstr_fd("\n", 1);
-		if (-1 == chdir(common->env_variables_list[get_envp_var_index(common, "PWD")][1]))
+//		old_pwd = common->env_variables_list[get_envp_var_index(common, "PWD")][1];
+//		common->env_variables_list[get_envp_var_index(common, "PWD")][1] =
+//				common->env_variables_list[get_envp_var_index(common, "OLDPWD")][1];
+//		common->env_variables_list[get_envp_var_index(common, "OLDPWD")][1] = old_pwd;
+//		ft_putstr_fd(common->env_variables_list[get_envp_var_index(common, "PWD")][1], 1);
+//		ft_putstr_fd("\n", 1);
+//		if (-1 == chdir(common->env_variables_list[get_envp_var_index(common, "PWD")][1]))
+//		{
+//			strerror((errno = ENOENT));
+//			return ;
+//		}
+		if (-1 != get_envp_var_index(common, "OLDPWD")
+			&& NULL != common->env_variables_list[get_envp_var_index(common, "OLDPWD")][1])
 		{
-			strerror((errno = ENOENT));
-			return ;
+			if (-1 == chdir(common->env_variables_list[get_envp_var_index(common, "OLDPWD")][1]))
+			{
+				strerror((errno = ENOENT));
+				return;
+			}
+			old_pwd = ft_strdup(common->env_variables_list[get_envp_var_index(common, "OLDPWD")][1]);
+			update_envp_var(common, "OLDPWD", common->env_variables_list[get_envp_var_index(common, "PWD")][1], 0);
+			update_envp_var(common, "PWD", old_pwd, 0);
+			free(old_pwd);
+			ft_putstr_fd(common->env_variables_list[get_envp_var_index(common, "PWD")][1], 1);
+			ft_putstr_fd("\n", 1);
+		}
+		else
+		{
+			printf("minishell: cd: OLDPWD not set\n");
+			errno = 1;
 		}
 	}
 }
