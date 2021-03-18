@@ -12,7 +12,7 @@ int		is_buildin(t_simple_command *simple_command)
 	ft_bzero(list, 8);
 	list[0] = "cd";
 	list[1] = "pwd";
-	list[2] = "echdfo";
+	list[2] = "echo";
 	list[3] = "env";
 	list[4] = "export";
 	list[5] = "unset";
