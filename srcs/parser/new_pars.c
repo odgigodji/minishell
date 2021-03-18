@@ -111,6 +111,7 @@ void ft_init_struct(t_common *common, int arg_count)
 
 void new_pars(t_common *common, char *line)
 {
+	printf("------используется новый парсер, чтобы вернуться на старый нужно закомитить new_pars в parser.c и раскомитьть pars---------\n");
 	char **arg;
 	int i;
 	static int k = 0; // number of argument
