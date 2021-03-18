@@ -11,6 +11,13 @@ void	minishell_loop(char **envp)
 //	signal(SIGQUIT, handler_s);	// quit	Ctrl+|	выход из приложенияя
 	while (ft_parser(&common))
 	{
+//		while(common.command.simple_commands[0]->arguments[i])
+//		{
+//			printf("%d argument is |%s|\n", i, common.command.simple_commands[0]->arguments[i]);
+//			i++;
+//		}
+//		if (common.command.simple_commands[0]->arguments[i] == NULL)
+//			printf("%d argument is |null|\n", i);
 		executor(&common);
 	}
 }

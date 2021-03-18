@@ -161,6 +161,7 @@ void ft_init_struct(t_common *common, int arg_count)
 	common->command.simple_commands[0] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
 	common->command.simple_commands[0]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 	common->command.simple_commands[0]->arg_number = 0;
+	common->command.number_of_simple_commands = 1;
 //	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->command_count] = NULL;
 	;
 }
@@ -200,16 +201,16 @@ void new_pars(t_common *common, char *line)
 //	printf("<%s>\n", common->command.simple_commands[0]->arguments[3]);
 //	printf("<%s>\n", common->command.simple_commands[0]->arguments[4]);
 	i = 0;
-	while(common->command.simple_commands[0]->arguments[i])
-	{
-		printf("<%s>\n", common->command.simple_commands[0]->arguments[i]);
-		i++;
-	}
+//	while(common->command.simple_commands[0]->arguments[i])
+//	{
+//		printf("<%s>\n", common->command.simple_commands[0]->arguments[i]);
+//		i++;
+//	}
 //	while(i < 3)
 //	{
 //		printf("%s\n", common->command.simple_commands[0]->arguments[i]);
 //		i++;
 //	}
 //	printf("%s", line);
-	exit(0);
+//	exit(0);
 }
