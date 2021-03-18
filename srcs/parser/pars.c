@@ -165,10 +165,10 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 	printf("f_line:|%s|\n", f_line);
 
 //	return (0);
-	sc->command_count = ft_word_counter(f_line, ' '); // 			fixme quoters moment
-	sc->arguments = ft_calloc(sizeof(char *),sc->command_count + 1 ); // память под двойной массив
+	sc->arg_count = ft_word_counter(f_line, ' '); // 			fixme quoters moment
+	sc->arguments = ft_calloc(sizeof(char *),sc->arg_count + 1 ); // память под двойной массив
 
-	printf("command_count = %d\n", sc->command_count);
+	printf("command_count = %d\n", sc->arg_count);
 	sc->flag = 0; // нет попадания в пробел
 
 //	spec = " '|\"";
@@ -191,7 +191,7 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 //	arguments[1] = "|-l|";
 //	arguments[2] = "|-a|";
 
-	sc->arguments[sc->command_count] = NULL; // последний аргумент
+	sc->arguments[sc->arg_count] = NULL; // последний аргумент
 	sc->quotes = 0;
 	int fl = 0;
 	int h = 0;
@@ -216,13 +216,13 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 			}
 			sc->arguments[sc->k][h] = '\0';
 			printf("--%s--\n", sc->arguments[sc->k]);
-			if (sc->k < sc->command_count)
+			if (sc->k < sc->arg_count)
 				sc->k++; // 													fixme
 			sc->i++;
 		}
 		if ((f_line[sc->i] == ' ' || f_line[sc->i] == '\t') && !sc->quotes)
 		{
-			if (sc->k < sc->command_count && sc->flag == 0) // должны быть меньше количетсва аргументов ровно или - 1
+			if (sc->k < sc->arg_count && sc->flag == 0) // должны быть меньше количетсва аргументов ровно или - 1
 			{
 				sc->flag  = 1;
 				sc->j = 0;
@@ -259,7 +259,7 @@ void **line_to_arguments(char *line, char *env[4], t_simple_command *sc)
 	}
 //	printf("3\n");
 	free(f_line);
-	sc->arguments[sc->command_count] = NULL; //		ass				fixme incorrect command_count
+	sc->arguments[sc->arg_count] = NULL; //		ass				fixme incorrect command_count
 //	arguments[4][7] = '\0';
 //	printf("%s\n", arguments[4]);
 //	printf("i is: %d\n", sc->i);

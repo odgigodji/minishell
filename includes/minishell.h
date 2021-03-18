@@ -43,7 +43,7 @@ typedef struct			s_simple_command
 	int 				memory_allocated;
 	int					i; // counter
 	int					flag;	//space flag;
-	int 				command_count; // количество аргументов
+	int 				arg_count; // количество аргументов
 	int 				k; // number of argument
 	int 				j; //счетчик символов по строке аргумента
 	int					quotes;

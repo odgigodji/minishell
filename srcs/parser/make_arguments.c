@@ -11,7 +11,7 @@ int make_arg(char *f_line , t_simple_command *sc)
 	if (!sc->memory_allocated)
 	{
 //		printf("2.3\n");
-		len_for_calloc = (sc->k == sc->command_count - 1) ? \
+		len_for_calloc = (sc->k == sc->arg_count - 1) ? \
 				ft_strlen(f_line + sc->i) : ft_strlen_to_char(f_line + sc->i, ' ');
 
 		sc->arguments[sc->k] = ft_calloc(sizeof(char), len_for_calloc + 1); // +1 для \0

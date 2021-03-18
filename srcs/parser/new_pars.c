@@ -9,7 +9,7 @@ void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_c
 	printf("res is %s\n", res);
 	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number] = ft_strdup(res);
 	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number]);
-	if (common->command.simple_commands[0]->arg_number != common->command.simple_commands[0]->command_count)
+	if (common->command.simple_commands[0]->arg_number != common->command.simple_commands[0]->arg_count)
 		common->command.simple_commands[0]->arg_number++;
 //	free(res);
 }
@@ -120,6 +120,7 @@ void line_to_arg(t_common *common, char *line)
 		}
 		i++;
 	}
+	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_count] = NULL;
 //	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[0]);
 //	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[1]);
 //	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[2]);
@@ -178,10 +179,10 @@ void new_pars(t_common *common, char *line)
 
 	int arg_count = ft_arg_counter(line);
 	ft_init_struct(common, arg_count);														//fixme написать функцию счетчика аргументов
-	common->command.simple_commands[0]->command_count = arg_count;
+	common->command.simple_commands[0]->arg_count = arg_count;
 
-	printf("arg_count is %d\n", common->command.simple_commands[0]->command_count);
+	printf("arg_count is %d\n", common->command.simple_commands[0]->arg_count);
 
 	line_to_arg(common, line);
-	common->command.simple_commands[0]->arguments[arg_count] = NULL;
+
 }
