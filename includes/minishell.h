@@ -38,7 +38,7 @@
 typedef struct			s_simple_command
 {
 	int					number_of_available_arguments;	//	Available space for arguments currently preallocated
-	int 				arg_number;			//	Number of argument
+	int 				current_arg;			//	Number of argument
 	char				**arguments;					//	fixme Array of arguments
 	int 				memory_allocated;
 	int					i; // counter

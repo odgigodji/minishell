@@ -2,19 +2,19 @@
 
 void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc)
 {
-//	printf("number_of_arg is %d\n", common->command.simple_commands[0]->arg_number);
+//	printf("number_of_arg is %d\n", common->command.simple_commands[0]->current_arg);
 //	printf("res is %s\n", res);
-	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number] = ft_strdup(res);
-//	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number]);
-	if (common->command.simple_commands[0]->arg_number != common->command.simple_commands[0]->arg_count)
-		common->command.simple_commands[0]->arg_number++;
+	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->current_arg] = ft_strdup(res);
+//	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->current_arg]);
+	if (common->command.simple_commands[0]->current_arg != common->command.simple_commands[0]->arg_count)
+		common->command.simple_commands[0]->current_arg++;
 }
 
 int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 {
 	char res[len_for_calloc];
 
-	ft_strlcpy(res, line + increment, len_for_calloc); //записываем все символы до спец символа во временную строку res
+	ft_strlcpy(res, line + increment, len_for_calloc); 	//записываем все символы до спец символа во временную строку res
 //	printf("len for calloc is %d [%s]\n", len_for_calloc, line + increment);
 //	printf("---%s---\n", res);
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);  //копируем res в simple_command->arguments
@@ -106,10 +106,10 @@ int	ft_arg_counter(char *s)																//fixme
 void ft_init_struct(t_common *common, int arg_count)
 {
 //	common->command = ft_calloc(sizeof(t_simple_command), 1);
-	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), 1); // пять команд это типо если будут пайпы
-	common->command.simple_commands[0] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
-	common->command.simple_commands[0]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
-	common->command.simple_commands[0]->arg_number = 0;
+	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), 5); // пять команд это типо если будут пайпы
+	common->command.simple_commands[common->command.current_simple_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
+	common->command.simple_commands[common->command.current_simple_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
+	common->command.simple_commands[common->command.current_simple_command]->current_arg = 0;
 	common->command.number_of_simple_commands = 1;
 	common->command.current_simple_command = 0;
 //	common->command.simple_commands[0]->arguments[arg_count] = NULL;
