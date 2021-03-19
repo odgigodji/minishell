@@ -18,15 +18,8 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 {
 //	char *res;
 	int i;
-	t_simple_command sc;
 	char res[len_for_calloc];
-//	common->command.simple_commands[0]->arguments = ft_calloc(sizeof(char *), 2);
-//	common->command.simple_commands[0]->arguments[0] = ft_calloc(sizeof(char), len_for_calloc + 1);
 	i = 0;
-//	static int k = 0;
-
-	 // = ft_calloc(sizeof(char), len_for_calloc + 1);
-
 	ft_strlcpy(res, line + increment, len_for_calloc);
 //	while(i < len_for_calloc)
 //	{
@@ -34,7 +27,7 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 //		i++;
 //		increment++;
 //	}
-	res[len_for_calloc] = '\0';
+//	res[len_for_calloc] = '\0';
 //	printf("len for calloc is %d [%s]\n", len_for_calloc, line + increment);
 //	printf("---%s---\n", res);
 //	sc.arguments[0] = res;
@@ -88,7 +81,7 @@ int	make_args(char *line, t_common *common, int increment)
 {
 	int i;
 	int len;
-	char spec[6] = " '|\"$";
+	char spec[6] = " '|\"$\t";
 
 	i = increment;
 	len = len_for_calloc(line, common, i, spec); // для нулевого символа + 1
@@ -103,9 +96,6 @@ void line_to_arg(t_common *common, char *line)
 	int i;
 
 	i = 0;
-//	common->command.simple_commands[0] = malloc(sizeof(t_simple_command) * 1);
-//	common->command.simple_commands[0]->k = 0;
-//	common->command.simple_commands[0]->command_count = 3; // command count
 	printf("|%s|\n", line);
 	while(line[i] && line[i] != ';')
 	{
@@ -113,19 +103,10 @@ void line_to_arg(t_common *common, char *line)
 		|| line[i] == '|' || line[i] == '$')
 			;
 		else
-		{
-//			make_arg(line, common->command.simple_commands[0]);
 			i = make_args(line, common, i);
-//			printf("%c", line[i]);
-		}
 		i++;
 	}
 	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_count] = NULL;
-//	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[0]);
-//	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[1]);
-//	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[2]);
-//	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[3]);
-//	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[4]);
 }
 
 int	ft_arg_counter(char *s)																//fixme

@@ -59,7 +59,7 @@ typedef struct			s_simple_command
 
 typedef struct			s_command
 {
-	int					current_simple_command;
+	int					current_simple_command; // текущая симпл команда( для движения по массиву **simple_commands)
 	int 				number_of_simple_commands;
 
 	t_simple_command	**simple_commands;	//fixme
