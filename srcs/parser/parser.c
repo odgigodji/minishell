@@ -43,13 +43,13 @@ int	ft_parser(t_common *common)
 	if (common->command.simple_commands[0]->arguments[i] == NULL)
 		printf(GRN"%d argument is |null|\n"RESET, i);
 	i = 0;
-//	while(common->command.simple_commands[1]->arguments[i])
-//	{
-//		printf(YEL"%d argument is |%s|\n"RESET, i, common->command.simple_commands[0]->arguments[i]);
-//		i++;
-//	}
-//	if (common->command.simple_commands[1]->arguments[i] == NULL)
-//		printf(YEL"%d argument is |null|\n"RESET, i);
+	while(common->command.simple_commands[1]->arguments[i])
+	{
+		printf(YEL"%d argument is |%s|\n"RESET, i, common->command.simple_commands[0]->arguments[i]);
+		i++;
+	}
+	if (common->command.simple_commands[1]->arguments[i] == NULL)
+		printf(YEL"%d argument is |null|\n"RESET, i);
 //	while (1) ;
 
 	free(line);
