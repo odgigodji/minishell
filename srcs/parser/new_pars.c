@@ -12,10 +12,8 @@ void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_c
 
 int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 {
-//	char *res;
-	int i;
 	char res[len_for_calloc];
-	i = 0;
+
 	ft_strlcpy(res, line + increment, len_for_calloc); //записываем все символы до спец символа во временную строку res
 //	printf("len for calloc is %d [%s]\n", len_for_calloc, line + increment);
 //	printf("---%s---\n", res);
