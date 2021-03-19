@@ -6,7 +6,7 @@ void ft_init_next_struct(t_common *common)
 
 	current_command = common->command.current_simple_command;
 	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
-	common->command.simple_commands[current_command]->current_arg = 3;   //кол во аргументов для новой симпл команды
+	common->command.simple_commands[current_command]->arg_count = 3;   //кол во аргументов для новой симпл команды
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),3 + 1);
 	common->command.simple_commands[current_command]->current_arg = 0;
 //	common->command.simple_commands[current_command]->current_arg = 0;
