@@ -67,7 +67,7 @@ void line_to_arg(t_common *common, char *line)
 	{
 		if (line[i] == ' ' || line[i] == '"' || line[i] == '\'' || line[i] == '\t' \
 		|| line[i] == '|' || line[i] == '$')
-			;
+			common->command.current_simple_command++;
 		else
 			i = make_args(line, common, i); //если символ не равен спец символу прописываем аргументы
 		i++;
@@ -105,13 +105,18 @@ int	ft_arg_counter(char *s)																//fixme
 
 void ft_init_struct(t_common *common, int arg_count)
 {
-//	common->command = ft_calloc(sizeof(t_simple_command), 1);
+//	common->command.current_simple_command;
 	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), 5); // пять команд это типо если будут пайпы
-	common->command.simple_commands[common->command.current_simple_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
-	common->command.simple_commands[common->command.current_simple_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
-	common->command.simple_commands[common->command.current_simple_command]->current_arg = 0;
-	common->command.number_of_simple_commands = 1;
 	common->command.current_simple_command = 0;
+	common->command.simple_commands[0] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
+	common->command.simple_commands[0]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
+	common->command.simple_commands[0]->current_arg = 0;
+
+	common->command.simple_commands[1] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
+	common->command.simple_commands[1]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
+	common->command.simple_commands[1]->current_arg = 0;
+	common->command.number_of_simple_commands = 1;
+
 //	common->command.simple_commands[0]->arguments[arg_count] = NULL;
 	;
 }
