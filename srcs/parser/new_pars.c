@@ -30,10 +30,6 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 //	res[len_for_calloc] = '\0';
 //	printf("len for calloc is %d [%s]\n", len_for_calloc, line + increment);
 //	printf("---%s---\n", res);
-//	sc.arguments[0] = res;
-//	printf("%s\n", sc.arguments[0]);
-	i = 0;
-
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);
 
 //	common->command.simple_commands[0]->arguments[0] = res;
@@ -56,18 +52,11 @@ int len_for_calloc(char *line, t_common *common, int increment, char *spec)
 	i = increment;
 //	printf("|%s|\n", line + i);
 	len_for_calloc = 0;
-//	len_for_calloc = ft_strlen_to_char(line + common->command.simple_commands[0]->i, ' ');
-//	len_for_calloc = ft_strlen_to_char(line + common->command.simple_commands[0]->i, '"');
 	while(!ft_strchr(spec, line[i]))
 	{
 		len_for_calloc++; //cчитает и последнгий элемент тоже так как возвращает указзаткльно на нуль терминатор
 		i++;
 	}
-//	if (common->command.simple_commands[0]->k == common->command.simple_commands[0]->command_count)
-//		len_for_calloc = ft_strlen(line + i);
-//	else
-//		common->command.simple_commands[0]->k++;
-//	printf("len_for_calloc is %d\n", len_for_calloc);
 	return (len_for_calloc);
 }
 
