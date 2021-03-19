@@ -20,6 +20,8 @@ void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_c
 	current_command = common->command.current_simple_command;
 //	printf("number_of_arg is %d\n", common->command.simple_commands[0]->current_arg);
 //	printf("res is %s\n", res);
+	printf(BLU"current command is %d\n"RESET, current_command);
+	printf(YEL"current arg is %d\n"RESET, common->command.simple_commands[current_command]->current_arg);
 	common->command.simple_commands[current_command]->arguments[common->command.simple_commands[current_command]->current_arg] = ft_strdup(res);
 //	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->current_arg]);
 	if (common->command.simple_commands[current_command]->current_arg != common->command.simple_commands[current_command]->arg_count)
@@ -32,7 +34,7 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 
 	ft_strlcpy(res, line + increment, len_for_calloc + 1); 	//записываем все символы до спец символа во временную строку res
 //	printf("len for calloc is %d current line is [%s]\n", len_for_calloc, line + increment);
-//	printf("---%s---\n", res);
+	printf("---%s---\n", res);
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);  //копируем res в simple_command->arguments
 	return (increment + len_for_calloc); // возвращаем позицию в нашей строке line изменненную на длину записанного аргумента
 }
@@ -63,7 +65,7 @@ int ft_test_shit(int k)
 int	make_args(char *line, t_common *common, int increment)
 {
 	int len;
-	char spec[6] = " '|\"$\t";
+	char spec[7] = " '|\"$\t";
 
 	len = len_for_calloc(line, common, increment, spec); // высчитываем длину для выделения памяти
 	do_arg(common, line, len, increment); // создаем аргумент
@@ -99,7 +101,7 @@ void line_to_arg(t_common *common, char *line)
 		{
 //			printf("curr char is >%c<\n", line[i]);
 			i = do_spec(common, line + i, line[i], i);
-			printf("current simple command after do_spec is %d\n",common->command.current_simple_command);
+//			printf("current simple command after do_spec is %d\n",common->command.current_simple_command);
 		}
 ////			common->command.current_simple_command++;
 		else
@@ -154,7 +156,7 @@ void ft_init_struct(t_common *common, int arg_count)
 //	common->command.simple_commands[1] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
 //	common->command.simple_commands[1]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 //	common->command.simple_commands[1]->current_arg = 0;
-	common->command.number_of_simple_commands = 1;
+	common->command.number_of_simple_commands = 2;
 
 //	common->command.simple_commands[0]->arguments[arg_count] = NULL;
 	;
