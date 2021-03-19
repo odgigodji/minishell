@@ -18,8 +18,8 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 	char res[len_for_calloc + 1];
 
 	ft_strlcpy(res, line + increment, len_for_calloc + 1); 	//записываем все символы до спец символа во временную строку res
-	printf("len for calloc is %d current line is [%s]\n", len_for_calloc, line + increment);
-	printf("---%s---\n", res);
+//	printf("len for calloc is %d current line is [%s]\n", len_for_calloc, line + increment);
+//	printf("---%s---\n", res);
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);  //копируем res в simple_command->arguments
 	return (increment + len_for_calloc); // возвращаем позицию в нашей строке line изменненную на длину записанного аргумента
 }
@@ -37,7 +37,7 @@ int len_for_calloc(char *line, t_common *common, int increment, char *spec)
 		len_for_calloc++; //cчитает и последнгий элемент тоже так как возвращает указзаткльно на нуль терминатор
 		i++;
 	}
-	printf("len after %d\n", len_for_calloc);
+//	printf("len after %d\n", len_for_calloc);
 	return (len_for_calloc);
 }
 
@@ -49,22 +49,20 @@ int ft_test_shit(int k)
 
 int	make_args(char *line, t_common *common, int increment)
 {
-	int i;
 	int len;
 	char spec[6] = " '|\"$\t";
 
-	i = increment;
-	len = len_for_calloc(line, common, i, spec); // высчитываем длину для выделения памяти
-	do_arg(common, line, len, i); // создаем аргумент
-	i += len;
+	len = len_for_calloc(line, common, increment, spec); // высчитываем длину для выделения памяти
+	do_arg(common, line, len, increment); // создаем аргумент
+//	i += len;
 //	printf("len_for_calloc is %d\n", len);
-	return (i);
+	return (increment + len);
 }
 
 void do_spec(t_common *common, char *line, char curent_char)
 {
-	printf("current char is |%c|\n", curent_char);
-	printf("current line is |%s|\n", line);
+	printf("current char is <%c>\n", curent_char);
+	printf("current line is <%s>\n", line);
 }
 
 void line_to_arg(t_common *common, char *line)
@@ -75,16 +73,20 @@ void line_to_arg(t_common *common, char *line)
 	printf("|%s|\n", line);
 	while(line[i] && line[i] != ';')
 	{
+		printf("(%c)\n", line[i]);
 		if (line[i] == ' ' || line[i] == '"' || line[i] == '\'' || line[i] == '\t' \
 		|| line[i] == '|' || line[i] == '$')
 		{
-			printf("curr char is >%c<\n", line[i]);
+//			printf("curr char is >%c<\n", line[i]);
 			do_spec(common, line + i, line[i]);
+			i++;
 		}
-//			common->command.current_simple_command++;
+////			common->command.current_simple_command++;
 		else
+		{
 			i = make_args(line, common, i); //если символ не равен спец символу прописываем аргументы
-		i++;
+		}
+//		i++;
 	}
 	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_count] = NULL; // зануляем последний арг
 }
@@ -119,7 +121,7 @@ int	ft_arg_counter(char *s)																//fixme
 
 void ft_init_struct(t_common *common, int arg_count)
 {
-//	common->command.current_simple_command;
+	common->command.current_simple_command;
 	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), 5); // пять команд это типо если будут пайпы
 	common->command.current_simple_command = 0;
 	common->command.simple_commands[0] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
