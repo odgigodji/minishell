@@ -16,11 +16,11 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 	int i;
 	char res[len_for_calloc];
 	i = 0;
-	ft_strlcpy(res, line + increment, len_for_calloc);
+	ft_strlcpy(res, line + increment, len_for_calloc); //записываем все символы до спец символа во временную строку res
 //	printf("len for calloc is %d [%s]\n", len_for_calloc, line + increment);
 //	printf("---%s---\n", res);
-	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);
-	return (increment + len_for_calloc);
+	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);  //копируем res в simple_command->arguments
+	return (increment + len_for_calloc); // возвращаем позицию в нашей строке line изменненную на длину записанного аргумента
 }
 
 int len_for_calloc(char *line, t_common *common, int increment, char *spec)
@@ -52,8 +52,8 @@ int	make_args(char *line, t_common *common, int increment)
 	char spec[6] = " '|\"$\t";
 
 	i = increment;
-	len = len_for_calloc(line, common, i, spec); // для нулевого символа + 1
-	do_arg(common, line, len + 1, i);
+	len = len_for_calloc(line, common, i, spec); // высчитываем длину для выделения памяти
+	do_arg(common, line, len + 1, i); // создаем аргумент
 	i += len;
 //	printf("len_for_calloc is %d\n", len);
 	return (i);
@@ -71,10 +71,10 @@ void line_to_arg(t_common *common, char *line)
 		|| line[i] == '|' || line[i] == '$')
 			;
 		else
-			i = make_args(line, common, i);
+			i = make_args(line, common, i); //если символ не равен спец символу прописываем аргументы
 		i++;
 	}
-	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_count] = NULL;
+	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_count] = NULL; // зануляем последний арг
 }
 
 int	ft_arg_counter(char *s)																//fixme
@@ -122,18 +122,15 @@ void new_pars(t_common *common, char *line)
 {
 	printf("------используется новый парсер, чтобы вернуться на старый нужно закомитить new_pars в parser.c и раскомитьть pars---------\n");
 	char **arg;
-	int i;
-	static int k = 0; // number of argument
+	int arg_count;
 
-	i = 0;
-
-	int arg_count = ft_arg_counter(line);
-	ft_init_struct(common, arg_count);														//fixme написать функцию счетчика аргументов
+	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
+	ft_init_struct(common, arg_count);			//инициализируем структуру симпл команды
 	printf(BLU"current simple command is %d\n"RESET, common->command.current_simple_command);
-	common->command.simple_commands[0]->arg_count = arg_count;
+	common->command.simple_commands[0]->arg_count = arg_count; //записываем количество аргуметов в simple_command
 
 	printf("arg_count is %d\n", common->command.simple_commands[0]->arg_count);
 
-	line_to_arg(common, line);
+	line_to_arg(common, line); //считываем line и записываем все в simple_commands->arguments
 
 }
