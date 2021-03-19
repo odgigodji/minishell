@@ -73,7 +73,7 @@ void line_to_arg(t_common *common, char *line)
 	printf("|%s|\n", line);
 	while(line[i] && line[i] != ';')
 	{
-		printf("(%c)\n", line[i]);
+//		printf("(%c)\n", line[i]);
 		if (line[i] == ' ' || line[i] == '"' || line[i] == '\'' || line[i] == '\t' \
 		|| line[i] == '|' || line[i] == '$')
 		{
