@@ -59,7 +59,7 @@ typedef struct			s_simple_command
 
 typedef struct			s_command
 {
-	int					number_of_available_simple_commands;
+	int					current_simple_command;
 	int 				number_of_simple_commands;
 
 	t_simple_command	**simple_commands;	//fixme
@@ -88,6 +88,8 @@ void				new_pars(t_common *common, char *line);
 size_t				ft_strlen_to_char(const char *s, char c);
 int					make_arg(char *f_line , t_simple_command *sc);
 int 				make_args(char *line, t_common *common, int increment);
+void				ft_init_struct(t_common *common, int arg_count);
+int					ft_arg_counter(char *s);
 
 /*
 ** executor

@@ -2,13 +2,13 @@
 
 void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc)
 {
-	printf("number_of_arg is %d\n", common->command.simple_commands[0]->arg_number);
+//	printf("number_of_arg is %d\n", common->command.simple_commands[0]->arg_number);
 //	nubmer_of_arg = 0;
 //	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number] = ft_calloc(sizeof(char), len_for_calloc);
 //	ft_strlcpy(common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number], res, len_for_calloc);
-	printf("res is %s\n", res);
+//	printf("res is %s\n", res);
 	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number] = ft_strdup(res);
-	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number]);
+//	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number]);
 	if (common->command.simple_commands[0]->arg_number != common->command.simple_commands[0]->arg_count)
 		common->command.simple_commands[0]->arg_number++;
 //	free(res);
@@ -35,8 +35,8 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 //		increment++;
 //	}
 	res[len_for_calloc] = '\0';
-	printf("len for calloc is %d [%s]\n", len_for_calloc, line + increment);
-	printf("---%s---\n", res);
+//	printf("len for calloc is %d [%s]\n", len_for_calloc, line + increment);
+//	printf("---%s---\n", res);
 //	sc.arguments[0] = res;
 //	printf("%s\n", sc.arguments[0]);
 	i = 0;
@@ -128,7 +128,7 @@ void line_to_arg(t_common *common, char *line)
 //	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[4]);
 }
 
-int	ft_arg_counter(char *s)												//fixme
+int	ft_arg_counter(char *s)																//fixme
 {
 	int		count;
 	int 	quote_t;
@@ -164,6 +164,7 @@ void ft_init_struct(t_common *common, int arg_count)
 	common->command.simple_commands[0]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 	common->command.simple_commands[0]->arg_number = 0;
 	common->command.number_of_simple_commands = 1;
+	common->command.current_simple_command = 0;
 //	common->command.simple_commands[0]->arguments[arg_count] = NULL;
 	;
 }
@@ -179,6 +180,7 @@ void new_pars(t_common *common, char *line)
 
 	int arg_count = ft_arg_counter(line);
 	ft_init_struct(common, arg_count);														//fixme написать функцию счетчика аргументов
+	printf(BLU"current simple command is %d\n"RESET, common->command.current_simple_command);
 	common->command.simple_commands[0]->arg_count = arg_count;
 
 	printf("arg_count is %d\n", common->command.simple_commands[0]->arg_count);
