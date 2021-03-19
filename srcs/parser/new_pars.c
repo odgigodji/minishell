@@ -3,15 +3,11 @@
 void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc)
 {
 //	printf("number_of_arg is %d\n", common->command.simple_commands[0]->arg_number);
-//	nubmer_of_arg = 0;
-//	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number] = ft_calloc(sizeof(char), len_for_calloc);
-//	ft_strlcpy(common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number], res, len_for_calloc);
 //	printf("res is %s\n", res);
 	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number] = ft_strdup(res);
 //	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->arg_number]);
 	if (common->command.simple_commands[0]->arg_number != common->command.simple_commands[0]->arg_count)
 		common->command.simple_commands[0]->arg_number++;
-//	free(res);
 }
 
 int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
@@ -21,26 +17,9 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 	char res[len_for_calloc];
 	i = 0;
 	ft_strlcpy(res, line + increment, len_for_calloc);
-//	while(i < len_for_calloc)
-//	{
-//		res[i] = line[increment];
-//		i++;
-//		increment++;
-//	}
-//	res[len_for_calloc] = '\0';
 //	printf("len for calloc is %d [%s]\n", len_for_calloc, line + increment);
 //	printf("---%s---\n", res);
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);
-
-//	common->command.simple_commands[0]->arguments[0] = res;
-
-//	printf("<%s>\n", common->command.simple_commands[0]->arguments[0]);
-//	printf("<%s>\n", common->command.simple_commands[0]->arguments[1]);
-//	printf("<%s>\n", common->command.simple_commands[0]->arguments[2]);
-
-//	printf("%s\n", common->command.simple_commands[0]->arguments[0]);
-//	if (common->command.simple_commands[0]->k != common->command.simple_commands[0]->command_count)
-//		k++;
 	return (increment + len_for_calloc);
 }
 
