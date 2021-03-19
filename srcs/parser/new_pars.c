@@ -2,21 +2,24 @@
 
 void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc)
 {
+	int current_command;
+
+	current_command = common->command.current_simple_command;
 //	printf("number_of_arg is %d\n", common->command.simple_commands[0]->current_arg);
 //	printf("res is %s\n", res);
-	common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->current_arg] = ft_strdup(res);
+	common->command.simple_commands[current_command]->arguments[common->command.simple_commands[current_command]->current_arg] = ft_strdup(res);
 //	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->current_arg]);
-	if (common->command.simple_commands[0]->current_arg != common->command.simple_commands[0]->arg_count)
-		common->command.simple_commands[0]->current_arg++;
+	if (common->command.simple_commands[current_command]->current_arg != common->command.simple_commands[current_command]->arg_count)
+		common->command.simple_commands[current_command]->current_arg++;
 }
 
 int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 {
-	char res[len_for_calloc];
+	char res[len_for_calloc + 1];
 
-	ft_strlcpy(res, line + increment, len_for_calloc); 	//записываем все символы до спец символа во временную строку res
-//	printf("len for calloc is %d [%s]\n", len_for_calloc, line + increment);
-//	printf("---%s---\n", res);
+	ft_strlcpy(res, line + increment, len_for_calloc + 1); 	//записываем все символы до спец символа во временную строку res
+	printf("len for calloc is %d current line is [%s]\n", len_for_calloc, line + increment);
+	printf("---%s---\n", res);
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);  //копируем res в simple_command->arguments
 	return (increment + len_for_calloc); // возвращаем позицию в нашей строке line изменненную на длину записанного аргумента
 }
@@ -34,6 +37,7 @@ int len_for_calloc(char *line, t_common *common, int increment, char *spec)
 		len_for_calloc++; //cчитает и последнгий элемент тоже так как возвращает указзаткльно на нуль терминатор
 		i++;
 	}
+	printf("len after %d\n", len_for_calloc);
 	return (len_for_calloc);
 }
 
@@ -51,10 +55,16 @@ int	make_args(char *line, t_common *common, int increment)
 
 	i = increment;
 	len = len_for_calloc(line, common, i, spec); // высчитываем длину для выделения памяти
-	do_arg(common, line, len + 1, i); // создаем аргумент
+	do_arg(common, line, len, i); // создаем аргумент
 	i += len;
 //	printf("len_for_calloc is %d\n", len);
 	return (i);
+}
+
+void do_spec(t_common *common, char *line, char curent_char)
+{
+	printf("current char is |%c|\n", curent_char);
+	printf("current line is |%s|\n", line);
 }
 
 void line_to_arg(t_common *common, char *line)
@@ -67,7 +77,11 @@ void line_to_arg(t_common *common, char *line)
 	{
 		if (line[i] == ' ' || line[i] == '"' || line[i] == '\'' || line[i] == '\t' \
 		|| line[i] == '|' || line[i] == '$')
-			common->command.current_simple_command++;
+		{
+			printf("curr char is >%c<\n", line[i]);
+			do_spec(common, line + i, line[i]);
+		}
+//			common->command.current_simple_command++;
 		else
 			i = make_args(line, common, i); //если символ не равен спец символу прописываем аргументы
 		i++;
@@ -112,9 +126,9 @@ void ft_init_struct(t_common *common, int arg_count)
 	common->command.simple_commands[0]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 	common->command.simple_commands[0]->current_arg = 0;
 
-	common->command.simple_commands[1] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
-	common->command.simple_commands[1]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
-	common->command.simple_commands[1]->current_arg = 0;
+//	common->command.simple_commands[1] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
+//	common->command.simple_commands[1]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
+//	common->command.simple_commands[1]->current_arg = 0;
 	common->command.number_of_simple_commands = 1;
 
 //	common->command.simple_commands[0]->arguments[arg_count] = NULL;
