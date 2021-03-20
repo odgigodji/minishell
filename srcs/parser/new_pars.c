@@ -17,6 +17,7 @@ void ft_init_next_simple_command(t_common *common, char *line)
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 	common->command.simple_commands[current_command]->arg_count = arg_count;
 	common->command.simple_commands[current_command]->current_arg = 0;
+	printf(BLU"arg_count for %d simple command is %d\n"RESET, current_command, common->command.simple_commands[current_command]->arg_count);
 //	common->command.simple_commands[current_command]->current_arg = 0;
 }
 
@@ -26,10 +27,12 @@ void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_c
 
 //	ft_init_next_struct(common);
 	current_command = common->command.current_simple_command;
+
 //	printf("number_of_arg is %d\n", common->command.simple_commands[0]->current_arg);
 //	printf("res is %s\n", res);
-	printf(BLU"current command is %d\n"RESET, current_command);
-	printf(YEL"current arg is %d\n"RESET, common->command.simple_commands[current_command]->current_arg);
+//	printf(BLU"current command is %d\n"RESET, current_command);
+//	printf(YEL"current arg is %d\n"RESET, common->command.simple_commands[current_command]->current_arg);
+
 	common->command.simple_commands[current_command]->arguments[common->command.simple_commands[current_command]->current_arg] = ft_strdup(res);
 //	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->current_arg]);
 	if (common->command.simple_commands[current_command]->current_arg != common->command.simple_commands[current_command]->arg_count)
@@ -42,7 +45,7 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 
 	ft_strlcpy(res, line + increment, len_for_calloc + 1); 	//записываем все символы до спец символа во временную строку res
 //	printf("len for calloc is %d current line is [%s]\n", len_for_calloc, line + increment);
-	printf("---%s---\n", res);
+//	printf("---%s---\n", res);
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);  //копируем res в simple_command->arguments
 	return (increment + len_for_calloc); // возвращаем позицию в нашей строке line изменненную на длину записанного аргумента
 }
@@ -86,8 +89,8 @@ int do_spec(t_common *common, char *line, char curent_char, int increment)
 {
 	if (curent_char == '|')
 	{
-		printf("current char is <%c>\n", curent_char);
-		printf("current line is <%s>\n", line);
+//		printf("current char is <%c>\n", curent_char);
+//		printf("current line is <%s>\n", line);
 		common->command.current_simple_command++;
 		ft_init_next_simple_command(common, line + 1);
 	}
@@ -156,15 +159,15 @@ void ft_init_struct(t_common *common, char *line)
 	int arg_count;
 
 	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
-	printf("->%d\n", arg_count);
+//	printf("->%d\n", arg_count);
 	current_command = common->command.current_simple_command;
 	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), 5); // пять команд это типо если будут пайпы  fixme
 	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 	common->command.simple_commands[current_command]->current_arg = 0;
 	common->command.simple_commands[current_command]->arg_count = arg_count;
-	printf("arg_count is %d\n", common->command.simple_commands[current_command]->arg_count = arg_count);
-	common->command.number_of_simple_commands = 3; //	fixme количество симпл команд
+	printf(BLU"arg_count for 0 simple command is %d\n"RESET, common->command.simple_commands[current_command]->arg_count);
+	common->command.number_of_simple_commands = 3; 	//	fixme количество симпл команд
 //	common->command.simple_commands[0]->arguments[arg_count] = NULL;
 	;
 }
@@ -175,7 +178,8 @@ void new_pars(t_common *common, char *line)
 //	int arg_count;
 
 	ft_init_struct(common, line);			//инициализируем структуру симпл команды
-	printf(BLU"current simple command is %d\n"RESET, common->command.current_simple_command);
+
+//	printf(BLU"current simple command is %d\n"RESET, common->command.current_simple_command);
 //	common->command.simple_commands[0]->arg_count = arg_count; //записываем количество аргуметов в simple_command
 
 	printf("arg_count is %d\n", common->command.simple_commands[0]->arg_count);
