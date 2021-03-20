@@ -8,17 +8,17 @@ void ft_init_next_simple_command(t_common *common, char *line)
 	printf(RED"line after '|' is <%s>\n"RESET, line);
 	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
 //	printf("next_arg_count is %d\n", arg_count)
-	printf("->%d\n", arg_count);
+//	printf("->%d\n", arg_count);
 	current_command = common->command.current_simple_command;
 
 	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
-	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
+	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 10);
 	common->command.simple_commands[current_command]->arg_count = arg_count;  //кол во аргументов для новой симпл команды  fixme
 	common->command.simple_commands[current_command]->current_arg = 0;
 
 	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; //
 
-	printf(BLU"arg_count for %d simple command is %d\n"RESET, current_command, common->command.simple_commands[current_command]->arg_count);
+	printf(BLU"arg_count for simple command[%d] is %d\n"RESET, current_command, common->command.simple_commands[current_command]->arg_count);
 //	common->command.simple_commands[current_command]->current_arg = 0;
 }
 
