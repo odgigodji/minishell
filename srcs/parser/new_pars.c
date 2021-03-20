@@ -156,7 +156,7 @@ void ft_init_struct(t_common *common, int arg_count)
 //	common->command.simple_commands[1] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
 //	common->command.simple_commands[1]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 //	common->command.simple_commands[1]->current_arg = 0;
-	common->command.number_of_simple_commands = 2;
+	common->command.number_of_simple_commands = 3;
 
 //	common->command.simple_commands[0]->arguments[arg_count] = NULL;
 	;

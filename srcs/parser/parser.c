@@ -33,23 +33,37 @@ int	ft_parser(t_common *common)
 // --------------добавить цикл для обработки точки c запятой--------------
 
 	new_pars(common, line); //--------------- новый парсер
-	printf("arguments:\n");
+	printf("simple command and arguments:\n");
 	int i =0;
-	while(common->command.simple_commands[0]->arguments[i])
+	int j = 0;
+	while(common->command.simple_commands[i])
 	{
-		printf(GRN"%d argument is |%s|\n"RESET, i, common->command.simple_commands[0]->arguments[i]);
+		j = 0;
+		while(common->command.simple_commands[i]->arguments[j])
+		{
+			printf(BLU"simple_command[%d]: "RESET, i );
+			printf(YEL"sc->arguments[%d]"RESET,j);
+			printf(GRN"|%s|\n", common->command.simple_commands[i]->arguments[j]);
+			j++;
+		}
+		printf("--next_simple_command--\n");
 		i++;
 	}
-	if (common->command.simple_commands[0]->arguments[i] == NULL)
-		printf(GRN"%d argument is |null|\n"RESET, i);
-	i = 0;
-	while(common->command.simple_commands[1]->arguments[i])
-	{
-		printf(YEL"%d argument is |%s|\n"RESET, i, common->command.simple_commands[0]->arguments[i]);
-		i++;
-	}
-	if (common->command.simple_commands[1]->arguments[i] == NULL)
-		printf(YEL"%d argument is |null|\n"RESET, i);
+//	while(common->command.simple_commands[0]->arguments[i])
+//	{
+//		printf(GRN"%d argument is |%s|\n"RESET, i, common->command.simple_commands[0]->arguments[i]);
+//		i++;
+//	}
+//	if (common->command.simple_commands[0]->arguments[i] == NULL)
+//		printf(GRN"%d argument is |null|\n"RESET, i);
+//	i = 0;
+//	while(common->command.simple_commands[1]->arguments[i])
+//	{
+//		printf(YEL"%d argument is |%s|\n"RESET, i, common->command.simple_commands[0]->arguments[i]);
+//		i++;
+//	}
+//	if (common->command.simple_commands[1]->arguments[i] == NULL)
+//		printf(YEL"%d argument is |null|\n"RESET, i);
 //	while (1) ;
 
 	free(line);
