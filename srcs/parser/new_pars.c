@@ -31,8 +31,8 @@ void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_c
 
 //	printf("number_of_arg is %d\n", common->command.simple_commands[0]->current_arg);
 //	printf("res is %s\n", res);
-//	printf(BLU"current command is %d\n"RESET, current_command);
-//	printf(YEL"current arg is %d\n"RESET, common->command.simple_commands[current_command]->current_arg);
+	printf(BLU"current command is %d\n"RESET, current_command);
+	printf(YEL"current arg is %d\n"RESET, common->command.simple_commands[current_command]->current_arg);
 
 	common->command.simple_commands[current_command]->arguments[common->command.simple_commands[current_command]->current_arg] = ft_strdup(res);
 //	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->current_arg]);
