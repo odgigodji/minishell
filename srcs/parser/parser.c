@@ -46,6 +46,12 @@ int	ft_parser(t_common *common)
 			printf(GRN"|%s|\n", common->command.simple_commands[i]->arguments[j]);
 			j++;
 		}
+		if (common->command.simple_commands[i]->arguments[j] == NULL)
+		{
+			printf(BLU"simple_command[%d]: "RESET, i);
+			printf(YEL"sc->arguments[%d]"RESET,j);
+			printf(GRN"|null|\n");
+		}
 		printf("--next_simple_command--\n");
 		i++;
 	}

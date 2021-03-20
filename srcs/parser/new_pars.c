@@ -159,18 +159,12 @@ void ft_init_struct(t_common *common, char *line)
 	printf("->%d\n", arg_count);
 	current_command = common->command.current_simple_command;
 	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), 5); // пять команд это типо если будут пайпы  fixme
-//	common->command.current_simple_command = 0;
 	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 	common->command.simple_commands[current_command]->current_arg = 0;
 	common->command.simple_commands[current_command]->arg_count = arg_count;
 	printf("arg_count is %d\n", common->command.simple_commands[current_command]->arg_count = arg_count);
-
-//	common->command.simple_commands[1] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
-//	common->command.simple_commands[1]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
-//	common->command.simple_commands[1]->current_arg = 0;
 	common->command.number_of_simple_commands = 3; //	fixme количество симпл команд
-
 //	common->command.simple_commands[0]->arguments[arg_count] = NULL;
 	;
 }
