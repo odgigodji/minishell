@@ -10,8 +10,8 @@ cat < file < test | cat -e
 cat < file < test | sort
 
 echo f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v
-echo 1 2 3 | echo 3 4 5
-hello my name is john | 61 72 83 94 | aA bB cC dD
+echo 1 2 3 | echo 3 4 5 | ls -l -a
+hello my name is john | 61 72 83 94 00 00  | aA bB cC dD | echo 1 2 3 4
 
 echo $?
 echo -n -n -n -n test

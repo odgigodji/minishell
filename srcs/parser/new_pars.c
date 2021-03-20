@@ -153,21 +153,39 @@ int	ft_arg_counter(char *s)																//fixme
 	return (count);
 }
 
+int ft_simple_command_counter(char *line)
+{
+	int counter;
+
+	counter = 1;
+	while(*line)
+	{
+		if (*line == '|')
+			counter++;
+		line++;
+	}
+	return (counter);
+}
+
 void ft_init_struct(t_common *common, char *line)
 {
 	int current_command;
 	int arg_count;
+	int simple_command_count;
 
+	current_command = common->command.current_simple_command;
 	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
 //	printf("->%d\n", arg_count);
-	current_command = common->command.current_simple_command;
-	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), 5); // пять команд это типо если будут пайпы  fixme
+	simple_command_count = ft_simple_command_counter(line);
+	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), simple_command_count + 1); // пять команд это типо если будут пайпы  fixme
 	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 	common->command.simple_commands[current_command]->current_arg = 0;
 	common->command.simple_commands[current_command]->arg_count = arg_count;
 	printf(BLU"arg_count for 0 simple command is %d\n"RESET, common->command.simple_commands[current_command]->arg_count);
-	common->command.number_of_simple_commands = 3; 	//	fixme количество симпл команд
+	common->command.number_of_simple_commands = simple_command_count;
+	printf(GRN"----------------command.number_of_simple_commands is %d------------------\n"RESET, common->command.number_of_simple_commands);
+//	common->command.number_of_simple_commands = 3; 	//	fixme количество симпл команд
 //	common->command.simple_commands[0]->arguments[arg_count] = NULL;
 	;
 }
