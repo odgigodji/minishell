@@ -65,5 +65,6 @@ int	ft_parser(t_common *common)
 //	common->command.simple_commands = malloc(sizeof(t_simple_command *) * 5);
 //	common->command.simple_commands[0] = simple_command;
 //	common->command.number_of_simple_commands = 1; // максимум одна команда если есть пайпы
+printf(GRN"------------------------------------------end of parser-------------------------------\n"RESET);
 	return (gnl_rv);
 }

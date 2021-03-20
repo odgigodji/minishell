@@ -40,13 +40,14 @@ typedef struct			s_simple_command
 	int					number_of_available_arguments;	//	Available space for arguments currently preallocated
 	int 				current_arg;			//	Number of argument
 	char				**arguments;					//	fixme Array of arguments
-	int 				memory_allocated;
-	int					i; // counter
-	int					flag;	//space flag;
 	int 				arg_count; // количество аргументов
-	int 				k; // number of argument
-	int 				j; //счетчик символов по строке аргумента
-	int					quotes;
+
+//	int 				memory_allocated;
+//	int					i; // counter
+//	int					flag;	//space flag;
+//	int 				k; // number of argument
+//	int 				j; //счетчик символов по строке аргумента
+//	int					quotes;
 
 	//	SimpleCommand();								// функция для создания simple_command
 	//	void insertArgument(char *argument);			// функция для вставки аргумента в simple_command
