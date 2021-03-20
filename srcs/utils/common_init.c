@@ -56,6 +56,7 @@ t_command	command_init(void)
 	command.err_file = NULL;
 
 	command.background = 0;
+	command.current_simple_command = 0;
 	return (command);
 }
 

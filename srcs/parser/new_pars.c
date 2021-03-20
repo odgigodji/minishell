@@ -1,12 +1,17 @@
 #include "minishell.h"
 
-void ft_init_next_struct(t_common *common)
+void ft_init_next_simple_command(t_common *common)
 {
 	int current_command;
+	int arg_count;
 
+//	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
+	printf("->%d\n", arg_count);
 	current_command = common->command.current_simple_command;
+
 	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
-	common->command.simple_commands[current_command]->arg_count = 3;   //кол во аргументов для новой симпл команды
+	common->command.simple_commands[current_command]->arg_count = 3;//ft_arg_counter(line);//3;   //кол во аргументов для новой симпл команды  fixme
+
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),3 + 1);
 	common->command.simple_commands[current_command]->current_arg = 0;
 //	common->command.simple_commands[current_command]->current_arg = 0;
@@ -81,7 +86,7 @@ int do_spec(t_common *common, char *line, char curent_char, int increment)
 		printf("current char is <%c>\n", curent_char);
 		printf("current line is <%s>\n", line);
 		common->command.current_simple_command++;
-		ft_init_next_struct(common);
+		ft_init_next_simple_command(common);
 	}
 	increment++;
 	return (increment);
@@ -122,7 +127,7 @@ int	ft_arg_counter(char *s)																//fixme
 
 	c = ' ';
 	count = 0;
-	while (*s)
+	while (*s && *s != '|')
 	{
 		if ((*s == '"' || *s == '\''))// && *(s - 1) != '\\')
 		{
@@ -142,21 +147,26 @@ int	ft_arg_counter(char *s)																//fixme
 	return (count);
 }
 
-void ft_init_struct(t_common *common, int arg_count)
+void ft_init_struct(t_common *common, char *line)
 {
 	int current_command;
+	int arg_count;
 
+	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
+	printf("->%d\n", arg_count);
 	current_command = common->command.current_simple_command;
-	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), 5); // пять команд это типо если будут пайпы
-	common->command.current_simple_command = 0;
+	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), 5); // пять команд это типо если будут пайпы  fixme
+//	common->command.current_simple_command = 0;
 	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 	common->command.simple_commands[current_command]->current_arg = 0;
+	common->command.simple_commands[current_command]->arg_count = arg_count;
+	printf("arg_count is %d\n", common->command.simple_commands[current_command]->arg_count = arg_count);
 
 //	common->command.simple_commands[1] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
 //	common->command.simple_commands[1]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 //	common->command.simple_commands[1]->current_arg = 0;
-	common->command.number_of_simple_commands = 3;
+	common->command.number_of_simple_commands = 3; //	fixme количество симпл команд
 
 //	common->command.simple_commands[0]->arguments[arg_count] = NULL;
 	;
@@ -165,13 +175,11 @@ void ft_init_struct(t_common *common, int arg_count)
 void new_pars(t_common *common, char *line)
 {
 	printf("------используется новый парсер, чтобы вернуться на старый нужно закомитить new_pars в parser.c и раскомитьть pars---------\n");
-	char **arg;
-	int arg_count;
+//	int arg_count;
 
-	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
-	ft_init_struct(common, arg_count);			//инициализируем структуру симпл команды
+	ft_init_struct(common, line);			//инициализируем структуру симпл команды
 	printf(BLU"current simple command is %d\n"RESET, common->command.current_simple_command);
-	common->command.simple_commands[0]->arg_count = arg_count; //записываем количество аргуметов в simple_command
+//	common->command.simple_commands[0]->arg_count = arg_count; //записываем количество аргуметов в simple_command
 
 	printf("arg_count is %d\n", common->command.simple_commands[0]->arg_count);
 

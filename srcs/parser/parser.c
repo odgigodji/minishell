@@ -18,6 +18,7 @@ int	ft_parser(t_common *common)
 {
 	char	*line;
 	int		gnl_rv;
+	int j;
 //	t_simple_command *simple_command;
 
 	line = NULL;
@@ -34,14 +35,13 @@ int	ft_parser(t_common *common)
 
 	new_pars(common, line); //--------------- новый парсер
 	printf("simple command and arguments:\n");
-	int i =0;
-	int j = 0;
+	int i = 0;
 	while(common->command.simple_commands[i])
 	{
 		j = 0;
 		while(common->command.simple_commands[i]->arguments[j])
 		{
-			printf(BLU"simple_command[%d]: "RESET, i );
+			printf(BLU"simple_command[%d]: "RESET, i);
 			printf(YEL"sc->arguments[%d]"RESET,j);
 			printf(GRN"|%s|\n", common->command.simple_commands[i]->arguments[j]);
 			j++;
@@ -49,21 +49,7 @@ int	ft_parser(t_common *common)
 		printf("--next_simple_command--\n");
 		i++;
 	}
-//	while(common->command.simple_commands[0]->arguments[i])
-//	{
-//		printf(GRN"%d argument is |%s|\n"RESET, i, common->command.simple_commands[0]->arguments[i]);
-//		i++;
-//	}
-//	if (common->command.simple_commands[0]->arguments[i] == NULL)
-//		printf(GRN"%d argument is |null|\n"RESET, i);
-//	i = 0;
-//	while(common->command.simple_commands[1]->arguments[i])
-//	{
-//		printf(YEL"%d argument is |%s|\n"RESET, i, common->command.simple_commands[0]->arguments[i]);
-//		i++;
-//	}
-//	if (common->command.simple_commands[1]->arguments[i] == NULL)
-//		printf(YEL"%d argument is |null|\n"RESET, i);
+
 //	while (1) ;
 
 	free(line);
