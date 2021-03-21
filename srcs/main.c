@@ -20,6 +20,17 @@ void	minishell_loop(char **envp)
 //			printf("%d argument is |null|\n", i);
 		executor(&common);
 	}
+	while (ft_parser(&common))
+	{
+//		while(common.command.simple_commands[0]->arguments[i])
+//		{
+//			printf("%d argument is |%s|\n", i, common.command.simple_commands[0]->arguments[i]);
+//			i++;
+//		}
+//		if (common.command.simple_commands[0]->arguments[i] == NULL)
+//			printf("%d argument is |null|\n", i);
+		executor(&common);
+	}
 }
 
 int main(int argc, char const **argv, char const **envp)
