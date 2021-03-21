@@ -15,8 +15,7 @@ void ft_init_next_simple_command(t_common *common, char *line)
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 10);
 	common->command.simple_commands[current_command]->arg_count = arg_count;  //кол во аргументов для новой симпл команды  fixme
 	common->command.simple_commands[current_command]->current_arg = 0;
-
-	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; //
+//	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; //
 
 	printf(BLU"arg_count for simple command[%d] is %d\n"RESET, current_command, common->command.simple_commands[current_command]->arg_count);
 //	common->command.simple_commands[current_command]->current_arg = 0;
@@ -35,7 +34,8 @@ void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_c
 	printf(YEL"current arg is %d\n"RESET, common->command.simple_commands[current_command]->current_arg);
 
 	common->command.simple_commands[current_command]->arguments[common->command.simple_commands[current_command]->current_arg] = ft_strdup(res);
-//	printf(GRN"<%s>\n"RESET, common->command.simple_commands[0]->arguments[common->command.simple_commands[0]->current_arg]);
+	printf(GRN"<%s>\n"RESET, common->command.simple_commands[current_command]->\
+	arguments[common->command.simple_commands[current_command]->current_arg]);
 	if (common->command.simple_commands[current_command]->current_arg != common->command.simple_commands[current_command]->arg_count)
 		common->command.simple_commands[current_command]->current_arg++;
 }
@@ -43,11 +43,14 @@ void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_c
 int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 {
 	char res[len_for_calloc + 1];
+	int current_command = common->command.current_simple_command;
+	int arg_count = common->command.simple_commands[current_command]->arg_count;
 
 	ft_strlcpy(res, line + increment, len_for_calloc + 1); 	//записываем все символы до спец символа во временную строку res
 //	printf("len for calloc is %d current line is [%s]\n", len_for_calloc, line + increment);
 //	printf("---%s---\n", res);
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);  //копируем res в simple_command->arguments
+	common->command.simple_commands[current_command]->arguments[arg_count] = NULL;
 	return (increment + len_for_calloc); // возвращаем позицию в нашей строке line изменненную на длину записанного аргумента
 }
 
@@ -93,7 +96,9 @@ int do_spec(t_common *common, char *line, char curent_char, int increment)
 //		printf("current char is <%c>\n", curent_char);
 //		printf("current line is <%s>\n", line);
 		if (common->command.current_simple_command != common->command.number_of_simple_commands)
-		common->command.current_simple_command++;
+			common->command.current_simple_command++;
+//		else
+//			return (increment);
 		ft_init_next_simple_command(common, line + 1);
 	}
 	increment++;
@@ -116,7 +121,6 @@ void line_to_arg(t_common *common, char *line)
 			i = do_spec(common, line + i, line[i], i);
 //			printf("current simple command after do_spec is %d\n",common->command.current_simple_command);
 		}
-////			common->command.current_simple_command++;
 		else
 		{
 			i = make_args(line, common, i); //если символ не равен спец символу прописываем аргументы
@@ -190,6 +194,7 @@ void ft_init_struct(t_common *common, char *line)
 //	common->command.number_of_simple_commands = 3; 	//	fixme количество симпл команд
 	common->command.simple_commands[simple_command_count] = NULL;
 	common->command.simple_commands[0]->arguments[arg_count] = NULL;
+	common->command.current_simple_command = 0;
 	;
 }
 
