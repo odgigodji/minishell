@@ -1,5 +1,18 @@
 #include "minishell.h"
 
+void ft_do_command(t_common *common)
+{
+	//сюда надо функцию работащую с точкой запятой
+	int i = 0;
+	char *line = NULL;
+	get_next_line(0, &line);
+//	while(line[i])
+//	{
+		ft_parser(common, line);
+		executor(common);
+//	}
+}
+
 void	minishell_loop(char **envp)
 {
 	t_common	common;
@@ -9,27 +22,10 @@ void	minishell_loop(char **envp)
 	common = common_init((char **)envp);
 	signal_processor();
 //	signal(SIGQUIT, handler_s);	// quit	Ctrl+|	выход из приложенияя
-	while (ft_parser(&common))
+	while (1)
 	{
-//		while(common.command.simple_commands[0]->arguments[i])
-//		{
-//			printf("%d argument is |%s|\n", i, common.command.simple_commands[0]->arguments[i]);
-//			i++;
-//		}
-//		if (common.command.simple_commands[0]->arguments[i] == NULL)
-//			printf("%d argument is |null|\n", i);
-		executor(&common);
-	}
-	while (ft_parser(&common))
-	{
-//		while(common.command.simple_commands[0]->arguments[i])
-//		{
-//			printf("%d argument is |%s|\n", i, common.command.simple_commands[0]->arguments[i]);
-//			i++;
-//		}
-//		if (common.command.simple_commands[0]->arguments[i] == NULL)
-//			printf("%d argument is |null|\n", i);
-		executor(&common);
+		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
+		ft_do_command(&common);
 	}
 }
 

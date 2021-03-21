@@ -2,7 +2,7 @@
 
 void ft_init_next_simple_command(t_common *common, char *line)
 {
-	int current_command;
+	int current_command;//команда на которой мы сейяча находимся
 	int arg_count;
 
 	printf(RED"line after '|' is <%s>\n"RESET, line);
@@ -24,18 +24,18 @@ void ft_init_next_simple_command(t_common *common, char *line)
 void do_pipe(t_common *common, char *line)
 {
 	//		printf("current char is <%c>\n", curent_char);
-//		printf("current line is <%s>\n", line);
+	//		printf("current line is <%s>\n", line);
 	if (common->command.current_simple_command != common->command.number_of_simple_commands)
-		common->command.current_simple_command++;
+		common->command.current_simple_command++; // если не последняя команда переключаеммся на следедующую
 //		else
 //			return (increment);
-	ft_init_next_simple_command(common, line + 1);
+	ft_init_next_simple_command(common, line + 1); //инициализируем следующую команду
 }
 
 int do_all_spec(t_common *common, char *line, char curent_char, int increment)
 {
 	if (curent_char == '|')
-		do_pipe(common, line);
-	increment++;
+		do_pipe(common, line); // делаем пайп
+	increment++; //переходим на следующий элемент
 	return (increment);
 }

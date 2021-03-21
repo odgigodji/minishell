@@ -6,16 +6,16 @@ void ft_error(void)
 	;
 }
 
-int	ft_parser(t_common *common)
+int	ft_parser(t_common *common, char *line)
 {
-	char	*line;
+//	char	*line;
 	int		gnl_rv;
 	int j;
 //	t_simple_command *simple_command;
 
-	line = NULL;
-	ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
-	gnl_rv = get_next_line(0, &line);
+//	line = NULL;
+//	ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
+//	gnl_rv = get_next_line(0, &line);
 //	printf("0\n");
 //	ft_lexer(line);
 

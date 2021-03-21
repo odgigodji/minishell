@@ -83,7 +83,7 @@ typedef struct			s_common
 */
 
 int					get_next_line(int fd, char **line);
-int					ft_parser(t_common *common);
+int					ft_parser(t_common *common, char *line);
 int					pars(t_common *common, char *line);
 void				new_pars(t_common *common, char *line);
 size_t				ft_strlen_to_char(const char *s, char c);
