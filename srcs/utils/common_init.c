@@ -33,7 +33,7 @@ t_simple_command	*simple_command_init(
 		return (NULL);
 	simple_command->arguments = arguments;
 	simple_command->current_arg = number_of_arguments;
-	simple_command->number_of_available_arguments = number_of_available_arguments;
+//	simple_command->number_of_available_arguments = number_of_available_arguments;
 	return (simple_command);
 }
 
