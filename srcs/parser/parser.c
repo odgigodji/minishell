@@ -39,6 +39,7 @@ int	ft_parser(t_common *common)
 	while(common->command.simple_commands[i])
 	{
 		j = 0;
+		printf(RED"arg_count: %d\n"RESET, common->command.simple_commands[i]->arg_count);
 		while(common->command.simple_commands[i]->arguments[j])
 		{
 			printf(BLU"simple_command[%d]: "RESET, i);
