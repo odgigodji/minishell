@@ -6,14 +6,6 @@ void ft_error(void)
 	;
 }
 
-void ft_prss(t_common *common, char *line)
-{
-	int i;
-
-	i = 0;
-	;
-}
-
 int	ft_parser(t_common *common)
 {
 	char	*line;
@@ -66,6 +58,6 @@ int	ft_parser(t_common *common)
 //	common->command.simple_commands = malloc(sizeof(t_simple_command *) * 5);
 //	common->command.simple_commands[0] = simple_command;
 //	common->command.number_of_simple_commands = 1; // максимум одна команда если есть пайпы
-printf(CYN"------------------------------------------end of parser-------------------------------\n"RESET);
+printf(CYN"-----------------------------------------------------------end of parser----------------------------------------------------\n"RESET);
 	return (gnl_rv);
 }
