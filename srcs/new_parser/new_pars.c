@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void line_to_arg(t_common *common, char *line)
+int line_to_arg(t_common *common, char *line)
 {
 	int i;
 
@@ -24,17 +24,19 @@ void line_to_arg(t_common *common, char *line)
 	}
 	common->command.simple_commands[common->command.current_simple_command]->\
 	arguments[common->command.simple_commands[common->command.current_simple_command]->arg_count] = NULL; // зануляем последний арг
+	return (i);
 }
 
 int	ft_arg_counter(char *s)																//fixme
 {
+	printf(WHT"Ssssssssssssssssssssssssssssssssssssssssssss in ft_arg_counter +%s+\n"RESET, s);
 	int		count;
 	int 	quote_t;
 	int		c;
 
 	c = ' ';
 	count = 0;
-	while ((*s && *s != '|') || (*s == c && *s + 1 == '|'))
+	while ((*s && *s != '|' && *s!= ';') || (*s == c && *s + 1 == '|'))
 	{
 //		if ((*s == '"' || *s == '\''))// && *(s - 1) != '\\')
 //		{
@@ -60,7 +62,7 @@ int ft_simple_command_counter(char *line) //fixme need upgrade
 	int counter;
 
 	counter = 1;
-	while(*line)
+	while(*line && *line != ';')
 	{
 		if (*line == '|')
 			counter++;
@@ -94,18 +96,17 @@ void ft_init_struct(t_common *common, char *line)
 	;
 }
 
-void new_pars(t_common *common, char *line)
+int new_pars(t_common *common, char *line)
 {
-	printf("------используется новый парсер, чтобы вернуться на старый нужно закомитить new_pars в parser.c и раскомитьть pars---------\n");
+//	printf("------используется новый парсер, чтобы вернуться на старый нужно закомитить new_pars в parser.c и раскомитьть pars---------\n");
 //	int arg_count;
 
 	ft_init_struct(common, line);			//инициализируем структуру симпл команды
-
 //	printf(BLU"current simple command is %d\n"RESET, common->command.current_simple_command);
 //	common->command.simple_commands[0]->arg_count = arg_count; //записываем количество аргуметов в simple_command
 
 //	printf("arg_count is %d\n", common->command.simple_commands[0]->arg_count);
 
-	line_to_arg(common, line); //считываем line и записываем все в simple_commands->arguments
+	return(line_to_arg(common, line)); //считываем line и записываем все в simple_commands->arguments
 
 }

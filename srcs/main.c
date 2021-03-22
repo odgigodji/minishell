@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int ft_f(char *line)
+int ft_shift_line_beyond_semicolon(char *line)
 {
 	int i = 0;
 	while(line[i])
@@ -14,7 +14,6 @@ int ft_f(char *line)
 
 void ft_do_command(t_common *common)
 {
-	//сюда надо функцию работащую с точкой запятой
 	int i = 0;
 	static char *line;
 
@@ -25,11 +24,13 @@ void ft_do_command(t_common *common)
 	}
 //	while(line[i])
 //	{
-		ft_parser(common, line);
-		line += ft_f(line) + 1;
-		printf("--->%s\n", line);
+		line += ft_parser(common, line) + 1;
+//		 ft_shift_line_beyond_semicolon(line) + 1;
+
 //		line += 5;
 		executor(common);
+		printf(CYN"----------------------------------------------------------end of executor---------------------------------------------------\n"RESET);
+		printf("line after ';' is <%s>\n", line);
 //	}
 }
 

@@ -85,7 +85,7 @@ typedef struct			s_common
 int					get_next_line(int fd, char **line);
 int					ft_parser(t_common *common, char *line);
 int					pars(t_common *common, char *line);
-void				new_pars(t_common *common, char *line);
+int					new_pars(t_common *common, char *line);
 size_t				ft_strlen_to_char(const char *s, char c);
 int					make_arg(char *f_line , t_simple_command *sc);
 int 				make_args(char *line, t_common *common, int increment);

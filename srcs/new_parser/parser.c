@@ -9,7 +9,7 @@ void ft_error(void)
 int	ft_parser(t_common *common, char *line)
 {
 //	char	*line;
-	int		gnl_rv;
+	int		ret;
 	int j;
 //	t_simple_command *simple_command;
 
@@ -24,7 +24,7 @@ int	ft_parser(t_common *common, char *line)
 
 // --------------добавить цикл для обработки точки c запятой--------------
 
-	new_pars(common, line); //--------------- новый парсер
+	ret = new_pars(common, line); //--------------- новый парсер
 	printf("simple command and arguments:\n");
 	int i = 0;
 	while(common->command.simple_commands[i])
@@ -44,9 +44,12 @@ int	ft_parser(t_common *common, char *line)
 			printf(YEL"sc->arguments[%d]"RESET,j);
 			printf(GRN"|null|\n");
 		}
-		printf("--next_simple_command--\n"RESET);
+		if ((i + 1) != common->command.number_of_simple_commands);
+			printf("--next_simple_command--\n"RESET);
 		i++;
 	}
+	if (common->command.simple_commands[i] == NULL)
+		printf(BLU"simple_commands[%d]: (null)\n"RESET, i );
 
 //	while (1) ;
 
@@ -59,5 +62,5 @@ int	ft_parser(t_common *common, char *line)
 //	common->command.simple_commands[0] = simple_command;
 //	common->command.number_of_simple_commands = 1; // максимум одна команда если есть пайпы
 printf(CYN"-----------------------------------------------------------end of parser----------------------------------------------------\n"RESET);
-	return (gnl_rv);
+	return (ret);
 }
