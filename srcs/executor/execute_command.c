@@ -30,7 +30,7 @@ int		is_buildin(t_simple_command *simple_command)
 
 void	execute_simple_command_buildin(t_common *common, t_simple_command *simple_command)
 {
-	printf(YEL "DEBUG: не системная функция mini_%s:\n"RESET, simple_command->arguments[0]);
+//	printf(YEL "DEBUG: не системная функция mini_%s:\n"RESET, simple_command->arguments[0]);
 	if (!ft_strncmp("cd", simple_command->arguments[0], 3))
 		mini_cd(simple_command->arguments, common);
 	else if (!ft_strncmp("pwd", simple_command->arguments[0], 4))

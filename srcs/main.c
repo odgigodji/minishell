@@ -31,9 +31,9 @@ void ft_do_command(t_common *common)
 	executor(common);
 
 //		printf(CYN"----------------------------------------------------------end of executor---------------------------------------------------\n"RESET);
-	if (*line == '\0')
-		printf("==================================================the end of line\n");
-	printf("-------------------------------line after ';' is <%s>\n", line);
+//	if (*line == '\0')
+//		printf("==================================================the end of line\n");
+//	printf("-------------------------------line after ';' is <%s>\n", line);
 
 //	}
 }
