@@ -18,9 +18,11 @@ ls -l -a|ls -l -a |ls -l -a| ls -l -a| echo hello world|echo hello world
 echo hello ; echo world ; echo hola
 echo hello ; ls | echo world
 pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd;pwd
-pwd ; pwd
+echo 1 ; echo 2 ; echo 3; echo 4; echo 5;echo 6 ;echo 7
+echo 1 ; echo 2 ; echo 3; echo 4; echo 5;echo 6 ;echo 7 ; ls -l -a ; ls ; pwd ; echo 8 ;echo 9
+pwd ; pwd - ok
 pwd; pwd
-pwd ;pwd
+pwd ;pwd - ok
 pwd;pwd
 
 echo kitty | cat -e

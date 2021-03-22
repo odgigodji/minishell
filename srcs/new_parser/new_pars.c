@@ -24,6 +24,7 @@ int line_to_arg(t_common *common, char *line)
 	}
 	common->command.simple_commands[common->command.current_simple_command]->\
 	arguments[common->command.simple_commands[common->command.current_simple_command]->arg_count] = NULL; // зануляем последний арг
+//	printf("I IS %d\n", i);
 	return (i);
 }
 
