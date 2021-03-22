@@ -15,8 +15,13 @@ hello my name is john | 61 72 83 94 00 00  | aA bB cC dD | echo 1 2 3 4
 ls | ls |ls |ls|ls| ls -l -a| echo hello world
 ls |ls |ls|ls| echo hello world|echo hello world
 ls -l -a|ls -l -a |ls -l -a| ls -l -a| echo hello world|echo hello world
-echo hello ; echo world
+echo hello ; echo world ; echo hola
 echo hello ; ls | echo world
+pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd;pwd
+pwd ; pwd
+pwd; pwd
+pwd ;pwd
+pwd;pwd
 
 echo kitty | cat -e
 echo hello|echo 123

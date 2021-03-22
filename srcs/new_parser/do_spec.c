@@ -5,7 +5,7 @@ void ft_init_next_simple_command(t_common *common, char *line)
 	int current_command;//команда на которой мы сейяча находимся
 	int arg_count;
 
-	printf(RED"line after '|' is <%s>\n"RESET, line);
+//	printf(RED"line after '|' is <%s>\n"RESET, line);
 	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
 //	printf("next_arg_count is %d\n", arg_count)
 //	printf("->%d\n", arg_count);
@@ -17,7 +17,7 @@ void ft_init_next_simple_command(t_common *common, char *line)
 	common->command.simple_commands[current_command]->current_arg = 0;
 //	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; //
 
-	printf(BLU"arg_count for simple command[%d] is %d\n"RESET, current_command, common->command.simple_commands[current_command]->arg_count);
+//	printf(BLU"arg_count for simple command[%d] is %d\n"RESET, current_command, common->command.simple_commands[current_command]->arg_count);
 //	common->command.simple_commands[current_command]->current_arg = 0;
 }
 

@@ -29,8 +29,10 @@ void ft_do_command(t_common *common)
 
 //		line += 5;
 		executor(common);
-		printf(CYN"----------------------------------------------------------end of executor---------------------------------------------------\n"RESET);
-		printf("line after ';' is <%s>\n", line);
+
+//		printf(CYN"----------------------------------------------------------end of executor---------------------------------------------------\n"RESET);
+
+//		printf("line after ';' is <%s>\n", line);
 //	}
 }
 

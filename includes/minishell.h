@@ -26,6 +26,7 @@
 #define MAG   "\x1B[35m"
 #define CYN   "\x1B[36m"
 #define WHT   "\x1B[37m"
+#define BG_WHT	  "\x1B[47m" //для выделения серым
 #define RESET "\x1B[0m"
 
 /*

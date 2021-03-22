@@ -5,7 +5,7 @@ int line_to_arg(t_common *common, char *line)
 	int i;
 
 	i = 0;
-	printf("|%s|\n", line);
+//	printf("|%s|\n", line); //-------------------------------------------------
 	while(line[i] && line[i] != ';')
 	{
 //		printf("(%c)\n", line[i]);
@@ -29,7 +29,7 @@ int line_to_arg(t_common *common, char *line)
 
 int	ft_arg_counter(char *s)																//fixme
 {
-	printf(WHT"Ssssssssssssssssssssssssssssssssssssssssssss in ft_arg_counter +%s+\n"RESET, s);
+//	printf(BG_WHT"string in ft_arg_counter +%s+\n"RESET, s);
 	int		count;
 	int 	quote_t;
 	int		c;
@@ -50,7 +50,7 @@ int	ft_arg_counter(char *s)																//fixme
 //			s++;
 //		}
 		if ((*s != c && *(s + 1) == c) || (*s != c && (*(s + 1) == '\0')) || \
-		(*s != c && (*(s + 1 ) == '|')))
+		(*s != c && (*(s + 1 ) == '|')) || (*s != c && (*(s + 1 ) == ';')))
 			count++;
 		s++;
 	}
@@ -86,9 +86,11 @@ void ft_init_struct(t_common *common, char *line)
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 	common->command.simple_commands[current_command]->current_arg = 0;//задаем номер текущего аргумента = 0 тк как формируем новый массив аргументов
 	common->command.simple_commands[current_command]->arg_count = arg_count; // количество аргуемнтов заносим в структуру
-	printf(BLU"arg_count for 0 simple command is %d\n"RESET, common->command.simple_commands[current_command]->arg_count);
+//	printf(BLU"arg_count for 0 simple command is %d\n"RESET, common->command.simple_commands[current_command]->arg_count);
 	common->command.number_of_simple_commands = simple_command_count;
-	printf(GRN"----------------command.number_of_simple_commands is %d------------------\n"RESET, common->command.number_of_simple_commands);
+
+//	printf(GRN"----------------command.number_of_simple_commands is %d------------------\n"RESET, common->command.number_of_simple_commands);
+
 //	common->command.number_of_simple_commands = 3; 	//	fixme количество симпл команд
 	common->command.simple_commands[simple_command_count] = NULL;
 	common->command.simple_commands[0]->arguments[arg_count] = NULL;
