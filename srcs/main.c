@@ -23,12 +23,8 @@ void ft_do_command(t_common *common)
 		get_next_line(0, &line);
 		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
-//	while(line[i])
-//	{
-	if (*line == '\0')
-		printf("==================================================the end of line\n");
 
-	line += ft_parser(common, line) + 1;
+	line += ft_parser(common, line);
 //		 ft_shift_line_beyond_semicolon(line) + 1;
 
 //		line += 5;
