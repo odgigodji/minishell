@@ -27,7 +27,7 @@ void ft_print_common(t_common *common)
 			printf(YEL"sc->arguments[%d]"RESET,j);
 			printf(GRN"|null|\n");
 		}
-		if ((i + 1) != common->command.number_of_simple_commands);
+		if ((i + 1) != common->command.number_of_simple_commands)
 		printf("--next_simple_command--\n"RESET);
 		i++;
 	}
@@ -54,7 +54,7 @@ int	ft_parser(t_common *common, char *line)
 
 	ret = new_pars(common, line); //--------------- новый парсер
 //	printf("simple command and arguments:\n");
-//	ft_print_common(common);
+	ft_print_common(common);
 
 
 

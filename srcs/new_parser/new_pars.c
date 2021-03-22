@@ -5,7 +5,7 @@ int line_to_arg(t_common *common, char *line)
 	int i;
 
 	i = 0;
-//	printf("|%s|\n", line); //-------------------------------------------------
+	printf("|%s|\n", line); //-------------------------------------------------
 	while(line[i] && line[i] != ';')
 	{
 //		printf("(%c)\n", line[i]);
@@ -90,7 +90,7 @@ void ft_init_struct(t_common *common, char *line)
 //	printf(BLU"arg_count for 0 simple command is %d\n"RESET, common->command.simple_commands[current_command]->arg_count);
 	common->command.number_of_simple_commands = simple_command_count;
 
-//	printf(GRN"----------------command.number_of_simple_commands is %d------------------\n"RESET, common->command.number_of_simple_commands);
+	printf(GRN"----------------command.number_of_simple_commands is %d------------------\n"RESET, common->command.number_of_simple_commands);
 
 //	common->command.number_of_simple_commands = 3; 	//	fixme количество симпл команд
 	common->command.simple_commands[simple_command_count] = NULL;
