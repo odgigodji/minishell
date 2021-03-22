@@ -21,7 +21,7 @@ void ft_do_command(t_common *common)
 	{
 		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
 		get_next_line(0, &line);
-		printf("-----------------------------line from gnl - |%s|\n", line);
+//		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 
 	line += ft_parser(common, line);
