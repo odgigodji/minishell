@@ -24,7 +24,7 @@ void ft_do_command(t_common *common)
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 
-	line += ft_parser(common, line);
+	line += ft_parser(common, line); // смещаем line на расстояние до точки с запятой
 //		 ft_shift_line_beyond_semicolon(line) + 1;
 
 //		line += 5;
