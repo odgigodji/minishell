@@ -14,14 +14,15 @@
 - [ ] **Buildins**
     - [x] echo
     - [x] cd
-        - [ ] проработать вариант когда удалены PWD и OLDPWD
+        - [x] проработать вариант когда удалены PWD и OLDPWD
         - [ ] No such file or directory
     - [x] pwd
     - [x] export
       - [ ] добавить сортировку при выводе списка
     - [x] unset
     - [x] env
-    - [x] exit
+    - [ ] exit
+      - [ ] не выходит
       - [ ] очистка памяти структуры common
 
 [markdown tutorial](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown)

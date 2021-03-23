@@ -34,3 +34,10 @@ echo $?
 echo -n -n -n -n test
 echo kitty|cat -e
 echo kitty'|'cat -e
+echo $"PWD"
+echo $PWD
+;;
+;
+ls |
+||
+cat | cat | ls | cat | cat
