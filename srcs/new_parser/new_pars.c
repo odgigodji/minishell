@@ -96,10 +96,13 @@ void ft_init_struct(t_common *common, char *line)
 	int arg_count;
 	int simple_command_count;
 
+	//---------------------------------------------считаем аргументы и количество симпл команд------------------
 	current_command = common->command.current_simple_command;
 	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
 //	printf("->%d\n", arg_count);
 	simple_command_count = ft_simple_command_counter(line);
+
+	//--------------------------------------------выделяем память под сипл_команды и и их аргументы-----------
 	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), simple_command_count + 1); // пять команд это типо если будут пайпы  fixme
 	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
@@ -110,11 +113,17 @@ void ft_init_struct(t_common *common, char *line)
 
 //	printf(GRN"----------------command.number_of_simple_commands is %d------------------\n"RESET, common->command.number_of_simple_commands);
 
+
+	//-------------------------------зануляем то что надо занулить---------------
 //	common->command.number_of_simple_commands = 3; 	//	fixme количество симпл команд
 	common->command.simple_commands[simple_command_count] = NULL;
 	common->command.simple_commands[0]->arguments[arg_count] = NULL;
 	common->command.current_simple_command = 0;
-	;
+
+
+	//-------------------------------считаем количество аутфайлов и выделяем под них память-----------------
+	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), 3); //fixme функция для этого
+	common->command.simple_commands[current_command]->out_file[3] = NULL;
 }
 
 int new_pars(t_common *common, char *line)

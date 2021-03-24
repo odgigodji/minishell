@@ -43,7 +43,6 @@ int ft_init_out_or_input_file(t_common *common, char *line, int increment)
 	printf(BG_WHT"%s\n"RESET, line + increment);
 	printf("BG_WHT[%d]\n"RESET, (int)outfile_len);
 	printf("CURRENT_OUT_FILE IS %d\n", current_out_file);
-	common->command.simple_commands[common->command.current_simple_command]->out_file = ft_calloc(sizeof(char *), 5);
 
 	if (current_out_file != num_of_outfiles)
 	{

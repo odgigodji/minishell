@@ -33,8 +33,17 @@ void ft_print_common(t_common *common)
 	}
 	if (common->command.simple_commands[i] == NULL)
 		printf(BLU"simple_commands[%d]: (null)\n"RESET, i );
-	if (common->command.simple_commands[0]->out_file[0])
-		printf(RED"outfile|%s|\n"RESET, common->command.simple_commands[common->command.current_simple_command]->out_file[0]);
+	i = 0;
+	j = 0;
+//	while(common->command.simple_commands[i]->out_file)
+//	{
+		while(common->command.simple_commands[0]->out_file[j])
+		{
+			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->out_file[j]);
+			j++;
+		}
+//		i++;
+//	}
 }
 
 int	ft_parser(t_common *common, char *line)
