@@ -102,6 +102,8 @@ int					ft_redirect_counter(char *line, char redirect_char);
 int					do_redirect(t_common *common, char *line);
 void				do_pipe(t_common *common, char *line);
 int					ft_simple_command_counter(char *line);
+void				ft_init_simple_commands(t_common *common, char *line, int current_command);
+void				ft_init_outfiles(t_common *common, char *line, int current_command);
 
 /*
 ** executor

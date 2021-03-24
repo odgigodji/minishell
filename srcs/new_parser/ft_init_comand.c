@@ -11,7 +11,10 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
 	common->command.simple_commands[current_command]->out_file[outfile_count] = NULL; //занудяем последний outfile
 	common->command.simple_commands[current_command]->outfile_count = outfile_count;
 	printf(BLU"redirect_count is %d\n"RESET, common->command.simple_commands[current_command]->outfile_count);
-	common->command.simple_commands[current_command]->have_pipe = 0; //обнуляем пайп
+	if (common->command.number_of_simple_commands > 1)
+		common->command.simple_commands[current_command]->have_pipe = 1; //eсли есть пайп
+	else
+		common->command.simple_commands[current_command]->have_pipe = 0; //обнуляем пайп
 }
 
 /*
@@ -27,10 +30,11 @@ void ft_init_simple_commands(t_common *common, char *line, int current_command)
 	common->command.simple_commands[current_command] = \
 	ft_calloc(sizeof(t_simple_command) , 1); //выделяем память под одну simple_command
 	common->command.simple_commands[current_command]->arguments = \
-	ft_calloc(sizeof(char *),arg_count + 1); // memory for arguments;
+	ft_calloc(sizeof(char *),arg_count + 1); // memory for arguments; // +10 для next_simpl_command
 	common->command.simple_commands[current_command]->current_arg = 0;//задаем номер текущего аргумента = 0 тк как формируем новый массив аргументов
 	common->command.simple_commands[current_command]->arg_count = arg_count; // количество аргуемнтов заносим в структуру
 	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; //0
+	//printf(BLU"arg_count for simple command[%d] is %d\n"RESET, current_command, common->command.simple_commands[current_command]->arg_count);
 }
 
 /*
