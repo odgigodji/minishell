@@ -46,6 +46,7 @@ typedef struct			s_simple_command
 
 	int 				num_of_outfiles;
 	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
+	int 				current_outfile;
 	char				**out_file_cat;		// путь к файлу для записи в него результата (редирект ">>")
 
 
