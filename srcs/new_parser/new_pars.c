@@ -124,6 +124,8 @@ void ft_init_struct(t_common *common, char *line)
 	//-------------------------------считаем количество аутфайлов и выделяем под них память-----------------
 	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), 3); //fixme функция для этого
 	common->command.simple_commands[current_command]->out_file[3] = NULL;
+
+	common->command.simple_commands[common->command.current_simple_command]->have_pipe = 0;
 }
 
 int new_pars(t_common *common, char *line)

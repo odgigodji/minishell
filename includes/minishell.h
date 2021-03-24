@@ -46,7 +46,7 @@ typedef struct			s_simple_command
 	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
 	char				**out_file_cat;		// путь к файлу для записи в него результата (редирект ">>")
 
-
+	int 				have_pipe;
 //	int 				memory_allocated;
 //	int					i; // counter
 //	int					flag;	//space flag;
@@ -74,7 +74,7 @@ typedef struct			s_command
 	char				*out_file_cat;		// путь к файлу для записи в него результата (редирект ">")
 	char 				*input_file; // путь к файлу для чтения из него ввода (редирект "<")
 	char 				*err_file;		// путь к файлу для записи в него вывода ошибки (редирект >&)
-	int 				background;		// ?
+	int 				background;// ?
 }						t_command;
 
 typedef struct			s_common

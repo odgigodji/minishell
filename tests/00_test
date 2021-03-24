@@ -27,6 +27,8 @@ pwd ;pwd - ok
 pwd;pwd
 echo hello my name is john;echo 61 72 83 94 00 00;echo aA bB cC dD;echo 1 2 3 4
 echo hello > outfile0 1 2 > outfile1 3 4
+echo hello > outfile0 1 2 > outfile1 3 4 | echo aaa > outfile3 bbb ccc
+
 
 echo kitty | cat -e
 echo hello|echo 123
