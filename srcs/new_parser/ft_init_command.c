@@ -14,10 +14,10 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
 {
 	int outfile_count;
 
-	outfile_count = ft_redirect_counter(line, '>');
+	outfile_count = ft_redirect_counter(line, '>'); //fixme
 
 //	common->command.simple_commands[current_command]->num_of_outfiles = ft_redirect_counter(line, '>'); //fixme для отсальных типов добавить
-	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count); //fixme функция для этого
+	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count);
 	common->command.simple_commands[current_command]->out_file[outfile_count] = NULL;
 	common->command.simple_commands[current_command]->num_of_outfiles = outfile_count;
 	common->command.simple_commands[current_command]->current_outfile = 0;
@@ -33,7 +33,7 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
  * инициализация симпл команды:
  * считаем аргументы симпл команды
  * выделяем память под одну simple_command
- * memory for arguments; // +10 для next_simpl_command
+ * memory for arguments; // +10 для next_simple_command
  * задаем номер текущего аргумента = 0 тк как формируем новый массив аргументов
  * количество аргуемнтов заносим в структуру
 */
