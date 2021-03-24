@@ -1,14 +1,21 @@
 #include "minishell.h"
 
+
+
+/*
+** инициализация симпл команды
+*/
+
 void ft_init_simple_commands(t_common *common, char *line, int current_command)
 {
 	int arg_count;
 
-	arg_count = 0;
 	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
 	//printf("->%d\n", arg_count);
-	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1); //одна команда без пайпов
-	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
+	common->command.simple_commands[current_command] = \
+	ft_calloc(sizeof(t_simple_command) , 1); //выделяем память под одну simple_command
+	common->command.simple_commands[current_command]->arguments = \
+	ft_calloc(sizeof(char *),arg_count + 1); // memory for arguments;
 	common->command.simple_commands[current_command]->current_arg = 0;//задаем номер текущего аргумента = 0 тк как формируем новый массив аргументов
 	common->command.simple_commands[current_command]->arg_count = arg_count; // количество аргуемнтов заносим в структуру
 	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; //0
@@ -21,29 +28,16 @@ void ft_init_simple_commands(t_common *common, char *line, int current_command)
 void	ft_init_current_command(t_common *common, char *line)
 {
 	int current_command;
-//	int arg_count;
-	int simple_command_count;
-//	int num_of_outfile;
 
-	//---------------------------------------------считаем аргументы и количество симпл команд------------------
-	current_command = common->command.current_simple_command; //номер текущей каоманды
-	simple_command_count = ft_simple_command_counter(line);
-	//--------------------------------------------выделяем память под сипл_команды и и их аргументы-----------
-	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *), simple_command_count + 1); // пять команд это типо если будут пайпы  fixme
+	current_command = common->command.current_simple_command; //номер текущей команды, считаем аргументы и количество симпл команд------------------
+	common->command.number_of_simple_commands = ft_simple_command_counter(line); //fixme
+	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *),\
+	common->command.number_of_simple_commands + 1); // выделяем память под сипл_команды и и их аргументы fixme
 	ft_init_simple_commands(common, line, current_command);
-
-
 //	printf(BLU"arg_count for 0 simple command is %d\n"RESET, common->command.simple_commands[current_command]->arg_count);
-	common->command.number_of_simple_commands = simple_command_count;
-
 //	printf(GRN"----------------command.number_of_simple_commands is %d------------------\n"RESET, common->command.number_of_simple_commands);
-
-
-	//-------------------------------зануляем то что надо занулить---------------
-//	common->command.number_of_simple_commands = 3; 	//	fixme количество симпл команд
-	common->command.simple_commands[simple_command_count] = NULL;
-//	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; //0
-	common->command.current_simple_command = 0;
+	common->command.simple_commands[common->command.number_of_simple_commands] = NULL; // зануляем последнюю симпл_команду
+	common->command.current_simple_command = 0; // текующая симпл команда = 0;
 
 
 	//-------------------------------считаем количество аутфайлов и выделяем под них память-----------------
