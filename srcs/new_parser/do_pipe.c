@@ -17,7 +17,7 @@ void do_pipe(t_common *common, char *line)
 {
 	//		printf("current char is <%c>\n", curent_char);
 	//		printf("current line is <%s>\n", line);
-	if (common->command.current_simple_command != common->command.number_of_simple_commands)
+	if (common->command.current_simple_command != common->command.num_of_simple_commands)
 		common->command.current_simple_command++; // если не последняя команда переключаеммся на следедующую
 //		else
 //			return (increment);

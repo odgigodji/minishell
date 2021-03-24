@@ -48,7 +48,7 @@ void	last_simple_command_output(t_pipe *pipe_variables, t_common *common)
 
 void	execute_command(t_common *common, char **envp)
 {
-	int		command_table_len = common->command.number_of_simple_commands;	//	возможно number_of_available_simple_commands
+	int		command_table_len = common->command.num_of_simple_commands;	//	возможно number_of_available_simple_commands
 	int		command_table_count = 0;
 	int		ret;
 	t_pipe	pipe_variables;

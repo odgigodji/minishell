@@ -42,7 +42,7 @@ typedef struct			s_simple_command
 	int 				current_arg;			//	Number of argument
 	char				**arguments;					//	fixme Array of arguments
 	int 				arg_count; // количество аргументов = number_of_available_arguments
-	int 				outfile_count;
+	int 				num_of_outfiles;
 	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
 	char				**out_file_cat;		// путь к файлу для записи в него результата (редирект ">>")
 
@@ -66,7 +66,7 @@ typedef struct			s_simple_command
 typedef struct			s_command
 {
 	int					current_simple_command; // текущая симпл команда( для движения по массиву **simple_commands)
-	int 				number_of_simple_commands; // количество симпл команд
+	int 				num_of_simple_commands;  // количество симпл команд
 
 	t_simple_command	**simple_commands;	//fixme
 

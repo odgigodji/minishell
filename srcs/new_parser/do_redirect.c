@@ -25,7 +25,7 @@ int ft_do_outfile(t_common *common, char *line, int increment)
 	int num_of_outfiles;
 	int ret;
 
-	num_of_outfiles = common->command.simple_commands[common->command.current_simple_command]->outfile_count;
+	num_of_outfiles = common->command.simple_commands[common->command.current_simple_command]->num_of_outfiles;
 	if (common->command.simple_commands[common->command.current_simple_command]->have_pipe && current_out_file == num_of_outfiles)
 	{
 		current_out_file = 0;
@@ -35,14 +35,13 @@ int ft_do_outfile(t_common *common, char *line, int increment)
 		ret = ft_make_outfile(common, line, increment, current_out_file);
 
 //		common->command.simple_commands[current_command]->out_file[num_of_outfile] = NULL;
-		common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file] = NULL;
+		common->command.simple_commands[common->command.current_simple_command]->out_file[num_of_outfiles] = NULL;
 		return (ret);
 	}
 	if (current_out_file != num_of_outfiles)
 	{
 		ret = ft_make_outfile(common, line, increment, current_out_file);
 	}
-
 	return (ret);
 }
 
