@@ -17,12 +17,6 @@ int len_for_calloc(char *line, t_common *common, int increment, char *spec)
 	return (len_for_calloc);
 }
 
-int ft_test_shit(int k)
-{
-	k++;
-	return(k);
-}
-
 void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc)
 {
 	int current_command;
@@ -37,7 +31,7 @@ void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_c
 
 	common->command.simple_commands[current_command]->arguments[common->command.simple_commands[current_command]->current_arg] = ft_strdup(res);
 //	printf(GRN"<%s>\n"RESET, common->command.simple_commands[current_command]->\
-	arguments[common->command.simple_commands[current_command]->current_arg]);
+//	arguments[common->command.simple_commands[current_command]->current_arg]);
 	if (common->command.simple_commands[current_command]->current_arg != common->command.simple_commands[current_command]->arg_count)
 		common->command.simple_commands[current_command]->current_arg++;
 }
@@ -67,4 +61,3 @@ int	make_args(char *line, t_common *common, int increment)
 //	printf("len_for_calloc is %d\n", len);
 	return (increment + len);
 }
-

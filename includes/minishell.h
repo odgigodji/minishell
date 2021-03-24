@@ -42,7 +42,7 @@ typedef struct			s_simple_command
 	int 				current_arg;			//	Number of argument
 	char				**arguments;					//	fixme Array of arguments
 	int 				arg_count; // количество аргументов = number_of_available_arguments
-
+	int 				outfile_count;
 	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
 	char				**out_file_cat;		// путь к файлу для записи в него результата (редирект ">>")
 
@@ -95,10 +95,13 @@ int					new_pars(t_common *common, char *line);
 size_t				ft_strlen_to_char(const char *s, char c);
 int					make_arg(char *f_line , t_simple_command *sc);
 int 				make_args(char *line, t_common *common, int increment);
-void				ft_init_struct(t_common *common, char *line);
+void				ft_init_current_command(t_common *common, char *line);
 int					ft_arg_counter(char *s);
 int 				do_all_spec(t_common *common, char *line, char curent_char, int increment);
 int					ft_redirect_counter(char *line, char redirect_char);
+int					do_redirect(t_common *common, char *line);
+void				do_pipe(t_common *common, char *line);
+int					ft_simple_command_counter(char *line);
 
 /*
 ** executor
