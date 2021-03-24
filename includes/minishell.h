@@ -98,6 +98,7 @@ int 				make_args(char *line, t_common *common, int increment);
 void				ft_init_struct(t_common *common, char *line);
 int					ft_arg_counter(char *s);
 int 				do_all_spec(t_common *common, char *line, char curent_char, int increment);
+int					ft_redirect_counter(char *line, char redirect_char);
 
 /*
 ** executor

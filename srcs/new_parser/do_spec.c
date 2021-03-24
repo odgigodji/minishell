@@ -4,6 +4,7 @@ void ft_init_next_simple_command(t_common *common, char *line)
 {
 	int current_command;//команда на которой мы сейяча находимся
 	int arg_count;
+	int num_of_outfile;
 
 //	printf(RED"line after '|' is <%s>\n"RESET, line);
 	arg_count = ft_arg_counter(line);	//считаем аргументы симпл команды
@@ -20,7 +21,9 @@ void ft_init_next_simple_command(t_common *common, char *line)
 //	printf(BLU"arg_count for simple command[%d] is %d\n"RESET, current_command, common->command.simple_commands[current_command]->arg_count);
 //	common->command.simple_commands[current_command]->current_arg = 0;
 
-	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), 3); //fixme функция для этого
+	num_of_outfile = ft_redirect_counter(line, '>');
+	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), num_of_outfile); //fixme функция для этого
+	printf(BLU"redirect_count is %d\n"RESET, num_of_outfile);
 }
 
 void do_pipe(t_common *common, char *line)

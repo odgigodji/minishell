@@ -44,8 +44,8 @@ void ft_print_common(t_common *common)
 //		}
 //		i++;
 //	}
-	printf("sc[0] outfile[0] %s", common->command.simple_commands[0]->out_file[0]);
-	printf("sc[0] outfile[0] %s", common->command.simple_commands[1]->out_file[1]);
+//	printf("sc[0] outfile[0] %s", common->command.simple_commands[0]->out_file[0]);
+//	printf("sc[0] outfile[0] %s", common->command.simple_commands[1]->out_file[1]);
 }
 
 int	ft_parser(t_common *common, char *line)

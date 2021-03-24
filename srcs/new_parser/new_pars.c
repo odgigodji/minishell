@@ -40,6 +40,23 @@ int line_to_arg(t_common *common, char *line)
 	return (i);
 }
 
+int ft_redirect_counter(char *line, char redirect_char)
+{
+	int i;
+	int counter;
+
+	i = 0;
+	counter = 0;
+	while(line[i] && line[i] != ';' && line[i] != '|')
+	{
+		if (line[i] == redirect_char)
+			counter++;
+		i++;
+	}
+	return (counter);
+}
+
+
 int	ft_arg_counter(char *s)																//fixme если разделитель tab
 {
 //	printf(BG_WHT"string in ft_arg_counter +%s+\n"RESET, s);
@@ -95,6 +112,7 @@ void ft_init_struct(t_common *common, char *line)
 	int current_command;
 	int arg_count;
 	int simple_command_count;
+	int num_of_outfile;
 
 	//---------------------------------------------считаем аргументы и количество симпл команд------------------
 	current_command = common->command.current_simple_command;
@@ -126,6 +144,9 @@ void ft_init_struct(t_common *common, char *line)
 	common->command.simple_commands[current_command]->out_file[3] = NULL;
 
 	common->command.simple_commands[common->command.current_simple_command]->have_pipe = 0;
+	num_of_outfile = ft_redirect_counter(line, '>');
+	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), num_of_outfile); //fixme функция для этого
+	printf(BLU"redirect_count is %d\n"RESET, num_of_outfile);
 }
 
 int new_pars(t_common *common, char *line)
