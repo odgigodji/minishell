@@ -30,17 +30,17 @@ void ft_print_common(t_common *common)
 		printf(BLU"simple_commands[%d]: (null)\n"RESET, i );
 	i = 0;
 	j = 0;
-	while(common->command.simple_commands[i])
-	{
-		while(common->command.simple_commands[i]->out_file[j])
-		{
-			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->out_file[j]);
-			j++;
-		}
-		if (common->command.simple_commands[i]->out_file[j] == NULL)
-			printf(RED"sc[%d] outfile[%d] is (null)\n"RESET, i, j);
-		i++;
-	}
+//	while(common->command.simple_commands[i])
+//	{
+//		while(common->command.simple_commands[i]->out_file[j])
+//		{
+//			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->out_file[j]);
+//			j++;
+//		}
+//		if (common->command.simple_commands[i]->out_file[j] == NULL)
+//			printf(RED"sc[%d] outfile[%d] is (null)\n"RESET, i, j);
+//		i++;
+//	}
 }
 
 int	ft_parser(t_common *common, char *line)
@@ -48,7 +48,7 @@ int	ft_parser(t_common *common, char *line)
 	int		ret;
 
 	ret = new_pars(common, line); //--------------- новый парсер
-//	ft_print_common(common);
+	ft_print_common(common);
 	//printf(CYN"-----------------------------------------------------------end of parser----------------------------------------------------\n"RESET);
 	return (ret);
 }

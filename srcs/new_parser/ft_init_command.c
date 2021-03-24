@@ -45,7 +45,7 @@ void ft_init_simple_commands(t_common *common, char *line, int current_command)
 	arg_count = ft_arg_counter(line);
 	//printf("->%d\n", arg_count);
 	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1);
-	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
+	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 100);
 	common->command.simple_commands[current_command]->current_arg = 0;
 	common->command.simple_commands[current_command]->arg_count = arg_count;
 	common->command.simple_commands[current_command]->arguments[arg_count] = NULL;
@@ -54,7 +54,7 @@ void ft_init_simple_commands(t_common *common, char *line, int current_command)
 
 /*
  * ft_init_current_command - функция для инициализации команды
- * номер текущей команды, считаем аргументы и количество симпл команд;
+ * номер текущей симпл команды, считаем аргументы и количество симпл команд;
  * выделяем память под сипл_команды и и их аргументы;
  * зануляем последнюю симпл_команду;
  * текующая симпл команда = 0;

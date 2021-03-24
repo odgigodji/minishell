@@ -21,27 +21,31 @@ int ft_make_outfile(t_common *common, char *line, int increment, int current_out
 
 int ft_do_outfile(t_common *common, char *line, int increment)
 {
-	static int current_out_file = 0;
+//	static int current_out_file = 0;
+	int current_out_file;
 	int num_of_outfiles;
 	int ret;
 
+	ret = 0;
+	current_out_file = common->command.simple_commands[common->command.current_simple_command]->current_outfile;
 	num_of_outfiles = common->command.simple_commands[common->command.current_simple_command]->num_of_outfiles;
-	if (common->command.simple_commands[common->command.current_simple_command]->have_pipe && current_out_file == num_of_outfiles)
+	if (current_out_file == num_of_outfiles) // common->command.simple_commands[common->command.current_simple_command]->have_pipe ||
 	{
-		current_out_file = 0;
 		printf("CURRENT_OUT_FILE IS %d(should be 0)\n", current_out_file);
-		common->command.simple_commands[common->command.current_simple_command]->have_pipe = 0;
+//		common->command.simple_commands[common->command.current_simple_command]->have_pipe = 0;
 
 		ret = ft_make_outfile(common, line, increment, current_out_file);
-
+		common->command.simple_commands[common->command.current_simple_command]->current_outfile = 0;
 //		common->command.simple_commands[current_command]->out_file[num_of_outfile] = NULL;
-		common->command.simple_commands[common->command.current_simple_command]->out_file[num_of_outfiles] = NULL;
 		return (ret);
 	}
 	if (current_out_file != num_of_outfiles)
 	{
+		common->command.simple_commands[common->command.current_simple_command]->current_outfile++;
+		current_out_file++;
 		ret = ft_make_outfile(common, line, increment, current_out_file);
 	}
+	common->command.simple_commands[common->command.current_simple_command]->out_file[num_of_outfiles] = NULL;
 	return (ret);
 }
 
@@ -65,7 +69,7 @@ int do_redirect(t_common *common, char *line)
 				return (i);
 			}
 		}
-//		printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->out_file[0]);
+		printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->out_file[0]);
 //		common->command.simple_commands[common->command.current_simple_command]->out_file[0];
 	}
 	return 0;
