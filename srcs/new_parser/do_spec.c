@@ -32,14 +32,43 @@ void do_pipe(t_common *common, char *line)
 	ft_init_next_simple_command(common, line + 1); //инициализируем следующую команду
 }
 
+int ft_init_out_or_input_file(t_common *common, char *line, int increment)
+{
+	static int current_out_file = 0;
+	int num_of_outfiles;
+	int outfile_len;
+
+	num_of_outfiles = 3;
+	outfile_len = ft_strlen_to_char(line + increment, ' ');
+	printf(BG_WHT"%s\n"RESET, line + increment);
+	printf("BG_WHT[%d]\n"RESET, (int)outfile_len);
+	printf("CURRENT_OUT_FILE IS %d\n", current_out_file);
+	common->command.simple_commands[common->command.current_simple_command]->out_file = ft_calloc(sizeof(char *), 5);
+
+	if (current_out_file != num_of_outfiles)
+	{
+		common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file] = ft_calloc(sizeof(char), outfile_len + 1);
+		ft_strlcat(common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file],\
+	line + increment, outfile_len + 1); // +1 на \0
+		printf(RED"[%s]\n"RESET, common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file]);
+		current_out_file++;
+		common->command.simple_commands[common->command.current_simple_command]->arg_count--;
+	}
+	else
+	{
+		current_out_file = 0;
+		printf("CURRENT_OUT_FILE IS %d(should be 0)\n", current_out_file);
+	}
+	return (outfile_len);
+}
+
 int do_redirect(t_common *common, char *line)
 {
 	int i;
 	int outfile_len;
 
 	i = 0;
-	common->command.simple_commands[common->command.current_simple_command]->out_file = ft_calloc(sizeof(char *), 5);
-	common->command.simple_commands[common->command.current_simple_command]->out_file[0] = ft_calloc(sizeof(char), MAX_NAME);
+
 //	common->command.simple_commands[common->command.current_simple_command]->out_file[0] = "\0";//
 	if (line[i] == '>')
 	{
@@ -51,13 +80,13 @@ int do_redirect(t_common *common, char *line)
 				i++;
 			else
 			{
-				outfile_len = ft_strlen_to_char(line + i, ' ');
-				printf(BG_WHT"%.4s\n"RESET, line + i);
-				printf("BG_WHT[%d]\n"RESET, (int)outfile_len);
-				ft_strlcat(common->command.simple_commands[common->command.current_simple_command]->out_file[0],\
-				line + i, outfile_len + 1); //+1 на \0
-			   	common->command.simple_commands[common->command.current_simple_command]->arg_count--;
-			   	return (i + outfile_len);
+				i += ft_init_out_or_input_file(common, line, i);
+//				outfile_len = ft_strlen_to_char(line + i, ' ');
+//				printf(BG_WHT"%.4s\n"RESET, line + i);
+//				printf("BG_WHT[%d]\n"RESET, (int)outfile_len);
+//				ft_strlcat(common->command.simple_commands[common->command.current_simple_command]->out_file[0],\
+//				line + i, outfile_len + 1); // +1 на \0
+			   	return (i);
 			}
 //			i++;
 		}
