@@ -1,6 +1,18 @@
 #include "minishell.h"
 
+void ft_init_outfiles(t_common *common, char *line, int current_command)
+{
+	int outfile_count;
 
+	outfile_count = ft_redirect_counter(line, '>');
+
+//	common->command.simple_commands[current_command]->outfile_count = ft_redirect_counter(line, '>'); //fixme для отсальных типов добавить
+	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count); //fixme функция для этого
+	common->command.simple_commands[current_command]->out_file[outfile_count] = NULL; //занудяем последний outfile
+	common->command.simple_commands[current_command]->outfile_count = outfile_count;
+	printf(BLU"redirect_count is %d\n"RESET, common->command.simple_commands[current_command]->outfile_count);
+	common->command.simple_commands[current_command]->have_pipe = 0; //обнуляем пайп
+}
 
 /*
 ** инициализация симпл команды
@@ -39,14 +51,8 @@ void	ft_init_current_command(t_common *common, char *line)
 	common->command.simple_commands[common->command.number_of_simple_commands] = NULL; // зануляем последнюю симпл_команду
 	common->command.current_simple_command = 0; // текующая симпл команда = 0;
 
-
+	ft_init_outfiles(common, line, current_command);
 	//-------------------------------считаем количество аутфайлов и выделяем под них память-----------------
 //	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), 3); //fixme функция для этого
 
-
-	common->command.simple_commands[common->command.current_simple_command]->have_pipe = 0;
-	common->command.simple_commands[current_command]->outfile_count = ft_redirect_counter(line, '>');
-	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), common->command.simple_commands[current_command]->outfile_count); //fixme функция для этого
-	common->command.simple_commands[current_command]->out_file[common->command.simple_commands[current_command]->outfile_count] = NULL;
-	printf(BLU"redirect_count is %d\n"RESET, common->command.simple_commands[current_command]->outfile_count);
 }
