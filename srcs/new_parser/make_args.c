@@ -59,7 +59,7 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 int	make_args(char *line, t_common *common, int increment)
 {
 	int len;
-	char spec[8] = " '|\"$\t;";
+	char spec[] = " '|\"$\t;<>";
 
 	len = len_for_calloc(line, common, increment, spec); // высчитываем длину для выделения памяти
 	do_arg(common, line, len, increment); // создаем аргумент

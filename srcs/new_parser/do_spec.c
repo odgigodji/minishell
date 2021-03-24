@@ -32,10 +32,43 @@ void do_pipe(t_common *common, char *line)
 	ft_init_next_simple_command(common, line + 1); //инициализируем следующую команду
 }
 
-int do_all_spec(t_common *common, char *line, char curent_char, int increment)
+int do_redirect(t_common *common, char *line)
 {
-	if (curent_char == '|')
+	int i = 0;
+	common->command.simple_commands[common->command.current_simple_command]->out_file = ft_calloc(sizeof(char *), 5);
+	common->command.simple_commands[common->command.current_simple_command]->out_file[0] = ft_calloc(sizeof(char), MAX_NAME); //
+	if (line[i] == '>')
+	{
+		printf("|%s|\n", line + 1);
+		i++;
+		while(line[i] && line[i] != ';' && line[i] != '|')
+		{
+			if (line[i] == ' ')
+				i++;
+			else
+			{
+				printf(BG_WHT"%s\n"RESET, line + i);
+				printf("");
+//				ft_strlcat(common->command.simple_commands[common->command.current_simple_command]->out_file[0],\
+				line + i, ft_strlen_to_char(line + i, ' '));
+			   	return (i);
+			}
+//			i++;
+		}
+//		printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->out_file[0]);
+//		common->command.simple_commands[common->command.current_simple_command]->out_file[0];
+	}
+//	printf("RDRCT---\n");
+	return i;
+}
+
+int do_all_spec(t_common *common, char *line, char current_char, int increment)
+{
+	if (current_char == '|')
 		do_pipe(common, line); // делаем пайп
+//	if (current_char == '>' || current_char == '<')
+//		increment += do_redirect(common, line);
 	increment++; //переходим на следующий элемент
+//	printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->out_file[0]);
 	return (increment);
 }

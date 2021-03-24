@@ -43,6 +43,10 @@ typedef struct			s_simple_command
 	char				**arguments;					//	fixme Array of arguments
 	int 				arg_count; // количество аргументов = number_of_available_arguments
 
+	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
+	char				**out_file_cat;		// путь к файлу для записи в него результата (редирект ">>")
+
+
 //	int 				memory_allocated;
 //	int					i; // counter
 //	int					flag;	//space flag;
@@ -66,8 +70,9 @@ typedef struct			s_command
 
 	t_simple_command	**simple_commands;	//fixme
 
-	char				*out_file;		// путь к файлу для записи в него результата (редирект ">")
-	char 				*input_file;	// путь к файлу для чтения из него ввода (редирект "<")
+	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
+	char				*out_file_cat;		// путь к файлу для записи в него результата (редирект ">")
+	char 				*input_file; // путь к файлу для чтения из него ввода (редирект "<")
 	char 				*err_file;		// путь к файлу для записи в него вывода ошибки (редирект >&)
 	int 				background;		// ?
 }						t_command;

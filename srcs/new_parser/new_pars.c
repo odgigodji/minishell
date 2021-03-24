@@ -1,16 +1,26 @@
 #include "minishell.h"
 
+int is_spec(char *spec, char current_char)
+{
+	if(ft_strchr(spec, current_char))
+		return (1);
+	else
+		return (0);
+}
+
 int line_to_arg(t_common *common, char *line)
 {
 	int i;
+	char spec[10] = " '|\"$\t;<>";
 
 	i = 0;
 //	printf("|%s|\n", line); //-------------------------------------------------
 	while(line[i] && line[i] != ';')
 	{
 //		printf("(%c)\n", line[i]);
-		if (line[i] == ' ' || line[i] == '"' || line[i] == '\'' || line[i] == '\t' \
-		|| line[i] == '|' || line[i] == '$')
+//		if (line[i] == ' ' || line[i] == '"' || line[i] == '\'' || line[i] == '\t' \
+//		|| line[i] == '|' || line[i] == '$' || line[i] == '>' || line[i] == '<')
+		if(is_spec(spec, line[i]))
 		{
 //			printf("curr char is >%c<\n", line[i]);
 			i = do_all_spec(common, line + i, line[i], i);
@@ -30,16 +40,18 @@ int line_to_arg(t_common *common, char *line)
 	return (i);
 }
 
-int	ft_arg_counter(char *s)																//fixme
+int	ft_arg_counter(char *s)																//fixme если разделитель tab
 {
 //	printf(BG_WHT"string in ft_arg_counter +%s+\n"RESET, s);
+	int c;
 	int		count;
 	int 	quote_t;
-	int		c;
+//	char separator[] = " \t";
+	char spec[] = "'|\"$;"; // добавил спец символы иду по строке пока невстречаю один из них
 
 	c = ' ';
 	count = 0;
-	while ((*s && *s != '|' && *s!= ';') || (*s == c && *s + 1 == '|'))
+	while ((*s && !ft_strchr(spec, *s)))// || (*s == c && *s + 1 == '|'))
 	{
 //		if ((*s == '"' || *s == '\''))// && *(s - 1) != '\\')
 //		{
@@ -52,6 +64,8 @@ int	ft_arg_counter(char *s)																//fixme
 //			}
 //			s++;
 //		}
+//		if (((!ft_strchr(sep, *s)) && ft_strchr(spec, *(s + 1 ))) || ((!ft_strchr(sep, *s)) && (*(s + 1) == '\0')) || \
+//		((!ft_strchr(sep, *s)) && (*(s + 1 ) == '|')) || ((!ft_strchr(sep, *s) && (*(s + 1 ) == ';')))
 		if ((*s != c && *(s + 1) == c) || (*s != c && (*(s + 1) == '\0')) || \
 		(*s != c && (*(s + 1 ) == '|')) || (*s != c && (*(s + 1 ) == ';')))
 			count++;

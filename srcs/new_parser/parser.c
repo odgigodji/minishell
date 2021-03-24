@@ -54,7 +54,7 @@ int	ft_parser(t_common *common, char *line)
 
 	ret = new_pars(common, line); //--------------- новый парсер
 //	printf("simple command and arguments:\n");
-//	ft_print_common(common);
+	ft_print_common(common);
 
 
 

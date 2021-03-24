@@ -35,7 +35,8 @@ add_executable(minishell
         srcs/buildins/mini_env.c
         srcs/buildins/mini_unset.c srcs/buildins/mini_exit.c srcs/signals/signals_handler.c srcs/new_parser/new_pars.c
         srcs/new_parser/make_args.c
-        srcs/new_parser/do_spec)
+        srcs/new_parser/do_spec
+        srcs/new_parser/pars_utils.c)
 
 add_executable(executor_tests
         srcs/executor/executor_tests/00_main_test.c
@@ -60,7 +61,8 @@ add_executable(executor_tests
         srcs/executor/execute_command.c
         srcs/buildins/mini_env.c srcs/buildins/mini_unset.c srcs/buildins/mini_exit.c srcs/signals/signals_handler.c srcs/new_parser/new_pars.c
         srcs/new_parser/make_args.c
-        srcs/new_parser/do_spec)
+        srcs/new_parser/do_spec
+        srcs/new_parser/pars_utils.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m
