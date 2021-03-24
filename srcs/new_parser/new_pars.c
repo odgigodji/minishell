@@ -64,8 +64,8 @@ int	ft_arg_counter(char *s)																//fixme если разделител
 //			}
 //			s++;
 //		}
-if(*s =='>' || *s == '<')
-	s++;
+		if(*s =='>' || *s == '<')
+			s++;
 //		if (((!ft_strchr(sep, *s)) && ft_strchr(spec, *(s + 1 ))) || ((!ft_strchr(sep, *s)) && (*(s + 1) == '\0')) || \
 //		((!ft_strchr(sep, *s)) && (*(s + 1 ) == '|')) || ((!ft_strchr(sep, *s) && (*(s + 1 ) == ';')))
 		if ((*s != c && *(s + 1) == c) || (*s != c && (*(s + 1) == '\0')) || \

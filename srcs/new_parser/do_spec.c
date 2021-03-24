@@ -49,6 +49,7 @@ int ft_init_out_or_input_file(t_common *common, char *line, int increment)
 		common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file] = ft_calloc(sizeof(char), outfile_len + 1);
 		ft_strlcat(common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file],\
 	line + increment, outfile_len + 1); // +1 на \0
+		printf("current simple command is %d\n", common->command.current_simple_command);
 		printf(RED"[%s]\n"RESET, common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file]);
 		current_out_file++;
 		common->command.simple_commands[common->command.current_simple_command]->arg_count--;

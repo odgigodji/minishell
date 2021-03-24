@@ -37,13 +37,15 @@ void ft_print_common(t_common *common)
 	j = 0;
 //	while(common->command.simple_commands[i]->out_file)
 //	{
-		while(common->command.simple_commands[0]->out_file[j])
-		{
-			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->out_file[j]);
-			j++;
-		}
+//		while(common->command.simple_commands[0]->out_file[j])
+//		{
+//			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->out_file[j]);
+//			j++;
+//		}
 //		i++;
 //	}
+//	printf("sc[0] outfile[0] %s", common->command.simple_commands[0]->out_file[0]);
+//	printf("sc[0] outfile[0] %s", common->command.simple_commands[1]->out_file[1]);
 }
 
 int	ft_parser(t_common *common, char *line)
@@ -65,6 +67,7 @@ int	ft_parser(t_common *common, char *line)
 
 	ret = new_pars(common, line); //--------------- новый парсер
 //	printf("simple command and arguments:\n");
+
 	ft_print_common(common);
 
 

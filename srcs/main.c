@@ -1,17 +1,5 @@
 #include "minishell.h"
 
-int ft_shift_line_beyond_semicolon(char *line)
-{
-	int i = 0;
-	while(line[i])
-	{
-		if (line[i] == ';')
-			return i;
-		i++;
-	}
-	return i;
-}
-
 void ft_do_command(t_common *common)
 {
 	int i = 0;
