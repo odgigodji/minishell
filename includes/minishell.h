@@ -44,6 +44,7 @@ typedef struct			s_simple_command
 	int 				arg_count; // количество аргументов = number_of_available_arguments
 	int 				have_pipe;
 
+
 	int 				num_of_outfiles;
 	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
 	int 				current_outfile;
@@ -74,6 +75,7 @@ typedef struct			s_command
 
 	t_simple_command	**simple_commands;	//fixme
 
+	int 				space_after_redirect;
 	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
 	char				*out_file_cat;		// путь к файлу для записи в него результата (редирект ">")
 	char 				*input_file; // путь к файлу для чтения из него ввода (редирект "<")

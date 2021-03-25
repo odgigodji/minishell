@@ -2,7 +2,7 @@
 
 int ft_make_outfile(t_common *common, char *line, int increment, int current_out_file)
 {
-
+//	printf("ft_make_outfile:|%s|\n", line);
 	int outfile_len;
 	outfile_len = ft_strlen_to_char(line + increment, ' '); //fixme длина до пробела или до другого спец символа
 	printf(BG_WHT"%s\n"RESET, line + increment);
@@ -15,7 +15,7 @@ int ft_make_outfile(t_common *common, char *line, int increment, int current_out
 //	printf("current simple command is %d\n", common->command.current_simple_command);
 
 	current_out_file++;
-	if (*line == ' ') // fixme случай когда первый после '>' есть пробел тогда снижаем кол- во аргументов симпл команды
+	if (common->command.space_after_redirect) 							// fixme случай когда первый после '>' есть пробел тогда снижаем кол- во аргументов симпл команды
 		common->command.simple_commands[common->command.current_simple_command]->arg_count--;
 	return (outfile_len);
 }
@@ -67,7 +67,10 @@ int do_redirect(t_common *common, char *line)
 		while(line[i] && line[i] != ';' && line[i] != '|')
 		{
 			if (line[i] == ' ' || line[i] == '\t') // такие единичные штуки надо как то нормально сделать с табами и пробелами
+			{
+				common->command.space_after_redirect = 1;
 				i++;
+			}
 			else
 			{
 				i += ft_do_outfile(common, line, i);
