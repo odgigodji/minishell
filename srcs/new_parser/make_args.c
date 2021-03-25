@@ -30,7 +30,7 @@ void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_c
 //	printf(YEL"current arg is %d\n"RESET, common->command.simple_commands[current_command]->current_arg);
 
 	common->command.simple_commands[current_command]->arguments[common->command.simple_commands[current_command]->current_arg] = ft_strdup(res);
-	printf(GRN"<%s>\n"RESET, common->command.simple_commands[current_command]->\
+//	printf(GRN"<%s>\n"RESET, common->command.simple_commands[current_command]->\
 	arguments[common->command.simple_commands[current_command]->current_arg]);
 	if (common->command.simple_commands[current_command]->current_arg != common->command.simple_commands[current_command]->arg_count)
 		common->command.simple_commands[current_command]->current_arg++;
@@ -48,9 +48,9 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 //	printf("len for calloc is %d current line is [%s]\n", len_for_calloc, line + increment);
 //	printf("---%s---\n", res);
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);  //копируем res в simple_command->arguments
-	printf("cur_arg is %d\n", common->command.simple_commands[current_command]->current_arg);
+//	printf("cur_arg is %d\n", common->command.simple_commands[current_command]->current_arg);
 //	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; raskoment§
-	printf(BLU"<%s>\n"RESET, common->command.simple_commands[current_command]->\
+//	printf(BLU"<%s>\n"RESET, common->command.simple_commands[current_command]->\
 	arguments[common->command.simple_commands[current_command]->current_arg - 1]);
 	return (increment + len_for_calloc); // возвращаем позицию в нашей строке line изменненную на длину записанного аргумента
 }

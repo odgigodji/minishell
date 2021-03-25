@@ -23,7 +23,7 @@
 #define GRN   "\x1B[32m"
 #define YEL   "\x1B[33m"
 #define BLU   "\x1B[34m"
-#define MAG   "\x1B[35m"
+#define MAG   "\x1B[35m" //violet
 #define CYN   "\x1B[36m"
 #define WHT   "\x1B[37m"
 #define BG_WHT	  "\x1B[47m" //для выделения серым
@@ -47,6 +47,7 @@ typedef struct			s_simple_command
 	int 				num_of_outfiles;
 	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
 	int 				current_outfile;
+
 	char				**out_file_cat;		// путь к файлу для записи в него результата (редирект ">>")
 
 
