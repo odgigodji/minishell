@@ -81,6 +81,7 @@ void	ft_init_current_command(t_common *common, char *line)
 //	printf(GRN"----------------command.num_of_simple_commands is %d------------------\n"RESET, common->command.num_of_simple_commands);
 	common->command.simple_commands[common->command.num_of_simple_commands] = NULL;
 	common->command.current_simple_command = 0;
+	common->command.space_after_redirect = 0;
 	ft_init_outfiles(common, line, current_command);
 //	printf("ft_init_current_command_3:|%s|\n", line);
 }
