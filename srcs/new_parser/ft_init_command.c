@@ -26,7 +26,10 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
 //	printf("ft_init_outfiles_0.3 |%s|\n", line);
 	common->command.simple_commands[current_command]->current_outfile = 0;
 //	printf("ft_init_outfiles_1 |%s|\n", line);
-	printf(BLU"outfiles_count is %d\n"RESET, common->command.simple_commands[current_command]->num_of_outfiles);
+
+	if (DEBUG)
+		printf(BLU"outfiles_count is %d\n"RESET, common->command.simple_commands[current_command]->num_of_outfiles);
+
 	if (common->command.num_of_simple_commands == 1)
 		common->command.simple_commands[current_command]->have_pipe = 0; //eсли есть пайп
 	else
@@ -48,7 +51,8 @@ void ft_init_simple_commands(t_common *common, char *line, int current_command)
 	int arg_count;
 
 	arg_count = ft_arg_counter(line);
-	printf("->%d\n", arg_count);
+	if (DEBUG)
+		printf("->%d\n", arg_count);
 	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1);
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 10);
 	common->command.simple_commands[current_command]->current_arg = 0;

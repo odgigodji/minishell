@@ -18,6 +18,7 @@
 
 # define MAX_PATH 4096
 # define MAX_NAME 255
+# define DEBUG 1
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"

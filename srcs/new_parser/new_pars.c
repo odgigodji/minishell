@@ -14,7 +14,8 @@ int line_to_arg(t_common *common, char *line)
 	char spec[10] = " '|\"$\t<>";
 
 	i = 0;
-	printf("line_to_arg:|%s|\n", line); //-------------------------------------------------
+	if (DEBUG)
+		printf("line_to_arg:|%s|\n", line); //-------------------------------------------------
 	while(line[i] && line[i] != ';')
 	{
 		if(is_spec(spec, line[i]))
@@ -26,7 +27,7 @@ int line_to_arg(t_common *common, char *line)
 		i++;
 	common->command.simple_commands[common->command.current_simple_command]->\
 	arguments[common->command.simple_commands[common->command.current_simple_command]->arg_count] = NULL; // зануляем последний арг
-	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[0]); // я теряю где то элемент, надо искать
+//	printf(RED"<%s>\n"RESET, common->command.simple_commands[0]->arguments[0]); // я теряю где то элемент, надо искать
 //	printf("I IS %d\n", i);
 	return (i);
 }
@@ -35,7 +36,11 @@ int new_pars(t_common *common, char *line)
 {
 	int current_position;
 
-	printf("new_pars:|%s|\n", line);
+	if (DEBUG)
+	{
+		printf(YEL"---------------------------------------DEBUG_MOD-----------------------------------\n"RESET);
+		printf("new_pars:|%s|\n", line);
+	}
 	ft_init_current_command(common, line);			//инициализируем структуру симпл команды
 	current_position = line_to_arg(common, line);
 	return (current_position); //считываем line и записываем все в simple_commands->arguments

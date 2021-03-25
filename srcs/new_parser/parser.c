@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include "minishell.h"
 
-void ft_print_common(t_common *common)
+void ft_print_common(t_common *common, int flag)
 {
 	int i = 0;
 	int j;
+
 	while(common->command.simple_commands[i])
 	{
 		j = 0;
@@ -76,8 +77,12 @@ int	ft_parser(t_common *common, char *line)
 {
 	int		ret;
 
-	ret = new_pars(common, line); //--------------- новый парсер
-	ft_print_common(common);
-	//printf(CYN"-----------------------------------------------------------end of parser----------------------------------------------------\n"RESET);
+	ret = new_pars(common, line);
+
+	if (DEBUG)
+	{
+		ft_print_common(common, 1);
+		printf(CYN"-----------------------------------------------------------end of parser----------------------------------------------------\n"RESET);
+	}
 	return (ret);
 }
