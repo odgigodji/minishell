@@ -27,6 +27,7 @@ int ft_do_outfile(t_common *common, char *line, int increment)
 	int ret;
 
 	ret = 0;
+	ft_printf_outfile_info(common);
 	current_out_file = common->command.simple_commands[common->command.current_simple_command]->current_outfile;
 	num_of_outfiles = common->command.simple_commands[common->command.current_simple_command]->num_of_outfiles;
 	if (current_out_file == num_of_outfiles) // common->command.simple_commands[common->command.current_simple_command]->have_pipe ||
