@@ -35,12 +35,12 @@ void ft_print_common(t_common *common)
 	{
 		j = 0;
 		printf(GRN"simple_comand [%d]\n"RESET, i);
-		while(common->command.simple_commands[i]->arguments[j])
+		while(common->command.simple_commands[i]->out_file[j])
 		{
 			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->out_file[j]);
 			j++;
 		}
-		if (common->command.simple_commands[i]->arguments[j] == NULL)
+		if (common->command.simple_commands[i]->out_file[j] == NULL)
 		{
 			printf(RED"sc[%d] outfile[%d] is (null)\n"RESET, i, j);
 		}
