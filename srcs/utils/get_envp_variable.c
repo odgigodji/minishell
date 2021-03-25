@@ -42,7 +42,7 @@ char	*get_envp_variable_from_char(char **envp, char *var)
 ** первращает строку типа "USER=mscot" в массив [["USER"], ["mscot"]]
 */
 
-char	**get_key_value(char *envp_line)
+char	**get_key_and_value(char *envp_line)
 {
 	char	**var;
 	int		key_len;
@@ -85,7 +85,11 @@ char	***get_envp(char **envp)
 	count = 0;
 	while (envp[count])
 	{
-		result[count] = get_key_value(envp[count]);
+		result[count] = get_key_and_value(envp[count]);
+		if (!ft_strncmp(result[count][0], "SHLVL", 6))
+		{
+//			result[count]
+		}
 		count++;
 	}
 	return (result);

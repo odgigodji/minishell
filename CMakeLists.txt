@@ -19,6 +19,8 @@ add_executable(minishell
 #        srcs/parser/make_arguments.c
         srcs/executor/executor.c
         srcs/executor/example_pipe.c
+        srcs/executor/execute_command.c
+        srcs/signals/signals_handler.c
         srcs/get_next_line/get_next_line.c
         srcs/get_next_line/get_next_line_utils.c
 #        srcs/utils/get_next_line.c
@@ -26,21 +28,24 @@ add_executable(minishell
         srcs/utils/split_path.c
         srcs/utils/free_line_list.c
         srcs/utils/common_init.c
+        srcs/utils/make_envp.c
+        srcs/utils/get_envp_variable.c
         srcs/buildins/mini_pwd.c
         srcs/buildins/mini_cd.c
         srcs/buildins/mini_echo.c
-        srcs/utils/get_envp_variable.c
         srcs/buildins/mini_export.c
-        srcs/executor/execute_command.c
         srcs/buildins/mini_env.c
-        srcs/buildins/mini_unset.c srcs/buildins/mini_exit.c srcs/signals/signals_handler.c srcs/new_parser/new_pars.c
+        srcs/buildins/mini_unset.c
+        srcs/buildins/mini_exit.c
+        srcs/new_parser/new_pars.c
         srcs/new_parser/make_args.c
         srcs/new_parser/do_spec
         srcs/new_parser/pars_utils.c
         srcs/new_parser/do_pipe.c
         srcs/new_parser/do_redirect.c
         srcs/new_parser/ft_init_command.c
-        srcs/new_parser/counters.c)
+        srcs/new_parser/counters.c
+        )
 
 add_executable(executor_tests
         srcs/executor/executor_tests/00_main_test.c

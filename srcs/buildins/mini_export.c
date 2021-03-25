@@ -56,7 +56,7 @@ void	mini_export(t_common *common, char **simple_command)
 	{
 		while (simple_command[count])
 		{
-			key_value = get_key_value(simple_command[count]);
+			key_value = get_key_and_value(simple_command[count]);
 			update_envp_var(common, key_value[0], key_value[1], is_append(simple_command[count]));
 			free(key_value[0]);
 			free(key_value[1]);

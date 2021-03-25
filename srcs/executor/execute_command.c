@@ -51,7 +51,7 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command)
 {
 	char	**path;
 	int 	count;
-	char	command[100];
+	char	command[MAX_PATH];
 
 	if (is_buildin(simple_command))
 	{
@@ -62,17 +62,17 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command)
 	path = split_path(common->env_variables);
 	count = 0;
 	command[0] = '\0';
-	execve(simple_command->arguments[0], simple_command->arguments, common->env_variables);
+	execve(simple_command->arguments[0], simple_command->arguments, make_envp(common));
 	while (path[count])
 	{
-		ft_strlcat(command, path[count], 100);
-		ft_strlcat(command, "/", 100);
-		ft_strlcat(command, simple_command->arguments[0], 100);
-		execve(command, simple_command->arguments, common->env_variables);
+		ft_strlcat(command, path[count], MAX_PATH);
+		ft_strlcat(command, "/", MAX_PATH);
+		ft_strlcat(command, simple_command->arguments[0], MAX_PATH);
+		execve(command, simple_command->arguments, make_envp(common));
 		count++;
 		command[0] = '\0';
 	}
-	errno = 0;
+	errno = 1;
 	perror("execve child. Command not executed (no such command?)\n");
 	exit(0);
 }

@@ -165,7 +165,9 @@ int					update_envp_var(t_common *common, char *key, char *new_value, int append
 int					get_envp_var_index(t_common *common, char *var);
 char				*get_envp_var_pointer(t_common *common, char *var);
 void				free_arg_list(char ****arg_list);
-char				**get_key_value(char *envp_line);
+char				**get_key_and_value(char *envp_line);
+int					args_list_len(char	***arg_list);
+char				**make_envp(t_common *common);
 
 /*
 ** buildins

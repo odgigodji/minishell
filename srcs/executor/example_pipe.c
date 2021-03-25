@@ -30,7 +30,7 @@ void	restore_default_in_out_puts(t_pipe *pipe_variables)
 	close(pipe_variables->tmpout);
 }
 
-void	do_a_pipe(t_pipe *pipe_variables)
+void	do_a_pipe(t_pipe *pipe_variables, t_simple_command *command)
 {
 	// create pipe
 	pipe(pipe_variables->fdpipe);						//	создаём pipe
@@ -61,7 +61,7 @@ void	execute_command(t_common *common, char **envp)
 		if (command_table_count == command_table_len - 1)	//	если это последняя simple_command
 			last_simple_command_output(&pipe_variables, common);
 		else												//	иначе // not last simple command
-			do_a_pipe(&pipe_variables);
+			do_a_pipe(&pipe_variables, common->command.simple_commands[command_table_count]);
 		//	Redirect output
 		dup2(pipe_variables.fdout, STDOUT_FILENO);
 		close(pipe_variables.fdout);
@@ -166,3 +166,9 @@ void	execute_command(t_common *common, char **envp)
 //	ft_pipe(command_table, envp);
 //	return (0);
 //}
+
+		//	Выбираем направление ввода и вывода
+		//		подмена стандартного ввода на fd файла с именем "file"
+			int newfd = open("file",O_RDONLY);
+			dup2(newfd, 0);							// теперь если читать будем из fd = 0 то чтение будет из file
+			close(newfd);
