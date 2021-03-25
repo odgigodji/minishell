@@ -32,7 +32,7 @@ int ft_do_outfile(t_common *common, char *line, int increment)
 	if (current_out_file == num_of_outfiles) // common->command.simple_commands[common->command.current_simple_command]->have_pipe ||
 	{
 //		printf("CURRENT_OUT_FILE IS %d(should be 0)\n", current_out_file);
-		common->command.simple_commands[common->command.current_simple_command]->have_pipe = 0;
+//		common->command.simple_commands[common->command.current_simple_command]->have_pipe = 0;
 
 //		ret = ft_make_outfile(common, line, increment, current_out_file);
 		common->command.simple_commands[common->command.current_simple_command]->current_outfile = 0;

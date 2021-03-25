@@ -18,7 +18,7 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
 
 //	printf("ft_init_outfiles_0 |%s|\n", line);
 //	common->command.simple_commands[current_command]->num_of_outfiles = ft_redirect_counter(line, '>'); //fixme для отсальных типов добавить
-	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count + 1);
+	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count + 2); //+1-2
 //	printf("ft_init_outfiles_0.1 |%s|\n", line);
 //	common->command.simple_commands[current_command]->out_file[outfile_count] = NULL;
 //	printf("ft_init_outfiles_0.2 |%s|\n", line);
