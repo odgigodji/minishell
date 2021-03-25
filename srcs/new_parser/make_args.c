@@ -49,7 +49,7 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 //	printf("---%s---\n", res);
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);  //копируем res в simple_command->arguments
 	printf("cur_arg is %d\n", common->command.simple_commands[current_command]->current_arg);
-	common->command.simple_commands[current_command]->arguments[arg_count] = NULL;
+//	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; raskoment§
 	printf(BLU"<%s>\n"RESET, common->command.simple_commands[current_command]->\
 	arguments[common->command.simple_commands[current_command]->current_arg - 1]);
 	return (increment + len_for_calloc); // возвращаем позицию в нашей строке line изменненную на длину записанного аргумента

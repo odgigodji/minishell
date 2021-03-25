@@ -16,11 +16,16 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
 
 	outfile_count = ft_redirect_counter(line, '>'); //fixme
 
+	printf("ft_init_outfiles_0 |%s|\n", line);
 //	common->command.simple_commands[current_command]->num_of_outfiles = ft_redirect_counter(line, '>'); //fixme для отсальных типов добавить
-	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count);
-	common->command.simple_commands[current_command]->out_file[outfile_count] = NULL;
+	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count + 1);
+	printf("ft_init_outfiles_0.1 |%s|\n", line);
+//	common->command.simple_commands[current_command]->out_file[outfile_count] = NULL;
+	printf("ft_init_outfiles_0.2 |%s|\n", line);
 	common->command.simple_commands[current_command]->num_of_outfiles = outfile_count;
+	printf("ft_init_outfiles_0.3 |%s|\n", line);
 	common->command.simple_commands[current_command]->current_outfile = 0;
+	printf("ft_init_outfiles_1 |%s|\n", line);
 	printf(BLU"redirect_count is %d\n"RESET, common->command.simple_commands[current_command]->num_of_outfiles);
 	if (common->command.num_of_simple_commands == 1)
 		common->command.simple_commands[current_command]->have_pipe = 0; //eсли есть пайп
@@ -48,7 +53,7 @@ void ft_init_simple_commands(t_common *common, char *line, int current_command)
 	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 100);
 	common->command.simple_commands[current_command]->current_arg = 0;
 	common->command.simple_commands[current_command]->arg_count = arg_count;
-	common->command.simple_commands[current_command]->arguments[arg_count] = NULL;
+//	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; ne raskoment
 	//printf(BLU"arg_count for simple command[%d] is %d\n"RESET, current_command, common->command.simple_commands[current_command]->arg_count);
 }
 
@@ -65,14 +70,17 @@ void	ft_init_current_command(t_common *common, char *line)
 {
 	int current_command;
 
+	printf("ft_init_current_command_0:|%s|\n", line);
 	current_command = common->command.current_simple_command;
 	common->command.num_of_simple_commands = ft_simple_command_counter(line); //fixme
 	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *),\
 	common->command.num_of_simple_commands + 1);// fixme
 	ft_init_simple_commands(common, line, current_command);
+	printf("ft_init_current_command_2:|%s|\n", line);
 //	printf(BLU"arg_count for 0 simple command is %d\n"RESET, common->command.simple_commands[current_command]->arg_count);
 //	printf(GRN"----------------command.num_of_simple_commands is %d------------------\n"RESET, common->command.num_of_simple_commands);
 	common->command.simple_commands[common->command.num_of_simple_commands] = NULL;
 	common->command.current_simple_command = 0;
 	ft_init_outfiles(common, line, current_command);
+	printf("ft_init_current_command_3:|%s|\n", line);
 }

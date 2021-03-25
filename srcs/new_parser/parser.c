@@ -7,6 +7,8 @@ void ft_print_common(t_common *common)
 	int j;
 	while(common->command.simple_commands[i])
 	{
+		if (*common->command.simple_commands[0]->arguments[0] == '\0')
+			i = i;
 		j = 0;
 		printf(RED"arg_count: %d\n"RESET, common->command.simple_commands[i]->arg_count);
 		while(common->command.simple_commands[i]->arguments[j])

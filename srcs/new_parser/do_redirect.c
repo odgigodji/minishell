@@ -57,7 +57,7 @@ int do_redirect(t_common *common, char *line)
 //	common->command.simple_commands[common->command.current_simple_command]->out_file[0] = "\0";//
 	if (line[i] == '>')
 	{
-		printf("|%s|\n", line + 1);
+		printf("REDIR_start:|%s|\n", line + 1);
 		i++;
 		while(line[i] && line[i] != ';' && line[i] != '|')
 		{
