@@ -18,7 +18,13 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
 
 //	printf("ft_init_outfiles_0 |%s|\n", line);
 //	common->command.simple_commands[current_command]->num_of_outfiles = ft_redirect_counter(line, '>'); //fixme для отсальных типов добавить
-	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count + 10); //+1-2
+	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count + 10);//+1-2
+	int i = outfile_count;
+//	while(i < outfile_count + 5)
+//	{
+//		common->command.simple_commands[current_command]->out_file[outfile_count + i] = NULL;
+//		i++;
+//	}
 //	printf("ft_init_outfiles_0.1 |%s|\n", line);
 //	common->command.simple_commands[current_command]->out_file[outfile_count] = NULL;
 //	printf("ft_init_outfiles_0.2 |%s|\n", line);
@@ -46,17 +52,17 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
  * количество аргуемнтов заносим в структуру
 */
 
-void ft_init_simple_commands(t_common *common, char *line, int current_command)
+void ft_init_simple_commands(t_common *common, char *line, int current_simple_command)
 {
 	int arg_count;
 
 	arg_count = ft_arg_counter(line);
 	if (DEBUG)
 		printf("->%d\n", arg_count);
-	common->command.simple_commands[current_command] = ft_calloc(sizeof(t_simple_command) , 1);
-	common->command.simple_commands[current_command]->arguments = ft_calloc(sizeof(char *),arg_count + 10);
-	common->command.simple_commands[current_command]->current_arg = 0;
-	common->command.simple_commands[current_command]->arg_count = arg_count;
+	common->command.simple_commands[current_simple_command] = ft_calloc(sizeof(t_simple_command) , 1);
+	common->command.simple_commands[current_simple_command]->arguments = ft_calloc(sizeof(char *),arg_count + 10);
+	common->command.simple_commands[current_simple_command]->current_arg = 0;
+	common->command.simple_commands[current_simple_command]->arg_count = arg_count;
 //	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; ne raskoment
 	//printf(BLU"arg_count for simple command[%d] is %d\n"RESET, current_command, common->command.simple_commands[current_command]->arg_count);
 }
@@ -72,20 +78,20 @@ void ft_init_simple_commands(t_common *common, char *line, int current_command)
 
 void	ft_init_current_command(t_common *common, char *line)
 {
-	int current_command;
+	int current_simple_command;
 
 //	printf("ft_init_current_command_0:|%s|\n", line);
-	current_command = common->command.current_simple_command;
+	current_simple_command = common->command.current_simple_command;
 	common->command.num_of_simple_commands = ft_simple_command_counter(line); //fixme
 	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *),\
 	common->command.num_of_simple_commands + 1);// fixme
-	ft_init_simple_commands(common, line, current_command);
+	ft_init_simple_commands(common, line, current_simple_command);
 //	printf("ft_init_current_command_2:|%s|\n", line);
 //	printf(BLU"arg_count for 0 simple command is %d\n"RESET, common->command.simple_commands[current_command]->arg_count);
 //	printf(GRN"----------------command.num_of_simple_commands is %d------------------\n"RESET, common->command.num_of_simple_commands);
 	common->command.simple_commands[common->command.num_of_simple_commands] = NULL;
 	common->command.current_simple_command = 0;
 	common->command.space_after_redirect = 0;
-	ft_init_outfiles(common, line, current_command);
+	ft_init_outfiles(common, line, current_simple_command);
 //	printf("ft_init_current_command_3:|%s|\n", line);
 }
