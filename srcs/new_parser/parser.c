@@ -41,10 +41,10 @@ void ft_print_common(t_common *common, int flag)
 			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->out_file[j]);
 			j++;
 		}
-		if (common->command.simple_commands[i]->out_file[j] == NULL)
-		{
-			printf(RED"sc[%d] outfile[%d] is (null)\n"RESET, i, j);
-		}
+//		if (common->command.simple_commands[i]->out_file[j] == NULL)
+//		{
+//			printf(RED"sc[%d] outfile[%d] is (null)\n"RESET, i, j);
+//		}
 		i++;
 	}
 

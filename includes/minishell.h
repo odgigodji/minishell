@@ -18,7 +18,7 @@
 
 # define MAX_PATH 4096
 # define MAX_NAME 255
-# define DEBUG 0 //0 if debug off ; 1 is on
+# define DEBUG 1//0 if debug off ; 1 is on
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"
@@ -100,10 +100,10 @@ void ft_printf_outfile_info(t_common *common);
 
 int					get_next_line(int fd, char **line);
 int					ft_parser(t_common *common, char *line);
-int					pars(t_common *common, char *line);
+//int					pars(t_common *common, char *line);
 int					new_pars(t_common *common, char *line);
 size_t				ft_strlen_to_char(const char *s, char c);
-int					make_arg(char *f_line , t_simple_command *sc);
+//int					make_arg(char *f_line , t_simple_command *sc);
 int 				make_args(char *line, t_common *common, int increment);
 void				ft_init_current_command(t_common *common, char *line);
 int					ft_arg_counter(char *s);
