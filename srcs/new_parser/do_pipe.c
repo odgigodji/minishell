@@ -31,5 +31,5 @@ void do_pipe(t_common *common, char *line)
 //		else
 //			return (increment);
 	ft_init_next_simple_command(common, line + 1); //инициализируем следующую команду
-	ft_printf_outfile_info(common);
+//	ft_printf_outfile_info(common);
 }

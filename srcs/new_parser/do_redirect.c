@@ -54,6 +54,7 @@ int do_redirect(t_common *common, char *line)
 {
 	int i;
 
+	ft_printf_outfile_info(common);
 	i = 0;
 //	common->command.simple_commands[common->command.current_simple_command]->out_file[0] = "\0";//
 	if (line[i] == '>')

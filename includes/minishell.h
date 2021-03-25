@@ -88,6 +88,9 @@ typedef struct			s_common
 	char 				***env_variables_list;
 }						t_common;
 
+//временные функции
+void ft_printf_outfile_info(t_common *common);
+
 /*
 ** parser
 */
