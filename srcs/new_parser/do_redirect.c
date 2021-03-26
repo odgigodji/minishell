@@ -20,7 +20,7 @@ int ft_make_outfile(t_common *common, char *line, int increment, int current_out
 	line + increment, outfile_len + 1); // +1 на \0
 
 
-	current_out_file++;
+//	current_out_file++;
 	if (common->command.space_after_redirect) 							// fixme случай когда первый после '>' есть пробел тогда снижаем кол- во аргументов симпл команды
 		common->command.simple_commands[common->command.current_simple_command]->arg_count--;
 	return (outfile_len);
@@ -29,36 +29,27 @@ int ft_make_outfile(t_common *common, char *line, int increment, int current_out
 int ft_do_outfile(t_common *common, char *line, int increment)
 {
 //	static int current_out_file = 0;
-	int current_out_file;
+	int current_outfile;
 	int num_of_outfiles;
 	int ret;
 
 	ret = 0;
-//	ft_printf_outfile_info(common);
-	current_out_file = common->command.simple_commands[common->command.current_simple_command]->current_outfile;
+
+	if (DEBUG)
+		ft_printf_outfile_info(common);
+	current_outfile = common->command.simple_commands[common->command.current_simple_command]->current_outfile;
 	num_of_outfiles = common->command.simple_commands[common->command.current_simple_command]->num_of_outfiles;
-	if (current_out_file == num_of_outfiles) // common->command.simple_commands[common->command.current_simple_command]->have_pipe ||
+	if (current_outfile != num_of_outfiles)
 	{
-
-//		printf("CURRENT_OUT_FILE IS %d(should be 0)\n", current_out_file);
-//		common->command.simple_commands[common->command.current_simple_command]->have_pipe = 0;
-
-//		ret = ft_make_outfile(common, line, increment, current_out_file);
-		common->command.simple_commands[common->command.current_simple_command]->current_outfile = 0;
-		common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file] = NULL;
-		return (ret);
-	}
-	if (current_out_file != num_of_outfiles)
-	{
-		ret = ft_make_outfile(common, line, increment, current_out_file);
+		ret = ft_make_outfile(common, line, increment, current_outfile);
 		common->command.simple_commands[common->command.current_simple_command]->current_outfile++;
-//		current_out_file++;
+
 	}
-//	common->command.simple_commands[common->command.current_simple_command]->out_file[num_of_outfiles] = NULL;
+	common->command.simple_commands[common->command.current_simple_command]->out_file[num_of_outfiles] = NULL;
 
 
 	if (DEBUG)
-		printf(RED"[%s]\n"RESET, common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file]);
+		printf(RED"[%s]\n"RESET, common->command.simple_commands[common->command.current_simple_command]->out_file[current_outfile]);
 	return (ret);
 }
 

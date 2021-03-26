@@ -43,7 +43,7 @@ typedef struct			s_simple_command
 	int 				current_arg;			//	Number of argument
 	char				**arguments;					//	fixme Array of arguments
 	int 				arg_count; // количество аргументов = number_of_available_arguments
-	int 				have_pipe;
+//	int 				have_pipe;
 
 
 	int 				num_of_outfiles;

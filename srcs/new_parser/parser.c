@@ -36,6 +36,7 @@ void ft_print_common(t_common *common, int flag)
 	{
 		j = 0;
 		printf(GRN"simple_comand [%d]\n"RESET, i);
+		printf(BLU"num_of_outfiles:%d\n"RESET, common->command.simple_commands[i]->num_of_outfiles);
 		while(common->command.simple_commands[i]->out_file[j] && j < common->command.simple_commands[i]->num_of_outfiles)
 		{
 			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->out_file[j]);
