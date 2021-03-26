@@ -32,19 +32,19 @@ void ft_print_common(t_common *common, int flag)
 	i = 0;
 	j = 0;
 
-	while(common->command.simple_commands[i])
+	while(common->command.simple_commands[i] && i < common->command.num_of_simple_commands)
 	{
 		j = 0;
 		printf(GRN"simple_comand [%d]\n"RESET, i);
-		while(common->command.simple_commands[i]->out_file[j])
+		while(common->command.simple_commands[i]->out_file[j] && j < common->command.simple_commands[i]->num_of_outfiles)
 		{
 			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->out_file[j]);
 			j++;
 		}
-//		if (common->command.simple_commands[i]->out_file[j] == NULL)
-//		{
-//			printf(RED"sc[%d] outfile[%d] is (null)\n"RESET, i, j);
-//		}
+		if (common->command.simple_commands[i]->out_file[j] == NULL)
+		{
+			printf(RED"sc[%d] outfile[%d] is (null)\n"RESET, i, j);
+		}
 		i++;
 	}
 
