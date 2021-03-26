@@ -19,9 +19,10 @@
 # define MAX_PATH 4096
 # define MAX_NAME 255
 # define DEBUG 			0//0 if debug off ; 1 is on
-# define DEBUG_IN_FILE 	1
-# define FINAL_PRINT 	1
 # define DEBUG_ARG 		0
+# define DEBUG_INFILE 	1
+# define DEBUG_OUTFILE 	1
+# define FINAL_PRINT 	1
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"

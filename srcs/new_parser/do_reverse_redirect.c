@@ -6,11 +6,11 @@ int ft_make_input_file(t_common *common, char *line, int increment)
 	int input_file_len;
 	input_file_len = ft_strlen_to_char(line + increment, ' '); //fixme длина до пробела или до другого спец символа
 
-	if (DEBUG_IN_FILE)
+	if (DEBUG_INFILE)
 	{
 		printf("ft_make_outfile:|%s|\n", line);
 		printf(BG_WHT"%s\n"RESET, line + increment);
-		printf("OUTFILE LEN [%d]\n"RESET, (int) input_file_len);
+		printf("INPUT LEN [%d]\n"RESET, (int) input_file_len);
 		printf("current simple command is %d\n", common->command.current_simple_command);
 	}
 
@@ -27,13 +27,13 @@ int ft_do_input_file(t_common *common, char *line, int increment)
 {
 	int ret;
 
-	if (DEBUG_IN_FILE)
+	if (DEBUG_INFILE)
 	{
 		printf(BLU"ft_do_input_file:line:|%s|\n"RESET, line + increment);
 	}
 	ret = ft_make_input_file(common, line, increment);
 
-	if (DEBUG_IN_FILE)
+	if (DEBUG_INFILE)
 		printf(RED"fin_input_file[%s]\n"RESET, common->command.infile);
 	return (ret);
 }
@@ -43,7 +43,7 @@ int do_reverse_redirect(t_common *common, char *line)
 	int i;
 
 	i = 1;
-	if(DEBUG_IN_FILE)
+	if(DEBUG_INFILE)
 	{
 		printf(RED"do_rev_redir:|%s|\n"RESET, line);
 		printf("REDIR_start:|%s|\n", line + 1);
@@ -62,8 +62,8 @@ int do_reverse_redirect(t_common *common, char *line)
 		}
 	}
 
-	if (DEBUG_IN_FILE)
-		printf("----->|%s|\n", common->command.infile);
+	if (DEBUG_INFILE)
+		printf(MAG"----->|%s|\n"RESET, common->command.infile);
 //		common->command.simple_commands[common->command.current_simple_command]->out_file[0];
 
 	return 0;

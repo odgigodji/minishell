@@ -6,7 +6,7 @@ int ft_make_outfile(t_common *common, char *line, int increment, int current_out
 	int outfile_len;
 	outfile_len = ft_strlen_to_char(line + increment, ' '); //fixme длина до пробела или до другого спец символа
 
-	if (DEBUG)
+	if (DEBUG_OUTFILE)
 	{
 		printf("ft_make_outfile:|%s|\n", line);
 		printf(BG_WHT"%s\n"RESET, line + increment);
@@ -35,7 +35,7 @@ int ft_do_outfile(t_common *common, char *line, int increment)
 
 	ret = 0;
 
-	if (DEBUG)
+	if (DEBUG_OUTFILE)
 		ft_printf_outfile_info(common);
 	current_outfile = common->command.simple_commands[common->command.current_simple_command]->current_outfile;
 	num_of_outfiles = common->command.simple_commands[common->command.current_simple_command]->num_of_outfiles;
@@ -48,7 +48,7 @@ int ft_do_outfile(t_common *common, char *line, int increment)
 	common->command.simple_commands[common->command.current_simple_command]->outfile[num_of_outfiles] = NULL;
 
 
-	if (DEBUG)
+	if (DEBUG_OUTFILE)
 		printf(RED"[%s]\n"RESET, common->command.simple_commands[common->command.current_simple_command]->outfile[current_outfile]);
 	return (ret);
 }
@@ -57,7 +57,7 @@ int do_redirect(t_common *common, char *line)
 {
 	int i;
 
-	if(DEBUG)
+	if(DEBUG_OUTFILE)
 		ft_printf_outfile_info(common);
 
 	i = 0;
@@ -65,7 +65,7 @@ int do_redirect(t_common *common, char *line)
 	if (line[i] == '>')
 	{
 
-		if (DEBUG)
+		if (DEBUG_OUTFILE)
 			printf("REDIR_start:|%s|\n", line + 1);
 
 		i++;
@@ -83,7 +83,7 @@ int do_redirect(t_common *common, char *line)
 			}
 		}
 
-		if (DEBUG)
+		if (DEBUG_OUTFILE)
 			printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->outfile[0]);
 //		common->command.simple_commands[common->command.current_simple_command]->outfile[0];
 	}
