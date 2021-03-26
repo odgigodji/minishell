@@ -15,31 +15,12 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
 	int outfile_count;
 
 	outfile_count = ft_redirect_counter(line, '>'); //fixme
-
-//	printf("ft_init_outfiles_0 |%s|\n", line);
-//	common->command.simple_commands[current_command]->num_of_outfiles = ft_redirect_counter(line, '>'); //fixme для отсальных типов добавить
-	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count + 10);//+1-2
-	int i = outfile_count;
-//	while(i < outfile_count + 5)
-//	{
-//		common->command.simple_commands[current_command]->out_file[outfile_count + i] = NULL;
-//		i++;
-//	}
-//	printf("ft_init_outfiles_0.1 |%s|\n", line);
-//	common->command.simple_commands[current_command]->out_file[outfile_count] = NULL;
-//	printf("ft_init_outfiles_0.2 |%s|\n", line);
+	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count + 1);//+1-2
 	common->command.simple_commands[current_command]->num_of_outfiles = outfile_count;
-//	printf("ft_init_outfiles_0.3 |%s|\n", line);
 	common->command.simple_commands[current_command]->current_outfile = 0;
-//	printf("ft_init_outfiles_1 |%s|\n", line);
 
 	if (DEBUG)
 		printf(BLU"outfiles_count is %d\n"RESET, common->command.simple_commands[current_command]->num_of_outfiles);
-
-//	if (common->command.num_of_simple_commands == 1)
-//		common->command.simple_commands[current_command]->have_pipe = 0; //eсли есть пайп
-//	else
-//		common->command.simple_commands[current_command]->have_pipe = 1; //обнуляем пайп
 }
 
 /*
