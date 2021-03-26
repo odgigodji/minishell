@@ -169,6 +169,7 @@ void	execute_command(t_common *common, char **envp)
 
 		//	Выбираем направление ввода и вывода
 		//		подмена стандартного ввода на fd файла с именем "file"
-			int newfd = open("file",O_RDONLY);
-			dup2(newfd, 0);							// теперь если читать будем из fd = 0 то чтение будет из file
-			close(newfd);
+
+//			int newfd = open("file",O_RDONLY);
+//			dup2(newfd, 0);							// теперь если читать будем из fd = 0 то чтение будет из file
+//			close(newfd);
