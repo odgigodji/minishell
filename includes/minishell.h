@@ -18,7 +18,10 @@
 
 # define MAX_PATH 4096
 # define MAX_NAME 255
-# define DEBUG 1//0 if debug off ; 1 is on
+# define DEBUG 			0//0 if debug off ; 1 is on
+# define DEBUG_IN_FILE 	1
+# define FINAL_PRINT 	1
+# define DEBUG_ARG 		0
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"
@@ -47,7 +50,7 @@ typedef struct			s_simple_command
 
 
 	int 				num_of_outfiles;
-	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
+	char				**outfile;		// путь к файлу для записи в него результата (редирект ">")
 	int 				current_outfile;
 
 	char				**out_file_cat;		// путь к файлу для записи в него результата (редирект ">>")
@@ -78,8 +81,8 @@ typedef struct			s_command
 
 	int 				space_after_redirect;
 	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
+	char 				*infile; // путь к файлу для чтения из него ввода (редирект "<")
 	char				*out_file_cat;		// путь к файлу для записи в него результата (редирект ">")
-	char 				*input_file; // путь к файлу для чтения из него ввода (редирект "<")
 	char 				*err_file;		// путь к файлу для записи в него вывода ошибки (редирект >&)
 	int 				background;// ?
 }						t_command;
@@ -114,7 +117,7 @@ void				do_pipe(t_common *common, char *line);
 int					ft_simple_command_counter(char *line);
 void				ft_init_simple_commands(t_common *common, char *line, int current_command);
 void				ft_init_outfiles(t_common *common, char *line, int current_command);
-
+int					do_reverse_redirect(t_common *common, char *line);
 /*
 ** executor
 */

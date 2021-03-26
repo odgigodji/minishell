@@ -6,14 +6,16 @@ int len_for_calloc(char *line, t_common *common, int increment, char *spec)
 	int i;
 
 	i = increment;
-//	printf("|%s|\n", line + i);
+	if (DEBUG_ARG)
+		printf("|%s|\n", line + i);
 	len_for_calloc = 0;
 	while(!ft_strchr(spec, line[i]))
 	{
 		len_for_calloc++; //cчитает и последнгий элемент тоже так как возвращает указзаткльно на нуль терминатор
 		i++;
 	}
-//	printf("len after %d\n", len_for_calloc);
+	if (DEBUG_ARG)
+		printf("len after %d\n", len_for_calloc);
 	return (len_for_calloc);
 }
 
@@ -21,7 +23,6 @@ void ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_c
 {
 	int current_command;
 
-//	ft_init_next_struct(common);
 	current_command = common->command.current_simple_command;
 
 //	printf("number_of_arg is %d\n", common->command.simple_commands[0]->current_arg);
@@ -45,14 +46,14 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 	int arg_count = common->command.simple_commands[current_command]->arg_count;
 
 	ft_strlcpy(res, line + increment, len_for_calloc + 1); 	//записываем все символы до спец символа во временную строку res
-	if (DEBUG)
+	if (DEBUG_ARG)
 	{
 		printf("len for calloc is %d current line is [%s]\n", len_for_calloc, line + increment);
 		printf("---%s---\n", res);
 	}
 	ft_do_arg_and_switch_to_next_arg(common, res, len_for_calloc);  //копируем res в simple_command->arguments
 	common->command.simple_commands[current_command]->arguments[arg_count] = NULL;
-	if (DEBUG)
+	if (DEBUG_ARG)
 	{
 	printf("cur_arg is %d\n", common->command.simple_commands[current_command]->current_arg);
 
@@ -66,7 +67,7 @@ int	make_args(char *line, t_common *common, int increment)
 {
 	int len;
 	char spec[] = " '|\"$\t;<>";
-	if (DEBUG)
+	if (DEBUG_ARG)
 		printf("make_args line:|%s|\n", line);
 
 	len = len_for_calloc(line, common, increment, spec); // высчитываем длину для выделения памяти

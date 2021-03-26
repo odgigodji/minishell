@@ -15,9 +15,11 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
 	int outfile_count;
 
 	outfile_count = ft_redirect_counter(line, '>'); //fixme
-	common->command.simple_commands[current_command]->out_file = ft_calloc(sizeof(char *), outfile_count + 1);//+1-2
+	common->command.simple_commands[current_command]->outfile = ft_calloc(sizeof(char *), outfile_count + 1);//+1-2
 	common->command.simple_commands[current_command]->num_of_outfiles = outfile_count;
 	common->command.simple_commands[current_command]->current_outfile = 0;
+//	common->command.input_file = ft_calloc(sizeof(char), 255); // fixme test
+	common->command.space_after_redirect = 0; // fixme надо или нет
 
 	if (DEBUG)
 		printf(BLU"outfiles_count is %d\n"RESET, common->command.simple_commands[current_command]->num_of_outfiles);

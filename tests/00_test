@@ -26,6 +26,9 @@ pwd ; pwd
 pwd ; pwd - ok
 pwd;pwd
 echo hello my name is john;echo 61 72 83 94 00 00;echo aA bB cC dD;echo 1 2 3 4
+
+----------------------------редиректы-------------------------------------------
+
 echo hello > outfile0 1 2 | echo world > outfile1 3 4
 echo hello > outfile-0-0 1 2
 echo hello > outfile-0-0 1 2 | echo aaa > outfile-1-0 bbb ccc
@@ -35,6 +38,11 @@ echo a> out01 b c
 echo hello>outfile-0-0 1 2 | echo world>outfile-1-0 3 4
 echo hello 1 2 3 4
 echo 0 > out0 > echo 1 > out1 > echo 2 > out2 > echo 3 > out3 > echo 4 > out4 > echo 5 > out5
+
+
+--------------------------обратные редиректы------------------------------------
+echo hello< inputfile0 1 2 | echo hello< inputfile1 3 4 | echo hello< inputfile2 5 6
+echo hello | echo world > outfile < inputfile
 
 echo kitty | cat -e
 echo hello|echo 123

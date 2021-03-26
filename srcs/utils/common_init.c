@@ -52,7 +52,7 @@ t_command	command_init(void)
 	command.simple_commands = NULL;
 
 	command.out_file = NULL;
-	command.input_file = NULL;
+	command.infile = NULL;
 	command.err_file = NULL;
 
 	command.background = 0;

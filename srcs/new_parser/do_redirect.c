@@ -15,8 +15,8 @@ int ft_make_outfile(t_common *common, char *line, int increment, int current_out
 		printf("current simple command is %d\n", common->command.current_simple_command);
 	}
 
-	common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file] = ft_calloc(sizeof(char), outfile_len + 1);
-	ft_strlcat(common->command.simple_commands[common->command.current_simple_command]->out_file[current_out_file],\
+	common->command.simple_commands[common->command.current_simple_command]->outfile[current_out_file] = ft_calloc(sizeof(char), outfile_len + 1);
+	ft_strlcat(common->command.simple_commands[common->command.current_simple_command]->outfile[current_out_file],\
 	line + increment, outfile_len + 1); // +1 на \0
 
 
@@ -45,11 +45,11 @@ int ft_do_outfile(t_common *common, char *line, int increment)
 		common->command.simple_commands[common->command.current_simple_command]->current_outfile++;
 
 	}
-	common->command.simple_commands[common->command.current_simple_command]->out_file[num_of_outfiles] = NULL;
+	common->command.simple_commands[common->command.current_simple_command]->outfile[num_of_outfiles] = NULL;
 
 
 	if (DEBUG)
-		printf(RED"[%s]\n"RESET, common->command.simple_commands[common->command.current_simple_command]->out_file[current_outfile]);
+		printf(RED"[%s]\n"RESET, common->command.simple_commands[common->command.current_simple_command]->outfile[current_outfile]);
 	return (ret);
 }
 
@@ -61,7 +61,7 @@ int do_redirect(t_common *common, char *line)
 		ft_printf_outfile_info(common);
 
 	i = 0;
-//	common->command.simple_commands[common->command.current_simple_command]->out_file[0] = "\0";//
+//	common->command.simple_commands[common->command.current_simple_command]->outfile[0] = "\0";//
 	if (line[i] == '>')
 	{
 
@@ -84,8 +84,8 @@ int do_redirect(t_common *common, char *line)
 		}
 
 		if (DEBUG)
-			printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->out_file[0]);
-//		common->command.simple_commands[common->command.current_simple_command]->out_file[0];
+			printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->outfile[0]);
+//		common->command.simple_commands[common->command.current_simple_command]->outfile[0];
 	}
 	return 0;
 }

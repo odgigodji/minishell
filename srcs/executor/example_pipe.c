@@ -16,8 +16,8 @@ void	pipe_init(t_pipe *pipe_variables, t_common *common)
 	pipe_variables->tmpin = dup(STDIN_FILENO);		//	save in
 	pipe_variables->tmpout = dup(STDOUT_FILENO);	//	save out
 
-	if (NULL != common->command.input_file)			//	if (infile)
-		pipe_variables->fdin = open(common->command.input_file, O_RDONLY);				//	получаем ввод из файла
+	if (NULL != common->command.infile)			//	if (infile)
+		pipe_variables->fdin = open(common->command.infile, O_RDONLY);				//	получаем ввод из файла
 	else											//	set the initial input
 		pipe_variables->fdin = dup(pipe_variables->tmpin);	// use default input		//	используем стандартный ввод
 }
