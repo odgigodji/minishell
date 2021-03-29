@@ -41,9 +41,8 @@ int ft_do_in(t_common *common, char *line, int increment)
 	{
 		ret = ft_make_in(common, line, increment, current_infile);
 		common->command.simple_commands[common->command.current_simple_command]->current_infile++;
-
 	}
-//	common->command.simple_commands[common->command.current_simple_command]->infile[num_of_infiles] = NULL;
+	common->command.simple_commands[common->command.current_simple_command]->infile[num_of_infiles] = NULL;
 
 
 	if (DEBUG_INFILE)
