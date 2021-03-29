@@ -2,7 +2,6 @@
 
 int ft_make_input_file(t_common *common, char *line, int increment)
 {
-//
 	int input_file_len;
 	input_file_len = ft_strlen_to_char(line + increment, ' '); //fixme длина до пробела или до другого спец символа
 

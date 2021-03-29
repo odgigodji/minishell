@@ -46,6 +46,7 @@ add_executable(minishell
         srcs/new_parser/ft_init_command.c
         srcs/new_parser/counters.c
         srcs/new_parser/do_reverse_redirect.c
+        srcs/new_parser/do_r_redirect.c
         )
 
 add_executable(executor_tests
@@ -76,7 +77,8 @@ add_executable(executor_tests
         srcs/new_parser/do_pipe.c
         srcs/new_parser/do_redirect.c
         srcs/new_parser/ft_init_command.c
-        srcs/new_parser/counters.c)
+        srcs/new_parser/counters.c
+        srcs/new_parser/do_r_redirect.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m

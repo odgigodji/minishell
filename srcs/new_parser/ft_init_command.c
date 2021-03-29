@@ -1,5 +1,21 @@
 #include "minishell.h"
 
+
+void ft_init_infiles(t_common *common, char *line, int current_command)
+{
+	int infile_count;
+
+	infile_count = ft_redirect_counter(line, '<'); //fixme
+	common->command.simple_commands[current_command]->infile = ft_calloc(sizeof(char *), infile_count + 1);//+1-2
+	common->command.simple_commands[current_command]->num_of_infiles = infile_count;
+	common->command.simple_commands[current_command]->current_infile = 0;
+//	common->command.input_file = ft_calloc(sizeof(char), 255); // fixme test
+	common->command.space_after_redirect = 0; // fixme надо или нет
+
+	if (DEBUG_OUTFILE)
+		printf(BLU"outfiles_count is %d\n"RESET, common->command.simple_commands[current_command]->num_of_outfiles);
+}
+
 /*
 ** ft_init_outfiles:
  * инициализация outfiles:
@@ -21,7 +37,7 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
 //	common->command.input_file = ft_calloc(sizeof(char), 255); // fixme test
 	common->command.space_after_redirect = 0; // fixme надо или нет
 
-	if (DEBUG)
+	if (DEBUG_OUTFILE)
 		printf(BLU"outfiles_count is %d\n"RESET, common->command.simple_commands[current_command]->num_of_outfiles);
 }
 
@@ -75,5 +91,6 @@ void	ft_init_current_command(t_common *common, char *line)
 	common->command.current_simple_command = 0;
 	common->command.space_after_redirect = 0;
 	ft_init_outfiles(common, line, current_simple_command);
+	ft_init_infiles(common, line, current_simple_command);
 //	printf("ft_init_current_command_3:|%s|\n", line);
 }

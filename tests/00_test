@@ -35,13 +35,14 @@ echo hello > outfile-0-0 1 2 | echo aaa > outfile-1-0 bbb ccc
 echo hello > outfile-0-0 1 2 > outfile-0-1 3 4 5 6 > outfile-0-2 7 8 > outfile-0-3 9 10 | echo aaa > outfile-1-0 bbb ccc > outfile-1-1 a b c d e f g h | echo lll > out-2-0 z z z
 echo a > out01 a a > echo b > out02 b b | echo c > out10 c c
 echo a> out01 b c
-echo hello>outfile-0-0 1 2 | echo world>outfile-1-0 3 4
+echo hello> outfile-0-0 1 2 | echo world >outfile-1-0 3 4
 echo hello 1 2 3 4
 echo 0 > out0 > echo 1 > out1 > echo 2 > out2 > echo 3 > out3 > echo 4 > out4 > echo 5 > out5
 
 
 --------------------------обратные редиректы------------------------------------
-echo hello< inputfile0 1 2 | echo hello< inputfile1 3 4 | echo hello< inputfile2 5 6
+echo hello < inputfile0 1 2
+echo hello < inputfile0 1 2 | echo hello < inputfile1 3 4 | echo hello < inputfile2 5 6
 echo hello | echo world > outfile < inputfile
 
 echo kitty | cat -e

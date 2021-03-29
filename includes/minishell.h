@@ -21,7 +21,7 @@
 # define DEBUG 			0//0 if debug off ; 1 is on
 # define DEBUG_ARG 		0
 # define DEBUG_INFILE 	1
-# define DEBUG_OUTFILE 	1
+# define DEBUG_OUTFILE 	0
 # define FINAL_PRINT 	1
 
 #define RED   "\x1B[31m"
@@ -43,29 +43,20 @@
 */
 typedef struct			s_simple_command
 {
-//	int					number_of_available_arguments;	//	Available space for arguments currently preallocated
 	int 				current_arg;			//	Number of argument
 	char				**arguments;					//	fixme Array of arguments
 	int 				arg_count; // количество аргументов = number_of_available_arguments
-//	int 				have_pipe;
-
 
 	int 				num_of_outfiles;
 	char				**outfile;		// путь к файлу для записи в него результата (редирект ">")
 	int 				current_outfile;
 
+	int 				num_of_infiles;
+	char				**infile;		// путь к файлу для записи в него результата (редирект ">")
+	int 				current_infile;
+
 	char				**out_file_cat;		// путь к файлу для записи в него результата (редирект ">>")
 
-
-//	int 				memory_allocated;
-//	int					i; // counter
-//	int					flag;	//space flag;
-//	int 				k; // number of argument
-//	int 				j; //счетчик символов по строке аргумента
-//	int					quotes;
-
-	//	SimpleCommand();								// функция для создания simple_command
-	//	void insertArgument(char *argument);			// функция для вставки аргумента в simple_command
 }						t_simple_command;
 
 /*
@@ -119,6 +110,8 @@ int					ft_simple_command_counter(char *line);
 void				ft_init_simple_commands(t_common *common, char *line, int current_command);
 void				ft_init_outfiles(t_common *common, char *line, int current_command);
 int					do_reverse_redirect(t_common *common, char *line);
+int					do_r_redirect(t_common *common, char *line);
+void				ft_init_infiles(t_common *common, char *line, int current_command);
 /*
 ** executor
 */
