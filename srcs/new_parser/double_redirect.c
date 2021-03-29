@@ -53,7 +53,8 @@ int ft_double_redir(t_common *common, char *line)
 	if (DOUBLE_REDIR)
 		printf("--double redir:line is |%s|\n", line);
 	int i = 1;
-	i++;
+//	i++;
+	printf("--double redir:line is |%s|\n", line + 1);
 	while(line[i] && line[i] != ';' && line[i] != '|')
 	{
 		if (line[i] == ' ' || line[i] == '\t') // такие единичные штуки надо как то нормально сделать с табами и пробелами
