@@ -18,12 +18,12 @@
 
 # define MAX_PATH 4096
 # define MAX_NAME 255
-# define DEBUG 			0//0 if debug off ; 1 is on
-# define DEBUG_ARG 		0
-# define DEBUG_INFILE 	0
-# define DEBUG_OUTFILE 	0
-# define FINAL_PRINT 	0
-# define DOUBLE_REDIR   1
+# define DEBUG 				0//0 if debug off ; 1 is on
+# define DEBUG_ARG 			0
+# define DEBUG_INFILE 		0
+# define DEBUG_OUTFILE 		0
+# define FINAL_PRINT 		1
+# define DOUBLE_REDIR   	1
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"
@@ -57,9 +57,8 @@ typedef struct			s_simple_command
 	int 				current_infile;
 
 	int 				num_of_outfiles_can;
-	char				**outfile_can;		// путь к файлу для записи в него результата (редирект ">>")
-
-
+	char				**outfile_can; // путь к файлу для записи в него результата (редирект ">>")
+	int 				current_outfile_can;
 }						t_simple_command;
 
 /*
@@ -116,6 +115,8 @@ int					do_reverse_redirect(t_common *common, char *line);
 int					do_r_redirect(t_common *common, char *line);
 void				ft_init_infiles(t_common *common, char *line, int current_command);
 int					ft_double_redir(t_common *common, char *line);
+void ft_init_outfiles_can(t_common *common, char *line, int current_command);
+int ft_double_redir_counter(char *line);
 /*
 ** executor
 */

@@ -1,19 +1,19 @@
 #include "minishell.h"
 
-
-void ft_init_infiles_can(t_common *common, char *line, int current_command)
+void ft_init_outfiles_can(t_common *common, char *line, int current_command)
 {
-	int infile_count;
+	int outfile_can_count;
 
-	infile_count = 	1;								//ft_redirect_counter(line, '<'); 					//fixme
-	common->command.simple_commands[current_command]->infile = ft_calloc(sizeof(char *), infile_count + 1);//+1-2
-	common->command.simple_commands[current_command]->num_of_infiles = infile_count;
-	common->command.simple_commands[current_command]->current_infile = 0;
+	outfile_can_count = 	ft_double_redir_counter(line);//
+	printf("COUNT CAN %d\n", outfile_can_count);					// fixme
+	common->command.simple_commands[current_command]->outfile_can = ft_calloc(sizeof(char *), outfile_can_count + 2);//+1-2
+	common->command.simple_commands[current_command]->num_of_outfiles_can = outfile_can_count;
+	common->command.simple_commands[current_command]->current_outfile_can = 0;
 //	common->command.input_file = ft_calloc(sizeof(char), 255); // fixme test
 	common->command.space_after_redirect = 0; // fixme надо или нет
 
-	if (DEBUG_OUTFILE)
-		printf(BLU"outfiles_count is %d\n"RESET, common->command.simple_commands[current_command]->num_of_outfiles);
+	if (DOUBLE_REDIR)
+		printf(BLU"outfiles_count is %d\n"RESET, common->command.simple_commands[current_command]->num_of_outfiles_can);
 }
 
 
@@ -108,5 +108,6 @@ void	ft_init_current_command(t_common *common, char *line)
 	common->command.space_after_redirect = 0;
 	ft_init_outfiles(common, line, current_simple_command);
 	ft_init_infiles(common, line, current_simple_command);
+	ft_init_outfiles_can(common, line, current_simple_command);
 //	printf("ft_init_current_command_3:|%s|\n", line);
 }

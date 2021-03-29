@@ -19,6 +19,7 @@ void ft_init_next_simple_command(t_common *common, char *line)
 	ft_init_simple_commands(common, line, current_command);
 	ft_init_outfiles(common, line, current_command);
 	ft_init_infiles(common, line, current_command);
+	ft_init_outfiles_can(common, line, current_command);
 //	common->command.simple_commands[common->command.current_simple_command]->have_pipe = 1;
 }
 

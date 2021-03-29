@@ -66,3 +66,19 @@ int ft_redirect_counter(char *line, char redirect_char)
 	}
 	return (counter);
 }
+
+int ft_double_redir_counter(char *line)
+{
+	int i;
+	int counter;
+
+	counter = 0;
+	i = 0;
+	while(line[i] && line[i] != ';' && line[i] != '|')
+	{
+		if (line[i] == '>' && line[i + 1] == '>' && line[i])
+			counter++;
+		i++;
+	}
+	return (counter);
+}
