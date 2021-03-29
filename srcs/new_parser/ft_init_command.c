@@ -5,7 +5,8 @@ void ft_init_outfiles_can(t_common *common, char *line, int current_command)
 	int outfile_can_count;
 
 	outfile_can_count = 	ft_double_redir_counter(line);//
-	printf("COUNT CAN %d\n", outfile_can_count);					// fixme
+	if (DOUBLE_REDIR)
+		printf("COUNT CAN %d\n", outfile_can_count);					// fixme
 	common->command.simple_commands[current_command]->outfile_can = ft_calloc(sizeof(char *), outfile_can_count + 2);//+1-2
 	common->command.simple_commands[current_command]->num_of_outfiles_can = outfile_can_count;
 	common->command.simple_commands[current_command]->current_outfile_can = 0;

@@ -95,7 +95,7 @@ int	t_is_key(char *str)
 	return (0);
 }
 
-t_termcap	*t_tempcap_init(void)
+t_termcap	*t_termcap_init(void)
 {
 	t_termcap	*result;
 
@@ -231,7 +231,7 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 //	t_termcap	*termcap;
 //	int			rv;
 //
-//	termcap = t_tempcap_init();
+//	termcap = t_termcap_init();
 //	rv = 1;
 //	while (rv)
 //	{

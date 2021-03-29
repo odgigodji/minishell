@@ -25,8 +25,8 @@
 # define DEBUG_ARG 			0
 # define DEBUG_INFILE 		0
 # define DEBUG_OUTFILE 		0
-# define FINAL_PRINT 		1
-# define DOUBLE_REDIR   	1
+# define FINAL_PRINT 		0
+# define DOUBLE_REDIR   	0
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"
@@ -213,5 +213,8 @@ void				signal_handler_command(int num);
 ** termcap
 */
 int					t_get_next_line(char **line, t_termcap *termcap);
+void				t_term_to_cannon(t_termcap *termcap);
+t_termcap			*t_termcap_init(void);
+int					ft_putchar_term(int c);
 
 #endif
