@@ -1,5 +1,11 @@
 #include "minishell.h"
 
+
+
+
+
+
+
 int ft_make_outfile(t_common *common, char *line, int increment, int current_out_file)
 {
 //
@@ -61,6 +67,10 @@ int do_redirect(t_common *common, char *line)
 		ft_printf_outfile_info(common);
 
 	i = 0;
+	if (line[i + 1] == '>') // double redir
+	{
+		ft_double_redir(common, line);
+	}
 //	common->command.simple_commands[common->command.current_simple_command]->outfile[0] = "\0";//
 	if (line[i] == '>')
 	{

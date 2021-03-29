@@ -41,7 +41,7 @@ int do_reverse_redirect(t_common *common, char *line)
 {
 	int i;
 
-	i = 1;
+	i = 1; // on next element
 	if(DEBUG_INFILE)
 	{
 		printf(RED"do_rev_redir:|%s|\n"RESET, line);
