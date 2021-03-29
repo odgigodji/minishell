@@ -12,6 +12,9 @@
 # include <signal.h>
 # include "libft.h"
 
+# include <term.h>
+# include <termios.h>
+
 /*
 ** Linux has a maximum filename length of 255 characters for most filesystems (including EXT4), and a maximum path of 4096 characters.
 */
@@ -87,6 +90,20 @@ typedef struct			s_common
 	char 				**env_variables;		// не нужно удалять используется в функции execve() для исполнения команд
 	char 				***env_variables_list;
 }						t_common;
+
+typedef struct	s_termcap
+{
+	struct termios	term;
+	char			*term_name;
+	char			*temp;
+
+	char			**history;
+	int				history_count;
+	int				history_len;
+
+	int				cursor;
+	struct winsize	win;
+}				t_termcap;
 
 //временные функции
 void ft_printf_outfile_info(t_common *common);
@@ -191,5 +208,10 @@ char				*get_pwd(char **envp);
 void				signal_processor(void);
 void				signal_handler(int num);
 void				signal_handler_command(int num);
+
+/*
+** termcap
+*/
+int					t_get_next_line(char **line, t_termcap *termcap);
 
 #endif
