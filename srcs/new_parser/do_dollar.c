@@ -39,7 +39,7 @@ int ft_print_env(t_common *common, char **env_variables, char ***env_variables_l
 }
 
 
-int ft_do_dollar(t_common *common, char *line)
+int ft_do_dollar1(t_common *common, char *line)
 {
 	int ret;
 	char len;
@@ -59,4 +59,18 @@ int ft_do_dollar(t_common *common, char *line)
 	ret = ft_print_env(common, common->env_variables, common->env_variables_list, res);
 
 	return (ret);
+}
+
+int ft_do_dollar(t_common *common, char *line)
+{
+	int ret;
+	char len;
+	char res[50];
+	int i = 0;
+
+	if (DEB_DOLLAR	)
+		printf(GRN"after dollar:|%s|\n"RESET, line + 1);
+
+
+	return (ft_strlen_to_char(line, ' '));
 }

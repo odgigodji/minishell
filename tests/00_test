@@ -49,7 +49,6 @@ cat < 2 < 3
 echo hello >> aaa 1 2 3 | echo 12 >> asdf dfdf
 echo hello world >> 1 >> 2 >> 3
 
-
 ----------------------------------quotes----------------------------------------
 echo 'hello my dear friend' 1 2
 'e''c''h''o'
@@ -60,6 +59,7 @@ echo "hello my dear friend" 1 2
 echo hello $PATH 1 2 3
 echo hello $bullshit 1 2 3
 echo hello $PATH$SHELL 1 2 3
+echo $PATH$PATH$PATH 1 2 3
 
 echo kitty | cat -e
 echo hello|echo 123
