@@ -42,24 +42,36 @@ int	ft_arg_counter(char *s)																//fixme если разделител
 	int c;
 	int		count;
 	int 	quote_t;
-	int flag = 0;
+//	int flag = 0;
 //	char separator[] = " \t";
-	char spec[] = "|\"$;"; // добавил спец символы иду по строке пока невстречаю один из них
+	char spec[] = "|$;"; // добавил спец символы иду по строке пока невстречаю один из них
 
 	c = ' ';
 	count = 0;
 	while ((*s && !ft_strchr(spec, *s)))// || (*s == c && *s + 1 == '|'))
 	{
-		if (*s == '\'' && !flag)
+		if (*s == '\'')
 		{
-			count++;
 			s++;
 			while(*s != '\'')
 				s++;
-			s++;
+			count++;
+//			s++;
 			if (DEB_COUNTER)
 				printf(GRN"|%s|\n"RESET, s);
 		}
+		else if (*s == '"')
+		{
+
+			s++;
+			while(*s != '"')
+				s++;
+			count++;
+//			s++;
+			if (DEB_COUNTER)
+				printf(GRN"|%s|\n"RESET, s);
+		}
+//		s++;
 		if (*s == '>' && *(s + 1) == '>')
 			s += 2;
 		if(*s =='>' || *s == '<')

@@ -50,6 +50,7 @@ add_executable(minishell
         srcs/new_parser/double_redirect.c
         srcs/new_parser/termcap/termcap.c
         srcs/new_parser/do_quotes.c
+        srcs/new_parser/double_quotes.c
         )
 
 add_executable(executor_tests
@@ -89,6 +90,7 @@ add_executable(executor_tests
         srcs/new_parser/double_redirect.c
         srcs/new_parser/termcap/termcap.c
         srcs/new_parser/do_quotes.c
+        srcs/new_parser/double_quotes.c
         )
 
 target_link_libraries(minishell LINK_PUBLIC
