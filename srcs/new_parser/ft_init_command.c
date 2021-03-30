@@ -73,6 +73,7 @@ void ft_init_simple_commands(t_common *common, char *line, int current_simple_co
 	int arg_count;
 
 	arg_count = ft_arg_counter(line);
+//	arg_count -= ft_quotes_counter(common, line);
 	if (DEBUG)
 		printf("ft_init_simple_command: arg_count->%d\n", arg_count);
 	common->command.simple_commands[current_simple_command] = ft_calloc(sizeof(t_simple_command) , 1);

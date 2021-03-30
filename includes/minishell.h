@@ -25,8 +25,10 @@
 # define DEBUG_ARG 			0
 # define DEBUG_INFILE 		0
 # define DEBUG_OUTFILE 		0
-# define FINAL_PRINT 		0
 # define DOUBLE_REDIR   	0
+#define 	DEB_COUNTER		1
+# define DEB_QOUTES			1
+# define FINAL_PRINT 		1
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"
@@ -133,8 +135,12 @@ int					do_reverse_redirect(t_common *common, char *line);
 int					do_r_redirect(t_common *common, char *line);
 void				ft_init_infiles(t_common *common, char *line, int current_command);
 int					ft_double_redir(t_common *common, char *line);
-void ft_init_outfiles_can(t_common *common, char *line, int current_command);
-int ft_double_redir_counter(char *line);
+void 				ft_init_outfiles_can(t_common *common, char *line, int current_command);
+int 				ft_double_redir_counter(char *line);
+int 				do_quotes(t_common *common, char *line);
+int 				len_for_calloc(char *line, t_common *common, int increment, char *spec);
+int					do_arg(t_common *common, char *line, int len_for_calloc, int increment);
+int					ft_quotes_counter(t_common *common, char *line);
 /*
 ** executor
 */

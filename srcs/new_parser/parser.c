@@ -35,8 +35,9 @@ void ft_print_common(t_common *common, int flag)
 	while(common->command.simple_commands[i] && i < common->command.num_of_simple_commands)
 	{
 		j = 0;
-		printf(GRN"simple_comand [%d]\n"RESET, i);
-		printf(BLU"num_of_outfiles:%d\n"RESET, common->command.simple_commands[i]->num_of_outfiles);
+//		printf(GRN"simple_comand [%d]\n"RESET, i);
+		if (common->command.simple_commands[i]->num_of_outfiles)
+			printf(BLU"num_of_outfiles:%d\n"RESET, common->command.simple_commands[i]->num_of_outfiles);
 		while(common->command.simple_commands[i]->outfile[j] && j < common->command.simple_commands[i]->num_of_outfiles)
 		{
 			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->outfile[j]);
@@ -54,8 +55,9 @@ void ft_print_common(t_common *common, int flag)
 	while(common->command.simple_commands[i] && i < common->command.num_of_simple_commands)
 	{
 		j = 0;
-		printf(GRN"simple_comand [%d]\n"RESET, i);
-		printf(BLU"num_of_infiles:%d\n"RESET, common->command.simple_commands[i]->num_of_infiles);
+//		printf(GRN"simple_comand [%d]\n"RESET, i);
+		if (common->command.simple_commands[i]->num_of_infiles)
+			printf(BLU"num_of_infiles:%d\n"RESET, common->command.simple_commands[i]->num_of_infiles);
 		while(common->command.simple_commands[i]->infile[j] && j < common->command.simple_commands[i]->num_of_infiles)
 		{
 			printf(YEL"sc[%d] infile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->infile[j]);
@@ -71,8 +73,9 @@ void ft_print_common(t_common *common, int flag)
 	while(common->command.simple_commands[i] && i < common->command.num_of_simple_commands)
 	{
 		j = 0;
-		printf(GRN"simple_comand [%d]\n"RESET, i);
-		printf(BLU"num_of_outfiles_can:%d\n"RESET, common->command.simple_commands[i]->num_of_outfiles_can);
+//		printf(GRN"simple_comand [%d]\n"RESET, i);
+		if (common->command.simple_commands[i]->num_of_outfiles_can)
+			printf(BLU"num_of_outfiles_can:%d\n"RESET, common->command.simple_commands[i]->num_of_outfiles_can);
 		while(common->command.simple_commands[i]->outfile_can[j] && j < common->command.simple_commands[i]->num_of_outfiles_can)
 		{
 			printf(BLU"sc[%d] infile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->outfile_can[j]);

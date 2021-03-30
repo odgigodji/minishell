@@ -6,7 +6,7 @@ int len_for_calloc(char *line, t_common *common, int increment, char *spec)
 	int i;
 
 	i = increment;
-	if (DEBUG_ARG)
+	if (DEBUG_ARG || DEB_QOUTES)
 		printf("|%s|\n", line + i);
 	len_for_calloc = 0;
 	while(!ft_strchr(spec, line[i]))

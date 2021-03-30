@@ -1,5 +1,26 @@
 #include "minishell.h"
 
+int ft_quotes_counter(t_common *common, char *line)
+{
+	int i;
+	int count;
+
+	count = 0;
+	i = 0;
+	while(line[i])
+	{
+		if (line[i] == '\'')
+		{
+			count++;
+//			common->command.simple_commands[common->command.current_simple_command]->arg_count--;
+			while(line[i] != '\'')
+				i++;
+		}
+		i++;
+	}
+	return (count);
+}
+
 int ft_simple_command_counter(char *line) //fixme need upgrade
 {
 	int counter;
@@ -16,28 +37,29 @@ int ft_simple_command_counter(char *line) //fixme need upgrade
 
 int	ft_arg_counter(char *s)																//fixme если разделитель tab
 {
-//	printf(BG_WHT"string in ft_arg_counter +%s+\n"RESET, s);
+	if (DEB_COUNTER)
+	printf(BG_WHT"string in ft_arg_counter +%s+\n"RESET, s);
 	int c;
 	int		count;
 	int 	quote_t;
+	int flag = 0;
 //	char separator[] = " \t";
-	char spec[] = "'|\"$;"; // добавил спец символы иду по строке пока невстречаю один из них
+	char spec[] = "|\"$;"; // добавил спец символы иду по строке пока невстречаю один из них
 
 	c = ' ';
 	count = 0;
 	while ((*s && !ft_strchr(spec, *s)))// || (*s == c && *s + 1 == '|'))
 	{
-//		if ((*s == '"' || *s == '\''))// && *(s - 1) != '\\')
-//		{
-//			count++;
-//			quote_t = *s;
-//			s++;
-//			while(*s != quote_t)
-//			{
-//				s++;
-//			}
-//			s++;
-//		}
+		if (*s == '\'' && !flag)
+		{
+			count++;
+			s++;
+			while(*s != '\'')
+				s++;
+			s++;
+			if (DEB_COUNTER)
+				printf(GRN"|%s|\n"RESET, s);
+		}
 		if (*s == '>' && *(s + 1) == '>')
 			s += 2;
 		if(*s =='>' || *s == '<')
@@ -50,6 +72,8 @@ int	ft_arg_counter(char *s)																//fixme если разделител
 			count++;
 		s++;
 	}
+	if (DEB_COUNTER)
+		printf("COUNT %d\n", count);
 	return (count);
 }
 
