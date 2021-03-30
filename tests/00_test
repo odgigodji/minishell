@@ -56,6 +56,9 @@ echo 'hello my dear friend' 1 2
 ---------------------------------double_quotes----------------------------------
 echo "hello my dear friend" 1 2
 
+----------------------------------dolllar---------------------------------------
+echo hello $PATH
+
 echo kitty | cat -e
 echo hello|echo 123
 

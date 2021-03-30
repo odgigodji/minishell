@@ -13,6 +13,8 @@ int do_all_spec(t_common *common, char *line, char current_char, int increment)
 		increment += do_quotes(common, line);
 	if (current_char == '\"')
 		increment += ft_double_quotes(common, line);
+	if (current_char == '$')
+		increment += ft_do_dollar(common, line);
 	increment++; //переходим на следующий элемент
 	return (increment);
 }

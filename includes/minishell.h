@@ -22,12 +22,12 @@
 # define MAX_PATH 4096
 # define MAX_NAME 255
 # define DEBUG 				0//0 if debug off ; 1 is on
-# define DEBUG_ARG 			1
+# define DEBUG_ARG 			0
 # define DEBUG_INFILE 		0
 # define DEBUG_OUTFILE 		0
 # define DOUBLE_REDIR   	0
-#define DEB_COUNTER			1
-# define DEB_QOUTES			1
+#define DEB_COUNTER			0
+# define DEB_QOUTES			0
 # define FINAL_PRINT 		1
 
 #define RED   "\x1B[31m"
@@ -142,6 +142,7 @@ int 				len_for_calloc(char *line, t_common *common, int increment, char *spec);
 int					do_arg(t_common *common, char *line, int len_for_calloc, int increment);
 int					ft_quotes_counter(t_common *common, char *line);
 int					ft_double_quotes(t_common *common, char *line);
+int 				ft_do_dollar(t_common *common, char *line);
 /*
 ** executor
 */
