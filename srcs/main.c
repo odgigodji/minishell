@@ -12,7 +12,7 @@ void ft_do_command(t_common *common)
 //		get_next_line(0, &line);
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
-//	t_term_to_cannon(termcap);
+	t_term_to_cannon(common->termcap);
 	line += ft_parser(common, line); // смещаем line на расстояние до точки с запятой
 //		 ft_shift_line_beyond_semicolon(line) + 1;
 

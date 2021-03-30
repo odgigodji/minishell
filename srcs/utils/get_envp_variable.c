@@ -88,7 +88,7 @@ char	***get_envp(char **envp)
 		result[count] = get_key_and_value(envp[count]);
 		if (!ft_strncmp(result[count][0], "SHLVL", 6))
 		{
-//			result[count]
+			result[count][1] = ft_itoa(ft_atoi(result[count][1]) + 1);
 		}
 		count++;
 	}
