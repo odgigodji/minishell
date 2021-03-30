@@ -71,7 +71,11 @@ void	execute_command(t_common *common, char **envp)
 		dup2(pipe_variables.fdout, STDOUT_FILENO);
 		close(pipe_variables.fdout);
 		signal(SIGINT, signal_handler_command);
-		if (0 == (ret = fork()))							// Create child process
+		if (is_buildin(common->command.simple_commands[command_table_count]))
+		{
+			execute_simple_command_buildin(common, common->command.simple_commands[command_table_count]);
+		}
+		else if (0 == (ret = fork()))							// Create child process
 		{
 			execute_simple_command(common, common->command.simple_commands[command_table_count]);
 		}
