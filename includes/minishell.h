@@ -29,7 +29,7 @@
 #define DEB_COUNTER			0
 # define DEB_QOUTES			0
 # define DEB_DOLLAR			1
-# define FINAL_PRINT 		0
+# define FINAL_PRINT 		1
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"
@@ -144,6 +144,7 @@ int					do_arg(t_common *common, char *line, int len_for_calloc, int increment);
 int					ft_quotes_counter(t_common *common, char *line);
 int					ft_double_quotes(t_common *common, char *line);
 int 				ft_do_dollar(t_common *common, char *line);
+void				ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc);
 /*
 ** executor
 */
