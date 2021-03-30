@@ -28,7 +28,8 @@
 # define DOUBLE_REDIR   	0
 #define DEB_COUNTER			0
 # define DEB_QOUTES			0
-# define FINAL_PRINT 		1
+# define DEB_DOLLAR			1
+# define FINAL_PRINT 		0
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"
