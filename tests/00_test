@@ -57,7 +57,9 @@ echo 'hello my dear friend' 1 2
 echo "hello my dear friend" 1 2
 
 ----------------------------------dolllar---------------------------------------
-echo hello $PATH
+echo hello $PATH 1 2 3
+echo hello $bullshit 1 2 3
+echo hello $PATH$SHELL 1 2 3
 
 echo kitty | cat -e
 echo hello|echo 123
