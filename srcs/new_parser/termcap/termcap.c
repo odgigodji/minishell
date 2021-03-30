@@ -105,6 +105,7 @@ t_termcap	*t_termcap_init(void)
 	result->history = calloc(result->history_len, sizeof(char *));
 	result->history[0] = calloc(2048, sizeof(char));
 	result->history_count = 0;
+	result->term_name = strdup("xterm-256color");
 	tgetent(0, result->term_name);
 	result->cursor = 0;
 	return (result);
@@ -204,12 +205,13 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 	str[0] = '\0';
 	termcap->history[termcap->history_count] = calloc(2048, sizeof(char));
 	tputs(save_cursor, 1, ft_putchar_term);
-	while (strcmp(str, "\4"))			// 004 eot
+//	while (strcmp(str, "\4"))			// 004 eot
+	while (str[0] != '\n')			// 004 eot
 	{
 		if (0 >= (l = read(0, str, 100)))
 			return (l);
 		str[l] = '\0';
-		if (0 == l || !t_string_handle(termcap, str, l) || !strcmp(str, "\n"))
+		if (0 == l || !t_string_handle(termcap, str, l))  // || !strcmp(str, "\n")
 			break ;
 	}
 	termcap->cursor = 0;

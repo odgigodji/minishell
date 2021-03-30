@@ -17,10 +17,10 @@ int		is_buildin(t_simple_command *simple_command)
 	list[4] = "export";
 	list[5] = "unset";
 	list[6] = "exit";
+	list[6] = NULL;
 	count = 0;
 	while (list[count])
 	{
-
 		if (!strncmp(list[count], simple_command->arguments[0], 100))
 			return (1);
 		count++;
@@ -50,25 +50,27 @@ void	execute_simple_command_buildin(t_common *common, t_simple_command *simple_c
 void	execute_simple_command(t_common *common, t_simple_command *simple_command)
 {
 	char	**path;
+	char	**temp_envp;
 	int 	count;
 	char	command[MAX_PATH];
 
 	if (is_buildin(simple_command))
 	{
 		execute_simple_command_buildin(common, simple_command);
-		return ;
+		exit(0);
 	}
-	printf("");
+//	printf("");
+	temp_envp = make_envp(common);
 	path = split_path(common->env_variables);
 	count = 0;
 	command[0] = '\0';
-	execve(simple_command->arguments[0], simple_command->arguments, make_envp(common));
+	execve(simple_command->arguments[0], simple_command->arguments, temp_envp);
 	while (path[count])
 	{
 		ft_strlcat(command, path[count], MAX_PATH);
 		ft_strlcat(command, "/", MAX_PATH);
 		ft_strlcat(command, simple_command->arguments[0], MAX_PATH);
-		execve(command, simple_command->arguments, make_envp(common));
+		execve(command, simple_command->arguments, temp_envp);
 		count++;
 		command[0] = '\0';
 	}

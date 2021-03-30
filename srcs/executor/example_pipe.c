@@ -11,14 +11,14 @@ typedef struct			s_pipe
 	int fdpipe[2];
 }						t_pipe;
 
-void	pipe_init(t_pipe *pipe_variables, t_common *common)
+void	pipe_init(t_pipe *pipe_variables, t_simple_command *command)
 {
-	pipe_variables->tmpin = dup(STDIN_FILENO);		//	save in
-	pipe_variables->tmpout = dup(STDOUT_FILENO);	//	save out
+	int	count_in;
 
-	if (NULL != common->command.infile)			//	if (infile)
-		pipe_variables->fdin = open(common->command.infile, O_RDONLY);				//	получаем ввод из файла
-	else											//	set the initial input
+	count_in = 0;
+	if (NULL != command->infile[0])												//	if (infile)
+		pipe_variables->fdin = open(command->infile[count_in], O_RDONLY);				//	получаем ввод из файла
+	else																		//	set the initial input
 		pipe_variables->fdin = dup(pipe_variables->tmpin);	// use default input		//	используем стандартный ввод
 }
 //restore in/out defaults
@@ -41,7 +41,7 @@ void	do_a_pipe(t_pipe *pipe_variables, t_simple_command *command)
 void	last_simple_command_output(t_pipe *pipe_variables, t_common *common)
 {
 	if (NULL != common->command.out_file)	//	if (outfile)
-		pipe_variables->fdout = open(common->command.out_file, O_WRONLY, O_APPEND);
+		pipe_variables->fdout = open(*common->command.out_file, O_WRONLY, O_APPEND);
 	else
 		pipe_variables->fdout = dup(pipe_variables->tmpout);	//	то назначаем stdout (сохранённый ранее), результат вывода будем писать в стандартный вывод
 }
@@ -53,11 +53,16 @@ void	execute_command(t_common *common, char **envp)
 	int		ret;
 	t_pipe	pipe_variables;
 
-	pipe_init(&pipe_variables, common);		// сохраняем stdin/stdout определяем откуда
+	pipe_variables.tmpin = dup(STDIN_FILENO);		//	save in
+	pipe_variables.tmpout = dup(STDOUT_FILENO);		//	save out
 	while (common->command.simple_commands[command_table_count])
 	{
+		pipe_init(&pipe_variables, common->command.simple_commands[command_table_count]);		// сохраняем stdin/stdout определяем откуда
 		dup2(pipe_variables.fdin, STDIN_FILENO);			// подменяем stdin (fd = 0) на ранее созданный fdin
 		close(pipe_variables.fdin);
+//		printf("[%d][%d]\n", pipe_variables.fdin, pipe_variables.fdout);
+//		printf("[%d][%d]\n", pipe_variables.tmpin, pipe_variables.tmpout);
+//		printf("[%d][%d]\n", pipe_variables.fdpipe[0], pipe_variables.fdpipe[1]);
 		if (command_table_count == command_table_len - 1)	//	если это последняя simple_command
 			last_simple_command_output(&pipe_variables, common);
 		else												//	иначе // not last simple command
@@ -75,6 +80,12 @@ void	execute_command(t_common *common, char **envp)
 	}
 	restore_default_in_out_puts(&pipe_variables);
 }
+
+//void	execute_command(t_common *common, char **envp)
+//{
+//	printf("[%s]\n", common->command.simple_commands[0]->arguments[0]);
+//	execute_simple_command(common, common->command.simple_commands[0]);
+//}
 
 //void	execute_command(t_common *common, char **envp)
 //{
