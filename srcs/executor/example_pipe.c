@@ -16,9 +16,9 @@ void	pipe_init(t_pipe *pipe_variables, t_simple_command *command)
 	int	count_in;
 
 	count_in = 0;
-	if (NULL != command->infile[0])												//	if (infile)
-		pipe_variables->fdin = open(command->infile[count_in], O_RDONLY);				//	получаем ввод из файла
-	else																		//	set the initial input
+//	if (NULL != command->infile[0])												//	if (infile)
+//		pipe_variables->fdin = open(command->infile[count_in], O_RDONLY);				//	получаем ввод из файла
+//	else																		//	set the initial input
 		pipe_variables->fdin = dup(pipe_variables->tmpin);	// use default input		//	используем стандартный ввод
 }
 //restore in/out defaults
@@ -40,50 +40,53 @@ void	do_a_pipe(t_pipe *pipe_variables, t_simple_command *command)
 
 void	last_simple_command_output(t_pipe *pipe_variables, t_common *common)
 {
-	if (NULL != common->command.out_file)	//	if (outfile)
-		pipe_variables->fdout = open(*common->command.out_file, O_WRONLY, O_APPEND);
-	else
+//	if (NULL != common->command.out_file)	//	if (outfile)
+//		pipe_variables->fdout = open(*common->command.out_file, O_WRONLY, O_APPEND);
+//	else
 		pipe_variables->fdout = dup(pipe_variables->tmpout);	//	то назначаем stdout (сохранённый ранее), результат вывода будем писать в стандартный вывод
 }
 
-//void	execute_command(t_common *common, char **envp)
-//{
-//	int		command_table_len = common->command.num_of_simple_commands;	//	возможно number_of_available_simple_commands
-//	int		command_table_count = 0;
-//	int		ret;
-//	t_pipe	pipe_variables;
-//
-//	pipe_variables.tmpin = dup(STDIN_FILENO);		//	save in
-//	pipe_variables.tmpout = dup(STDOUT_FILENO);		//	save out
-//	while (common->command.simple_commands[command_table_count])
-//	{
-//		pipe_init(&pipe_variables, common->command.simple_commands[command_table_count]);		// сохраняем stdin/stdout определяем откуда
-//		dup2(pipe_variables.fdin, STDIN_FILENO);			// подменяем stdin (fd = 0) на ранее созданный fdin
-//		close(pipe_variables.fdin);
-////		printf("[%d][%d]\n", pipe_variables.fdin, pipe_variables.fdout);
-////		printf("[%d][%d]\n", pipe_variables.tmpin, pipe_variables.tmpout);
-////		printf("[%d][%d]\n", pipe_variables.fdpipe[0], pipe_variables.fdpipe[1]);
-//		if (command_table_count == command_table_len - 1)	//	если это последняя simple_command
-//			last_simple_command_output(&pipe_variables, common);
-//		else												//	иначе // not last simple command
-//			do_a_pipe(&pipe_variables, common->command.simple_commands[command_table_count]);
-//		//	Redirect output
-//		dup2(pipe_variables.fdout, STDOUT_FILENO);
-//		close(pipe_variables.fdout);
+void	execute_command(t_common *common, char **envp)
+{
+	int		command_table_len = common->command.num_of_simple_commands;	//	возможно number_of_available_simple_commands
+	int		command_table_count = 0;
+	int		ret;
+	t_pipe	pipe_variables;
+
+	pipe_variables.tmpin = dup(STDIN_FILENO);		//	save in
+	pipe_variables.tmpout = dup(STDOUT_FILENO);		//	save out
+
+	pipe_init(&pipe_variables, common->command.simple_commands[command_table_count]);		// сохраняем stdin/stdout определяем откуда
+	while (common->command.simple_commands[command_table_count])
+	{
+		dup2(pipe_variables.fdin, STDIN_FILENO);			// подменяем stdin (fd = 0) на ранее созданный fdin
+		close(pipe_variables.fdin);
+//		printf("[%d][%d]\n", pipe_variables.fdin, pipe_variables.fdout);
+//		printf("[%d][%d]\n", pipe_variables.tmpin, pipe_variables.tmpout);
+//		printf("[%d][%d]\n", pipe_variables.fdpipe[0], pipe_variables.fdpipe[1]);
+		if (command_table_count == command_table_len - 1)	//	если это последняя simple_command
+			last_simple_command_output(&pipe_variables, common);
+		else												//	иначе // not last simple command
+		{
+			do_a_pipe(&pipe_variables, common->command.simple_commands[command_table_count]);
+		}
+		//	Redirect output
+		dup2(pipe_variables.fdout, STDOUT_FILENO);
+		close(pipe_variables.fdout);
 //		signal(SIGINT, signal_handler_command);
-//		if (is_buildin(common->command.simple_commands[command_table_count]))
-//		{
-//			execute_simple_command_buildin(common, common->command.simple_commands[command_table_count]);
-//		}
-//		else if (0 == (ret = fork()))							// Create child process
-//		{
-//			execute_simple_command(common, common->command.simple_commands[command_table_count]);
-//		}
-//		waitpid(ret, NULL, WUNTRACED);
-//		command_table_count++;
-//	}
-//	restore_default_in_out_puts(&pipe_variables);
-//}
+		if (is_buildin(common->command.simple_commands[command_table_count]))
+		{
+			execute_simple_command_buildin(common, common->command.simple_commands[command_table_count]);
+		}
+		else if (0 == (ret = fork()))							// Create child process
+		{
+			execute_simple_command(common, common->command.simple_commands[command_table_count]);
+		}
+		waitpid(ret, NULL, WUNTRACED);
+		command_table_count++;
+	}
+	restore_default_in_out_puts(&pipe_variables);
+}
 
 //void	execute_command(t_common *common, char **envp)
 //{
@@ -91,7 +94,7 @@ void	last_simple_command_output(t_pipe *pipe_variables, t_common *common)
 //	execute_simple_command(common, common->command.simple_commands[0]);
 //}
 
-void	execute_command(t_common *common, char **envp)
+void	execute_command2(t_common *common, char **envp)
 {
 	int		command_table_len = common->command.num_of_simple_commands;	//	возможно number_of_available_simple_commands
 	int		command_table_count = 0;
@@ -100,7 +103,7 @@ void	execute_command(t_common *common, char **envp)
 	t_pipe	pipe_variables;
 
 	pipe_variables.tmpin = dup(STDIN_FILENO);		//	save in
-	pipe_variables.tmpout = dup(STDOUT_FILENO);	//	save out
+	pipe_variables.tmpout = dup(STDOUT_FILENO);		//	save out
 
 //	if (NULL != common->command.input_file)	//	if (infile)
 //		pipe_variables.fdin = open(common->command.input_file, O_RDONLY);				//	получаем ввод из файла
@@ -108,7 +111,7 @@ void	execute_command(t_common *common, char **envp)
 		pipe_variables.fdin = dup(pipe_variables.tmpin);	// use default input	//	используем стандартный ввод
 
 
-	while (common->command.simple_commands[0]->arguments[command_table_count])
+	while (common->command.simple_commands[command_table_count])
 	{
 		//	redirect input
 		dup2(pipe_variables.fdin, STDIN_FILENO);		// подменяем stdin (fd = 0) на ранее созданный fdin
@@ -141,8 +144,7 @@ void	execute_command(t_common *common, char **envp)
 		close(pipe_variables.fdout);
 
 		// Create child process
-		ret = fork();
-		if (ret == 0)
+		if (0 == (ret = fork()))
 		{
 			execute_simple_command(common, common->command.simple_commands[command_table_count]);
 //			char	**path = split_path(common->env_variables);
