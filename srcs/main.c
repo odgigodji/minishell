@@ -4,14 +4,12 @@ void ft_do_command(t_common *common)
 {
 	int i = 0;
 	static char *line;
-	t_termcap	*termcap;
 
-	termcap = t_termcap_init();
 	if (line == NULL || *line == '\0')
 	{
 		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
-//		t_get_next_line(&line, termcap);
-		get_next_line(0, &line);
+		t_get_next_line(&line, common->termcap);
+//		get_next_line(0, &line);
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 //	t_term_to_cannon(termcap);

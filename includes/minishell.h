@@ -84,13 +84,6 @@ typedef struct			s_command
 	int 				background;// ?
 }						t_command;
 
-typedef struct			s_common
-{
-	t_command			command;
-	char 				**env_variables;		// не нужно удалять используется в функции execve() для исполнения команд
-	char 				***env_variables_list;
-}						t_common;
-
 typedef struct	s_termcap
 {
 	struct termios	term;
@@ -104,6 +97,14 @@ typedef struct	s_termcap
 	int				cursor;
 	struct winsize	win;
 }				t_termcap;
+
+typedef struct			s_common
+{
+	t_command			command;
+	char 				**env_variables;		// не нужно удалять используется в функции execve() для исполнения команд
+	char 				***env_variables_list;
+	t_termcap			*termcap;
+}						t_common;
 
 //временные функции
 void ft_printf_outfile_info(t_common *common);
