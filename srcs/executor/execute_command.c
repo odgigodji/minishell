@@ -17,7 +17,7 @@ int		is_buildin(t_simple_command *simple_command)
 	list[4] = "export";
 	list[5] = "unset";
 	list[6] = "exit";
-	list[6] = NULL;
+	list[7] = NULL;
 	count = 0;
 	while (list[count])
 	{
