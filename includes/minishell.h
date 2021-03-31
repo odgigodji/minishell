@@ -72,6 +72,7 @@ typedef struct			s_simple_command
 	int 				num_of_outfiles_can;
 	char				**outfile_can; // путь к файлу для записи в него результата (редирект ">>")
 	int 				current_outfile_can;
+	int					is_cat;
 }						t_simple_command;
 
 /*
@@ -96,16 +97,16 @@ typedef struct			s_command
 
 typedef struct	s_termcap
 {
-	struct termios	term;
-	char			*term_name;
-	char			*temp;
+	struct termios		term;
+	char				*term_name;
+	char				*temp;
 
-	char			**history;
-	int				history_count;
-	int				history_len;
+	char				**history;
+	int					history_count;
+	int					history_len;
 
-	int				cursor;
-	struct winsize	win;
+	int					cursor;
+	struct winsize		win;
 }				t_termcap;
 
 typedef struct			s_common
