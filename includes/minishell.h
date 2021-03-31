@@ -116,6 +116,22 @@ typedef struct			s_common
 	t_termcap			*termcap;
 }						t_common;
 
+//dup2(pipe_variables.tmpin, STDIN_FILENO);
+//dup2(pipe_variables.tmpout, STDOUT_FILENO);
+//close(pipe_variables.tmpin);
+//close(pipe_variables.tmpout);
+
+typedef struct			s_pipe
+{
+	int tmpin;
+	int tmpout;
+
+	int	fdin;
+	int	fdout;
+
+	int fdpipe[2];
+}						t_pipe;
+
 //временные функции
 void ft_printf_outfile_info(t_common *common);
 
@@ -205,6 +221,9 @@ void				free_arg_list(char ****arg_list);
 char				**get_key_and_value(char *envp_line);
 int					args_list_len(char	***arg_list);
 char				**make_envp(t_common *common);
+
+int					simple_command_open_file(char *file, int is_read, int is_cat);
+int					simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_read, int is_cat);
 
 /*
 ** buildins

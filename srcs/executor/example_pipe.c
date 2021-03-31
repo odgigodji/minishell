@@ -172,7 +172,7 @@ void	execute_command1(t_common *common, char **envp)
 		if (NULL == common->command.simple_commands[command_table_count + 1])
 		{
 			pipe_variables.fdout = simple_command_in_out_fd(command->outfile, &pipe_variables, IS_WRITE, command->is_cat);		// if fd = -1 continue;
-			pipe_variables.fdin = simple_command_in_out_fd(command->infile, &pipe_variables, IS_READ, command->is_cat);		// if fd = -1 continue;
+			pipe_variables.fdin = simple_command_in_out_fd(command->infile, &pipe_variables, IS_READ, command->is_cat);			// if fd = -1 continue;
 		}
 		else
 		{
