@@ -33,7 +33,7 @@ int		simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_
 		{
 			if (-1 == (fd = simple_command_open_file(files_list[count], is_read, is_cat)))
 			{
-				return (1);
+				return (fd);
 			}
 			if (is_read)
 				pipe_variables->fdin = fd;
@@ -43,7 +43,7 @@ int		simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_
 			if (NULL != files_list[count])
 				close(fd);
 		}
-		return (0);
+		return (fd);
 	}
 	else
 	{
@@ -51,11 +51,12 @@ int		simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_
 		{
 //		pipe_variables->fdin = dup(pipe_variables->tmpin); // сработает только для первой?
 			pipe_variables->fdin = dup(pipe_variables->fdpipe[0]); // сработает только для первой?
+			return (pipe_variables->fdin);
 		}
 		else
 		{
 			pipe_variables->fdout = dup(pipe_variables->fdpipe[1]);
+			return (pipe_variables->fdout);
 		}
-		return (0);
 	}
 }

@@ -1,12 +1,12 @@
-total 40
--rw-r--r--   1 namerei  student   753 Feb 25 14:28 CMakeLists.txt
--rw-r--r--   1 namerei  student  1126 Feb 24 17:57 Makefile
-drwxr-xr-x  10 namerei  student   340 Feb 25 14:28 cmake-build-debug
--rwxr-xr-x   1 namerei  student  9244 Feb 24 17:57 example_pipe
--rw-r--r--   1 namerei  student     0 Feb 25 15:02 file
-drwxr-xr-x   4 namerei  student   136 Feb 25 14:28 includes
-drwxr-xr-x  98 namerei  student  3332 Feb 18 17:10 libft
-drwxr-xr-x   8 namerei  student   272 Feb 25 14:29 srcs
--rw-r--r--   1 namerei  student     0 Feb 25 15:02 test
--rw-r--r--   1 namerei  student     0 Feb 25 15:02 test2
-drwxr-xr-x   3 namerei  student   102 Feb 25 14:28 tests
+total 56
+-rw-r--r--   1 mscot  student   3445 Mar 31 10:57 CMakeLists.txt
+-rw-r--r--@  1 mscot  student   1126 Feb 24 10:34 Makefile
+drwxr-xr-x   3 mscot  student    102 Mar 10 13:47 _void
+drwxr-xr-x   9 mscot  student    306 Mar 31 14:39 cmake-build-debug
+-rw-r--r--   1 mscot  student      0 Mar 31 14:40 file
+drwxr-xr-x   3 mscot  student    102 Mar 31 14:13 includes
+-rw-r--r--   1 mscot  student   1702 Mar  8 17:21 info
+drwxr-xr-x  93 mscot  student   3162 Feb 18 11:02 libft
+-rwxr-xr-x   1 mscot  student  14100 Feb 24 18:54 minishell
+drwxr-xr-x  10 mscot  student    340 Mar 30 14:37 srcs
+drwxr-xr-x   3 mscot  student    102 Mar 31 14:13 tests

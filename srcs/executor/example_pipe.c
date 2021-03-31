@@ -183,11 +183,15 @@ void	execute_processor(t_common *common)
 	command_table_count = 0;
 	while (common->command.simple_commands[command_table_count])
 	{
-		dup2(pipe_variables.fdin, STDIN_FILENO);		//	Redirect input // подменяем stdin (fd = 0) на ранее созданный fdin
+		dup2(pipe_variables.fdin,
+			 STDIN_FILENO);        //	Redirect input // подменяем stdin (fd = 0) на ранее созданный fdin
 		close(pipe_variables.fdin);
 		command = common->command.simple_commands[command_table_count];
 		if (NULL == common->command.simple_commands[command_table_count + 1]) // если последняя комманда
-			pipe_variables.fdout = simple_command_in_out_fd(command->outfile, &pipe_variables, IS_WRITE, command->is_cat);		// if fd = -1 continue;
+		{
+			pipe_variables.fdout = simple_command_in_out_fd(command->outfile, &pipe_variables, IS_WRITE,
+															command->is_cat);        // if fd = -1 continue;
+		}
 		else
 		{
 			pipe(pipe_variables.fdpipe);
