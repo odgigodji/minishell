@@ -8,11 +8,11 @@ void ft_do_command(t_common *common)
 	if (line == NULL || *line == '\0')
 	{
 		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
-		t_get_next_line(&line, common->termcap);
-//		get_next_line(0, &line);
+//		t_get_next_line(&line, common->termcap);
+		get_next_line(0, &line);
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
-	t_term_to_cannon(common->termcap);
+//	t_term_to_cannon(common->termcap);
 	line += ft_parser(common, line); // смещаем line на расстояние до точки с запятой
 //		 ft_shift_line_beyond_semicolon(line) + 1;
 

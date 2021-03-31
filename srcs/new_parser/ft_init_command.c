@@ -79,6 +79,7 @@ void ft_init_simple_commands(t_common *common, char *line, int current_simple_co
 	common->command.simple_commands[current_simple_command]->arguments = ft_calloc(sizeof(char *),arg_count + 10);
 	common->command.simple_commands[current_simple_command]->current_arg = 0;
 	common->command.simple_commands[current_simple_command]->arg_count = arg_count;
+	common->command.simple_commands[current_simple_command]->is_cat = 0;
 //	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; ne raskoment
 }
 
@@ -111,4 +112,5 @@ void	ft_init_current_command(t_common *common, char *line)
 	ft_init_infiles(common, line, current_simple_command);
 	ft_init_outfiles_can(common, line, current_simple_command);
 //	printf("ft_init_current_command_3:|%s|\n", line);
+
 }

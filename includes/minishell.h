@@ -25,18 +25,25 @@
 # define DEBUG_ARG 			0
 # define DEBUG_INFILE 		0
 # define DEBUG_OUTFILE 		0
-# define FINAL_PRINT 		0
+# define FINAL_PRINT 		1
 # define DOUBLE_REDIR   	0
 
-#define RED   "\x1B[31m"
-#define GRN   "\x1B[32m"
-#define YEL   "\x1B[33m"
-#define BLU   "\x1B[34m"
-#define MAG   "\x1B[35m" //violet
-#define CYN   "\x1B[36m"
-#define WHT   "\x1B[37m"
-#define BG_WHT	  "\x1B[47m" //для выделения серым
-#define RESET "\x1B[0m"
+# define RED   "\x1B[31m"
+# define GRN   "\x1B[32m"
+# define YEL   "\x1B[33m"
+# define BLU   "\x1B[34m"
+# define MAG   "\x1B[35m" //violet
+# define CYN   "\x1B[36m"
+# define WHT   "\x1B[37m"
+# define BG_WHT	  "\x1B[47m" //для выделения серым
+# define RESET "\x1B[0m"
+
+# define SHELL_NAME "minishell"
+
+# define IS_READ 1
+# define IS_WRITE 0
+# define IS_CAT 1
+# define IS_NOT_CAT 0
 
 /*
 **	Command Data structure
@@ -62,6 +69,7 @@ typedef struct			s_simple_command
 	int 				num_of_outfiles_can;
 	char				**outfile_can; // путь к файлу для записи в него результата (редирект ">>")
 	int 				current_outfile_can;
+	int					is_cat;
 }						t_simple_command;
 
 /*
@@ -105,6 +113,17 @@ typedef struct			s_common
 	char 				***env_variables_list;
 	t_termcap			*termcap;
 }						t_common;
+
+typedef struct			s_pipe
+{
+	int					tmpin;
+	int					tmpout;
+
+	int 				fdin;
+	int 				fdout;
+
+	int 				fdpipe[2];
+}						t_pipe;
 
 //временные функции
 void ft_printf_outfile_info(t_common *common);
@@ -188,6 +207,9 @@ void				free_arg_list(char ****arg_list);
 char				**get_key_and_value(char *envp_line);
 int					args_list_len(char	***arg_list);
 char				**make_envp(t_common *common);
+
+int					simple_command_open_file(char *file, int is_read, int is_cat);
+int					simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_read, int is_cat);
 
 /*
 ** buildins
