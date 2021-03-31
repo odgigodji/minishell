@@ -29,7 +29,7 @@ void ft_do_command(t_common *common)
 
 void	minishell_loop(char **envp)
 {
-	t_common	common;
+	t_common	*common;
 	int			i;
 
 	i = 0;
@@ -39,7 +39,7 @@ void	minishell_loop(char **envp)
 	while (1)
 	{
 //		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
-		ft_do_command(&common);
+		ft_do_command(common);
 	}
 }
 

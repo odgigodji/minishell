@@ -27,7 +27,7 @@ int		simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_
 	int	fd;
 
 	count = 0;
-	if (NULL != files_list[0])
+	if (NULL != files_list && NULL != files_list[0])
 	{
 		while (files_list[count])
 		{

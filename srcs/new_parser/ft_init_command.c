@@ -76,11 +76,14 @@ void ft_init_simple_commands(t_common *common, char *line, int current_simple_co
 //	arg_count -= ft_quotes_counter(common, line);
 	if (DEBUG)
 		printf("ft_init_simple_command: arg_count->%d\n", arg_count);
-	common->command.simple_commands[current_simple_command] = ft_calloc(sizeof(t_simple_command) , 1);
-	common->command.simple_commands[current_simple_command]->arguments = ft_calloc(sizeof(char *),arg_count + 10);
+	common->command.simple_commands[current_simple_command] = ft_calloc(sizeof(t_simple_command), 1);
+	common->command.simple_commands[current_simple_command]->arguments = ft_calloc(sizeof(char *),arg_count + 1);
 	common->command.simple_commands[current_simple_command]->current_arg = 0;
 	common->command.simple_commands[current_simple_command]->arg_count = arg_count;
 	common->command.simple_commands[current_simple_command]->is_cat = 0;
+	common->command.simple_commands[current_simple_command]->infile = NULL;
+	common->command.simple_commands[current_simple_command]->outfile = NULL;
+	common->command.simple_commands[current_simple_command]->outfile_can = NULL;
 //	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; ne raskoment
 }
 
@@ -100,13 +103,12 @@ void	ft_init_current_command(t_common *common, char *line)
 //	printf("ft_init_current_command_0:|%s|\n", line);
 	current_simple_command = common->command.current_simple_command;
 	common->command.num_of_simple_commands = ft_simple_command_counter(line); //fixme
-	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *),\
-	common->command.num_of_simple_commands + 1);// fixme
+	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *),common->command.num_of_simple_commands + 1);// fixme
 	ft_init_simple_commands(common, line, current_simple_command);
 //	printf("ft_init_current_command_2:|%s|\n", line);
 //	printf(BLU"arg_count for 0 simple command is %d\n"RESET, common->command.simple_commands[current_command]->arg_count);
 //	printf(GRN"----------------command.num_of_simple_commands is %d------------------\n"RESET, common->command.num_of_simple_commands);
-	common->command.simple_commands[common->command.num_of_simple_commands] = NULL;
+//	common->command.simple_commands[common->command.num_of_simple_commands] = NULL;
 	common->command.current_simple_command = 0;
 	common->command.space_after_redirect = 0;
 	ft_init_outfiles(common, line, current_simple_command);

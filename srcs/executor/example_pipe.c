@@ -10,7 +10,7 @@ void	pipe_init(t_pipe *pipe_variables, t_simple_command *command)
 		pipe_variables->fdin = dup(pipe_variables->tmpin);	// use default input		//	используем стандартный ввод
 //		pipe_variables->fdin = pipe_variables->fdpipe[0];		//	read fd назначаем на in
 //	else
-	if (NULL != command->infile[0])
+	if (NULL != command->infile && NULL != command->infile[0])
 		while (command->infile[count])
 		{
 			if (-1 == (fd = open(command->infile[count], O_RDONLY)))
@@ -42,7 +42,7 @@ int	do_a_pipe(t_pipe *pipe_variables, t_simple_command *command)
 
 	// create pipe
 	pipe(pipe_variables->fdpipe);							//	создаём pipe
-	if (NULL == command->outfile[0])
+	if (NULL == command->outfile && NULL == command->outfile[0])
 	{
 		pipe_variables->fdout = pipe_variables->fdpipe[1];        //	write fd назначаем на out
 		return (pipe_variables->fdpipe[1]);
@@ -147,12 +147,12 @@ void	last_simple_command_output(t_pipe *pipe_variables, t_simple_command *comman
 //	restore_default_in_out_puts(&pipe_variables);
 //}
 
-int		execute_fork(t_common *common, t_simple_command *simple_command)
-{}
+//int		execute_fork(t_common *common, t_simple_command *simple_command)
+//{}
 
 t_pipe	pipe_variables_init(void)
 {
-	t_pipe				pipe_variables;
+	t_pipe	pipe_variables;
 
 	pipe_variables.tmpin = dup(STDIN_FILENO);
 	pipe_variables.tmpout = dup(STDOUT_FILENO);
@@ -187,10 +187,10 @@ void	execute_processor(t_common *common)
 			 STDIN_FILENO);        //	Redirect input // подменяем stdin (fd = 0) на ранее созданный fdin
 		close(pipe_variables.fdin);
 		command = common->command.simple_commands[command_table_count];
-		if (NULL == common->command.simple_commands[command_table_count + 1]) // если последняя комманда
+		if (NULL == common->command.simple_commands[command_table_count + 1])		// если последняя комманда
 		{
 			pipe_variables.fdout = simple_command_in_out_fd(command->outfile, &pipe_variables, IS_WRITE,
-															command->is_cat);        // if fd = -1 continue;
+															command->is_cat);		// if fd = -1 continue;
 		}
 		else
 		{

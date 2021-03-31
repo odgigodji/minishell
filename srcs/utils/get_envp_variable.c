@@ -81,7 +81,6 @@ char	***get_envp(char **envp)
 	list_length = list_len((const char **)envp);
 	if (NULL == (result = malloc(sizeof(char **) * (list_length + 1))))
 		return (NULL);
-	result[list_length] = NULL;
 	count = 0;
 	while (envp[count])
 	{
@@ -92,6 +91,7 @@ char	***get_envp(char **envp)
 //		}
 		count++;
 	}
+	result[count] = NULL;
 	return (result);
 }
 
@@ -184,7 +184,7 @@ void	free_arg_list(char ****arg_list)
 }
 
 /*
-** выделение копирование с выделением памяти списка char ***
+** копирование с выделением памяти списка char ***
 ** и занесением нового аргумента в список
 ** память выделяется на len + 2 аргументов для нового аргумента
 */

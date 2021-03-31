@@ -23,7 +23,6 @@ add_executable(minishell
         srcs/signals/signals_handler.c
         srcs/get_next_line/get_next_line.c
         srcs/get_next_line/get_next_line_utils.c
-#        srcs/utils/get_next_line.c
         srcs/utils/copy_envp.c
         srcs/utils/split_path.c
         srcs/utils/free_line_list.c

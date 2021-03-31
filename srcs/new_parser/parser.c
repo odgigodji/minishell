@@ -120,7 +120,7 @@ int	ft_parser(t_common *common, char *line)
 
 	if (FINAL_PRINT)
 	{
-		ft_print_common(common, 1);
+//		ft_print_common(common, 1);
 		printf(CYN"-----------------------------------------------------------end of parser----------------------------------------------------\n"RESET);
 	}
 	return (ret);

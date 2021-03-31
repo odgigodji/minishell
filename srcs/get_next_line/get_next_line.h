@@ -12,10 +12,9 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFFER_SIZE 32
+# define BUFFER_SIZE 10000
 # include <stdlib.h>
 # include <unistd.h>
-# include "minishell.h"
 
 int		get_next_line(int fd, char **line);
 char	*ft_strchr(const char *s, int c);

@@ -143,12 +143,12 @@ size_t				ft_strlen_to_char(const char *s, char c);
 //int					make_arg(char *f_line , t_simple_command *sc);
 int 				make_args(char *line, t_common *common, int increment);
 void				ft_init_current_command(t_common *common, char *line);
-int					ft_arg_counter(char *s);
+int					ft_arg_counter(const char *s);
 int 				do_all_spec(t_common *common, char *line, char curent_char, int increment);
-int					ft_redirect_counter(char *line, char redirect_char);
+int					ft_redirect_counter(const char *line, char redirect_char);
 int					do_redirect(t_common *common, char *line);
 void				do_pipe(t_common *common, char *line);
-int					ft_simple_command_counter(char *line);
+int					ft_simple_command_counter(const char *line);
 void				ft_init_simple_commands(t_common *common, char *line, int current_command);
 void				ft_init_outfiles(t_common *common, char *line, int current_command);
 int					do_reverse_redirect(t_common *common, char *line);
@@ -200,8 +200,8 @@ void				ft_free_list(char ***split_list);
 
 void				free_line_list(char **split_list);
 
-t_common			common_init(char **envp);
-t_command			command_init(void);
+t_common			*common_init(char **envp);
+void				command_init(t_common *common);
 t_simple_command	*simple_command_init(
 								char **arguments,
 								int number_of_arguments,

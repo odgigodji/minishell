@@ -1,74 +1,56 @@
 #include "minishell.h"
 
 /*
-typedef struct			s_command
-{
-	int					number_of_available_simple_commands;
-	int 				number_of_simple_commands;
-
-	char				***simple_commands;
-	t_simple_command	**simple_commands_struct;
-
-	char				*out_file;		// путь к файлу для записи в него результата (редирект ">")
-	char 				*input_file;	// путь к файлу для чтения из него ввода (редирект "<")
-	char 				*err_file;		// путь к файлу для записи в него вывода ошибки (редирект >&)
-	int 				background;		// ?
-}						t_command;
-*/
-
-/*
 **	создание пустой структуры t_simple_command
 */
 
-t_simple_command	*simple_command_init(
-		char **arguments,
-		int number_of_arguments,
-		int number_of_available_arguments
-		)
-{
-	t_simple_command	*simple_command;
-
-	simple_command = NULL;
-	if (NULL == (simple_command = malloc(sizeof(t_simple_command))))
-		return (NULL);
-	simple_command->arguments = arguments;
-	simple_command->current_arg = number_of_arguments;
-//	simple_command->number_of_available_arguments = number_of_available_arguments;
-	return (simple_command);
-}
+//t_simple_command	*simple_command_init(
+//		char **arguments,
+//		int number_of_arguments,
+//		int number_of_available_arguments
+//		)
+//{
+//	t_simple_command	*simple_command;
+//
+//	simple_command = NULL;
+//	if (NULL == (simple_command = malloc(sizeof(t_simple_command))))
+//		return (NULL);
+//	simple_command->arguments = arguments;
+//	simple_command->current_arg = number_of_arguments;
+////	simple_command->arg_count = number_of_available_arguments;
+//	return (simple_command);
+//}
 
 /*
 **	создание пустой структуры t_command
 */
 
-t_command	command_init(void)
+void		command_init(t_common *common)
 {
-	t_command	command;
+	common->command.num_of_simple_commands = 0;
 
-	command.num_of_simple_commands = 0;
+	common->command.simple_commands = NULL;
 
-	command.simple_commands = NULL;
+	common->command.out_file = NULL;
+	common->command.infile = NULL;
+	common->command.err_file = NULL;
 
-	command.out_file = NULL;
-	command.infile = NULL;
-	command.err_file = NULL;
-
-	command.background = 0;
-	command.current_simple_command = 0;
-	return (command);
+	common->command.background = 0;
+	common->command.current_simple_command = 0;
 }
 
 /*
 **	создание пустой структуры t_common
 */
 
-t_common	common_init(char **envp)
+t_common	*common_init(char **envp)
 {
-	t_common common;
+	t_common	*common;
 
-	common.env_variables_list = get_envp(envp);		//	разбивает envp на название переменной и значение переменной
-	common.env_variables = make_envp(&common);			//	просто копирует envp
-	common.command = command_init();
-	common.termcap = t_termcap_init();
+	common = malloc(sizeof(t_common));
+	common->env_variables_list = get_envp(envp);		//	разбивает envp на название переменной и значение переменной
+	common->env_variables = envp;			//	просто копирует envp
+	command_init(common);
+	common->termcap = t_termcap_init();
 	return (common);
 }
