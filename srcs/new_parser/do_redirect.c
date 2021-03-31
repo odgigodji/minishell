@@ -69,9 +69,13 @@ int do_redirect(t_common *common, char *line)
 	i = 0;
 	if (line[i + 1] == '>') // double redir
 	{
-		 i += ft_double_redir(common, line + 1);
-		 return (i);
+		common->command.simple_commands[common->command.current_simple_command]->is_cat = 1;
+//		 i += ft_double_redir(common, line + 1);
+//		 return (i);
+		i++;
 	}
+	else
+		common->command.simple_commands[common->command.current_simple_command]->is_cat = 0;
 //	common->command.simple_commands[common->command.current_simple_command]->outfile[0] = "\0";//
 	if (line[i] == '>')
 	{

@@ -66,11 +66,20 @@ int ft_do_dollar(t_common *common, char *line)
 	int ret;
 	char len;
 	char res[50];
-	int i = 0;
+	int i = 1;
+	int j = 0;
 
 	if (DEB_DOLLAR	)
 		printf(GRN"after dollar:|%s|\n"RESET, line + 1);
-
-
+	while(line[i] != ' ' && line[i])
+	{
+		while(line[i] != '$')
+		{
+			res[j] = line[i];
+			j++;
+			i++;
+		}
+	}
+	printf(RED"|%s|\n"RESET, res);
 	return (ft_strlen_to_char(line, ' '));
 }
