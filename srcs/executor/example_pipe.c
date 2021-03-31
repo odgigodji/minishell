@@ -150,43 +150,61 @@ void	last_simple_command_output(t_pipe *pipe_variables, t_simple_command *comman
 int		execute_fork(t_common *common, t_simple_command *simple_command)
 {}
 
-
-
-void	execute_command1(t_common *common, char **envp)
+t_pipe	pipe_variables_init(void)
 {
-	int					ret;
-	int					command_table_count;
 	t_pipe				pipe_variables;
-	t_simple_command	*command;
 
 	pipe_variables.tmpin = dup(STDIN_FILENO);
 	pipe_variables.tmpout = dup(STDOUT_FILENO);
 
 	pipe_variables.fdin = pipe_variables.tmpin;
 	pipe_variables.fdout = pipe_variables.tmpout;
+	pipe_variables.fdpipe[0] = pipe_variables.tmpin;
+	pipe_variables.fdpipe[1] = pipe_variables.tmpout;
+	return (pipe_variables);
+}
 
+void	std_in_out_restore(t_pipe pipe_variables)
+{
+	dup2(pipe_variables.tmpin, STDIN_FILENO);
+	dup2(pipe_variables.tmpout, STDOUT_FILENO);
+	close(pipe_variables.tmpin);
+	close(pipe_variables.tmpout);
+}
+
+void	execute_processor(t_common *common)
+{
+	int					ret;
+	int					command_table_count;
+	t_pipe				pipe_variables;
+	t_simple_command	*command;
+
+	pipe_variables = pipe_variables_init();
 	command_table_count = 0;
 	while (common->command.simple_commands[command_table_count])
 	{
+		dup2(pipe_variables.fdin, STDIN_FILENO);		//	Redirect input // подменяем stdin (fd = 0) на ранее созданный fdin
+		close(pipe_variables.fdin);
 		command = common->command.simple_commands[command_table_count];
-		if (NULL == common->command.simple_commands[command_table_count + 1])
-		{
+		if (NULL == common->command.simple_commands[command_table_count + 1]) // если последняя комманда
 			pipe_variables.fdout = simple_command_in_out_fd(command->outfile, &pipe_variables, IS_WRITE, command->is_cat);		// if fd = -1 continue;
-			pipe_variables.fdin = simple_command_in_out_fd(command->infile, &pipe_variables, IS_READ, command->is_cat);			// if fd = -1 continue;
-		}
 		else
 		{
-
+			pipe(pipe_variables.fdpipe);
+			pipe_variables.fdin = simple_command_in_out_fd(command->infile, &pipe_variables, IS_READ, command->is_cat);
+			pipe_variables.fdout = simple_command_in_out_fd(command->outfile, &pipe_variables, IS_WRITE, command->is_cat);
 		}
+		dup2(pipe_variables.fdout, STDOUT_FILENO);				//	Redirect output
+		close(pipe_variables.fdout);
+		if (is_buildin(common->command.simple_commands[command_table_count]))
+			execute_simple_command_buildin(common, common->command.simple_commands[command_table_count]);
+		else if (0 == (ret = fork()))							// Create child process
+			execute_simple_command(common, common->command.simple_commands[command_table_count]);
+		command_table_count++;
 	}
+	std_in_out_restore(pipe_variables);
+	waitpid(ret, NULL, WUNTRACED);
 }
-
-//if (NULL != command->infile[0])
-//pipe_variables.fdin = simple_command_in_out_fd(
-//		command->infile,
-//		&pipe_variables, IS_READ, IS_NOT_CAT);
-//else
-//pipe_variables.fdin = dup(pipe_variables.tmpin);
 
 //		if (is_buildin(command))
 //				execute_simple_command_buildin(common, command);

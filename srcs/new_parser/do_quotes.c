@@ -16,7 +16,7 @@ void ft_quotes_in_first_arg(t_common *common, char *line)
 			i++;
 		else
 		{
-			res[j] == line[i];
+			res[j] = line[i];
 			j++;
 			i++;
 		}

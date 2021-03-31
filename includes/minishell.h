@@ -117,11 +117,6 @@ typedef struct			s_common
 	t_termcap			*termcap;
 }						t_common;
 
-//dup2(pipe_variables.tmpin, STDIN_FILENO);
-//dup2(pipe_variables.tmpout, STDOUT_FILENO);
-//close(pipe_variables.tmpin);
-//close(pipe_variables.tmpout);
-
 typedef struct			s_pipe
 {
 	int tmpin;
@@ -180,6 +175,7 @@ void				execute_command(t_common *common, char **envp);
 void				execute_simple_command_buildin(t_common *common, t_simple_command *simple_command);
 void				execute_simple_command(t_common *common, t_simple_command *simple_command);
 int					is_buildin(t_simple_command *simple_command);
+void				execute_processor(t_common *common);
 
 /*
  * pre_executor
