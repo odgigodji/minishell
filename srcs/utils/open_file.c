@@ -15,7 +15,7 @@ int		simple_command_open_file(char *file, int is_read, int is_cat)
 	}
 	if (-1 == fd)
 	{
-//		printf("%s: %s: No such file or directory", SHELL_NAME, file);
+		printf("%s: %s: No such file or directory", SHELL_NAME, file);
 		return (-1);
 	}
 	return (fd);

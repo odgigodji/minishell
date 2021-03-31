@@ -79,8 +79,6 @@ char	***get_envp(char **envp)
 	int		list_length;
 
 	list_length = list_len((const char **)envp);
-	printf("envp_len: %d\n", list_length);
-	printf("sizeof(char **): %ld\n", sizeof(char **));
 	if (NULL == (result = malloc(sizeof(char **) * (list_length + 1))))
 		return (NULL);
 	result[list_length] = NULL;
