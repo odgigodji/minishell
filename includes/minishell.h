@@ -25,25 +25,21 @@
 # define DEBUG_ARG 			0
 # define DEBUG_INFILE 		0
 # define DEBUG_OUTFILE 		0
-# define FINAL_PRINT 		1
 # define DOUBLE_REDIR   	0
+#define DEB_COUNTER			0
+# define DEB_QOUTES			0
+# define DEB_DOLLAR			1
+# define FINAL_PRINT 		0
 
-# define RED   "\x1B[31m"
-# define GRN   "\x1B[32m"
-# define YEL   "\x1B[33m"
-# define BLU   "\x1B[34m"
-# define MAG   "\x1B[35m" //violet
-# define CYN   "\x1B[36m"
-# define WHT   "\x1B[37m"
-# define BG_WHT	  "\x1B[47m" //для выделения серым
-# define RESET "\x1B[0m"
-
-# define SHELL_NAME "minishell"
-
-# define IS_READ 1
-# define IS_WRITE 0
-# define IS_CAT 1
-# define IS_NOT_CAT 0
+#define RED   "\x1B[31m"
+#define GRN   "\x1B[32m"
+#define YEL   "\x1B[33m"
+#define BLU   "\x1B[34m"
+#define MAG   "\x1B[35m" //violet
+#define CYN   "\x1B[36m"
+#define WHT   "\x1B[37m"
+#define BG_WHT	  "\x1B[47m" //для выделения серым
+#define RESET "\x1B[0m"
 
 /*
 **	Command Data structure
@@ -69,7 +65,6 @@ typedef struct			s_simple_command
 	int 				num_of_outfiles_can;
 	char				**outfile_can; // путь к файлу для записи в него результата (редирект ">>")
 	int 				current_outfile_can;
-	int					is_cat;
 }						t_simple_command;
 
 /*
@@ -114,17 +109,6 @@ typedef struct			s_common
 	t_termcap			*termcap;
 }						t_common;
 
-typedef struct			s_pipe
-{
-	int					tmpin;
-	int					tmpout;
-
-	int 				fdin;
-	int 				fdout;
-
-	int 				fdpipe[2];
-}						t_pipe;
-
 //временные функции
 void ft_printf_outfile_info(t_common *common);
 
@@ -152,8 +136,15 @@ int					do_reverse_redirect(t_common *common, char *line);
 int					do_r_redirect(t_common *common, char *line);
 void				ft_init_infiles(t_common *common, char *line, int current_command);
 int					ft_double_redir(t_common *common, char *line);
-void ft_init_outfiles_can(t_common *common, char *line, int current_command);
-int ft_double_redir_counter(char *line);
+void 				ft_init_outfiles_can(t_common *common, char *line, int current_command);
+int 				ft_double_redir_counter(char *line);
+int 				do_quotes(t_common *common, char *line);
+int 				len_for_calloc(char *line, t_common *common, int increment, char *spec);
+int					do_arg(t_common *common, char *line, int len_for_calloc, int increment);
+int					ft_quotes_counter(t_common *common, char *line);
+int					ft_double_quotes(t_common *common, char *line);
+int 				ft_do_dollar(t_common *common, char *line);
+void				ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc);
 /*
 ** executor
 */
@@ -207,9 +198,6 @@ void				free_arg_list(char ****arg_list);
 char				**get_key_and_value(char *envp_line);
 int					args_list_len(char	***arg_list);
 char				**make_envp(t_common *common);
-
-int					simple_command_open_file(char *file, int is_read, int is_cat);
-int					simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_read, int is_cat);
 
 /*
 ** buildins

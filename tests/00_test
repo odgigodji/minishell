@@ -39,14 +39,27 @@ echo hello> outfile-0-0 1 2 | echo world >outfile-1-0 3 4
 echo hello 1 2 3 4
 echo 0 > out0 > echo 1 > out1 > echo 2 > out2 > echo 3 > out3 > echo 4 > out4 > echo 5 > out5
 
-
 --------------------------обратные редиректы------------------------------------
 echo hello < inputfile0 1 2
 echo hello < inputfile0 1 2 | echo hello < inputfile1 3 4 | echo hello < inputfile2 5 6
 echo hello | echo world > outfile < inputfile
 cat < 2 < 3
+
+-----------------------------double_redirects-=---------------------------------
 echo hello >> aaa 1 2 3 | echo 12 >> asdf dfdf
 echo hello world >> 1 >> 2 >> 3
+
+----------------------------------quotes----------------------------------------
+echo 'hello my dear friend' 1 2
+'e''c''h''o'
+---------------------------------double_quotes----------------------------------
+echo "hello my dear friend" 1 2
+
+----------------------------------dolllar---------------------------------------
+echo hello $PATH 1 2 3
+echo hello $bullshit 1 2 3
+echo hello $PATH$SHELL 1 2 3
+echo $PATH$PATH$PATH 1 2 3
 
 echo kitty | cat -e
 echo hello|echo 123
