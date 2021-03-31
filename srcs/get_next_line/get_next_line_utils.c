@@ -77,7 +77,7 @@ char	*ft_strjoin_with_free(char *s1, char *s2)
 	if (!s1)
 		return (0);
 	len = ft_strlen(s1) + ft_strlen(s2);
-	res = (char *)malloc(len + 1);
+	res = (char *)malloc(sizeof(char) * (len + 1));
 	if (!res)
 		return (res);
 	while (s1[i])

@@ -21,7 +21,7 @@
 
 # define MAX_PATH 4096
 # define MAX_NAME 255
-# define DEBUG 				0//0 if debug off ; 1 is on
+# define DEBUG 				1//0 if debug off ; 1 is on
 # define DEBUG_ARG 			0
 # define DEBUG_INFILE 		0
 # define DEBUG_OUTFILE 		0

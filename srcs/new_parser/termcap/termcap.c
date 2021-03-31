@@ -206,7 +206,7 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 	termcap->history[termcap->history_count] = calloc(2048, sizeof(char));
 	tputs(save_cursor, 1, ft_putchar_term);
 //	while (str[0] != '\n')			// 004 eot
-	while (strcmp(str, "\4"))			// 004 eot
+	while (0 != strcmp(str, "\4"))			// 004 eot
 	{
 		if (0 >= (l = read(0, str, 100)))
 			return (l);
@@ -224,7 +224,7 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 	}
 	if (termcap->history_len > termcap->history_count)
 		termcap->history_count++;
-	return (strlen(*line));
+	return ((int)strlen(*line));
 }
 
 //int main(void)
