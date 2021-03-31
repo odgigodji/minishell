@@ -30,6 +30,7 @@ add_executable(minishell
         srcs/utils/common_init.c
         srcs/utils/make_envp.c
         srcs/utils/get_envp_variable.c
+        srcs/utils/open_file.c
         srcs/buildins/mini_pwd.c
         srcs/buildins/mini_cd.c
         srcs/buildins/mini_echo.c
@@ -69,6 +70,7 @@ add_executable(executor_tests
         srcs/buildins/mini_cd.c
         srcs/buildins/mini_echo.c
         srcs/utils/get_envp_variable.c
+        srcs/utils/open_file.c
         srcs/buildins/mini_export.c
 
         srcs/executor/executor_tests/01_test_get_envp_var_pointer.c

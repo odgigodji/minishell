@@ -41,6 +41,13 @@
 #define BG_WHT	  "\x1B[47m" //для выделения серым
 #define RESET "\x1B[0m"
 
+# define SHELL_NAME "minishell"
+
+# define IS_READ 1
+# define IS_WRITE 0
+# define IS_CAT 1
+# define IS_NOT_CAT 0
+
 /*
 **	Command Data structure
 */
