@@ -293,6 +293,7 @@ char		**lexer(char *line)
 	token = NULL;
 	if (NULL == (result = malloc(sizeof(char *) * 100)))
 		return (NULL);
+	result[0] = NULL;
 	while(line[count] && line[count] != ';')
 	{
 		if (!is_spec_symbol(line[count]))
