@@ -51,10 +51,29 @@ echo hello >> aaa 1 2 3 | echo 12 >> asdf dfdf
 echo hello world >> 1 >> 2 >> 3
 
 ----------------------------------quotes----------------------------------------
+Валидные
 echo 'hello my dear friend' 1 2
-'e''c''h''o'
+'echo' hello
+''e''c''h''o'' hello
+'e''c''h''o' hello
+"ec"'ho' hello
+
+Невалидные
+bash-3.2$ 'ec""ho' hello => bash: ec""ho: command not found
+bash-3.2$ "ec''ho" hello => bash: ec''ho: command not found
 ---------------------------------double_quotes----------------------------------
 echo "hello my dear friend" 1 2
+
+bash-3.2$ echo "hel$HOME"'$HOMElo'	=>	hel/Users/mscot$HOMElo
+bash-3.2$ echo "hel$HOME"'$?lo' 	=>	hel/Users/mscot$?lo
+bash-3.2$ echo "hel$?"'$?lo'		=>	hel0$?lo
+
+---------------------------------Экранирование----------------------------------
+
+
+bash-3.2$ echo\ test	=>	bash: echo test: command not found
+bash-3.2$ echo\\ test	=>	bash: echo\: command not found
+
 
 ----------------------------------dolllar---------------------------------------
 echo hello $PATH 1 2 3

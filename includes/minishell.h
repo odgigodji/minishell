@@ -48,6 +48,15 @@
 # define IS_CAT 1
 # define IS_NOT_CAT 0
 
+# define SPEC_SYMBOL "|<>"
+//# define SPEC_SYMBOL " '|\"$\t<>"
+# define GREAT "<GREAT>"				// ">"
+# define GREATGREAT "<GREATGREAT>"		// ">>"
+# define LESS "<LESS>"					// "<"
+# define GREATLESS "<GREATLESS>"		// "<<"
+# define PIPE "<PIPE>"					// "|"
+# define VAR "<VAR>"					// "$"
+
 /*
 **	Command Data structure
 */
@@ -55,6 +64,7 @@
 /*
 **	Describe a simple command and arguments
 */
+
 typedef struct			s_simple_command
 {
 	int 				current_arg;			//	Number of argument
@@ -128,8 +138,14 @@ typedef struct			s_pipe
 	int fdpipe[2];
 }						t_pipe;
 
-//временные функции
-void ft_printf_outfile_info(t_common *common);
+/*
+**	Временные функции
+*/
+
+void				ft_printf_outfile_info(t_common *common);
+char				**lexer(char *line);
+char				**braces_expander(char **lexer_result, t_common *common);
+
 
 /*
 ** parser

@@ -2,9 +2,12 @@
 
 void ft_do_command(t_common *common)
 {
-	int i = 0;
+	int 		i = 0;
 	static char *line;
+	char		**lexer_result;
+	int			count;
 
+	count = 0;
 	if (line == NULL || *line == '\0')
 	{
 		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
@@ -13,11 +16,21 @@ void ft_do_command(t_common *common)
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 //	t_term_to_cannon(common->termcap);
-	line += ft_parser(common, line); // смещаем line на расстояние до точки с запятой
-//		 ft_shift_line_beyond_semicolon(line) + 1;
+	if (!strncmp(line, "exit", 5))
+		exit(0);
+	lexer_result = lexer(line);
+	braces_expander(lexer_result, common);
+	count = 0;
+	while (lexer_result && lexer_result[count])
+	{
+		printf("[%3d] |%10s|\n", count, lexer_result[count]);
+		count++;
+	}
+	line = NULL;
+//	line += ft_parser(common, line); // смещаем line на расстояние до точки с запятой
 
-//		line += 5;
-	executor(common);
+//		 ft_shift_line_beyond_semicolon(line) + 1;
+//	executor(common);
 
 //		printf(CYN"----------------------------------------------------------end of executor---------------------------------------------------\n"RESET);
 //	if (*line == '\0')
@@ -38,7 +51,6 @@ void	minishell_loop(char **envp)
 //	signal(SIGQUIT, handler_s);	// quit	Ctrl+|	выход из приложенияя
 	while (1)
 	{
-//		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
 		ft_do_command(common);
 	}
 }
