@@ -2,111 +2,7 @@
 // Created by Mariam Scot on 4/1/21.
 //
 
-//#include <stdio.h>
-//#include <unistd.h>
-//#include <stdlib.h>
-//#include <string.h>
-//
-//# define SPEC_SYMBOL " '|\"\t<>"
-////# define SPEC_SYMBOL " '|\"$\t<>"
-//# define GREAT "<GREAT>"				// ">"
-//# define GREATGREAT "<GREATGREAT>"		// ">>"
-//# define LESS "<LESS>"					// "<"
-//# define GREATLESS "<GREATLESS>"		// "<<"
-//# define PIPE "<PIPE>"					// "|"
-//# define VAR "<VAR>"					// "$"
-//# define MAX_PATH 2048
 #include "minishell.h"
-
-//int				get_token(char *line, char **token);
-///*
-//** выделение памяти на simple_commands (simple_commands)
-//*/
-//
-//t_simple_command	**command_table_init(int num_of_simple_commands)
-//{
-//	t_simple_command	**command_table; // называется simple_commands в нашей структуре
-//	int 				count;
-//
-//	count = 0;
-//	if (NULL == (command_table = malloc(sizeof(t_simple_command *) * (num_of_simple_commands + 1))))
-//		return (NULL);
-//	while (count < num_of_simple_commands)
-//	{
-//		command_table[count] = NULL;
-//		count++;
-//	}
-//	return (command_table);
-//}
-//
-///*
-//** выделение памяти на одну simple_command (например на ["ls", "-l"])
-//*/
-//
-//t_simple_command	*simple_command_init_m(void)
-//{
-//	t_simple_command	*simple_command;
-//
-//	simple_command = NULL;
-//	return (simple_command);
-//}
-//
-///*
-//** функция которая по набору символов определяет являются ли они токеном
-//** Например если в набор символов попал спец символ то строка перестает быть токеном
-//** Пока символы не являются специальными это токен
-//**
-//** Возможно функция не очень подходящая её можно заменить на что-то ещё
-//*/
-//
-//int					is_token(char *token)
-//{
-//	return (1);
-//}
-//
-//
-///*
-//** Функция которая собирает simple_command из токенов
-//*/
-//
-//t_simple_command	*get_simple_command(t_common *common, char *line)
-//{
-//	int					count;
-//	t_simple_command	*simple_command;	// один элемент массива simple_commands
-//	char				*token;
-//
-//	count = 0;
-//	simple_command = simple_command_init_m();		//выделить память и занулить
-//	while ((token = get_token(line)))
-//	{
-//		simple_command->arguments[count] = get_token(line);
-//		count++;
-//	}
-//}
-//
-///*
-//** функция которая собирает из simple_command command_table (simple_commands)
-//*/
-//
-//int					get_command_table(t_common *common, char *line)
-//{
-//	t_command			command;
-//	t_simple_command	**command_table;
-//	t_simple_command	*simple_command;
-//	int					count;
-//
-//	command_table = command_table_init(100);		//выделить память и занулить
-//	simple_command = NULL;
-//	count = 0;
-//	while (NULL != (simple_command = get_simple_command(common, line)))
-//	{
-//		command_table[count] = simple_command;
-//		count++;
-//	}
-//	command_table[count] = NULL;
-//	common->command.simple_commands = command_table;
-//	return (0);
-//}
 
 int			is_spec_symbol(char c)
 {
@@ -132,28 +28,7 @@ int			check_back_slash(char *line)
 	return (count);
 }
 
-/*
-** функция которая бежит по строке и возвращается завалидированный токен
-** По одному токену за один раз
-*/
-
-int			get_token(char *line, char **token)
-{
-	int		count_line;
-	int		count_token;
-	char	buffer[100];
-	int		back_slash;
-	int		back_slash_flag;
-	char	brace_flag;
-
-	count_line = 0;
-	count_token = 0;
-	back_slash_flag = 0;
-	brace_flag = 0;
-	buffer[0] = '\0';
-//	while (line[count_line] && (line[count_line - 1] != '\\' && !is_spec_symbol(line[count_line])))
-	while (line[count_line] && !is_spec_symbol(line[count_line]))
-	{
+// back slash
 //		if (line[count_line] == '\\')
 //		{
 //			back_slash = check_back_slash(&line[count_line]) / 2;
@@ -170,6 +45,27 @@ int			get_token(char *line, char **token)
 ////				count_line++;
 //			}
 //		}
+
+/*
+** функция которая бежит по строке и возвращается завалидированный токен
+** По одному токену за один раз
+*/
+
+int			get_token(char *line, char **token)
+{
+	int		count_line;
+	int		count_token;
+	char	buffer[100];
+	char	brace_flag;
+	int		back_slash_flag;
+
+	count_line = 0;
+	count_token = 0;
+	buffer[0] = '\0';
+	back_slash_flag = 0;
+	while (line[count_line] && !is_spec_symbol(line[count_line]))
+	{
+		// back slash
 		if (line[count_line] == '"' || line[count_line] == '\'')
 		{
 			brace_flag = line[count_line];
@@ -184,7 +80,7 @@ int			get_token(char *line, char **token)
 		}
 		if (line[count_line] && line[count_line] != ' '
 		&& (!is_spec_symbol(line[count_line])
-			|| (is_spec_symbol(line[count_line]) && back_slash_flag)))
+			|| is_spec_symbol(line[count_line])))
 		{
 			buffer[count_token] = line[count_line];
 			count_line++;
@@ -196,10 +92,58 @@ int			get_token(char *line, char **token)
 		}
 		else
 			count_line++;
-		back_slash_flag = 0;
 	}
 	buffer[count_token] = '\0';
 	*token = strdup(buffer);
+	return (count_line);
+}
+
+char		toggle_brace_flag_lexer(char flag, char current_char)
+{
+	if (flag == '\0')
+		return (current_char);
+	else if (current_char == flag)
+		return ('\0');
+	else
+		return (flag);
+}
+
+int			toggle_back_slash_flag(int flag, char *line, int count)
+{
+	if (count == 0 || *(line - 1) != '\\')
+		return (1);
+	else
+		return (flag + 1);
+}
+
+int			get_token2(char *line, char **token)
+{
+	int		count_line;
+	int		count_token;
+	char	buffer_token[MAX_PATH];
+	char	flag_brace;
+	int		flag_back_slash;
+
+	count_line = 0;
+	count_token = 0;
+	flag_brace = 0;
+	flag_back_slash = 0;
+	while (line[count_line])
+	{
+//		puts("check");
+		if (line[count_line] == '"' || line[count_line] == '\'')
+			flag_brace = toggle_brace_flag_lexer(flag_brace, line[count_line]);
+		if ('\0' == flag_brace && (line[count_line] == ' ' || is_spec_symbol(line[count_line])) && flag_back_slash % 2 == 0)
+			break ;
+		if (line[count_line] == '\\')
+			flag_back_slash = toggle_back_slash_flag(flag_back_slash, &line[count_line], count_line);
+		buffer_token[count_token] = line[count_line];
+		count_line++;
+		count_token++;
+	}
+	buffer_token[count_token] = '\0';
+//	printf("buffer |%s|\n", buffer_token);
+	*token = strdup(buffer_token);
 	return (count_line);
 }
 
@@ -297,7 +241,7 @@ char		**lexer(char *line)
 	while(line[count] && line[count] != ';')
 	{
 		if (!is_spec_symbol(line[count]))
-			count += get_token(&line[count], &token);
+			count += get_token2(&line[count], &token);
 		else
 			if (line[count] != ' ')
 				count += get_spec_token(&line[count], &token);

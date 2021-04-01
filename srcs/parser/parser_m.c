@@ -75,8 +75,6 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 	else
 	{
 		count_token = 1 + get_env_variable_name(token, &temp);    // + 1 на знак доллара
-//		puts(token);
-//		puts(temp);
 		if (temp && get_envp_var_pointer(common, temp))
 			strlcat(*result, get_envp_var_pointer(common, temp), MAX_PATH);
 	}

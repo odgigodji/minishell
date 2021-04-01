@@ -46,14 +46,14 @@ void ft_do_command(t_common *common)
 	if (!strncmp(line, "exit", 5))
 		exit(0);
 	lexer_result = lexer(line);
-	get_command_table(common, lexer_result);
+//	get_command_table(common, lexer_result);
 	braces_expander(lexer_result, common);
 //	count = 0;
-//	while (lexer_result && lexer_result[count])
-//	{
-//		printf("[%3d] |%10s|\n", count, lexer_result[count]);
-//		count++;
-//	}
+	while (lexer_result && lexer_result[count])
+	{
+		printf("[%3d] |%10s|\n", count, lexer_result[count]);
+		count++;
+	}
 	line = NULL;
 
 //	line += new_pars(common, line); // смещаем line на расстояние до точки с запятой
