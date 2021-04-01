@@ -68,7 +68,8 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 	if (token[1] == '?')
 	{
 		temp = ft_itoa(errno);
-		strlcat(*result, get_envp_var_pointer(common, temp), MAX_PATH);
+		puts(temp);
+		strlcat(*result, temp, MAX_PATH);
 		count_token = 1 + (int)strlen(temp);
 	}
 	else
