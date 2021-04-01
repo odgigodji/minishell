@@ -93,7 +93,7 @@ echo $"PWD"
 echo $PWD
 ;;
 ;
-ls |   <- хороший кейс
+ls |   <- хороший кейс для executor
 ||
 cat | cat | ls | cat | cat
 
