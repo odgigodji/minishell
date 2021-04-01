@@ -9,16 +9,19 @@ cat -e < file < test
 cat < file < test | cat -e
 cat < file < test | sort
 
-echo f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v
+echo f f f  s fd g sdf g sdfgsdf g sdfg sd fg sdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v
+echo 1 2 3 4 5
 echo 1 2 3 | echo 3 4 5 | ls -l -a
 echo hello my name is john | echo 61 72 83 94 00 00  | echo aA bB cC dD | echo 1 2 3 4
-ls | ls |ls |ls|ls| ls -l -a| echo hello world
+ls 1 2 3| ls |ls |ls|ls| ls -l -a| echo hello world
 ls |ls |ls|ls| echo hello world|echo hello world
 ls -l -a|ls -l -a |ls -l -a| ls -l -a| echo hello world|echo hello world
+
+---------------------------------------------;----------------------------------
 echo hello ; echo world ; echo hola
 echo hello ; ls | echo world
 pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd;pwd ; pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd;pwd  pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd;pwd;pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd;pwd ; pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd;pwd  pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd ;pwd ; pwd ; pwd ;pwd;pwd
-
+echo 1 2 3 ; ls ;pwd
 echo 1 ; echo 2 ; echo 3; echo 4; echo 5;echo 6 ;echo 7; echo 8;echo 9;echo 10 ;echo 11 ; echo 12 ; echo 13 ; echo 14
 echo 1 ; echo 2 ; echo 3; echo 4; echo 5;echo 6 ;echo 7 ; ls -l -a ; ls ; pwd ; echo 8 ;echo 9
 pwd ; pwd - ok
@@ -79,7 +82,7 @@ bash-3.2$ echo\\ test	=>	bash: echo\: command not found
 echo hello $PATH 1 2 3
 echo hello $bullshit 1 2 3
 echo hello $PATH$SHELL 1 2 3
-echo $PATH$PATH$PATH 1 2 3
+echo $PATH$SHELL$PATH 1 2 3
 echo $USER$USER $USER
 
 echo kitty | cat -e

@@ -220,6 +220,7 @@ void	execute_processor(t_common *common)
 
 void	execute_command(t_common *common, char **envp)
 {
+	(void)**envp;
 	int		command_table_len = common->command.num_of_simple_commands;	//	возможно number_of_available_simple_commands
 	int		command_table_count = 0;
 	int		ret;

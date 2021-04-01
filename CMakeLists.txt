@@ -3,6 +3,7 @@ project(minishell C)
 set(CMAKE_C_STANDARD 99)
 
 set(CMAKE_C_FLAGS "-fsanitize=address")
+#set(CMAKE_C_FLAGS "")
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/libft
@@ -36,7 +37,7 @@ add_executable(minishell
         srcs/buildins/mini_env.c
         srcs/buildins/mini_unset.c
         srcs/buildins/mini_exit.c
-        srcs/new_parser/new_pars.c
+#        srcs/new_parser/new_pars.c
         srcs/new_parser/make_args.c
         srcs/new_parser/do_spec
         srcs/new_parser/pars_utils.c
@@ -53,6 +54,9 @@ add_executable(minishell
         srcs/new_parser/do_dollar.c
         srcs/parser/lexer_m.c
         srcs/parser/parser_m.c
+        srcs/utils/utils.c
+        srcs/parser/parser_idea.c
+
         )
 
 add_executable(executor_tests
@@ -81,7 +85,7 @@ add_executable(executor_tests
         srcs/buildins/mini_unset.c
         srcs/buildins/mini_exit.c
         srcs/signals/signals_handler.c
-        srcs/new_parser/new_pars.c
+#        srcs/new_parser/new_pars.c
         srcs/new_parser/make_args.c
         srcs/new_parser/do_spec
         srcs/new_parser/pars_utils.c
@@ -94,7 +98,10 @@ add_executable(executor_tests
         srcs/new_parser/termcap/termcap.c
         srcs/new_parser/do_quotes.c
         srcs/new_parser/double_quotes.c
-        srcs/new_parser/do_dollar.c srcs/parser/lexer_m.c)
+        srcs/new_parser/do_dollar.c srcs/parser/lexer_m.c
+        srcs/utils/utils.c
+        srcs/parser/parser_idea.c
+        )
 
 target_link_libraries(minishell LINK_PUBLIC
         m

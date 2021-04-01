@@ -55,7 +55,7 @@ char	*ft_strdup(const char *s1)
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void			*res;
+	void			*res = NULL;
 	unsigned char	*x;
 
 	res = malloc(count * size);
@@ -87,7 +87,8 @@ char	*ft_strjoin_with_free(char *s1, char *s2)
 	}
 	while (*s2)
 	{
-		res[i] = *s2++;
+		res[i] = *s2;
+		s2++;
 		i++;
 	}
 	res[i] = '\0';

@@ -56,6 +56,8 @@
 # define GREATLESS "<GREATLESS>"		// "<<"
 # define PIPE "<PIPE>"					// "|"
 # define VAR "<VAR>"					// "$"
+# define TOKEN_IS_PIPE !ft_strncmp(PIPE, lexer_result[counter], ft_strlen(PIPE))
+# define TOKEN_IS_NOT_PIPE ft_strncmp(PIPE, lexer_result[count], ft_strlen(PIPE))
 
 /*
 **	Command Data structure
@@ -67,22 +69,22 @@
 
 typedef struct			s_simple_command
 {
-	int 				current_arg;			//	Number of argument
 	char				**arguments;					//	fixme Array of arguments
-	int 				arg_count; // количество аргументов = number_of_available_arguments
-
-	int 				num_of_outfiles;
 	char				**outfile;		// путь к файлу для записи в него результата (редирект ">")
-	int 				current_outfile;
-
-	int 				num_of_infiles;
 	char				**infile;		// путь к файлу для записи в него результата (редирект ">")
-	int 				current_infile;
-
-	int 				num_of_outfiles_can;
 	char				**outfile_can; // путь к файлу для записи в него результата (редирект ">>")
-	int 				current_outfile_can;
 	int					is_cat;
+
+
+
+	int 				arg_count; // количество аргументов = number_of_available_arguments
+	int 				current_arg;			//	Number of argument
+	int 				num_of_outfiles;
+	int 				current_outfile;
+	int 				num_of_infiles;
+	int 				current_infile;
+	int 				num_of_outfiles_can;
+	int 				current_outfile_can;
 }						t_simple_command;
 
 /*
@@ -145,6 +147,8 @@ typedef struct			s_pipe
 void				ft_printf_outfile_info(t_common *common);
 char				**lexer(char *line);
 char				**braces_expander(char **lexer_result, t_common *common);
+void				ft_print_lexer_result(char **lexer_result);
+void 				ft_print_args(char **arguments);
 
 
 /*
@@ -180,6 +184,24 @@ int					ft_quotes_counter(t_common *common, char *line);
 int					ft_double_quotes(t_common *common, char *line);
 int 				ft_do_dollar(t_common *common, char *line);
 void				ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc);
+
+int					get_token(char *line, char **token);
+char				*token_to_simple_command(char *token_to_arg);
+t_command			get_command_table(t_common *common, char **lexer_result);
+t_simple_command	*get_simple_command(t_common *common, char **lexer_result);
+//char				*get_token(char *line);
+int					is_token(char *token);
+t_simple_command	*simple_command_init(char **lexer_result);
+t_simple_command	**command_table_init(char **lexer_result);
+char				**init_args(char **lexer_result);
+
+/*
+** counters
+*/
+int 				num_of_simple_commands(char **lexer_result);
+int 				num_of_args(char **lexer_result);
+
+
 /*
 ** executor
 */
@@ -218,11 +240,7 @@ void				free_line_list(char **split_list);
 
 t_common			*common_init(char **envp);
 void				command_init(t_common *common);
-t_simple_command	*simple_command_init(
-								char **arguments,
-								int number_of_arguments,
-								int number_of_available_arguments
-);
+
 
 char				*get_envp_variable(t_common *common, char *var);
 char				*get_envp_line(t_common *common, char *line);

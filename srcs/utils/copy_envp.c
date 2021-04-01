@@ -39,7 +39,7 @@ char	**copy_envp(char **envp)
 	count = 0;
 	if (NULL == (copy = malloc(sizeof(char *) * (envp_len + 1))))
 		return (NULL);
-	while (count < envp_len)
+	while (count < (int)envp_len)
 	{
 		line_len = ft_strlen(envp[count]);
 		if (NULL == (copy[count] = malloc(line_len + 1)))

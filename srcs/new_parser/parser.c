@@ -9,7 +9,7 @@ void ft_print_common(t_common *common, int flag)
 	while(common->command.simple_commands[i])
 	{
 		j = 0;
-		printf(RED"arg_count: %d\n"RESET, common->command.simple_commands[i]->arg_count);
+//		printf(RED"arg_count: %d\n"RESET, common->command.simple_commands[i]->arg_count);
 		while(common->command.simple_commands[i]->arguments[j])
 		{
 			printf(BLU"simple_command[%d]: "RESET, i);
@@ -32,61 +32,62 @@ void ft_print_common(t_common *common, int flag)
 	i = 0;
 	j = 0;
 
-	while(common->command.simple_commands[i] && i < common->command.num_of_simple_commands)
-	{
-		j = 0;
-//		printf(GRN"simple_comand [%d]\n"RESET, i);
-		if (common->command.simple_commands[i]->num_of_outfiles)
-			printf(BLU"num_of_outfiles:%d\n"RESET, common->command.simple_commands[i]->num_of_outfiles);
-		while(common->command.simple_commands[i]->outfile[j] && j < common->command.simple_commands[i]->num_of_outfiles)
-		{
-			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->outfile[j]);
-			j++;
-		}
-		if (common->command.simple_commands[i]->outfile[j] == NULL)
-		{
-			printf(RED"sc[%d] outfile[%d] is (null)\n"RESET, i, j);
-		}
-		i++;
-	}
+//	while(common->command.simple_commands[i] && i < common->command.num_of_simple_commands)
+//	{
+//		j = 0;
+////		printf(GRN"simple_comand [%d]\n"RESET, i);
+//		if (common->command.simple_commands[i]->num_of_outfiles)
+//			printf(BLU"num_of_outfiles:%d\n"RESET, common->command.simple_commands[i]->num_of_outfiles);
+//		while(common->command.simple_commands[i]->outfile[j] && j < common->command.simple_commands[i]->num_of_outfiles)
+//		{
+//			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->outfile[j]);
+//			j++;
+//		}
+//		if (common->command.simple_commands[i]->outfile[j] == NULL)
+//		{
+//			printf(RED"sc[%d] outfile[%d] is (null)\n"RESET, i, j);
+//		}
+//		i++;
+//	}
 //	printf(YEL"final output_file is |%s|\n"RESET, common->command.infile);
 
-	i = 0;
-	while(common->command.simple_commands[i] && i < common->command.num_of_simple_commands)
-	{
-		j = 0;
-//		printf(GRN"simple_comand [%d]\n"RESET, i);
-		if (common->command.simple_commands[i]->num_of_infiles)
-			printf(BLU"num_of_infiles:%d\n"RESET, common->command.simple_commands[i]->num_of_infiles);
-		while(common->command.simple_commands[i]->infile[j] && j < common->command.simple_commands[i]->num_of_infiles)
-		{
-			printf(YEL"sc[%d] infile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->infile[j]);
-			j++;
-		}
-		if (common->command.simple_commands[i]->infile[j] == NULL)
-		{
-			printf(YEL"sc[%d] infile[%d] is (null)\n"RESET, i, j);
-		}
-		i++;
-	}
-	i= 0;
-	while(common->command.simple_commands[i] && i < common->command.num_of_simple_commands)
-	{
-		j = 0;
-//		printf(GRN"simple_comand [%d]\n"RESET, i);
-		if (common->command.simple_commands[i]->num_of_outfiles_can)
-			printf(BLU"num_of_outfiles_can:%d\n"RESET, common->command.simple_commands[i]->num_of_outfiles_can);
-		while(common->command.simple_commands[i]->outfile_can[j] && j < common->command.simple_commands[i]->num_of_outfiles_can)
-		{
-			printf(BLU"sc[%d] infile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->outfile_can[j]);
-			j++;
-		}
-		if (common->command.simple_commands[i]->outfile_can[j] == NULL)
-		{
-			printf(BLU"sc[%d] infile[%d] is (null)\n"RESET, i, j);
-		}
-		i++;
-	}
+//	i = 0;
+//	while(common->command.simple_commands[i] && i < common->command.num_of_simple_commands)
+//	{
+//		j = 0;
+////		printf(GRN"simple_comand [%d]\n"RESET, i);
+//		if (common->command.simple_commands[i]->num_of_infiles)
+//			printf(BLU"num_of_infiles:%d\n"RESET, common->command.simple_commands[i]->num_of_infiles);
+//		while(common->command.simple_commands[i]->infile[j] && j < common->command.simple_commands[i]->num_of_infiles)
+//		{
+//			printf(YEL"sc[%d] infile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->infile[j]);
+//			j++;
+//		}
+//		if (common->command.simple_commands[i]->infile[j] == NULL)
+//		{
+//			printf(YEL"sc[%d] infile[%d] is (null)\n"RESET, i, j);
+//		}
+//		i++;
+//	}
+//	i= 0;
+//	while(common->command.simple_commands[i] && i < common->command.num_of_simple_commands)
+//	{
+//		j = 0;
+////		printf(GRN"simple_comand [%d]\n"RESET, i);
+//		if (common->command.simple_commands[i]->num_of_outfiles_can)
+//			printf(BLU"num_of_outfiles_can:%d\n"RESET, common->command.simple_commands[i]->num_of_outfiles_can);
+//		while(common->command.simple_commands[i]->outfile_can[j] && j < common->command.simple_commands[i]->num_of_outfiles_can)
+//		{
+//			printf(BLU"sc[%d] infile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->outfile_can[j]);
+//			j++;
+//		}
+//		if (common->command.simple_commands[i]->outfile_can[j] == NULL)
+//		{
+//			printf(BLU"sc[%d] infile[%d] is (null)\n"RESET, i, j);
+//		}
+//		i++;
+//	}
+
 //	printf(YEL"final input_file is |%s|\n"RESET, common->command.infile);
 //	if (common->command.simple_commands[0]->num_of_outfiles > 0)
 //	{
@@ -112,16 +113,12 @@ void ft_print_common(t_common *common, int flag)
 //	}
 }
 
-int	ft_parser(t_common *common, char *line)
-{
-	int		ret;
-
-	ret = new_pars(common, line);
-
-	if (FINAL_PRINT)
-	{
-//		ft_print_common(common, 1);
-		printf(CYN"-----------------------------------------------------------end of parser----------------------------------------------------\n"RESET);
-	}
-	return (ret);
-}
+//int	ft_parser(t_common *common, char *line)
+//{
+//	int		ret;
+//
+////		if (ret == 0)
+////		common->is_end_of_line = 1;
+//
+//	return (ret);
+//}

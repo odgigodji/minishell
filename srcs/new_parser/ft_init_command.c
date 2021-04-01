@@ -98,22 +98,26 @@ void ft_init_simple_commands(t_common *common, char *line, int current_simple_co
 
 void	ft_init_current_command(t_common *common, char *line)
 {
-	int current_simple_command;
+	int current_simple_command = 0;
 
 //	printf("ft_init_current_command_0:|%s|\n", line);
 	current_simple_command = common->command.current_simple_command;
+	printf(MAG"%d\n"RESET, current_simple_command);
+	common->command.simple_commands = NULL;
 	common->command.num_of_simple_commands = ft_simple_command_counter(line); //fixme
-	common->command.simple_commands = ft_calloc(sizeof(t_simple_command *),common->command.num_of_simple_commands + 1);// fixme
+//	printf(RED"%d\n"RESET, common->command.current_simple_command);
+//	printf(BLU"%d\n"RESET, common->command.num_of_simple_commands + 1);
+	common->command.simple_commands = malloc(sizeof(t_simple_command *) * (common->command.num_of_simple_commands + 1));//ft_calloc(sizeof(t_simple_command *),common->command.num_of_simple_commands + 1);// fixme
 	ft_init_simple_commands(common, line, current_simple_command);
 //	printf("ft_init_current_command_2:|%s|\n", line);
 //	printf(BLU"arg_count for 0 simple command is %d\n"RESET, common->command.simple_commands[current_command]->arg_count);
 //	printf(GRN"----------------command.num_of_simple_commands is %d------------------\n"RESET, common->command.num_of_simple_commands);
-//	common->command.simple_commands[common->command.num_of_simple_commands] = NULL;
+	common->command.simple_commands[common->command.num_of_simple_commands] = NULL;
 	common->command.current_simple_command = 0;
 	common->command.space_after_redirect = 0;
-	ft_init_outfiles(common, line, current_simple_command);
-	ft_init_infiles(common, line, current_simple_command);
-	ft_init_outfiles_can(common, line, current_simple_command);
+//	ft_init_outfiles(common, line, current_simple_command);
+//	ft_init_infiles(common, line, current_simple_command);
+//	ft_init_outfiles_can(common, line, current_simple_command);
 //	printf("ft_init_current_command_3:|%s|\n", line);
 
 }

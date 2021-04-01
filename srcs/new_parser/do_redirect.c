@@ -1,11 +1,6 @@
 #include "minishell.h"
 
 
-
-
-
-
-
 int ft_make_outfile(t_common *common, char *line, int increment, int current_out_file)
 {
 //
@@ -77,30 +72,30 @@ int do_redirect(t_common *common, char *line)
 	else
 		common->command.simple_commands[common->command.current_simple_command]->is_cat = IS_NOT_CAT;
 //	common->command.simple_commands[common->command.current_simple_command]->outfile[0] = "\0";//
-	if (line[i] == '>')
+//	if (line[i] == '>')
+//	{
+
+	if (DEBUG_OUTFILE)
+		printf("REDIR_start:|%s|\n", line + 1);
+
+	i++;
+	while(line[i] && line[i] != ';' && line[i] != '|')
 	{
-
-		if (DEBUG_OUTFILE)
-			printf("REDIR_start:|%s|\n", line + 1);
-
-		i++;
-		while(line[i] && line[i] != ';' && line[i] != '|')
+		if (line[i] == ' ' || line[i] == '\t') // такие единичные штуки надо как то нормально сделать с табами и пробелами
 		{
-			if (line[i] == ' ' || line[i] == '\t') // такие единичные штуки надо как то нормально сделать с табами и пробелами
-			{
-				common->command.space_after_redirect = 1;
-				i++;
-			}
-			else
-			{
-				i += ft_do_outfile(common, line, i);
-				return (i);
-			}
+			common->command.space_after_redirect = 1;
+			i++;
 		}
+		else
+		{
+			i += ft_do_outfile(common, line, i);
+			return (i);
+		}
+	}
 
-		if (DEBUG_OUTFILE)
+	if (DEBUG_OUTFILE)
 			printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->outfile[0]);
 //		common->command.simple_commands[common->command.current_simple_command]->outfile[0];
-	}
+//	}
 	return 0;
 }

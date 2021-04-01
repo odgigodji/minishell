@@ -63,9 +63,9 @@ int ft_do_dollar1(t_common *common, char *line)
 
 int ft_do_dollar(t_common *common, char *line)
 {
-	int ret;
 	char len;
 	char res[50];
+	char ret[100];
 	int i = 1;
 	int j = 0;
 
@@ -79,7 +79,9 @@ int ft_do_dollar(t_common *common, char *line)
 			j++;
 			i++;
 		}
+		printf(RED"|%s|\n"RESET, res);
+		break ;
 	}
-	printf(RED"|%s|\n"RESET, res);
+//	printf(RED"|%s|\n"RESET, res);
 	return (ft_strlen_to_char(line, ' '));
 }

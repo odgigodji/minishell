@@ -2,6 +2,7 @@
 
 int len_for_calloc(char *line, t_common *common, int increment, char *spec)
 {
+	(void)*common;
 	int len_for_calloc;
 	int i;
 
@@ -43,6 +44,7 @@ int do_arg(t_common *common, char *line, int len_for_calloc, int increment)
 {
 	char res[len_for_calloc + 1];
 	int current_command = common->command.current_simple_command;
+//	printf("%d\n",  common->command.simple_commands[current_command]->arg_count);
 	int arg_count = common->command.simple_commands[current_command]->arg_count;
 
 	ft_strlcpy(res, line + increment, len_for_calloc + 1); 	//записываем все символы до спец символа во временную строку res
