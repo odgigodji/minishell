@@ -48,7 +48,7 @@
 # define IS_CAT 1
 # define IS_NOT_CAT 0
 
-# define SPEC_SYMBOL "|<>"
+# define SPEC_SYMBOL "|<>;"
 //# define SPEC_SYMBOL " '|\"$\t<>"
 # define GREAT "<GREAT>"				// ">"
 # define GREATGREAT "<GREATGREAT>"		// ">>"
