@@ -80,6 +80,7 @@ echo hello $PATH 1 2 3
 echo hello $bullshit 1 2 3
 echo hello $PATH$SHELL 1 2 3
 echo $PATH$PATH$PATH 1 2 3
+echo $USER$USER $USER
 
 echo kitty | cat -e
 echo hello|echo 123
@@ -92,7 +93,7 @@ echo $"PWD"
 echo $PWD
 ;;
 ;
-ls |
+ls |   <- хороший кейс
 ||
 cat | cat | ls | cat | cat
 
