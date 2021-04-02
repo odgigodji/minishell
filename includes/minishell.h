@@ -77,14 +77,14 @@ typedef struct			s_simple_command
 
 
 
-	int 				arg_count; // количество аргументов = number_of_available_arguments
-	int 				current_arg;			//	Number of argument
-	int 				num_of_outfiles;
-	int 				current_outfile;
-	int 				num_of_infiles;
-	int 				current_infile;
-	int 				num_of_outfiles_can;
-	int 				current_outfile_can;
+//	int 				arg_count; // количество аргументов = number_of_available_arguments
+//	int 				current_arg;			//	Number of argument
+//	int 				num_of_outfiles;
+//	int 				current_outfile;
+//	int 				num_of_infiles;
+//	int 				current_infile;
+//	int 				num_of_outfiles_can;
+//	int 				current_outfile_can;
 }						t_simple_command;
 
 /*
@@ -156,31 +156,31 @@ void 				ft_print_args(char **arguments);
 */
 
 int					get_next_line(int fd, char **line);
-int					ft_parser(t_common *common, char *line);
-//int					pars(t_common *common, char *line);
-int					new_pars(t_common *common, char *line);
+//int					ft_parser(t_common *common, char *line);
+////int					pars(t_common *common, char *line);
+//int					new_pars(t_common *common, char *line);
 size_t				ft_strlen_to_char(const char *s, char c);
 //int					make_arg(char *f_line , t_simple_command *sc);
-int 				make_args(char *line, t_common *common, int increment);
-void				ft_init_current_command(t_common *common, char *line);
+//int 				make_args(char *line, t_common *common, int increment);
+//void				ft_init_current_command(t_common *common, char *line);
 int					ft_arg_counter(const char *s);
-int 				do_all_spec(t_common *common, char *line, char curent_char, int increment);
+//int 				do_all_spec(t_common *common, char *line, char curent_char, int increment);
 int					ft_redirect_counter(const char *line, char redirect_char);
-int					do_redirect(t_common *common, char *line);
+//int					do_redirect(t_common *common, char *line);
 void				do_pipe(t_common *common, char *line);
 int					ft_simple_command_counter(const char *line);
 void				ft_init_simple_commands(t_common *common, char *line, int current_command);
-void				ft_init_outfiles(t_common *common, char *line, int current_command);
-int					do_reverse_redirect(t_common *common, char *line);
-int					do_r_redirect(t_common *common, char *line);
-void				ft_init_infiles(t_common *common, char *line, int current_command);
-int					ft_double_redir(t_common *common, char *line);
-void 				ft_init_outfiles_can(t_common *common, char *line, int current_command);
+//void				ft_init_outfiles(t_common *common, char *line, int current_command);
+//int					do_reverse_redirect(t_common *common, char *line);
+//int					do_r_redirect(t_common *common, char *line);
+//void				ft_init_infiles(t_common *common, char *line, int current_command);
+//int					ft_double_redir(t_common *common, char *line);
+//void 				ft_init_outfiles_can(t_common *common, char *line, int current_command);
 int 				ft_double_redir_counter(char *line);
 int 				do_quotes(t_common *common, char *line);
 int 				len_for_calloc(char *line, t_common *common, int increment, char *spec);
 int					do_arg(t_common *common, char *line, int len_for_calloc, int increment);
-int					ft_quotes_counter(t_common *common, char *line);
+//int					ft_quotes_counter(t_common *common, char *line);
 int					ft_double_quotes(t_common *common, char *line);
 int 				ft_do_dollar(t_common *common, char *line);
 void				ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc);

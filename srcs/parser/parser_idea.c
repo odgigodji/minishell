@@ -88,7 +88,7 @@ t_simple_command	*get_simple_command(t_common *common, char **lexer_result)
 		simple_command->arguments[count] = lexer_result[count];
 		count++;
 	}
-	ft_print_args(simple_command->arguments);
+//	ft_print_args(simple_command->arguments);
 //	while ((token = token_to_simple_command(lexer_result[count])))
 //	{
 //		simple_command->arguments[count] = token;
@@ -96,8 +96,8 @@ t_simple_command	*get_simple_command(t_common *common, char **lexer_result)
 //	}
 //	simple_command->arguments[0] = "hello";
 //	simple_command->arguments[1] = "world";
-	exit(0);
-	return(0);
+//	exit(0);
+	return (simple_command);
 }
 
 /*
@@ -109,15 +109,16 @@ t_command			get_command_table(t_common *common, char **lexer_result)
 	t_command			command;
 	t_simple_command	**command_table; //simple_commands
 	t_simple_command	*simple_command; //one simple_command
-	int					count;
+//	int					count;
 
 	command_table = command_table_init(lexer_result);		//выделить память и занулить
-	count = 0;
+//	count = 0;
 	while ((simple_command = get_simple_command(common, lexer_result)))
 	{
 //		exit (0);
-		command_table[count] = simple_command;
-		count++;
+		*command_table = simple_command;
+//		ft_print_args(*(command_table->arguments));
+		command_table++;
 	}
 	command.simple_commands = command_table;
 	return (command);

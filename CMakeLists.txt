@@ -38,20 +38,20 @@ add_executable(minishell
         srcs/buildins/mini_unset.c
         srcs/buildins/mini_exit.c
 #        srcs/new_parser/new_pars.c
-        srcs/new_parser/make_args.c
-        srcs/new_parser/do_spec
+#        srcs/new_parser/make_args.c
+#        srcs/new_parser/do_spec
         srcs/new_parser/pars_utils.c
-        srcs/new_parser/do_pipe.c
-        srcs/new_parser/do_redirect.c
-        srcs/new_parser/ft_init_command.c
-        srcs/new_parser/counters.c
-        srcs/new_parser/do_reverse_redirect.c
-        srcs/new_parser/do_r_redirect.c
-        srcs/new_parser/double_redirect.c
+#        srcs/new_parser/do_pipe.c
+#        srcs/new_parser/do_redirect.c
+#        srcs/new_parser/ft_init_command.c
+#        srcs/new_parser/counters.c
+#        srcs/new_parser/do_reverse_redirect.c
+#        srcs/new_parser/do_r_redirect.c
+#        srcs/new_parser/double_redirect.c
         srcs/new_parser/termcap/termcap.c
-        srcs/new_parser/do_quotes.c
-        srcs/new_parser/double_quotes.c
-        srcs/new_parser/do_dollar.c
+#        srcs/new_parser/do_quotes.c
+#        srcs/new_parser/double_quotes.c
+#        srcs/new_parser/do_dollar.c
         srcs/parser/lexer_m.c
         srcs/parser/parser_m.c
         srcs/utils/utils.c
@@ -90,7 +90,7 @@ add_executable(executor_tests
         srcs/new_parser/do_spec
         srcs/new_parser/pars_utils.c
         srcs/new_parser/do_pipe.c
-        srcs/new_parser/do_redirect.c
+#        srcs/new_parser/do_redirect.c
         srcs/new_parser/ft_init_command.c
         srcs/new_parser/counters.c
         srcs/new_parser/do_r_redirect.c

@@ -6,6 +6,7 @@ char **init_args(char **lexer_result)
 
 	args = ft_calloc((num_of_args(lexer_result) + 1), sizeof(char *));
 	args[num_of_args(lexer_result)] = NULL;
+	printf(RED"COUNT_ARG %d\n"RESET, num_of_args(lexer_result));
 	return (args);
 }
 
@@ -16,7 +17,6 @@ int num_of_args(char **lexer_result)
 	num_of_arg = 0;
 	while(lexer_result[num_of_arg] && ft_strncmp(PIPE, lexer_result[num_of_arg], ft_strlen(PIPE)))
 		num_of_arg++;
-	printf(RED"COUNT_ARG %d\n"RESET, num_of_arg);
 	return (num_of_arg);
 }
 
