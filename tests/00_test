@@ -16,6 +16,7 @@ echo hello my name is john | echo 61 72 83 94 00 00  | echo aA bB cC dD | echo 1
 ls 1 2 3| ls |ls |ls|ls| ls -l -a| echo hello world
 ls |ls |ls|ls| echo hello world|echo hello world
 ls -l -a|ls -l -a |ls -l -a| ls -l -a| echo hello world|echo hello world
+1 2 | 3 4
 
 ---------------------------------------------;----------------------------------
 echo hello ; echo world ; echo hola
