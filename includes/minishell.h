@@ -59,7 +59,7 @@
 # define TOKEN_IS_PIPE !ft_strncmp(PIPE, lexer_result[counter], ft_strlen(PIPE))
 # define TOKEN_IS_NOT_PIPE ft_strncmp(PIPE, lexer_result[count], ft_strlen(PIPE))
 # define TOKENS_POSITION tokens + *current_token
-# define NOT_LAST_TOKEN current_token < ft_array_len(lexer_result)
+# define NOT_LAST_TOKEN current_token < last_token
 
 /*
 **	Command Data structure
