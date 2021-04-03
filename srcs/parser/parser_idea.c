@@ -89,34 +89,19 @@ t_simple_command *get_simple_command(char **tokens, int *current_token)
 t_command get_command_table(char **lexer_result)
 {
 	t_command			command;
-	t_simple_command	**command_table; //simple_commands
-//	t_simple_command	*simple_command; //one simple_command
-//	int					counter;
+	t_simple_command	**command_table;
 	int 				last_token;
-	int current_token;
+	int 				current_token;
 
-//	counter = 0;
 	current_token = 0;
 	last_token = ft_array_len(lexer_result);
 	command_table = command_table_init(lexer_result);		//выделить память и занулить
-	while(NOT_LAST_TOKEN) //&& (command_table[counter] = get_simple_command(lexer_result, &current_token)))
+	while(NOT_LAST_TOKEN)
 	{
 		*command_table = get_simple_command(lexer_result, &current_token);
-//		command_table[counter] = get_simple_command(lexer_result + current_token, &current_token);
 		ft_print_simple_comand(*command_table);
 		command_table++;
 	}
-
-//	exit(0);
-//	while ((simple_command = get_simple_command(common, lexer_result)))
-//	{
-////		exit (0);
-//		*command_table = simple_command;
-////		ft_print_args(*(command_table->arguments));
-//		command_table++;
-//	}
-
-
 	command.simple_commands = command_table;
 	return (command);
 }
