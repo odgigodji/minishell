@@ -61,6 +61,6 @@ t_simple_command	*simple_command_init(char **lexer_result)
 
 	simple_command = NULL;
 	simple_command = malloc(sizeof(t_simple_command *));
-	simple_command->arguments = init_args(lexer_result);
+//	simple_command->arguments = init_args(lexer_result);
 	return (simple_command);
 }

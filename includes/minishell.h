@@ -152,7 +152,7 @@ char				**lexer(char *line);
 char				**braces_expander(char **lexer_result, t_common *common);
 void				ft_print_lexer_result(char **lexer_result);
 void 				ft_print_args(char **arguments);
-void ft_print_simple_comand(t_simple_command *simple_command);
+void 				ft_print_simple_comand(t_simple_command *simple_command);
 
 /*
 ** parser

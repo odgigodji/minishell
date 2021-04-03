@@ -50,7 +50,7 @@ char				*token_to_simple_command(char *token_to_arg)
 
 char **get_args(char **tokens, int *current_token)
 {
-	printf(GRN"%s\n"RESET, *tokens);
+//	printf(GRN"%s\n"RESET, *tokens);
 	int count;
 
 	char **arguments;
@@ -58,7 +58,7 @@ char **get_args(char **tokens, int *current_token)
 	arguments = init_args(TOKENS_POSITION);
 	while(tokens[*current_token] && ft_strncmp(PIPE, tokens[*current_token], ft_strlen(PIPE)))
 	{
-		printf("actual token is {%s}\n", tokens[*current_token]);
+//		printf("actual token is {%s}\n", tokens[*current_token]);
 		arguments[count] = ft_strdup(tokens[*current_token]);
 		count++;
 		(*current_token)++;
@@ -96,6 +96,7 @@ t_command get_command_table(char **lexer_result)
 	while(NOT_LAST_TOKEN)
 	{
 		*command_table = get_simple_command(lexer_result, &current_token);
+		printf("-----------------simple_command:---------------------\n");
 		ft_print_simple_comand(*command_table);
 		command_table++;
 	}

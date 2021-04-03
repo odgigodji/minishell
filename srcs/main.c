@@ -59,7 +59,8 @@ void ft_do_command(t_common *common)
 //	{
 //		printf("[%3d] |%10s|\n", count, lexer_result[count]);
 //		count++;
-//	}
+//
+
 	line = NULL;
 
 //	line += new_pars(common, line); // смещаем line на расстояние до точки с запятой
