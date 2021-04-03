@@ -94,10 +94,12 @@ typedef struct			s_simple_command
 
 typedef struct			s_command
 {
+	t_simple_command	**simple_commands;	//fixme
+	int 				current_token;
+
 	int					current_simple_command; // текущая симпл команда( для движения по массиву **simple_commands)
 	int 				num_of_simple_commands;  // количество симпл команд
 
-	t_simple_command	**simple_commands;	//fixme
 
 	int 				space_after_redirect;
 	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
@@ -187,8 +189,8 @@ void				ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_fo
 
 int					get_token(char *line, char **token);
 char				*token_to_simple_command(char *token_to_arg);
-t_command			get_command_table(t_common *common, char **lexer_result);
-t_simple_command	*get_simple_command(t_common *common, char **lexer_result);
+t_command get_command_table(char **lexer_result);
+t_simple_command *get_simple_command(char **tokens);
 //char				*get_token(char *line);
 int					is_token(char *token);
 t_simple_command	*simple_command_init(char **lexer_result);
