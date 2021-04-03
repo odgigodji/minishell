@@ -71,13 +71,10 @@ t_simple_command *get_simple_command(char **tokens, int *current_token)
 {
 	t_simple_command	*simple_command;	// один элемент массива simple_commands
 
-	printf(BLU"[%d]\n"RESET, *current_token);
-//	if(*current_token == ft_array_len(tokens))
-//		return (NULL);
+//	printf(BLU"[%d]\n"RESET, *current_token);
 	simple_command = simple_command_init(TOKENS_POSITION);		//выделить память и занулить
 	simple_command->arguments = get_args(tokens, current_token);
-//	*current_token += ++count;echo 1 2 3 | echo 3 4 5 | ls -l -a
-	printf(BLU"[%d]\n"RESET, *current_token);
+//	printf(BLU"[%d]\n"RESET, *current_token);
 
 	return (simple_command);
 }

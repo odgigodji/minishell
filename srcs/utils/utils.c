@@ -2,12 +2,12 @@
 
 char **init_args(char **lexer_result)
 {
-	char **args;
+	char **arguments;
 
-	args = ft_calloc((num_of_args(lexer_result) + 1), sizeof(char *));
-	args[num_of_args(lexer_result)] = NULL;
-	printf(RED"COUNT_ARG %d\n"RESET, num_of_args(lexer_result));
-	return (args);
+	arguments = ft_calloc((num_of_args(lexer_result) + 1), sizeof(char *));
+	arguments[num_of_args(lexer_result)] = NULL;
+//	printf(RED"COUNT_ARG %d\n"RESET, num_of_args(lexer_result));
+	return (arguments);
 }
 
 int num_of_args(char **lexer_result)
