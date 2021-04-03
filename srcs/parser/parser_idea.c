@@ -53,8 +53,6 @@ char **get_args(char **tokens, int *current_token)
 	printf(GRN"%s\n"RESET, *tokens);
 	int count;
 
-	if (tokens[*current_token] == NULL)
-		return(NULL);
 	char **arguments;
 	count = 0;
 	arguments = init_args(TOKENS_POSITION);
@@ -65,12 +63,7 @@ char **get_args(char **tokens, int *current_token)
 		count++;
 		(*current_token)++;
 	}
-	if(tokens[*current_token] == NULL)
-	{
-		return (arguments);
-	}
-	else
-		(*current_token)++;
+	(*current_token)++;
 	return (arguments);
 }
 
@@ -79,10 +72,13 @@ t_simple_command *get_simple_command(char **tokens, int *current_token)
 	t_simple_command	*simple_command;	// один элемент массива simple_commands
 
 	printf(BLU"[%d]\n"RESET, *current_token);
-	simple_command = simple_command_init(tokens + *current_token);		//выделить память и занулить
+//	if(*current_token == ft_array_len(tokens))
+//		return (NULL);
+	simple_command = simple_command_init(TOKENS_POSITION);		//выделить память и занулить
 	simple_command->arguments = get_args(tokens, current_token);
 //	*current_token += ++count;echo 1 2 3 | echo 3 4 5 | ls -l -a
 	printf(BLU"[%d]\n"RESET, *current_token);
+
 	return (simple_command);
 }
 
@@ -109,7 +105,7 @@ t_command get_command_table(char **lexer_result)
 //	command_table[2] = get_simple_command(lexer_result + command.current_token, &command);
 //	printf("current token is %d\n", command.current_token);
 
-	while((command_table[counter] = get_simple_command(lexer_result, &current_token)))
+	while(current_token < ft_array_len(lexer_result) && (command_table[counter] = get_simple_command(lexer_result, &current_token)))
 	{
 //		command_table[counter] = get_simple_command(lexer_result + current_token, &current_token);
 		ft_print_simple_comand(command_table[counter]);
