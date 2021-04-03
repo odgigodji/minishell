@@ -75,11 +75,11 @@ typedef struct			s_simple_command
 	char				**arguments;					//	fixme Array of arguments
 	char				**outfile;		// путь к файлу для записи в него результата (редирект ">")
 	char				**infile;		// путь к файлу для записи в него результата (редирект ">")
-	char				**outfile_can; // путь к файлу для записи в него результата (редирект ">>")
 	int					is_cat;
 
 
 
+//	char				**outfile_can; // путь к файлу для записи в него результата (редирект ">>")
 //	int 				arg_count; // количество аргументов = number_of_available_arguments
 //	int 				current_arg;			//	Number of argument
 //	int 				num_of_outfiles;

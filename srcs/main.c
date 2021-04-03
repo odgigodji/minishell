@@ -35,11 +35,13 @@ void ft_print_lexer_result(char **lexer_result)
 	int count;
 
 	count = 0;
+	printf("----------------lexer-result-------------------\n");
 	while (lexer_result && lexer_result[count])
 	{
 		printf("[%3d] |%10s|\n", count, lexer_result[count]);
 		count++;
 	}
+	printf("----------------lexer-result-------------------\n");
 }
 
 void ft_do_command(t_common *common)
@@ -62,6 +64,7 @@ void ft_do_command(t_common *common)
 	if (!strncmp(line, "exit", 5))
 		exit(0);
 	lexer_result = lexer(line);
+	ft_print_lexer_result(lexer_result);
 //	braces_expander(lexer_result, common);
 	common->command = get_command_table(lexer_result);
 	ft_print_all_command(common->command.simple_commands);

@@ -1,6 +1,12 @@
 #include <tcl.h>
 #include "minishell.h"
 
+char **get_outfiles(char **lexer_result, int *current_token)
+{
+
+	return(0);
+}
+
 char **get_args(char **lexer_result, int *current_token)
 {
 //	printf(GRN"%s\n"RESET, *tokens);
@@ -30,6 +36,7 @@ t_simple_command *get_simple_command(char **lexer_result, int *current_token)
 
 	simple_command = simple_command_init(ACTUAL_POSITION_IN_LEXER_RESULT);		//выделить память и занулить
 	simple_command->arguments = get_args(lexer_result, current_token);
+//	simple_command->outfile = get_outfiles(lexer_result, current_token);
 	return (simple_command);
 }
 
@@ -54,7 +61,6 @@ t_command get_command_table(char **lexer_result)
 		command_table[count] = get_simple_command(lexer_result, &current_token);
 		count++;
 	}
-//	command_table -= last_token;
 	command.simple_commands = command_table;
 	return (command);
 }
