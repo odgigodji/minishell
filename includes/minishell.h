@@ -56,10 +56,11 @@
 # define GREATLESS "<GREATLESS>"		// "<<"
 # define PIPE "<PIPE>"					// "|"
 # define VAR "<VAR>"					// "$"
-# define TOKEN_IS_PIPE !ft_strncmp(PIPE, lexer_result[counter], ft_strlen(PIPE))
+//# define TOKEN_IS_PIPE !ft_strncmp(PIPE, lexer_result[counter], ft_strlen(PIPE))
 # define TOKEN_IS_NOT_PIPE ft_strncmp(PIPE, lexer_result[count], ft_strlen(PIPE))
-# define TOKENS_POSITION tokens + *current_token
-# define NOT_LAST_TOKEN current_token < last_token
+# define ACTUAL_POSITION_IN_LEXER_RESULT lexer_result + *current_token
+# define NOT_LAST_TOKEN current_token < last_token //?=
+# define ACTUAL_TOKEN lexer_result[*current_token]
 
 /*
 **	Command Data structure
@@ -153,6 +154,7 @@ char				**braces_expander(char **lexer_result, t_common *common);
 void				ft_print_lexer_result(char **lexer_result);
 void 				ft_print_args(char **arguments);
 void 				ft_print_simple_comand(t_simple_command *simple_command);
+void				ft_print_all_command(t_simple_command **command_table);
 
 /*
 ** parser
@@ -191,7 +193,7 @@ void				ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_fo
 int					get_token(char *line, char **token);
 char				*token_to_simple_command(char *token_to_arg);
 t_command get_command_table(char **lexer_result);
-t_simple_command *get_simple_command(char **tokens, int *current_token);
+t_simple_command *get_simple_command(char **lexer_result, int *current_token);
 //char				*get_token(char *line);
 int					is_token(char *token);
 t_simple_command	*simple_command_init(char **lexer_result);

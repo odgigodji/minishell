@@ -16,7 +16,18 @@ void ft_print_args(char **arguments)
 
 void ft_print_simple_comand(t_simple_command *simple_command)
 {
+	printf("-----------------simple_command:---------------------\n");
 	ft_print_args(simple_command->arguments);
+}
+
+void ft_print_all_command(t_simple_command **command_table)
+{
+	int i = 0;
+	while(command_table[i])
+	{
+		ft_print_simple_comand(command_table[i]);
+		i++;
+	}
 }
 
 void ft_print_lexer_result(char **lexer_result)
@@ -53,6 +64,7 @@ void ft_do_command(t_common *common)
 	lexer_result = lexer(line);
 //	braces_expander(lexer_result, common);
 	common->command = get_command_table(lexer_result);
+	ft_print_all_command(common->command.simple_commands);
 //	ft_print_args(common->command.simple_commands[0]->arguments);
 //	count = 0;
 //	while (lexer_result && lexer_result[count])

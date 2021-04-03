@@ -29,7 +29,7 @@ int num_of_simple_commands(char **lexer_result)
 	count_of_simple_command = 1;  //min 1 command
 	while(lexer_result && lexer_result[counter])
 	{
-		if (TOKEN_IS_PIPE)
+		if (!ft_strncmp(PIPE, lexer_result[counter], ft_strlen(PIPE)))
 			count_of_simple_command++;
 		counter++;
 	}
