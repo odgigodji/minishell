@@ -151,7 +151,7 @@ char				**lexer(char *line);
 char				**braces_expander(char **lexer_result, t_common *common);
 void				ft_print_lexer_result(char **lexer_result);
 void 				ft_print_args(char **arguments);
-
+void ft_print_simple_comand(t_simple_command *simple_command);
 
 /*
 ** parser
@@ -190,7 +190,7 @@ void				ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_fo
 int					get_token(char *line, char **token);
 char				*token_to_simple_command(char *token_to_arg);
 t_command get_command_table(char **lexer_result);
-t_simple_command *get_simple_command(char **tokens, t_command *command);
+t_simple_command *get_simple_command(char **tokens, int *current_token);
 //char				*get_token(char *line);
 int					is_token(char *token);
 t_simple_command	*simple_command_init(char **lexer_result);

@@ -11,7 +11,12 @@ void ft_print_args(char **arguments)
 		counter++;
 	}
 	if (arguments[counter] == NULL)
-		printf(YEL"|%s|"RESET, arguments[counter]);
+		printf(YEL"|%s|\n"RESET, arguments[counter]);
+}
+
+void ft_print_simple_comand(t_simple_command *simple_command)
+{
+	ft_print_args(simple_command->arguments);
 }
 
 void ft_print_lexer_result(char **lexer_result)
