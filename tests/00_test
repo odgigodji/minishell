@@ -11,7 +11,7 @@ cat < file < test | sort
 
 echo f f f  s fd g sdf g sdfgsdf g sdfg sd fg sdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd f f f  s fd g sdf g sdfgsdf g sdfg sd fg sd v v
 echo 1 2 3 4 5
-echo 1 2 3 | echo 3 4 5 | ls -l -a
+echo 1 2 3 | keho 3 4 5 | ls -l -a
 echo hello my name is john | echo 61 72 83 94 00 00  | echo aA bB cC dD | echo 1 2 3 4
 ls 1 2 3| ls |ls |ls|ls| ls -l -a| echo hello world
 ls |ls |ls|ls| echo hello world|echo hello world

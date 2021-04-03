@@ -58,6 +58,7 @@
 # define VAR "<VAR>"					// "$"
 # define TOKEN_IS_PIPE !ft_strncmp(PIPE, lexer_result[counter], ft_strlen(PIPE))
 # define TOKEN_IS_NOT_PIPE ft_strncmp(PIPE, lexer_result[count], ft_strlen(PIPE))
+# define TOKENS_POSITION tokens + *current_token
 
 /*
 **	Command Data structure
