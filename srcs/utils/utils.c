@@ -7,10 +7,10 @@ char **init_args(char **lexer_result, char *spec_token)
 	arguments = malloc((num_of_args(lexer_result, spec_token) + 1) * sizeof(char *));
 	//ft_calloc((num_of_args(lexer_result, spec_token) + 1), sizeof(char *));
 	arguments[num_of_args(lexer_result, spec_token)] = NULL;
-//	if (!ft_strcmp(spec_token, GREAT))
-//		printf(RED"GREAT COUNT_ARG %d\n"RESET, num_of_args(lexer_result, GREAT));
-//	else
-//		printf(RED"COUNT_ARG %d\n"RESET, num_of_args(lexer_result, PIPE));
+	if (!ft_strcmp(spec_token, GREAT))
+		printf(BLU"GREAT COUNT_ARG %d\n"RESET, num_of_args(lexer_result, GREAT));
+	else
+		printf(RED"COUNT_ARG %d\n"RESET, num_of_args(lexer_result, PIPE));
 	return (arguments);
 }
 

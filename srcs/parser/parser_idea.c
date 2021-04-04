@@ -5,16 +5,27 @@ char **get_outfiles(char **lexer_result, int *current_token)
 {
 	char **outfiles;
 
+	int counter = 0;
 //	while()h
 	outfiles = NULL;
 	outfiles = init_args(lexer_result, GREAT);
-	outfiles[0] = ft_strdup("helllo");
-	outfiles[1] = ft_strdup("world");
-	outfiles[2] = NULL;
-//	while(lexer_result)
-//	printf(BLU"%s\n"RESET, outfiles[0]);
-//	printf(BLU"%s\n"RESET, outfiles[1]);
-//	printf(BLU"%s\n"RESET, outfiles[2]);
+			//malloc(sizeof(char *) * 5); //fixme
+//	outfiles[0] = NULL;
+	while(lexer_result && *lexer_result &&ft_strcmp(*lexer_result, PIPE))
+	{
+		if(!ft_strcmp(*lexer_result, GREAT))
+		{
+//			printf("-%s\n", *(++lexer_result));
+			if ((!(outfiles[counter] = ft_strdup(*(++lexer_result)))))
+			{
+				break;
+			}
+			printf("-%s\n",outfiles[counter]);
+			counter++;
+		}
+		lexer_result++;
+	}
+	outfiles[counter] = NULL;
 	return(outfiles);
 }
 
