@@ -6,24 +6,18 @@ char **get_outfiles(char **lexer_result, int *current_token)
 	printf(GRN"current_token[%d] position|%s|\n"RESET, *current_token, *lexer_result);
 	char **outfiles;
 
+
 	int counter = 0;
-	static int token = 0;
-//	while()h
 	outfiles = NULL;
-//	lexer_result -= *current_token;
 	outfiles = init_args(lexer_result, GREAT);
-			//malloc(sizeof(char *) * 5); //fixme
-//	outfiles[0] = NULL;
 	while(lexer_result && *lexer_result &&ft_strcmp(*lexer_result, PIPE))
 	{
 		if(!ft_strcmp(*lexer_result, GREAT))
 		{
 //			printf("-%s\n", *(++lexer_result));
 			if ((!(outfiles[counter] = ft_strdup(*(++lexer_result)))))
-			{
-				break;
-			}
-			printf("-%s\n",outfiles[counter]);
+				break ;
+//			printf("-%s\n",outfiles[counter]);
 			counter++;
 		}
 		lexer_result++;
@@ -70,9 +64,12 @@ t_simple_command *get_simple_command(char **lexer_result, int *current_token)
 {
 	t_simple_command	*simple_command;	// один элемент массива simple_commands
 
-	simple_command = one_simple_command_init(ACTUAL_POSITION_IN_LEXER_RESULT);		//выделить память и занулить
+	simple_command = one_simple_command_init(ACTUAL_POSITION_IN_LEXER_RESULT);//выделить память и занулить
+	if(*current_token > ft_array_len(lexer_result))
+		return (simple_command);
+	simple_command->outfiles = get_outfiles(ACTUAL_POSITION_IN_LEXER_RESULT, current_token);
 	simple_command->arguments = get_args(lexer_result, current_token);
-	simple_command->outfiles = get_outfiles(lexer_result, current_token);
+//
 //	printf(BLU"%s\n"RESET, simple_command->outfiles[0]);
 //	printf(BLU"%s\n"RESET, simple_command->outfiles[1]);
 //	printf(BLU"%s\n"RESET, simple_command->outfiles[2]);
