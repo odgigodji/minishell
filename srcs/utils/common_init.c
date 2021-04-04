@@ -4,7 +4,7 @@
 **	создание пустой структуры t_simple_command
 */
 
-//t_simple_command	*simple_command_init(
+//t_simple_command	*one_simple_command_init(
 //		char **arguments,
 //		int number_of_arguments,
 //		int number_of_available_arguments

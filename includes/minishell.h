@@ -196,15 +196,15 @@ t_command get_command_table(char **lexer_result);
 t_simple_command *get_simple_command(char **lexer_result, int *current_token);
 //char				*get_token(char *line);
 int					is_token(char *token);
-t_simple_command	*simple_command_init(char **lexer_result);
+t_simple_command	*one_simple_command_init(char **lexer_result);
 t_simple_command	**command_table_init(char **lexer_result);
-char				**init_args(char **lexer_result);
+char **init_args(char **lexer_result, char *spec_token);
 
 /*
 ** counters
 */
 int 				num_of_simple_commands(char **lexer_result);
-int 				num_of_args(char **lexer_result);
+int 				num_of_args(char **lexer_result, char *spec_token);
 
 
 /*

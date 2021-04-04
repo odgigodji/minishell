@@ -3,8 +3,12 @@
 
 char **get_outfiles(char **lexer_result, int *current_token)
 {
+	char **outfiles;
 
-	return(0);
+//	while()h
+	outfiles = NULL;
+	outfiles = init_args(ACTUAL_POSITION_IN_LEXER_RESULT, GREAT);
+	return(outfiles);
 }
 
 char **get_args(char **lexer_result, int *current_token)
@@ -15,13 +19,20 @@ char **get_args(char **lexer_result, int *current_token)
 	char **arguments;
 	arguments = NULL;
 	count = 0;
-	arguments = init_args(ACTUAL_POSITION_IN_LEXER_RESULT);
-	while(lexer_result[*current_token] && ft_strncmp(PIPE, lexer_result[*current_token], ft_strlen(PIPE)))
+	arguments = init_args(ACTUAL_POSITION_IN_LEXER_RESULT, PIPE);
+	while(lexer_result[*current_token] && ft_strcmp(PIPE, lexer_result[*current_token]))
 	{
+		if (!ft_strcmp(GREAT, lexer_result[*current_token]))
+		{
+			(*current_token)++;
+			(*current_token)++;
+//			*current_token += 2;
+		}
 		arguments[count] = ft_strdup(lexer_result[*current_token]);
 		count++;
 		(*current_token)++;
 	}
+	arguments[count] = NULL;
 	(*current_token)++;
 	return (arguments);
 }
@@ -34,7 +45,7 @@ t_simple_command *get_simple_command(char **lexer_result, int *current_token)
 {
 	t_simple_command	*simple_command;	// один элемент массива simple_commands
 
-	simple_command = simple_command_init(ACTUAL_POSITION_IN_LEXER_RESULT);		//выделить память и занулить
+	simple_command = one_simple_command_init(ACTUAL_POSITION_IN_LEXER_RESULT);		//выделить память и занулить
 	simple_command->arguments = get_args(lexer_result, current_token);
 //	simple_command->outfile = get_outfiles(lexer_result, current_token);
 	return (simple_command);
