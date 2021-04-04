@@ -23,7 +23,7 @@ void ft_init_infiles(t_common *common, char *line, int current_command)
 	int infile_count;
 
 	infile_count = ft_redirect_counter(line, '<'); //fixme
-	common->command.simple_commands[current_command]->infile = ft_calloc(sizeof(char *), infile_count + 1);//+1-2
+	common->command.simple_commands[current_command]->infiles = ft_calloc(sizeof(char *), infile_count + 1);//+1-2
 	common->command.simple_commands[current_command]->num_of_infiles = infile_count;
 	common->command.simple_commands[current_command]->current_infile = 0;
 //	common->command.input_file = ft_calloc(sizeof(char), 255); // fixme test
@@ -81,7 +81,7 @@ void ft_init_simple_commands(t_common *common, char *line, int current_simple_co
 	common->command.simple_commands[current_simple_command]->current_arg = 0;
 	common->command.simple_commands[current_simple_command]->arg_count = arg_count;
 	common->command.simple_commands[current_simple_command]->is_cat = 0;
-	common->command.simple_commands[current_simple_command]->infile = NULL;
+	common->command.simple_commands[current_simple_command]->infiles = NULL;
 	common->command.simple_commands[current_simple_command]->outfiles = NULL;
 	common->command.simple_commands[current_simple_command]->outfile_can = NULL;
 //	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; ne raskoment

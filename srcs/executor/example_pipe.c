@@ -6,24 +6,24 @@ void	pipe_init(t_pipe *pipe_variables, t_simple_command *command)
 	int fd;
 
 	count = 0;
-//	if (NULL == command->infile[0])												//	if (infile)
+//	if (NULL == command->infiles[0])												//	if (infiles)
 		pipe_variables->fdin = dup(pipe_variables->tmpin);	// use default input		//	используем стандартный ввод
 //		pipe_variables->fdin = pipe_variables->fdpipe[0];		//	read fd назначаем на in
 //	else
-	if (NULL != command->infile && NULL != command->infile[0])
-		while (command->infile[count])
+	if (NULL != command->infiles && NULL != command->infiles[0])
+		while (command->infiles[count])
 		{
-			if (-1 == (fd = open(command->infile[count], O_RDONLY)))
+			if (-1 == (fd = open(command->infiles[count], O_RDONLY)))
 			{
 				ft_putstr_fd("minishell: ", 1);
-				ft_putstr_fd(command->infile[count], 1);
+				ft_putstr_fd(command->infiles[count], 1);
 				ft_putstr_fd(": No such file or directory(pipe_init)", 1);
 				count++;
 				continue ;
 			}
 			pipe_variables->fdin = fd;
 			count++;
-			if (command->infile[count])
+			if (command->infiles[count])
 				close(pipe_variables->fdin);
 		}
 }
@@ -86,21 +86,21 @@ void	last_simple_command_output(t_pipe *pipe_variables, t_simple_command *comman
 	}
 	pipe_variables->fdin = pipe_variables->fdpipe[0];		//	read fd назначаем на in
 	 count = 0;
-	if (NULL != command->infile[0])
+	if (NULL != command->infiles[0])
 	{
-		while (command->infile[count])
+		while (command->infiles[count])
 		{
-			if (-1 == (fd = open(command->infile[count], O_RDONLY)))
+			if (-1 == (fd = open(command->infiles[count], O_RDONLY)))
 			{
 				ft_putstr_fd("minishell: ", 1);
-				ft_putstr_fd(command->infile[count], 1);
+				ft_putstr_fd(command->infiles[count], 1);
 				ft_putstr_fd(": No such file or directory(lasl_read)\n", 1);
 				count++;
 				continue;
 			}
 			pipe_variables->fdin = fd;
 			count++;
-			if (command->infile[count])
+			if (command->infiles[count])
 				close(pipe_variables->fdin);
 		}
 	}
@@ -195,7 +195,7 @@ void	execute_processor(t_common *common)
 		else
 		{
 			pipe(pipe_variables.fdpipe);
-			pipe_variables.fdin = simple_command_in_out_fd(command->infile, &pipe_variables, IS_READ, command->is_cat);
+			pipe_variables.fdin = simple_command_in_out_fd(command->infiles, &pipe_variables, IS_READ, command->is_cat);
 			pipe_variables.fdout = simple_command_in_out_fd(command->outfiles, &pipe_variables, IS_WRITE, command->is_cat);
 		}
 		dup2(pipe_variables.fdout, STDOUT_FILENO);				//	Redirect output
@@ -230,7 +230,7 @@ void	execute_command(t_common *common, char **envp)
 	pipe_variables.tmpin = dup(STDIN_FILENO);		//	save in
 	pipe_variables.tmpout = dup(STDOUT_FILENO);		//	save out
 
-//	if (NULL != common->command.input_file)	//	if (infile)
+//	if (NULL != common->command.input_file)	//	if (infiles)
 //		pipe_variables.fdin = open(common->command.input_file, O_RDONLY);				//	получаем ввод из файла
 //	else											//	set the initial input
 		pipe_variables.fdin = dup(pipe_variables.tmpin);	// use default input	//	используем стандартный ввод

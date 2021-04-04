@@ -1,23 +1,44 @@
 #include <tcl.h>
 #include "minishell.h"
 
+char **get_infiles(char **lexer_result)
+{
+	char **infiles;
+	int counter;
+
+	counter = 0;
+	infiles = NULL;
+	infiles = init_args(lexer_result, LESS);
+	while(lexer_result && *lexer_result && ft_strcmp(*lexer_result, PIPE))
+	{
+		if(!ft_strcmp(*lexer_result, LESS))
+		{
+			if ((!(infiles[counter] = ft_strdup(*(++lexer_result)))))
+				break ;
+			counter++;
+		}
+		lexer_result++;
+	}
+	infiles[counter] = NULL;
+	return(infiles);
+}
+
 char **get_outfiles(char **lexer_result, int *current_token)
 {
-	printf(GRN"current_token[%d] position|%s|\n"RESET, *current_token, *lexer_result);
 	char **outfiles;
-
+	int is_cat;
 
 	int counter = 0;
 	outfiles = NULL;
 	outfiles = init_args(lexer_result, GREAT);
-	while(lexer_result && *lexer_result &&ft_strcmp(*lexer_result, PIPE))
+	while(lexer_result && *lexer_result && ft_strcmp(*lexer_result, PIPE))
 	{
-		if(!ft_strcmp(*lexer_result, GREAT))
+		if(!ft_strcmp(*lexer_result, GREAT) || !ft_strcmp(*lexer_result, GREATGREAT))
 		{
-//			printf("-%s\n", *(++lexer_result));
+//			if (!ft_strcmp(*lexer_result, GREATGREAT))
+//				is_cat = 1;
 			if ((!(outfiles[counter] = ft_strdup(*(++lexer_result)))))
 				break ;
-//			printf("-%s\n",outfiles[counter]);
 			counter++;
 		}
 		lexer_result++;
@@ -68,11 +89,8 @@ t_simple_command *get_simple_command(char **lexer_result, int *current_token)
 	if(*current_token > ft_array_len(lexer_result))
 		return (simple_command);
 	simple_command->outfiles = get_outfiles(ACTUAL_POSITION_IN_LEXER_RESULT, current_token);
+	simple_command->infiles = get_infiles(ACTUAL_POSITION_IN_LEXER_RESULT);
 	simple_command->arguments = get_args(lexer_result, current_token);
-//
-//	printf(BLU"%s\n"RESET, simple_command->outfiles[0]);
-//	printf(BLU"%s\n"RESET, simple_command->outfiles[1]);
-//	printf(BLU"%s\n"RESET, simple_command->outfiles[2]);
 	return (simple_command);
 }
 

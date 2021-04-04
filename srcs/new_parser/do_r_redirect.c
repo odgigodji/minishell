@@ -15,8 +15,8 @@ int ft_make_infile(t_common *common, char *line, int increment, int current_infi
 		printf("current simple command is %d\n", common->command.current_simple_command);
 	}
 
-	common->command.simple_commands[common->command.current_simple_command]->infile[current_infile] = ft_calloc(sizeof(char), infile_len + 1);
-	ft_strlcat(common->command.simple_commands[common->command.current_simple_command]->infile[current_infile],\
+	common->command.simple_commands[common->command.current_simple_command]->infiles[current_infile] = ft_calloc(sizeof(char), infile_len + 1);
+	ft_strlcat(common->command.simple_commands[common->command.current_simple_command]->infiles[current_infile],\
 	line + increment, infile_len + 1); // +1 на \0
 
 
@@ -42,11 +42,11 @@ int ft_do_infile(t_common *common, char *line, int increment)
 		ret = ft_make_infile(common, line, increment, current_infile);
 		common->command.simple_commands[common->command.current_simple_command]->current_infile++;
 	}
-	common->command.simple_commands[common->command.current_simple_command]->infile[num_of_infiles] = NULL;
+	common->command.simple_commands[common->command.current_simple_command]->infiles[num_of_infiles] = NULL;
 
 
 	if (DEBUG_INFILE)
-		printf(RED"[%s]\n"RESET, common->command.simple_commands[common->command.current_simple_command]->infile[current_infile]);
+		printf(RED"[%s]\n"RESET, common->command.simple_commands[common->command.current_simple_command]->infiles[current_infile]);
 	return (ret);
 }
 
@@ -77,7 +77,7 @@ int do_r_redirect(t_common *common, char *line)
 	}
 
 //		if (DEBUG_INFILE)
-//			printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->infile[0]);
+//			printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->infiles[0]);
 //		common->command.simple_commands[common->command.current_simple_command]->outfiles[0];
 	return 0;
 }

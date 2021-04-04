@@ -74,7 +74,7 @@ typedef struct			s_simple_command
 {
 	char				**arguments;					//	fixme Array of arguments
 	char				**outfiles;		// путь к файлу для записи в него результата (редирект ">")
-	char				**infile;		// путь к файлу для записи в него результата (редирект ">")
+	char				**infiles;		// путь к файлу для записи в него результата (редирект ">")
 	int					is_cat;
 
 
@@ -103,7 +103,7 @@ typedef struct			s_command
 	int 				num_of_simple_commands;  // количество симпл команд
 
 
-	int 				space_after_redirect;
+//	int 				space_after_redirect;
 	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
 	char 				*infile; // путь к файлу для чтения из него ввода (редирект "<")
 	char				*outfile_cat;		// путь к файлу для записи в него результата (редирект ">")

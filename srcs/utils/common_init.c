@@ -27,7 +27,7 @@
 
 void		command_init(t_common *common)
 {
-	common->command.num_of_simple_commands = 0;
+//	common->command.num_of_simple_commands = 0;
 
 	common->command.simple_commands = NULL;
 

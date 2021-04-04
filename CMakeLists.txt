@@ -15,7 +15,7 @@ link_directories(
 
 add_executable(minishell
         srcs/main.c
-        srcs/new_parser/parser.c
+#        srcs/new_parser/parser.c
 #        srcs/parser/make_arguments.c
         srcs/executor/executor.c
         srcs/executor/example_pipe.c
@@ -53,7 +53,7 @@ add_executable(minishell
 #        srcs/new_parser/double_quotes.c
 #        srcs/new_parser/do_dollar.c
         srcs/parser/lexer_m.c
-        srcs/parser/parser_m.c
+#        srcs/parser/parser_m.c
         srcs/utils/utils.c
         srcs/parser/parser_idea.c
 
@@ -61,7 +61,7 @@ add_executable(minishell
 
 add_executable(executor_tests
         srcs/executor/executor_tests/00_main_test.c
-        srcs/new_parser/parser.c
+#        srcs/new_parser/parser.c
 #        srcs/parser/pars.c
         srcs/executor/executor.c
         srcs/executor/example_pipe.c
