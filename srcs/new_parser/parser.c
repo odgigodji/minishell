@@ -38,14 +38,14 @@ void ft_print_common(t_common *common, int flag)
 ////		printf(GRN"simple_comand [%d]\n"RESET, i);
 //		if (common->command.simple_commands[i]->num_of_outfiles)
 //			printf(BLU"num_of_outfiles:%d\n"RESET, common->command.simple_commands[i]->num_of_outfiles);
-//		while(common->command.simple_commands[i]->outfile[j] && j < common->command.simple_commands[i]->num_of_outfiles)
+//		while(common->command.simple_commands[i]->outfiles[j] && j < common->command.simple_commands[i]->num_of_outfiles)
 //		{
-//			printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->outfile[j]);
+//			printf(RED"sc[%d] outfiles[%d] is |%s|\n"RESET, i, j, common->command.simple_commands[i]->outfiles[j]);
 //			j++;
 //		}
-//		if (common->command.simple_commands[i]->outfile[j] == NULL)
+//		if (common->command.simple_commands[i]->outfiles[j] == NULL)
 //		{
-//			printf(RED"sc[%d] outfile[%d] is (null)\n"RESET, i, j);
+//			printf(RED"sc[%d] outfiles[%d] is (null)\n"RESET, i, j);
 //		}
 //		i++;
 //	}
@@ -91,25 +91,25 @@ void ft_print_common(t_common *common, int flag)
 //	printf(YEL"final input_file is |%s|\n"RESET, common->command.infile);
 //	if (common->command.simple_commands[0]->num_of_outfiles > 0)
 //	{
-//		printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, 0, 0,
-//			   common->command.simple_commands[0]->outfile[0]);
-//		printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, 0, 0,
-//			   common->command.simple_commands[0]->outfile[1]);
-//		printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, 0, 0,
-//			   common->command.simple_commands[0]->outfile[2]);
-//		printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, 0, 0,
-//			   common->command.simple_commands[0]->outfile[3]);
-//		printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, 0, 0,
-//			   common->command.simple_commands[0]->outfile[4]);
+//		printf(RED"sc[%d] outfiles[%d] is |%s|\n"RESET, 0, 0,
+//			   common->command.simple_commands[0]->outfiles[0]);
+//		printf(RED"sc[%d] outfiles[%d] is |%s|\n"RESET, 0, 0,
+//			   common->command.simple_commands[0]->outfiles[1]);
+//		printf(RED"sc[%d] outfiles[%d] is |%s|\n"RESET, 0, 0,
+//			   common->command.simple_commands[0]->outfiles[2]);
+//		printf(RED"sc[%d] outfiles[%d] is |%s|\n"RESET, 0, 0,
+//			   common->command.simple_commands[0]->outfiles[3]);
+//		printf(RED"sc[%d] outfiles[%d] is |%s|\n"RESET, 0, 0,
+//			   common->command.simple_commands[0]->outfiles[4]);
 //
-//		printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, 1, 0,
-//			   common->command.simple_commands[1]->outfile[0]);
-//		printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, 1, 0,
-//			   common->command.simple_commands[1]->outfile[1]);
-//		printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, 1, 0,
-//			   common->command.simple_commands[1]->outfile[2]);
-//		printf(RED"sc[%d] outfile[%d] is |%s|\n"RESET, 1, 0,
-//			   common->command.simple_commands[1]->outfile[3]);
+//		printf(RED"sc[%d] outfiles[%d] is |%s|\n"RESET, 1, 0,
+//			   common->command.simple_commands[1]->outfiles[0]);
+//		printf(RED"sc[%d] outfiles[%d] is |%s|\n"RESET, 1, 0,
+//			   common->command.simple_commands[1]->outfiles[1]);
+//		printf(RED"sc[%d] outfiles[%d] is |%s|\n"RESET, 1, 0,
+//			   common->command.simple_commands[1]->outfiles[2]);
+//		printf(RED"sc[%d] outfiles[%d] is |%s|\n"RESET, 1, 0,
+//			   common->command.simple_commands[1]->outfiles[3]);
 //	}
 }
 

@@ -38,7 +38,7 @@ void ft_init_infiles(t_common *common, char *line, int current_command)
  * инициализация outfiles:
  * считаем количество outfiles(= количество '>');
  * выделяем память под все количество файлов;
- * занудяем последний outfile;
+ * занудяем последний outfiles;
  * если у нас только одна simple_command = нет пайпа, ставив флаг have_pipe = 0;
  * если кол-во simple_command > 1 то флаг в положении 1;
 */
@@ -48,7 +48,7 @@ void ft_init_outfiles(t_common *common, char *line, int current_command)
 	int outfile_count;
 
 	outfile_count = ft_redirect_counter(line, '>'); //fixme
-	common->command.simple_commands[current_command]->outfile = ft_calloc(sizeof(char *), outfile_count + 1);//+1-2
+	common->command.simple_commands[current_command]->outfiles = ft_calloc(sizeof(char *), outfile_count + 1);//+1-2
 	common->command.simple_commands[current_command]->num_of_outfiles = outfile_count;
 	common->command.simple_commands[current_command]->current_outfile = 0;
 //	common->command.input_file = ft_calloc(sizeof(char), 255); // fixme test
@@ -82,7 +82,7 @@ void ft_init_simple_commands(t_common *common, char *line, int current_simple_co
 	common->command.simple_commands[current_simple_command]->arg_count = arg_count;
 	common->command.simple_commands[current_simple_command]->is_cat = 0;
 	common->command.simple_commands[current_simple_command]->infile = NULL;
-	common->command.simple_commands[current_simple_command]->outfile = NULL;
+	common->command.simple_commands[current_simple_command]->outfiles = NULL;
 	common->command.simple_commands[current_simple_command]->outfile_can = NULL;
 //	common->command.simple_commands[current_command]->arguments[arg_count] = NULL; ne raskoment
 }

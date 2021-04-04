@@ -42,14 +42,14 @@ int	do_a_pipe(t_pipe *pipe_variables, t_simple_command *command)
 
 	// create pipe
 	pipe(pipe_variables->fdpipe);							//	создаём pipe
-	if (NULL == command->outfile && NULL == command->outfile[0])
+	if (NULL == command->outfiles && NULL == command->outfiles[0])
 	{
 		pipe_variables->fdout = pipe_variables->fdpipe[1];        //	write fd назначаем на out
 		return (pipe_variables->fdpipe[1]);
 	}
 	else
 	{
-		fd = simple_command_in_out_fd(command->outfile, pipe_variables, IS_WRITE, command->is_cat);
+		fd = simple_command_in_out_fd(command->outfiles, pipe_variables, IS_WRITE, command->is_cat);
 		if (-1 == fd)
 			return (1);
 		pipe_variables->fdout = fd;
@@ -61,26 +61,26 @@ void	last_simple_command_output(t_pipe *pipe_variables, t_simple_command *comman
 {
 	int	fd;
 	int	count;
-//	if (NULL != common->command.out_file)	//	if (outfile)
+//	if (NULL != common->command.out_file)	//	if (outfiles)
 //		pipe_variables->fdout = open(*common->command.out_file, O_WRONLY, O_APPEND);
 //	else
 	count = 0;
 	pipe_variables->fdout = dup(pipe_variables->tmpout);	//	то назначаем stdout (сохранённый ранее), результат вывода будем писать в стандартный вывод
-	if (NULL != command->outfile[0])
+	if (NULL != command->outfiles[0])
 	{
-		while (command->outfile[count])
+		while (command->outfiles[count])
 		{
-			if (-1 == (fd = open(command->outfile[count], O_WRONLY | O_APPEND | O_TRUNC | O_CREAT, 0644)))
+			if (-1 == (fd = open(command->outfiles[count], O_WRONLY | O_APPEND | O_TRUNC | O_CREAT, 0644)))
 			{
 				ft_putstr_fd("minishell: ", 1);
-				ft_putstr_fd(command->outfile[count], 1);
+				ft_putstr_fd(command->outfiles[count], 1);
 				ft_putstr_fd(": No such file or directory(last_write)\n", 1);
 				count++;
 				continue;
 			}
 			pipe_variables->fdout = fd;
 			count++;
-			if (command->outfile[count])
+			if (command->outfiles[count])
 				close(pipe_variables->fdout);
 		}
 	}
@@ -189,14 +189,14 @@ void	execute_processor(t_common *common)
 		command = common->command.simple_commands[command_table_count];
 		if (NULL == common->command.simple_commands[command_table_count + 1])		// если последняя комманда
 		{
-			pipe_variables.fdout = simple_command_in_out_fd(command->outfile, &pipe_variables, IS_WRITE,
+			pipe_variables.fdout = simple_command_in_out_fd(command->outfiles, &pipe_variables, IS_WRITE,
 															command->is_cat);		// if fd = -1 continue;
 		}
 		else
 		{
 			pipe(pipe_variables.fdpipe);
 			pipe_variables.fdin = simple_command_in_out_fd(command->infile, &pipe_variables, IS_READ, command->is_cat);
-			pipe_variables.fdout = simple_command_in_out_fd(command->outfile, &pipe_variables, IS_WRITE, command->is_cat);
+			pipe_variables.fdout = simple_command_in_out_fd(command->outfiles, &pipe_variables, IS_WRITE, command->is_cat);
 		}
 		dup2(pipe_variables.fdout, STDOUT_FILENO);				//	Redirect output
 		close(pipe_variables.fdout);
@@ -249,7 +249,7 @@ void	execute_command(t_common *common, char **envp)
 		*/
 		if (command_table_count == command_table_len - 1)	//	если это последняя simple_command
 		{
-//			if (NULL != common->command.out_file)	//	if (outfile)
+//			if (NULL != common->command.out_file)	//	if (outfiles)
 //				pipe_variables.fdout = open(common->command.out_file, O_WRONLY, O_APPEND);
 //			else
 				pipe_variables.fdout = dup(pipe_variables.tmpout);	//	то назначаем stdout (сохранённый ранее), результат вывода будем писать в стандартный вывод

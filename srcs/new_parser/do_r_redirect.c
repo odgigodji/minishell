@@ -55,7 +55,7 @@ int do_r_redirect(t_common *common, char *line)
 	int i;
 
 	i = 0;
-//	common->command.simple_commands[common->command.current_simple_command]->outfile[0] = "\0";//
+//	common->command.simple_commands[common->command.current_simple_command]->outfiles[0] = "\0";//
 
 	if (DEBUG_INFILE)
 		printf("REDIR_start:|%s|\n", line + 1);
@@ -78,6 +78,6 @@ int do_r_redirect(t_common *common, char *line)
 
 //		if (DEBUG_INFILE)
 //			printf("----->|%s|\n", common->command.simple_commands[common->command.current_simple_command]->infile[0]);
-//		common->command.simple_commands[common->command.current_simple_command]->outfile[0];
+//		common->command.simple_commands[common->command.current_simple_command]->outfiles[0];
 	return 0;
 }

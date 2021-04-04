@@ -4,8 +4,9 @@ char **init_args(char **lexer_result, char *spec_token)
 {
 	char **arguments;
 
-	arguments = ft_calloc((num_of_args(lexer_result, spec_token) + 1), sizeof(char *));
-//	arguments[num_of_args(lexer_result, spec_token)] = NULL;
+	arguments = malloc((num_of_args(lexer_result, spec_token) + 1) * sizeof(char *));
+	//ft_calloc((num_of_args(lexer_result, spec_token) + 1), sizeof(char *));
+	arguments[num_of_args(lexer_result, spec_token)] = NULL;
 //	if (!ft_strcmp(spec_token, GREAT))
 //		printf(RED"GREAT COUNT_ARG %d\n"RESET, num_of_args(lexer_result, GREAT));
 //	else
@@ -47,7 +48,8 @@ t_simple_command	**command_table_init(char **lexer_result)
 	t_simple_command	**command_table; // называется simple_commands в нашей структуре
 
 	command_table = NULL; // выделить память и занулить переменные
-	command_table = ft_calloc(num_of_simple_commands(lexer_result) + 1, sizeof(char *));
+	command_table = malloc((num_of_simple_commands(lexer_result) + 1) * sizeof(t_simple_command *));
+	//ft_calloc(num_of_simple_commands(lexer_result) + 1, sizeof(t_simple_command *));
 	command_table[num_of_simple_commands(lexer_result)] = NULL;
 	printf(RED"COUNT_SC %d\n"RESET, num_of_simple_commands(lexer_result));
 	return (command_table);
@@ -62,6 +64,6 @@ t_simple_command	*one_simple_command_init(char **lexer_result)
 	t_simple_command	*simple_command;
 
 	simple_command = NULL;
-	simple_command = malloc(sizeof(t_simple_command *));
+	simple_command = malloc(sizeof(t_simple_command));
 	return (simple_command);
 }

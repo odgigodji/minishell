@@ -73,7 +73,7 @@
 typedef struct			s_simple_command
 {
 	char				**arguments;					//	fixme Array of arguments
-	char				**outfile;		// путь к файлу для записи в него результата (редирект ">")
+	char				**outfiles;		// путь к файлу для записи в него результата (редирект ">")
 	char				**infile;		// путь к файлу для записи в него результата (редирект ">")
 	int					is_cat;
 

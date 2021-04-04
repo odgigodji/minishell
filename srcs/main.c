@@ -16,8 +16,10 @@ void ft_print_args(char **arguments)
 
 void ft_print_simple_comand(t_simple_command *simple_command)
 {
-	printf("-----------------simple_command:---------------------\n");
+	printf(BLU"-----------------simple_command:---------------------\n"RESET);
 	ft_print_args(simple_command->arguments);
+	printf("-------outfiles------\n");
+	ft_print_args(simple_command->outfiles);
 }
 
 void ft_print_all_command(t_simple_command **command_table)
