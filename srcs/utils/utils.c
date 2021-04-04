@@ -8,7 +8,7 @@ char **init_args(char **lexer_result, char *spec_token)
 	//ft_calloc((num_of_args(lexer_result, spec_token) + 1), sizeof(char *));
 	arguments[num_of_args(lexer_result, spec_token)] = NULL;
 	if (!ft_strcmp(spec_token, GREAT))
-		printf(BLU"GREAT COUNT_ARG %d\n"RESET, num_of_args(lexer_result, GREAT));
+		printf(BLU"GREAT COUNT %d\n"RESET, num_of_args(lexer_result, GREAT));
 	else
 		printf(RED"COUNT_ARG %d\n"RESET, num_of_args(lexer_result, PIPE));
 	return (arguments);
@@ -17,11 +17,18 @@ char **init_args(char **lexer_result, char *spec_token)
 int num_of_args(char **lexer_result, char *spec_token)
 {
 	int num_of_arg;
+	int num_of_outfiles;
 
 	num_of_arg = 0;
-	while(lexer_result[num_of_arg] && ft_strcmp(PIPE, lexer_result[num_of_arg]) &&\
-	ft_strcmp(spec_token, lexer_result[num_of_arg]))
+	num_of_outfiles = 0;
+	while(lexer_result[num_of_arg] && ft_strcmp(PIPE, lexer_result[num_of_arg]))
+	{
+		if (!ft_strcmp(spec_token, GREAT) && !ft_strcmp(lexer_result[num_of_arg], GREAT))
+			num_of_outfiles++;
 		num_of_arg++;
+	}
+	if (!ft_strcmp(spec_token, GREAT))
+		return(num_of_outfiles);
 	return (num_of_arg);
 }
 

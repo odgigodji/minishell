@@ -8,6 +8,7 @@ char **get_outfiles(char **lexer_result, int *current_token)
 	int counter = 0;
 //	while()h
 	outfiles = NULL;
+//	lexer_result -= *current_token;
 	outfiles = init_args(lexer_result, GREAT);
 			//malloc(sizeof(char *) * 5); //fixme
 //	outfiles[0] = NULL;
