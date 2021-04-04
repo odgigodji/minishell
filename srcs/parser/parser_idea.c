@@ -11,6 +11,7 @@ char **get_outfiles(char **lexer_result, int *current_token)
 	outfiles[0] = ft_strdup("helllo");
 	outfiles[1] = ft_strdup("world");
 	outfiles[2] = NULL;
+//	while(lexer_result)
 //	printf(BLU"%s\n"RESET, outfiles[0]);
 //	printf(BLU"%s\n"RESET, outfiles[1]);
 //	printf(BLU"%s\n"RESET, outfiles[2]);
@@ -57,6 +58,7 @@ t_simple_command *get_simple_command(char **lexer_result, int *current_token)
 
 	simple_command = one_simple_command_init(ACTUAL_POSITION_IN_LEXER_RESULT);		//выделить память и занулить
 	simple_command->arguments = get_args(lexer_result, current_token);
+//	printf(GRN"current_token[%d]\n"RESET, *current_token);
 	simple_command->outfiles = get_outfiles(lexer_result, current_token);
 //	printf(BLU"%s\n"RESET, simple_command->outfiles[0]);
 //	printf(BLU"%s\n"RESET, simple_command->outfiles[1]);
