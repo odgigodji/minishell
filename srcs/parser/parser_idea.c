@@ -49,11 +49,10 @@ char **get_outfiles(char **lexer_result, int *current_token)
 
 void pass_redirect_files(char **lexer_result, int *current_token)
 {
-	if (!ft_strcmp(GREAT, lexer_result[*current_token]) || !ft_strcmp(GREATGREAT, lexer_result[*current_token]) \
-	|| !ft_strcmp(LESS, lexer_result[*current_token]))
-	{
+	if (!ft_strcmp(ACTUAL_TOKEN, GREAT) || \
+	!ft_strcmp(ACTUAL_TOKEN, GREATGREAT) || \
+	!ft_strcmp(ACTUAL_TOKEN, LESS))
 		*current_token += 2;
-	}
 }
 
 char **get_args(char **lexer_result, int *current_token)
@@ -65,10 +64,10 @@ char **get_args(char **lexer_result, int *current_token)
 	arguments = NULL;
 	count = 0;
 	arguments = init_args(ACTUAL_POSITION_IN_LEXER_RESULT, PIPE);
-	while(lexer_result[*current_token] && ft_strcmp(PIPE, lexer_result[*current_token]))
+	while(ACTUAL_TOKEN && ft_strcmp(ACTUAL_TOKEN, PIPE))
 	{
 		pass_redirect_files(lexer_result, current_token);
-		arguments[count] = ft_strdup(lexer_result[*current_token]);
+		arguments[count] = ft_strdup(ACTUAL_TOKEN);
 		count++;
 		(*current_token)++;
 	}
