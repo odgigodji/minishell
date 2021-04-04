@@ -5,7 +5,7 @@ char **init_args(char **lexer_result, char *spec_token)
 	char **arguments;
 
 	arguments = ft_calloc((num_of_args(lexer_result, spec_token) + 1), sizeof(char *));
-	arguments[num_of_args(lexer_result, spec_token)] = NULL;
+//	arguments[num_of_args(lexer_result, spec_token)] = NULL;
 //	if (!ft_strcmp(spec_token, GREAT))
 //		printf(RED"GREAT COUNT_ARG %d\n"RESET, num_of_args(lexer_result, GREAT));
 //	else
