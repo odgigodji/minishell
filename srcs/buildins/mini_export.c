@@ -17,8 +17,6 @@ void	print_export(t_common *common)
 	int	count;
 
 	count = 0;
-//	puts(GRN "test" RESET);
-	printf("declare -x %s=\"%s\"\n", common->env_variables_list[count][0], common->env_variables_list[count][1]);
 	while (common->env_variables_list[count])
 	{
 		if (common->env_variables_list[count][1])
@@ -27,7 +25,6 @@ void	print_export(t_common *common)
 			printf("declare -x %s\n", common->env_variables_list[count][0]);
 		count++;
 	}
-//	puts(GRN "test" RESET);
 }
 
 int		is_append(char *arg)
@@ -48,9 +45,7 @@ void	mini_export(t_common *common, char **simple_command)
 	count = 1;
 	if (NULL == simple_command[1])
 	{
-//		puts(RED "test" RESET);
 		print_export(common);
-		return ;
 	}
 	else
 	{

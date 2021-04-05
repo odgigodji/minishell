@@ -85,10 +85,10 @@ char	***get_envp(char **envp)
 	while (envp[count])
 	{
 		result[count] = get_key_and_value(envp[count]);
-//		if (!ft_strncmp(result[count][0], "SHLVL", 6))
-//		{
-//			result[count][1] = ft_itoa(ft_atoi(result[count][1]) + 1);
-//		}
+		if (!ft_strncmp(result[count][0], "SHLVL", 6))
+		{
+			result[count][1] = ft_itoa(ft_atoi(result[count][1]) + 1);
+		}
 		count++;
 	}
 	result[count] = NULL;
@@ -245,4 +245,14 @@ int		update_envp_var(t_common *common, char *key, char *new_value, int append)
 		add_argument(common, key, new_value);
 		return (0);
 	}
+}
+
+int		ft_array_len(char	**arg_list)
+{
+	int	count;
+
+	count = 0;
+	while (arg_list[count])
+		count++;
+	return (count);
 }
