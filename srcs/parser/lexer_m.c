@@ -130,7 +130,6 @@ int			get_token2(char *line, char **token)
 	flag_back_slash = 0;
 	while (line[count_line])
 	{
-//		puts("check");
 		if (line[count_line] == '"' || line[count_line] == '\'')
 			flag_brace = toggle_brace_flag_lexer(flag_brace, line[count_line]);
 		if ('\0' == flag_brace && (line[count_line] == ' ' || is_spec_symbol(line[count_line])) && flag_back_slash % 2 == 0)
@@ -142,7 +141,6 @@ int			get_token2(char *line, char **token)
 		count_token++;
 	}
 	buffer_token[count_token] = '\0';
-//	printf("buffer |%s|\n", buffer_token);
 	*token = strdup(buffer_token);
 	return (count_line);
 }

@@ -156,6 +156,8 @@ void 				ft_print_args(char **arguments);
 void 				ft_print_simple_comand(t_simple_command *simple_command);
 void				ft_print_all_command(t_simple_command **command_table);
 
+int		ft_array_len(char	**arg_list); // fixme удалить
+
 /*
 ** parser
 */
@@ -218,7 +220,8 @@ void				execute_command(t_common *common, char **envp);
 void				execute_simple_command_buildin(t_common *common, t_simple_command *simple_command);
 void				execute_simple_command(t_common *common, t_simple_command *simple_command);
 int					is_buildin(t_simple_command *simple_command);
-void				execute_processor(t_common *common);
+void				execute_processor(t_common *common, t_pipe *pipe_variables);
+void				execute_preprocessing(t_common *common);
 
 /*
  * pre_executor
