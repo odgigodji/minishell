@@ -22,6 +22,7 @@ void ft_print_simple_comand(t_simple_command *simple_command)
 	{
 		printf("-------outfiles------\n");
 		ft_print_args(simple_command->outfiles);
+		printf(GRN"is_cat =%d\n"RESET, simple_command->is_cat);
 	}
 	if (simple_command->infiles[0])
 	{

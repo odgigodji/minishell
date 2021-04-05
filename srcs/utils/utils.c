@@ -83,5 +83,6 @@ t_simple_command	*one_simple_command_init(char **lexer_result)
 
 	simple_command = NULL;
 	simple_command = malloc(sizeof(t_simple_command));
+	simple_command->is_cat = 0;
 	return (simple_command);
 }

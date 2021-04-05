@@ -23,10 +23,9 @@ char **get_infiles(char **lexer_result)
 	return(infiles);
 }
 
-char **get_outfiles(char **lexer_result, int *current_token)
+char **get_outfiles(char **lexer_result, int *is_cat)
 {
 	char **outfiles;
-	int is_cat;
 
 	int counter = 0;
 	outfiles = NULL;
@@ -35,8 +34,10 @@ char **get_outfiles(char **lexer_result, int *current_token)
 	{
 		if(!ft_strcmp(*lexer_result, GREAT) || !ft_strcmp(*lexer_result, GREATGREAT))
 		{
-//			if (!ft_strcmp(*lexer_result, GREATGREAT))
-//				is_cat = 1;
+			if (!ft_strcmp(*lexer_result, GREATGREAT))
+				*is_cat = 1;
+			else
+				*is_cat = 0;
 			if ((!(outfiles[counter] = ft_strdup(*(++lexer_result)))))
 				break ;
 			counter++;
@@ -118,7 +119,7 @@ t_simple_command *get_simple_command(char **lexer_result, int *current_token)
 	simple_command = one_simple_command_init(ACTUAL_POSITION_IN_LEXER_RESULT);//выделить память и занулить
 	if(*current_token > ft_array_len(lexer_result))
 		return (simple_command);
-	simple_command->outfiles = get_outfiles(ACTUAL_POSITION_IN_LEXER_RESULT, current_token);
+	simple_command->outfiles = get_outfiles(ACTUAL_POSITION_IN_LEXER_RESULT, &simple_command->is_cat);
 	simple_command->infiles = get_infiles(ACTUAL_POSITION_IN_LEXER_RESULT);
 	simple_command->arguments = get_args(lexer_result, current_token);
 	return (simple_command);
