@@ -49,10 +49,28 @@ char **get_outfiles(char **lexer_result, int *current_token)
 
 void pass_redirect_files(char **lexer_result, int *current_token)
 {
-	if (!ft_strcmp(ACTUAL_TOKEN, GREAT) || \
-	!ft_strcmp(ACTUAL_TOKEN, GREATGREAT) || \
+	char *token_after_file;
+
+	token_after_file = lexer_result[*current_token + 2];
+	if (!ft_strcmp(ACTUAL_TOKEN, GREAT) || !ft_strcmp(ACTUAL_TOKEN, GREATGREAT) || \
 	!ft_strcmp(ACTUAL_TOKEN, LESS))
-		*current_token += 2;
+	{
+		printf(MAG"-%d\n"RESET, *current_token);
+		if (token_after_file && ft_strcmp(token_after_file, GREAT) || !token_after_file)
+		{
+			*current_token += 2;
+			return ;
+		}
+		token_after_file = lexer_result[*current_token + 2];
+		while (token_after_file && !ft_strcmp(ACTUAL_TOKEN, GREAT) && (!ft_strcmp(token_after_file, GREAT)))
+			*current_token += 2;
+//		if (!token_after_file)
+//		{
+//			printf(RED"kkk\n"RESET);
+//			*current_token += 2;
+//		}
+		printf(MAG"--%d\n"RESET, *current_token);
+	}
 }
 
 char **get_args(char **lexer_result, int *current_token)
@@ -67,7 +85,9 @@ char **get_args(char **lexer_result, int *current_token)
 	while(ACTUAL_TOKEN && ft_strcmp(ACTUAL_TOKEN, PIPE))
 	{
 		pass_redirect_files(lexer_result, current_token);
-		arguments[count] = ft_strdup(ACTUAL_TOKEN);
+		printf("=%s\n",ACTUAL_TOKEN);
+		if (!(arguments[count] = ft_strdup(ACTUAL_TOKEN)))
+			return (arguments);
 		count++;
 		(*current_token)++;
 	}

@@ -69,29 +69,11 @@ void ft_do_command(t_common *common)
 		exit(0);
 	lexer_result = lexer(line);
 	ft_print_lexer_result(lexer_result);
-//	braces_expander(lexer_result, common);
+	braces_expander(lexer_result, common);
 	common->command = get_command_table(lexer_result);
 	ft_print_all_command(common->command.simple_commands);
-//	ft_print_args(common->command.simple_commands[0]->arguments);
-//	count = 0;
-//	while (lexer_result && lexer_result[count])
-//	{
-//		printf("[%3d] |%10s|\n", count, lexer_result[count]);
-//		count++;
-//
-
 	line = NULL;
 
-//	line += new_pars(common, line); // смещаем line на расстояние до точки с запятой
-
-//	executor(common);
-
-//		printf(CYN"----------------------------------------------------------end of executor---------------------------------------------------\n"RESET);
-//	if (*line == '\0')
-//		printf("==================================================the end of line\n");
-//	printf("-------------------------------line after ';' is <%s>\n", line);
-
-//	}
 }
 
 void	minishell_loop(char **envp)

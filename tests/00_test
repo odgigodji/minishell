@@ -103,3 +103,8 @@ ls |   <- хороший кейс для executor
 cat | cat | ls | cat | cat
 
 test=test ; env | grep test ; export test ; env | grep test
+
+--------------------------------m_test------------------------------------------
+                                            //вывод в 5: 1 1 2 3
+echo 1 > 2 > 3 > 4 > hello 1 2 3 > 5
+echo hello > outfile-0-0 1 2 > echo 1 > 2 > 3 > 4 > hello 1 2 3 > 5

@@ -53,7 +53,7 @@ add_executable(minishell
 #        srcs/new_parser/double_quotes.c
 #        srcs/new_parser/do_dollar.c
         srcs/parser/lexer_m.c
-#        srcs/parser/parser_m.c
+        srcs/parser/parser_m.c
         srcs/utils/utils.c
         srcs/parser/parser_idea.c
 
