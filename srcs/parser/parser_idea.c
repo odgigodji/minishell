@@ -69,7 +69,7 @@ void pass_redirect_files(char **lexer_result, int *current_token)
 	!ft_strcmp(ACTUAL_TOKEN, LESS))
 	{
 //		printf(MAG"-%d\n"RESET, *current_token);
-		if (token_after_file && ft_strcmp(token_after_file, GREAT) || !token_after_file)
+		if ((token_after_file && ft_strcmp(token_after_file, GREAT)) || !token_after_file)
 		{
 			*current_token += 2;
 			return ;
@@ -109,7 +109,7 @@ char **get_args(char **lexer_result, int *current_token)
 }
 
 /*
-** функция которая собирает siple_command из токенов
+** функция которая собирает simple_command из токенов
 */
 
 t_simple_command *get_simple_command(char **lexer_result, int *current_token)

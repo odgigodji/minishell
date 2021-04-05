@@ -92,15 +92,27 @@ void ft_do_command(t_common *common)
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 //	t_term_to_cannon(common->termcap);
-
 	if (!strncmp(line, "exit", 5))
 		exit(0);
 	lexer_result = lexer(line);
+	if (invalid_lexer_result(lexer_result))
+	{
+		printf(RED"invalid line\n"RESET);
+		exit(2);
+	}
 	ft_print_lexer_result(lexer_result);
 	braces_expander(lexer_result, common);
 	common->command = get_command_table(lexer_result);
 	ft_print_all_command(common->command.simple_commands);
 	line = shift_line(line);
+//	i = 0;
+//	while(lexer_result[i])
+//	{
+//		free(lexer_result[i]);
+//		i++;
+//	}
+//	while (1);
+//	free(lexer_result);
 //	printf(GRN"----------%s\n"RESET, line);
 	executor(common);
 

@@ -159,6 +159,13 @@ void				ft_print_all_command(t_simple_command **command_table);
 int		ft_array_len(char	**arg_list); // fixme удалить
 
 /*
+** is_valid
+*/
+
+int ft_is_valid_line(char *line);
+int invalid_lexer_result(char **lexer_result);
+
+/*
 ** parser
 */
 

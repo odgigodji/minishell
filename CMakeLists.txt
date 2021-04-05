@@ -56,8 +56,7 @@ add_executable(minishell
         srcs/parser/parser_m.c
         srcs/utils/utils.c
         srcs/parser/parser_idea.c
-
-        )
+        srcs/parser/utils1.c)
 
 add_executable(executor_tests
         srcs/executor/executor_tests/00_main_test.c
@@ -101,7 +100,7 @@ add_executable(executor_tests
         srcs/new_parser/do_dollar.c srcs/parser/lexer_m.c
         srcs/utils/utils.c
         srcs/parser/parser_idea.c
-        )
+        srcs/parser/utils1.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m
