@@ -54,10 +54,6 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command)
 	int 	count;
 	char	command[MAX_PATH];
 
-	if (is_buildin(simple_command))
-	{
-		exit(0);
-	}
 	temp_envp = make_envp(common);
 	path = split_path(common->env_variables);
 	count = 0;
@@ -76,6 +72,5 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command)
 	ft_putstr_fd("minishell: command not found: ", 1);
 	ft_putstr_fd(simple_command->arguments[0], 1);
 	ft_putstr_fd("\n", 1);
-//	perror("execve child. Command not executed (no such command?)\n");
 	exit(0);
 }

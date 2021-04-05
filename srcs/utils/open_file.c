@@ -49,8 +49,7 @@ int		simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_
 	{
 		if (is_read)
 		{
-//		pipe_variables->fdin = dup(pipe_variables->tmpin); // сработает только для первой?
-			pipe_variables->fdin = dup(pipe_variables->fdpipe[0]); // сработает только для первой?
+			pipe_variables->fdin = dup(pipe_variables->fdpipe[0]);
 			return (pipe_variables->fdin);
 		}
 		else

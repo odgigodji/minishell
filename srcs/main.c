@@ -102,6 +102,7 @@ void ft_do_command(t_common *common)
 	ft_print_all_command(common->command.simple_commands);
 	line = shift_line(line);
 //	printf(GRN"----------%s\n"RESET, line);
+	executor(common);
 
 }
 
