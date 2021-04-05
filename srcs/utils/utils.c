@@ -6,12 +6,12 @@ char **init_args(char **lexer_result, char *spec_token)
 
 	arguments = malloc((num_of_args(lexer_result, spec_token) + 1) * sizeof(char *));
 	arguments[num_of_args(lexer_result, spec_token)] = NULL;
-	if (!ft_strcmp(spec_token, GREAT))
-		printf(BLU"GREAT COUNT %d\n"RESET, num_of_args(lexer_result, GREAT));
-	if(!ft_strcmp(spec_token, LESS))
-		printf(GRN"LESS COUNT %d\n"RESET, num_of_args(lexer_result, LESS));
-	else
-		printf(RED"COUNT_ARG %d\n"RESET, num_of_args(lexer_result, PIPE));
+//	if (!ft_strcmp(spec_token, GREAT))
+//		printf(BLU"GREAT COUNT %d\n"RESET, num_of_args(lexer_result, GREAT));
+//	if(!ft_strcmp(spec_token, LESS))
+//		printf(GRN"LESS COUNT %d\n"RESET, num_of_args(lexer_result, LESS));
+//	else
+//		printf(RED"COUNT_ARG %d\n"RESET, num_of_args(lexer_result, PIPE));
 	return (arguments);
 }
 
@@ -45,6 +45,8 @@ int num_of_simple_commands(char **lexer_result)
 {
 	int count_of_simple_command;
 
+	if (*lexer_result == NULL)
+		return (NULL);
 	count_of_simple_command = 1;  //min 1 command
 	while(lexer_result && *lexer_result)
 	{
