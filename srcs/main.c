@@ -59,6 +59,22 @@ void ft_print_lexer_result(char **lexer_result)
 	printf("----------------lexer-result-------------------\n");
 }
 
+char *shift_line(char *line)
+{
+	int len_to_shift;
+	char *new_line;
+
+	new_line = NULL;
+	len_to_shift = ft_strlen_to_char(line, ';');
+	if (line[len_to_shift] == '\0')
+		return (NULL);
+//	printf("-[%d]\n", len_to_shift);
+//	printf("=%s\n", line + len_to_shift + 1);
+	if (line + len_to_shift + 1)
+		new_line = line + len_to_shift + 1;
+	return (new_line);
+}
+
 void ft_do_command(t_common *common)
 {
 	int 		i = 0;
@@ -83,7 +99,8 @@ void ft_do_command(t_common *common)
 	braces_expander(lexer_result, common);
 	common->command = get_command_table(lexer_result);
 	ft_print_all_command(common->command.simple_commands);
-	line = NULL;
+	line = shift_line(line);
+//	printf(GRN"----------%s\n"RESET, line);
 
 }
 
