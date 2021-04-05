@@ -64,11 +64,6 @@ void pass_redirect_files(char **lexer_result, int *current_token)
 		token_after_file = lexer_result[*current_token + 2];
 		while (token_after_file && !ft_strcmp(ACTUAL_TOKEN, GREAT) && (!ft_strcmp(token_after_file, GREAT)))
 			*current_token += 2;
-//		if (!token_after_file)
-//		{
-//			printf(RED"kkk\n"RESET);
-//			*current_token += 2;
-//		}
 		printf(MAG"--%d\n"RESET, *current_token);
 	}
 }
