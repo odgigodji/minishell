@@ -18,10 +18,16 @@ void ft_print_simple_comand(t_simple_command *simple_command)
 {
 	printf(BLU"-----------------simple_command:---------------------\n"RESET);
 	ft_print_args(simple_command->arguments);
-	printf("-------outfiles------\n");
-	ft_print_args(simple_command->outfiles);
-	printf("-------infiles-------\n");
-	ft_print_args(simple_command->infiles);
+	if (simple_command->outfiles[0])
+	{
+		printf("-------outfiles------\n");
+		ft_print_args(simple_command->outfiles);
+	}
+	if (simple_command->infiles[0])
+	{
+		printf("-------infiles-------\n");
+		ft_print_args(simple_command->infiles);
+	}
 }
 
 void ft_print_all_command(t_simple_command **command_table)
