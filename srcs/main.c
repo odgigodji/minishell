@@ -33,6 +33,11 @@ void ft_print_simple_comand(t_simple_command *simple_command)
 void ft_print_all_command(t_simple_command **command_table)
 {
 	int i = 0;
+	if(command_table[0] == NULL)
+	{
+		printf("empty line\n");
+		return ;
+	}
 	while(command_table[i])
 	{
 		ft_print_simple_comand(command_table[i]);

@@ -46,7 +46,7 @@ int num_of_simple_commands(char **lexer_result)
 	int count_of_simple_command;
 
 	if (*lexer_result == NULL)
-		return (NULL);
+		return (0);
 	count_of_simple_command = 1;  //min 1 command
 	while(lexer_result && *lexer_result)
 	{
