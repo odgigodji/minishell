@@ -28,7 +28,8 @@ int num_of_args(char **lexer_result, char *spec_token)
 	{
 		if (!ft_strcmp(spec_token, LESS) && (!ft_strcmp(lexer_result[num_of_args], LESS)))
 			num_of_infiles++;
-		if ((!ft_strcmp(spec_token, GREAT)) && ((!ft_strcmp(lexer_result[num_of_args], GREAT) \
+		if ((!ft_strcmp(spec_token, GREAT)) \
+		&& ((!ft_strcmp(lexer_result[num_of_args], GREAT) \
 		|| !ft_strcmp(lexer_result[num_of_args], GREATGREAT))))
 			num_of_outfiles++;
 		num_of_args++;

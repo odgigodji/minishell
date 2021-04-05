@@ -62,7 +62,10 @@ void pass_redirect_files(char **lexer_result, int *current_token)
 			return ;
 		}
 		token_after_file = lexer_result[*current_token + 2];
-		while (token_after_file && !ft_strcmp(ACTUAL_TOKEN, GREAT) && (!ft_strcmp(token_after_file, GREAT)))
+		while (token_after_file && (!ft_strcmp(ACTUAL_TOKEN, GREAT) || !ft_strcmp(ACTUAL_TOKEN, LESS) \
+		|| !ft_strcmp(ACTUAL_TOKEN, GREATGREAT)) \
+		&& (!ft_strcmp(token_after_file, GREAT )|| !ft_strcmp(ACTUAL_TOKEN, LESS) \
+		|| !ft_strcmp(ACTUAL_TOKEN, GREATGREAT)))
 			*current_token += 2;
 		printf(MAG"--%d\n"RESET, *current_token);
 	}
