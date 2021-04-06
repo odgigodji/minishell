@@ -9,10 +9,15 @@ void	execute_preprocessing(t_common *common)
 
 	execute_processor(common, &pipe_variables);
 
-//	dup2(pipe_variables.tmpin, STDIN_FILENO);
-//	dup2(pipe_variables.tmpout, STDOUT_FILENO);
-//	close(pipe_variables.tmpin);
-//	close(pipe_variables.tmpout);
+	dup2(pipe_variables.tmpin, STDIN_FILENO);
+	dup2(pipe_variables.tmpout, STDOUT_FILENO);
+	close(pipe_variables.tmpin);
+	close(pipe_variables.tmpout);
+
+	close(pipe_variables.fdin);
+	close(pipe_variables.fdout);
+	close(pipe_variables.fdpipe[0]);
+	close(pipe_variables.fdpipe[1]);
 
 }
 
@@ -30,8 +35,7 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 		simple_command = common->command.simple_commands[command_table_count];
 
 		//	выбираем откуда читать
-//		simple_command_in_out_fd(simple_command->infiles, pipe_variables, IS_READ, simple_command->is_cat);
-		pipe_variables->fdin = dup(pipe_variables->fdpipe[0]);
+		simple_command_in_out_fd(simple_command->infiles, pipe_variables, IS_READ, simple_command->is_cat);
 		close(pipe_variables->fdpipe[0]);	// fixme
 		dup2(pipe_variables->fdin, STDIN_FILENO);
 		close(pipe_variables->fdin);		// fixme
@@ -45,8 +49,7 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 		}
 		else
 			pipe(pipe_variables->fdpipe);
-//		simple_command_in_out_fd(simple_command->outfiles, pipe_variables, IS_WRITE, simple_command->is_cat);
-		pipe_variables->fdout = dup(pipe_variables->fdpipe[1]);
+		simple_command_in_out_fd(simple_command->outfiles, pipe_variables, IS_WRITE, simple_command->is_cat);
 		close(pipe_variables->fdpipe[1]);	//	fixme
 		dup2(pipe_variables->fdout, STDOUT_FILENO);
 		close(pipe_variables->fdout);		//	fixme
@@ -63,16 +66,13 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 		waitpid(ret, NULL, WUNTRACED);
 		command_table_count++;
 	}
-//	waitpid(-1, NULL, WUNTRACED);
-	dup2(pipe_variables->tmpin, STDIN_FILENO);
-	dup2(pipe_variables->tmpout, STDOUT_FILENO);
-	close(pipe_variables->tmpin);
-	close(pipe_variables->tmpout);
-
-	close(pipe_variables->fdin);
-	close(pipe_variables->fdout);
-	close(pipe_variables->fdpipe[0]);
-	close(pipe_variables->fdpipe[1]);
-//	waitpid(ret, NULL, WNOHANG);
-//	waitpid(ret, NULL, 0);
+//	dup2(pipe_variables->tmpin, STDIN_FILENO);
+//	dup2(pipe_variables->tmpout, STDOUT_FILENO);
+//	close(pipe_variables->tmpin);
+//	close(pipe_variables->tmpout);
+//
+//	close(pipe_variables->fdin);
+//	close(pipe_variables->fdout);
+//	close(pipe_variables->fdpipe[0]);
+//	close(pipe_variables->fdpipe[1]);
 }

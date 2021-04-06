@@ -92,8 +92,8 @@ void ft_do_command(t_common *common)
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 //	t_term_to_cannon(common->termcap);
-	if (!strncmp(line, "exit", 5))
-		exit(0);
+//	if (!strncmp(line, "exit", 5))
+//		exit(0);
 	lexer_result = lexer(line);
 	if (invalid_lexer_result(lexer_result))
 	{
