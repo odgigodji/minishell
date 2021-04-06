@@ -128,6 +128,7 @@ int			get_token2(char *line, char **token)
 	count_token = 0;
 	flag_brace = 0;
 	flag_back_slash = 0;
+	buffer_token[0] = '\0';
 	while (line[count_line])
 	{
 		if (line[count_line] == '"' || line[count_line] == '\'')

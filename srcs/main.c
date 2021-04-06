@@ -101,16 +101,20 @@ void ft_do_command(t_common *common)
 		exit(2);
 	}
 	ft_print_lexer_result(lexer_result);
-	braces_expander(lexer_result, common);
-	common->command = get_command_table(lexer_result);
-	ft_print_all_command(common->command.simple_commands);
-	line = shift_line(line);
-//	i = 0;
 //	while(lexer_result[i])
 //	{
 //		free(lexer_result[i]);
 //		i++;
 //	}
+	braces_expander(lexer_result, common);
+
+//	fixme раскомментить
+	common->command = get_command_table(lexer_result);
+	ft_print_all_command(common->command.simple_commands);
+	line = shift_line(line);
+//	fixme раскомментить
+
+//	i = 0;
 //	while (1);
 //	free(lexer_result);
 //	printf(GRN"----------%s\n"RESET, line);
