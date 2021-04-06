@@ -17,14 +17,15 @@ void ft_print_args(char **arguments)
 void ft_print_simple_comand(t_simple_command *simple_command)
 {
 	printf(BLU"-----------------simple_command:---------------------\n"RESET);
-	ft_print_args(simple_command->arguments);
+	if(simple_command->arguments[0])
+		ft_print_args(simple_command->arguments);
 	if (simple_command->outfiles[0])
 	{
 		printf("-------outfiles------\n");
 		ft_print_args(simple_command->outfiles);
 		printf(GRN"is_cat =%d\n"RESET, simple_command->is_cat);
 	}
-	if (simple_command->infiles[0])
+	if (simple_command->infiles && simple_command->infiles[0])
 	{
 		printf("-------infiles-------\n");
 		ft_print_args(simple_command->infiles);
@@ -34,7 +35,7 @@ void ft_print_simple_comand(t_simple_command *simple_command)
 void ft_print_all_command(t_simple_command **command_table)
 {
 	int i = 0;
-	if(command_table[0] == NULL)
+	if(command_table == NULL || command_table[0] == NULL)
 	{
 		printf("empty line\n");
 		return ;
@@ -118,7 +119,7 @@ void ft_do_command(t_common *common)
 //	while (1);
 //	free(lexer_result);
 //	printf(GRN"----------%s\n"RESET, line);
-	executor(common);
+//	executor(common);
 
 }
 

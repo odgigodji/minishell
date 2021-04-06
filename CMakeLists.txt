@@ -57,6 +57,7 @@ set(SOURCE_FILES
         srcs/utils/utils.c
         srcs/parser/parser_idea.c
         srcs/parser/utils1.c
+        srcs/new_parser/name.c
         )
 
 add_executable(minishell
@@ -69,7 +70,7 @@ add_executable(executor_tests
         srcs/executor/executor_tests/00_main_test.c
         srcs/executor/executor_tests/01_test_get_envp_var_pointer.c
         srcs/executor/executor_tests/executor_tests.h
-        )
+        srcs/new_parser/name.c)
 
 add_executable(lexer_tests
         ${SOURCE_FILES}

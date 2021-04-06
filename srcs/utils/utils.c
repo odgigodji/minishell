@@ -50,7 +50,7 @@ int num_of_simple_commands(char **lexer_result)
 	count_of_simple_command = 1;  //min 1 command
 	while(lexer_result && *lexer_result)
 	{
-		if (!ft_strcmp(PIPE, *lexer_result))
+		if (!ft_strcmp(PIPE, *lexer_result) && *lexer_result + 1)
 			count_of_simple_command++;
 		lexer_result++;
 	}

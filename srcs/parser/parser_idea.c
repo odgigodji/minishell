@@ -50,42 +50,53 @@ char **get_outfiles(char **lexer_result, int *is_cat)
 
 void avoid_redirects_without_args(char **lexer_result, int *current_token)
 {
-	char *token_after_file;
-
-	token_after_file = lexer_result[*current_token + 2];
-	while (token_after_file && (!ft_strcmp(ACTUAL_TOKEN, GREAT) || !ft_strcmp(ACTUAL_TOKEN, LESS) \
-		|| !ft_strcmp(ACTUAL_TOKEN, GREATGREAT)) \
-		&& (!ft_strcmp(token_after_file, GREAT )|| !ft_strcmp(ACTUAL_TOKEN, LESS) \
-		|| !ft_strcmp(ACTUAL_TOKEN, GREATGREAT)))
+	while ((lexer_result[*current_token + 2] && (is_redirect(ACTUAL_TOKEN))) \
+	|| (!lexer_result[*current_token + 2] && (is_redirect(ACTUAL_TOKEN))))
+	{
 		*current_token += 2;
+		if (!ACTUAL_TOKEN)
+			return ;
+	}
+}
+
+int is_redirect(char *actual_token)
+{
+	if (!ft_strcmp(actual_token, GREAT) || !ft_strcmp(actual_token, GREATGREAT) || \
+	!ft_strcmp(actual_token, LESS))
+		return (1);
+	else
+		return (0);
 }
 
 void pass_redirect_files(char **lexer_result, int *current_token)
 {
+	printf(MAG"%s\n"RESET, lexer_result[*current_token]);
 	char *token_after_file;
 
 	token_after_file = lexer_result[*current_token + 2];
-	if (!ft_strcmp(ACTUAL_TOKEN, GREAT) || !ft_strcmp(ACTUAL_TOKEN, GREATGREAT) || \
-	!ft_strcmp(ACTUAL_TOKEN, LESS))
+	if (is_redirect(ACTUAL_TOKEN))
 	{
 //		printf(MAG"-%d\n"RESET, *current_token);
-		if ((token_after_file && ft_strcmp(token_after_file, GREAT)) || !token_after_file)
+		printf(GRN"%s\n"RESET, lexer_result[*current_token]);
+		if ((token_after_file && (ft_strcmp(token_after_file, GREAT) \
+		&& ft_strcmp(token_after_file, GREATGREAT) && ft_strcmp(token_after_file, LESS)) || !token_after_file))
 		{
 			*current_token += 2;
 			return ;
 		}
 		avoid_redirects_without_args(lexer_result, current_token);
-		if ((!ft_strcmp(token_after_file, LESS) || !ft_strcmp(token_after_file, GREATGREAT) \
-		|| !ft_strcmp(token_after_file, GREAT)) \
-		&& !ft_strcmp(token_after_file, PIPE))
-			return ;
+
+//		if ((!ft_strcmp(token_after_file, LESS) || !ft_strcmp(token_after_file, GREATGREAT) \
+//		|| !ft_strcmp(token_after_file, GREAT)) \
+//		&& !ft_strcmp(token_after_file, PIPE))
+//			return ;
 //		printf(MAG"--%d\n"RESET, *current_token);
 	}
 }
 
 char **get_args(char **lexer_result, int *current_token)
 {
-//	printf(GRN"%s\n"RESET, *tokens);
+//	printf(GRN"%s\n"RESET, *lexer_result);
 	int count;
 
 	char **arguments;
@@ -95,7 +106,7 @@ char **get_args(char **lexer_result, int *current_token)
 	while(ACTUAL_TOKEN && ft_strcmp(ACTUAL_TOKEN, PIPE))
 	{
 		pass_redirect_files(lexer_result, current_token);
-		if (ACTUAL_TOKEN && !ft_strcmp(ACTUAL_TOKEN, PIPE))
+		if (ACTUAL_TOKEN && (!ft_strcmp(ACTUAL_TOKEN, PIPE)))
 			break ;
 //		printf("=%s\n",ACTUAL_TOKEN);
 		if (!(arguments[count] = ft_strdup(ACTUAL_TOKEN)))
@@ -143,6 +154,8 @@ t_command get_command_table(char **lexer_result)
 	command_table = command_table_init(lexer_result);		//выделить память и занулить
 	while(NOT_LAST_TOKEN)
 	{
+		if(current_token >= ft_array_len(lexer_result))
+			break ;
 		command_table[count] = get_simple_command(lexer_result, &current_token);
 		count++;
 	}

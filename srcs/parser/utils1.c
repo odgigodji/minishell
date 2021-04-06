@@ -19,10 +19,6 @@ int is_redirects_error(char **lexer_result)
 	return (0);
 }
 
-int ft_is_valid_line(char *line)
-{
-	;
-}
 
 int invalid_lexer_result(char **lexer_result)
 {

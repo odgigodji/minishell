@@ -110,11 +110,15 @@ test=test ; env | grep test ; export test ; env | grep test
 echo 1 > 2 > 3 > 4 > hello 1 2 3 > 5
 echo 1 < 2 > 3 < 4 > hello a b c > 5
 echo 1 < 2 > 3 < 4 > hello a b c > 5
-echo 1 < 2 > 3 < 4 < 5 > 6 < 7 < 8 > 9 >> 10 >> 11 >> 12 < 13 > hello a b c
-echo hello > outfile-0-0 1 2 7 7 7 > echo 1 > 2 > 3 > 4 > hello 1 2 3 4 5 > 5
+echo a < 2 > 3 < 4 < 5 > 6 < 7 < 8 > 9 >> 10 >> 11 >> 12 < 13 > hello b c d
+echo 0 > outfile-0-0 1 2 3 4 5 > a 6 > b > c > d > e > f > g > h > j 7 8 9 10 11 > k | echo 1
 cat -e < file | sort | cat -e
 cat -e < file | sort | cat -e | cat -e > file | sort | cat -e | cat -e >> file | sort | cat -e
 
 -------------------------------invalid_lines------------------------------------
 echo 1 >> 2
 echo 1 > < 2
+cat > file > test
+cat < file < test
+1  2 3 | a b c  | # # # | 7 7
+echo 1 > 2 a

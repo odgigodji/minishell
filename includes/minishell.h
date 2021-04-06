@@ -144,6 +144,9 @@ typedef struct			s_pipe
 	int fdpipe[2];
 }						t_pipe;
 
+t_simple_command *get_simple_command1(char **lexer_result, int *current_token);
+
+
 /*
 **	Временные функции
 */
@@ -198,6 +201,7 @@ int					do_arg(t_common *common, char *line, int len_for_calloc, int increment);
 int					ft_double_quotes(t_common *common, char *line);
 int 				ft_do_dollar(t_common *common, char *line);
 void				ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc);
+int is_redirect(char *actual_token);
 
 int					get_token(char *line, char **token);
 char				*token_to_simple_command(char *token_to_arg);
