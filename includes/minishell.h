@@ -152,8 +152,7 @@ t_simple_command *get_simple_command1(char **lexer_result, int *current_token);
 */
 
 void				ft_printf_outfile_info(t_common *common);
-char				**lexer(char *line);
-char				**braces_expander(char **lexer_result, t_common *common);
+
 void				ft_print_lexer_result(char **lexer_result);
 void 				ft_print_args(char **arguments);
 void 				ft_print_simple_comand(t_simple_command *simple_command);
@@ -213,6 +212,11 @@ t_simple_command	*one_simple_command_init(char **lexer_result);
 t_simple_command	**command_table_init(char **lexer_result);
 char **init_args(char **lexer_result, char *spec_token);
 
+
+char				**lexer(char *line);
+char				**braces_expander(char **lexer_result, t_common *common);
+char				toggle_brace_flag_lexer(char flag, char current_char);
+int					toggle_back_slash_flag(int flag, char *line, int count);
 /*
 ** counters
 */

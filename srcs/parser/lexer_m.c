@@ -18,34 +18,6 @@ int			is_spec_symbol(char c)
 	return (0);
 }
 
-int			check_back_slash(char *line)
-{
-	int	count;
-
-	count = 0;
-	while (line[count] == '\\')
-		count++;
-	return (count);
-}
-
-// back slash
-//		if (line[count_line] == '\\')
-//		{
-//			back_slash = check_back_slash(&line[count_line]) / 2;
-//			while (back_slash)
-//			{
-//				buffer[count_token] = '\\';
-//				count_line += 2;
-//				count_token++;
-//				back_slash--;
-//			}
-//			if (line[count_line] == '\\')
-//			{
-//				back_slash_flag = 1;
-////				count_line++;
-//			}
-//		}
-
 /*
 ** функция которая бежит по строке и возвращается завалидированный токен
 ** По одному токену за один раз
@@ -255,24 +227,3 @@ char		**lexer(char *line)
 	}
 	return (result);
 }
-
-//int	main(int argc, char **argv)
-//{
-//	char	**lexer_result;
-//	int		count;
-//
-//	lexer_result = lexer(argv[1]);
-//	count = 0;
-//	while (lexer_result[count])
-//	{
-//		printf("[%3d] |%10s|\n", count, lexer_result[count]);
-//		count++;
-//	}
-//	return (0);
-//}
-
-
-
-
-
-

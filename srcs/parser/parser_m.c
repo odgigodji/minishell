@@ -4,29 +4,6 @@
 
 #include "minishell.h"
 
-int			is_has_braces(char *token)
-{
-	int	count;
-
-	count = 0;
-	while (token && token[count])
-	{
-		if (token[count] == '\'' || token[count] == '"')
-			return (1);
-		count++;
-
-	}
-	return (0);
-}
-
-char 		toggle_brace_flag(char current_char, char brace_flag)
-{
-	if (current_char == brace_flag)
-		return ('\0');
-	else
-		return (current_char);
-}
-
 int			get_env_variable_name(char *line, char **variable_name)
 {
 	int 	count;
@@ -49,16 +26,8 @@ int			get_env_variable_name(char *line, char **variable_name)
 	}
 	result[count] = '\0';
 	*variable_name = result;
-//	printf("var_name: |%s|\n", result);
 	return (count);
 }
-
-//char	*get_envp_var_pointer(t_common *common, char *var)
-
-//char		*expand_braces(char *token, t_common *common)
-//{
-//
-//}
 
 int			expand_variable(char *token, t_common *common, char **result, int *count_result)
 {
@@ -68,9 +37,8 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 	if (token[1] == '?')
 	{
 		temp = ft_itoa(errno);
-		puts(temp);
 		strlcat(*result, temp, MAX_PATH);
-		count_token = 1 + (int)strlen(temp);
+		count_token = 1 + (int)ft_strlen(temp);
 	}
 	else
 	{
@@ -78,7 +46,7 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 		if (temp && get_envp_var_pointer(common, temp))
 			strlcat(*result, get_envp_var_pointer(common, temp), MAX_PATH);
 	}
-	*count_result = (int) strlen(*result);
+	*count_result = (int)ft_strlen(*result);
 	return (count_token);
 }
 
@@ -113,13 +81,13 @@ int			expand_double_quotes(char *token, t_common *common, char **result, int *co
 	count = 0;
 	count_temp = 0;
 	temp = calloc(MAX_PATH, sizeof(char));
-	while (token_p[count] && token_p[count] != '"')
+	while (token_p[count] && !(token_p[count] == '"'))
 	{
-		if (token_p[count] == '$')
+		if (token_p[count] == '$' && token_p[count - 1] != '\\')
 			count += expand_variable(&token[count + 1], common, &temp, &count_temp);
 		else
 		{
-			if (token_p[count] == '"')
+			if (token_p[count] == '"' && token_p[count - 1] != '\\')
 				break ;
 			temp[count_temp] = token_p[count];
 			count++;
@@ -136,21 +104,29 @@ char		*expand_braces(char *token, t_common *common)
 {
 	int		count_token;
 	int		count_result;
+	int		flag_back_slash;
 	char	*result;
 
 	count_token = 0;
 	count_result = 0;
+	flag_back_slash = 0;
 	if (NULL == (result = calloc(sizeof(char), MAX_PATH)))
 		return (NULL);
 	while (token[count_token])
 	{
-		if (token[count_token] == '$')
+		if (token[count_token] == '\\')
+		{
+			flag_back_slash = toggle_back_slash_flag(flag_back_slash, &token[count_token], count_token);
+			if (flag_back_slash % 2 != 0)
+				count_token++;
+		}
+		if (token[count_token] == '$' && flag_back_slash % 2 == 0)
 			count_token += expand_variable(&token[count_token], common, &result, &count_result);
-		else if (token[count_token] == '\'')
+		else if (token[count_token] == '\'' && flag_back_slash % 2 == 0)
 			count_token += expand_single_quotes(&token[count_token], common, &result, &count_result);
-		else if (token[count_token] == '"')
+		else if (token[count_token] == '"' && flag_back_slash % 2 == 0)
 			count_token += expand_double_quotes(&token[count_token], common, &result, &count_result);
-		else
+		else if (token[count_token])
 		{
 			result[count_result] = token[count_token];
 			count_token++;
@@ -223,14 +199,8 @@ char		**braces_expander(char **lexer_result, t_common *common)
 	count = 0;
 	while (lexer_result[count])
 	{
-//		if (is_has_braces(lexer_result[count]))
 		lexer_result[count] = expand_braces(lexer_result[count], common);
 		count++;
 	}
 	return (lexer_result);
 }
-
-//t_command	*parser_m(char **tokens, )
-//{
-//
-//}

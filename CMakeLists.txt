@@ -74,10 +74,10 @@ add_executable(executor_tests
 
 add_executable(lexer_tests
         ${SOURCE_FILES}
-        srcs/parser/lexer_tests/test_lexer.c
-        srcs/parser/lexer_tests/test_lexer.h
+        srcs/parser/lexer_tests/test_lexer_00.c
+        srcs/parser/lexer_tests/test_lexer_00.h
         srcs/parser/lexer_tests/main_test.c
-        )
+        srcs/parser/lexer_tests/test_lexer_01.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m

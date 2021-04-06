@@ -63,16 +63,9 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 		{
 			execute_simple_command(common, simple_command);
 		}
-		waitpid(ret, NULL, WUNTRACED);
+//		waitpid(ret, NULL, WUNTRACED);
 		command_table_count++;
 	}
-//	dup2(pipe_variables->tmpin, STDIN_FILENO);
-//	dup2(pipe_variables->tmpout, STDOUT_FILENO);
-//	close(pipe_variables->tmpin);
-//	close(pipe_variables->tmpout);
-//
-//	close(pipe_variables->fdin);
-//	close(pipe_variables->fdout);
-//	close(pipe_variables->fdpipe[0]);
-//	close(pipe_variables->fdpipe[1]);
+	for (int i = 0; i < 4; i++)
+		wait(0);
 }

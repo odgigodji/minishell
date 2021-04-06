@@ -58,16 +58,20 @@ echo hello world >> 1 >> 2 >> 3
 
 ----------------------------------quotes----------------------------------------
 Валидные
-echo 'hello my dear friend' 1 2
 'echo' hello
+echo 'hello my dear friend' 1 2
 ''e''c''h''o'' hello
 'e''c''h''o' hello
 "ec"'ho' hello
+
+"ec"'ho' ""h""'e'l'l'''o''
+
 
 Невалидные
 bash-3.2$ 'ec""ho' hello => bash: ec""ho: command not found
 bash-3.2$ "ec''ho" hello => bash: ec''ho: command not found
 ---------------------------------double_quotes----------------------------------
+"echo" "hello"
 echo "hello my dear friend" 1 2
 
 bash-3.2$ echo "hel$HOME"'$HOMElo'	=>	hel/Users/mscot$HOMElo
@@ -80,7 +84,22 @@ bash-3.2$ echo "hel$?"'$?lo'		=>	hel0$?lo
 bash-3.2$ echo\ test	=>	bash: echo test: command not found
 bash-3.2$ echo\\ test	=>	bash: echo\: command not found
 
+echo "test"
 
+echo '\\'		=>	\\
+echo "\\"		=>	\
+
+echo '\\\'		=>	\\
+echo "\\\""		=>	\"
+
+echo "test\""
+
+echo 'test'
+
+echo m"test\""		=> mtest\"
+"ec"'ho' "\"h\""'e'l'l'''o''    =>	"h"ello
+"ec"'ho' "\"h\""'e'l\'l\'''o''	=>	"h"el'l'o
+echo '\\\-'\\					=>	\\\-\
 ----------------------------------dolllar---------------------------------------
 echo hello $PATH 1 2 3
 echo hello $bullshit 1 2 3
