@@ -7,6 +7,6 @@
 
 #include "minishell.h"
 
-void	test_lexer(t_common *common, char **envp);
+int	test_lexer_00(char *line, char **test_result);
 
 #endif //MINISHELL_02_TEST_LEXER_H

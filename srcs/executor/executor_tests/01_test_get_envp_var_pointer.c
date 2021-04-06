@@ -13,7 +13,7 @@ void	test_get_envp_var_pointer(t_common *common, char **envp)
 
 	count = 0;
 	count_test = 0;
-	printf ("%3s ", "01");
+	printf ("%3s \n", "01");
 	while (envp[count])
 	{
 		count_copy = 0;
@@ -26,7 +26,7 @@ void	test_get_envp_var_pointer(t_common *common, char **envp)
 		if (ft_strncmp(ft_strrchr(envp[count], '=') + 1, get_envp_var_pointer(common, temp), 100))
 		{
 			count_test++;
-			printf("[%d][%s] [%s]\n", count, envp[count], common->env_variables_list[count][1]);
+			printf(RED"[%d]"RESET"\n[should be]	[%s]\n[actually]	[%s]\n", count, envp[count], common->env_variables_list[count][1]);
 		}
 		count++;
 	}
