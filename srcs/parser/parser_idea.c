@@ -70,7 +70,7 @@ int is_redirect(char *actual_token)
 
 void pass_redirect_files(char **lexer_result, int *current_token)
 {
-	printf(MAG"%s\n"RESET, lexer_result[*current_token]);
+//	printf(MAG"%s\n"RESET, lexer_result[*current_token]);
 	char *token_after_file;
 
 	token_after_file = lexer_result[*current_token + 2];
@@ -78,19 +78,12 @@ void pass_redirect_files(char **lexer_result, int *current_token)
 	{
 //		printf(MAG"-%d\n"RESET, *current_token);
 		printf(GRN"%s\n"RESET, lexer_result[*current_token]);
-		if ((token_after_file && (ft_strcmp(token_after_file, GREAT) \
-		&& ft_strcmp(token_after_file, GREATGREAT) && ft_strcmp(token_after_file, LESS)) || !token_after_file))
+		if ((token_after_file && (!is_redirect(token_after_file)) || !token_after_file))
 		{
 			*current_token += 2;
 			return ;
 		}
 		avoid_redirects_without_args(lexer_result, current_token);
-
-//		if ((!ft_strcmp(token_after_file, LESS) || !ft_strcmp(token_after_file, GREATGREAT) \
-//		|| !ft_strcmp(token_after_file, GREAT)) \
-//		&& !ft_strcmp(token_after_file, PIPE))
-//			return ;
-//		printf(MAG"--%d\n"RESET, *current_token);
 	}
 }
 

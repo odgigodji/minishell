@@ -1,54 +1,68 @@
 #include "minishell.h"
 
-t_simple_command *get_simple_command1(char **lexer_result, int *current_token)
+int incorrect_quotes(char *line)
 {
-	t_simple_command	*simple_command;// один элемент массива simple_commands
-	int files_count;
-	int arg_count;
-	int last_token;
+	printf(RED"---------|%s|---------\n"RESET, line);
+	int i;
+	int flag;
+	int res;
 
-
-//	last_token = ft_array_len(lexer_result);
-	if(*lexer_result == NULL)
-		return(NULL);
-	files_count = 0;
-	arg_count = 0;
-	simple_command = one_simple_command_init(ACTUAL_POSITION_IN_LEXER_RESULT);//выделить память и занулить
-	printf(GRN"%s\n"RESET, lexer_result[*current_token]);
-	simple_command->outfiles = init_args(lexer_result, GREAT);
-	simple_command->arguments = init_args(lexer_result, "regular_token");
-
-	while(ACTUAL_TOKEN)
+	i = 1;
+	res = 1;
+	while (line[i])
 	{
-		printf("-%s\n", ACTUAL_TOKEN);
-//		if (!ft_strcmp(ACTUAL_TOKEN, PIPE))
-//		{
-//			*current_token += 1;
-//			return (simple_command);
-//		}
-//		if(*current_token > ft_array_len(lexer_result))
-//			return (simple_command);
-//		if(!ft_strcmp(ACTUAL_TOKEN, GREAT))//is_redirect)
-//		{
-//			simple_command->outfiles[files_count] = ft_strdup(lexer_result[++(*current_token)]);//get_files;
-//			printf(BLU"files:%s\n"RESET, simple_command->outfiles[files_count]);
-//			if(simple_command->outfiles[files_count + 1])
-//				files_count++;
-//		}
-//		if(ft_strcmp(ACTUAL_TOKEN, GREAT))//is-args_token
-//		{
-//			simple_command->arguments[arg_count] = ft_strdup(lexer_result[++(*current_token)]);//get_args
-//			printf(RED"files:%s\n"RESET, simple_command->arguments[arg_count]);
-//			if(simple_command->arguments[files_count + 1])
-//				arg_count++;
-//		}
-		if(!lexer_result[*current_token + 1])
-			break;
-		else
-			(*current_token)++;
+		if (line[i] == '\'')
+			res++;
+//		if (line[i + 1] && line[i] == '\\' && line[i + 1] == '\'')
+//			res--;
+		i++;
 	}
-	simple_command->outfiles[files_count] = NULL;
-	simple_command->arguments[files_count] = NULL;
-	lexer_result[*current_token] = NULL;
-	return (simple_command);
+	if (res % 2)
+	{
+		printf("[%d]not_ok\n", res);
+		return (1);
+	}
+	if (!(res % 2))
+	{
+		printf("[%d]ok\n", res);
+	}
+//	if (res % 2)
+//	exit(5);
+	return (0);
+}
+
+int incorrect_pipe(const char *line)
+{
+	int i;
+
+	i = 1;
+	while(line[i])
+	{
+		if (ft_empty_line(line))
+			return 1;
+		if(line[i] != '|' || (line[i + 1] && line[i] == ' ' && line[i + 1] != '|'))
+			return(0);
+		i++;
+	}
+	return(1);
+}
+
+int invalid_line(char *line)
+{
+	int i;
+	int res;
+
+	res = 0;
+	i = 0;
+	while(line[i])
+	{
+//		if(line[i] == ' ')
+//			;
+//		if (line[i] == '\'' && incorrect_quotes(line + i))
+//			return (1);
+//		if (line[i] == '|' && incorrect_pipe(line + i))
+//			return (1);
+		i++;
+	}
+	return (0);
 }

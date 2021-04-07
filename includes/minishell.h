@@ -145,7 +145,7 @@ typedef struct			s_pipe
 	int fdpipe[2];
 }						t_pipe;
 
-t_simple_command *get_simple_command1(char **lexer_result, int *current_token);
+//t_simple_command *get_simple_command1(char **lexer_result, int *current_token);
 
 
 /*
@@ -165,7 +165,7 @@ int		ft_array_len(char	**arg_list); // fixme удалить
 ** is_valid
 */
 
-int ft_is_valid_line(char *line);
+int invalid_line(char *line);
 int invalid_lexer_result(char **lexer_result);
 
 /*

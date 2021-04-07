@@ -145,6 +145,10 @@ void	execute_test_00(t_common *common)
 	char	*test_result_26[] = {"echo", "mtest\"", NULL};
 	execute_test(26, line_26, test_result_26, common);
 
+	char	*line_27 = "echo 1 > < 2";
+	char	*test_result_27[] = {"echo", "1", GREAT, LESS, "2", NULL};
+	execute_test(27, line_27, test_result_27, common);
+
 	//echo "\n \n \n"
 	char	*line_26_1 = "echo \"\\n \\n \\n\"";
 	char	*test_result_26_1[] = {"echo", "\\n \\n \\n", NULL};
