@@ -202,7 +202,7 @@ int			get_token3(char *line, char **token, t_common *common)
 	while (line[count_line])
 	{
 		temp = line[count_line];
-		if (line[count_line] == '\\' && !flag_back_slash && !flag_brace_single)
+		if (line[count_line] == '\\' && !flag_back_slash && !flag_brace_single && (ft_strchr("$\\\"", line[count_line + 1])))
 		{
 			flag_back_slash = 1;
 			count_line++;
