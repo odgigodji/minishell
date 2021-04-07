@@ -168,8 +168,8 @@ void	t_not_cr(t_termcap *termcap, int l, char *str)
 	termcap->cursor += l;
 	termcap->temp = strdup((termcap->history[termcap->history_count] + termcap->cursor - 1));
 	termcap->history[termcap->history_count][termcap->cursor - 1] = '\0';
-	strncat(termcap->history[termcap->history_count], str, 2048);
-	strncat(termcap->history[termcap->history_count], termcap->temp, 2048);
+	strncat(termcap->history[termcap->history_count], str, MAX_PATH);
+	strncat(termcap->history[termcap->history_count], termcap->temp, MAX_PATH);
 	write(1, str, l);
 	write(1, termcap->temp, strlen(termcap->temp));
 }

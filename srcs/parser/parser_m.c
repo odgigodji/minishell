@@ -40,6 +40,12 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 		strlcat(*result, temp, MAX_PATH);
 		count_token = 1 + (int)ft_strlen(temp);
 	}
+	else if (token[1] == '$')
+	{
+		temp = ft_itoa(getpid());
+		strlcat(*result, temp, MAX_PATH);
+		count_token = 1 + (int)ft_strlen(temp);
+	}
 	else
 	{
 		count_token = 1 + get_env_variable_name(token, &temp);    // + 1 на знак доллара

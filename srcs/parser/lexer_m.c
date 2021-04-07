@@ -186,7 +186,6 @@ int			get_token3(char *line, char **token, t_common *common)
 {
 	int		count_line;
 	int		count_token;
-//	char	buffer_token[MAX_PATH];
 	char	*buffer_token;
 	char	flag_brace_single;
 	char	flag_brace_double;

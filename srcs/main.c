@@ -88,13 +88,11 @@ void ft_do_command(t_common *common)
 	if (line == NULL || *line == '\0')
 	{
 		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
-//		t_get_next_line(&line, common->termcap);
-		get_next_line(0, &line);
+		t_get_next_line(&line, common->termcap);
+//		get_next_line(0, &line);
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
-//	t_term_to_cannon(common->termcap);
-//	if (!strncmp(line, "exit", 5))
-//		exit(0);
+	t_term_to_cannon(common->termcap);
 	lexer_result = lexer(line, common);
 	if (invalid_lexer_result(lexer_result))
 	{
@@ -108,11 +106,9 @@ void ft_do_command(t_common *common)
 //		i++;
 //	}
 
-//	fixme раскомментить
 	common->command = get_command_table(lexer_result);
 	ft_print_all_command(common->command.simple_commands);
 	line = shift_line(line);
-//	fixme раскомментить
 
 //	i = 0;
 //	while (1);
