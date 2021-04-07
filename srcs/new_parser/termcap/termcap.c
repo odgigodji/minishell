@@ -212,8 +212,10 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 //	while (str[0] != '\n')					// 004 eot
 	while (0 != strcmp(str, "\4"))			// 004 eot
 	{
-		if (0 >= (l = read(0, str, 100)))
+		if (0 > (l = read(0, str, 100)))
 			return (l);
+		if (!strcmp(str, "\4"))
+			return (13);
 		str[l] = '\0';
 		if (0 == l || !t_string_handle(termcap, str, l))  // || !strcmp(str, "\n")
 			break ;
