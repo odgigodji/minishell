@@ -213,10 +213,12 @@ t_simple_command	**command_table_init(char **lexer_result);
 char **init_args(char **lexer_result, char *spec_token);
 
 
-char				**lexer(char *line);
+char				**lexer(char *line, t_common *common);
 char				**braces_expander(char **lexer_result, t_common *common);
 char				toggle_brace_flag_lexer(char flag, char current_char);
 int					toggle_back_slash_flag(int flag, char *line, int count);
+int					expand_variable(char *token, t_common *common, char **result, int *count_result);
+int					get_token3(char *line, char **token, t_common *common);
 /*
 ** counters
 */

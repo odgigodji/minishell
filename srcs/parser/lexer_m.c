@@ -109,9 +109,133 @@ int			get_token2(char *line, char **token)
 			break ;
 		if (line[count_line] == '\\')
 			flag_back_slash = toggle_back_slash_flag(flag_back_slash, &line[count_line], count_line);
+
 		buffer_token[count_token] = line[count_line];
 		count_line++;
 		count_token++;
+	}
+	buffer_token[count_token] = '\0';
+	*token = strdup(buffer_token);
+	return (count_line);
+}
+
+/*
+ * 		if (line[count_line] == '\\' && !flag_brace)
+		{
+			flag_back_slash = toggle_back_slash_flag(flag_back_slash, &line[count_line], count_line);
+			count_line++;
+		}
+		if (line[count_line] == '\'')
+		{
+			flag_brace = toggle_brace_flag_lexer(flag_brace, line[count_line]);
+		}
+ */
+
+/*
+ * 		$TERM""text => TERM
+ * 		начинается с $
+ */
+char		*get_variable_name(char *line)
+{
+	char	*result;
+	char	*line_p;
+	int		count;
+
+	count = 0;
+	result = malloc(MAX_NAME * sizeof(char));
+	if (line[0] != '$')
+		return (NULL);
+	line_p = line + 1; // смещаем на $
+	while (line_p[count] && (line_p[count] == '_' || ft_isalnum(line_p[count])))
+	{
+		result[count] = line_p[count];
+		count++;
+	}
+	result[count] = '\0';
+	return (result);
+}
+
+//	var_value = char	*get_envp_var_pointer(t_common *common, char *var)
+int			expand_variable_lexer(char *line, t_common *common, char **buffer_token, int *count_token)
+{
+	char	*var_name;
+	char	*var_value;
+	char	*line_p;
+	int		count;
+
+	if (line[1] == '?')
+	{
+		line_p = ft_itoa(errno);
+		*count_token = strlcat(*buffer_token, line_p, MAX_PATH);
+		count = ft_strlen(line_p);
+		free(line_p);
+		return (count + 1);
+	}
+	var_name = get_variable_name(line);							// отправляем с $
+	var_value = get_envp_var_pointer(common, line + 1);		// + 1 смещаем на $
+	line_p = line + 1;
+	count = 0;
+	if (var_value)
+		*count_token = strlcat(*buffer_token, var_value, MAX_PATH);
+	while (line_p[count] && (line_p[count] == '_' || ft_isalnum(line_p[count])))
+		count++;
+	return (count + 1);
+}
+
+int			get_token3(char *line, char **token, t_common *common)
+{
+	int		count_line;
+	int		count_token;
+//	char	buffer_token[MAX_PATH];
+	char	*buffer_token;
+	char	flag_brace_single;
+	char	flag_brace_double;
+	char	flag_back_slash;
+	char	temp;
+
+	temp = 0;
+	count_line = 0;
+	count_token = 0;
+	flag_brace_single = 0;
+	flag_brace_double = 0;
+	flag_back_slash = 0;
+	buffer_token = calloc(MAX_PATH, sizeof(char));
+	while (line[count_line])
+	{
+		temp = line[count_line];
+		if (line[count_line] == '\\' && !flag_back_slash && !flag_brace_single)
+		{
+			flag_back_slash = 1;
+			count_line++;
+			continue ;
+		}
+		if (line[count_line] == '\'' && !flag_brace_double && !flag_back_slash)
+		{
+			flag_brace_single = !flag_brace_single;
+			count_line++;
+			continue ;
+		}
+		if (line[count_line] == '"' && !flag_brace_single && !flag_back_slash)
+		{
+			flag_brace_double = !flag_brace_double;
+			count_line++;
+			continue ;
+		}
+		if ('\0' == line[count_line] || ((line[count_line] == ' ' || is_spec_symbol(line[count_line]))
+			&& !flag_back_slash && !flag_brace_single && !flag_brace_double))
+		{
+			break;
+		}
+		if (line[count_line] == '$' && !flag_brace_single && !flag_back_slash)
+		{
+			count_line += expand_variable(&line[count_line], common, &buffer_token, &count_token);
+			continue ;
+		}
+		temp = line[count_line];
+		buffer_token[count_token] = line[count_line];
+		count_line++;
+		count_token++;
+		flag_back_slash = 0;
 	}
 	buffer_token[count_token] = '\0';
 	*token = strdup(buffer_token);
@@ -191,12 +315,12 @@ int			get_spec_token(char *line, char **token)
 		else
 			*token = strdup(GREATLESS);
 	}
-	else if (line[0] == '\'' || line[0] == '"')
-		*token = get_braced_token(line);
+//	else if (line[0] == '\'' || line[0] == '"')
+//		*token = get_braced_token(line);
 	return (get_spec_token_length(line, *token));
 }
 
-char		**lexer(char *line)
+char		**lexer(char *line, t_common *common)
 {
 	int		count;
 	int		count_result;
@@ -212,7 +336,7 @@ char		**lexer(char *line)
 	while(line[count] && line[count] != ';')
 	{
 		if (!is_spec_symbol(line[count]))
-			count += get_token2(&line[count], &token);
+			count += get_token3(&line[count], &token, common);
 		else
 			if (line[count] != ' ')
 				count += get_spec_token(&line[count], &token);

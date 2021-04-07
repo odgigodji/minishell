@@ -95,7 +95,7 @@ void ft_do_command(t_common *common)
 //	t_term_to_cannon(common->termcap);
 //	if (!strncmp(line, "exit", 5))
 //		exit(0);
-	lexer_result = lexer(line);
+	lexer_result = lexer(line, common);
 	if (invalid_lexer_result(lexer_result))
 	{
 		printf(RED"invalid line\n"RESET);
@@ -107,7 +107,6 @@ void ft_do_command(t_common *common)
 //		free(lexer_result[i]);
 //		i++;
 //	}
-	braces_expander(lexer_result, common);
 
 //	fixme раскомментить
 	common->command = get_command_table(lexer_result);
@@ -119,7 +118,7 @@ void ft_do_command(t_common *common)
 //	while (1);
 //	free(lexer_result);
 //	printf(GRN"----------%s\n"RESET, line);
-//	executor(common);
+	executor(common);
 
 }
 

@@ -59,25 +59,68 @@ void	execute_test_01(t_common *common)
 	char	*test_result_12[] = {"echo", "test", NULL};
 	execute_test_screening(12, line_12, test_result_12, common);
 
-//	char	*line_13 = "echo \"test\\\"\"";
-//	char	*test_result_13[] = {"echo", "test\\", NULL};
-//	execute_test_screening(13, line_13, test_result_13, common);
-//
-//	char	*line_14 = "echo m\"test\\\"\"";
-//	char	*test_result_14[] = {"echo", "mtest\\\"", NULL};
-//	execute_test_screening(14, line_14, test_result_14, common);
+	char	*line_13 = "echo \"test\\\"\\\"\"";
+	char	*test_result_13[] = {"echo", "test\"\"", NULL};
+	execute_test_screening(13, line_13, test_result_13, common);
 
-	char	*line_15 = "echo '\\\\\\'";
-	char	*test_result_15[] = {"echo", "\\\\\\", NULL};
+	char	*line_14 = "echo test\\\"";
+	char	*test_result_14[] = {"echo", "test\"", NULL};
+	execute_test_screening(14, line_14, test_result_14, common);
+
+	char	*line_15 = "echo m\\\"test\\\"";
+	char	*test_result_15[] = {"echo", "m\"test\"", NULL};
 	execute_test_screening(15, line_15, test_result_15, common);
 
-	char	*line_16 = "echo \\\\";
-	char	*test_result_16[] = {"echo", "\\", NULL};
+	char	*line_16 = "echo '\\\\\\'";
+	char	*test_result_16[] = {"echo", "\\\\\\", NULL};
 	execute_test_screening(16, line_16, test_result_16, common);
 
-	char	*line_17 = "echo \\$SHELL";
-	char	*test_result_17[] = {"echo", "$SHELL", NULL};
+	char	*line_17 = "echo \\\\";
+	char	*test_result_17[] = {"echo", "\\", NULL};
 	execute_test_screening(17, line_17, test_result_17, common);
+
+	char	*line_18 = "echo \\$SHELL";
+	char	*test_result_18[] = {"echo", "$SHELL", NULL};
+	execute_test_screening(18, line_18, test_result_18, common);
+
+	char	*line_19 = "echo '\\'";
+	char	*test_result_19[] = {"echo", "\\", NULL};
+	execute_test_screening(19, line_19, test_result_19, common);
+
+	//	echo '\\'
+	char	*line_20 = "echo '\\\\'";
+	char	*test_result_20[] = {"echo", "\\\\", NULL};
+	execute_test_screening(20, line_20, test_result_20, common);
+
+	//	echo '\\\'
+	char	*line_21 = "echo '\\\\\\'";
+	char	*test_result_21[] = {"echo", "\\\\\\", NULL};
+	execute_test_screening(21, line_21, test_result_21, common);
+
+	//	echo '\\\\'
+	char	*line_22 = "echo '\\\\\\\\'";
+	char	*test_result_22[] = {"echo", "\\\\\\\\", NULL};
+	execute_test_screening(22, line_22, test_result_22, common);
+
+	//	echo "\\"
+	char	*line_23 = "echo \"\\\\\"";
+	char	*test_result_23[] = {"echo", "\\", NULL};
+	execute_test_screening(23, line_23, test_result_23, common);
+
+//	echo "test\""
+	char	*line_24 = "echo \"test\\\"\"";
+	char	*test_result_24[] = {"echo", "test\"", NULL};
+	execute_test_screening(24, line_24, test_result_24, common);
+
+//	echo "\\\""		=>	\"
+	char	*line_25 = "echo \"\\\"\"";
+	char	*test_result_25[] = {"echo", "\"", NULL};
+	execute_test_screening(25, line_25, test_result_25, common);
+
+//	echo "\\\""		=>	\"
+	char	*line_26 = "echo \\\\\\\"";
+	char	*test_result_26[] = {"echo", "\\\"", NULL};
+	execute_test_screening(26, line_26, test_result_26, common);
 }
 
 void	execute_test_screening(int test_num, char *line, char **test_result, t_common *common)
@@ -95,15 +138,15 @@ int	test_lexer_01_screening(char *line, char **test_result, t_common *common)
 	int		count;
 	int		flag;
 
-	lexer_result = lexer(line);
-	braces_expander(lexer_result, common);
+	lexer_result = lexer(line, common);
+//	braces_expander(lexer_result, common);
 	count = 0;
 	flag = 0;
-	while(lexer_result[count])
+	while(lexer_result[count] && test_result[count])
 	{
 		if (ft_strncmp(lexer_result[count], test_result[count], ft_strlen(lexer_result[count]) + 1))
 		{
-			printf("%s != %s | ", lexer_result[count], test_result[count]);
+			printf("%s "RED"!="RESET" %s | ", lexer_result[count], test_result[count]);
 			flag = 1;
 		}
 		count++;

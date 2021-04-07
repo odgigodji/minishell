@@ -142,7 +142,7 @@ char	*get_envp_var_pointer(t_common *common, char *var)
 
 	count = 0;
 	count_index = 0;
-	while (var[count_index] && var[count_index] != '=')
+	while (var[count_index] && var[count] && (var[count] == '_' || ft_isalnum(var[count])))	//var[count_index] != '='
 		count_index++;
 	while (common->env_variables_list[count])
 	{
