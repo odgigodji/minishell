@@ -40,11 +40,13 @@ int	t_key_down(t_termcap *termcap, char **history, int *history_count)
 
 int	t_key_back(t_termcap *termcap, char **history, int *history_count, int cursor)
 {
-	tputs(cursor_left, 2, ft_putchar_term);
-	tputs(tgetstr("dc", 0), 1, ft_putchar_term);
-	termcap->history[termcap->history_count][strlen(termcap->history[termcap->history_count]) - 1] = '\0';
 	if (termcap->cursor > 0)
+	{
+		tputs(cursor_left, 2, ft_putchar_term);
+		tputs(tgetstr("dc", 0), 1, ft_putchar_term);
+		termcap->history[termcap->history_count][strlen(termcap->history[termcap->history_count]) - 1] = '\0';
 		termcap->cursor--;
+	}
 	return (termcap->cursor);
 }
 
