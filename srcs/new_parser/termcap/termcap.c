@@ -52,7 +52,7 @@ int	t_key_right(t_termcap *termcap, char **history, int *history_count, int curs
 {
 	if (termcap->cursor < strlen(termcap->history[termcap->history_count]))
 	{
-		write(1, str, strlen(str));
+		write(STDOUT_FILENO, str, strlen(str));
 		termcap->cursor++;
 	}
 	return (termcap->cursor);
@@ -60,9 +60,11 @@ int	t_key_right(t_termcap *termcap, char **history, int *history_count, int curs
 
 int	t_key_left(t_termcap *termcap, char **history, int *history_count, int cursor, char *str)
 {
-	write(1, str, strlen(str));
 	if (termcap->cursor > 0)
+	{
+		write(STDOUT_FILENO, str, strlen(str));
 		termcap->cursor--;
+	}
 	return (termcap->cursor);
 }
 
@@ -198,14 +200,14 @@ int	t_string_handle(t_termcap *termcap, char *str, int l)
 
 int	t_get_next_line(char **line, t_termcap *termcap)
 {
-	char	str[2048];
+	char	str[MAX_PATH];
 	int		l;
 
 	t_term_to_icannon(termcap);
 	str[0] = '\0';
-	termcap->history[termcap->history_count] = calloc(2048, sizeof(char));
+	termcap->history[termcap->history_count] = calloc(MAX_PATH, sizeof(char));
 	tputs(save_cursor, 1, ft_putchar_term);
-//	while (str[0] != '\n')			// 004 eot
+//	while (str[0] != '\n')					// 004 eot
 	while (0 != strcmp(str, "\4"))			// 004 eot
 	{
 		if (0 >= (l = read(0, str, 100)))

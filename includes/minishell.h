@@ -42,6 +42,7 @@
 #define RESET "\x1B[0m"
 
 # define SHELL_NAME "minishell"
+# define PROMT "minishell$"
 
 # define IS_READ 1
 # define IS_WRITE 0
