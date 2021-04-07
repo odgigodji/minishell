@@ -61,7 +61,8 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 			execute_simple_command_buildin(common, simple_command);
 		else if (0 == (ret = fork()))											//	создаём дочерний процесс
 		{
-			execute_simple_command(common, simple_command);
+			if (simple_command->arguments && simple_command->arguments[0])
+				execute_simple_command(common, simple_command);
 		}
 //		waitpid(ret, NULL, WUNTRACED);
 		command_table_count++;

@@ -20,6 +20,8 @@ int	t_key_up(t_termcap *termcap, char **history, int *history_count)
 {
 	if (0 < termcap->history_count)
 		termcap->history_count--;
+	else
+		write(1, "\a", 1);
 	tputs(restore_cursor, 1, ft_putchar_term);
 	tputs(tigetstr("ed"), 1, ft_putchar_term);
 	write(1, termcap->history[termcap->history_count], strlen(termcap->history[termcap->history_count]));
@@ -31,6 +33,8 @@ int	t_key_down(t_termcap *termcap, char **history, int *history_count)
 {
 	if (NULL != termcap->history[termcap->history_count + 1])
 		termcap->history_count++;
+	else
+		write(1, "\a", 1);
 	tputs(restore_cursor, 1, ft_putchar_term);
 	tputs(tigetstr("ed"), 1, ft_putchar_term);
 	write(1, termcap->history[termcap->history_count], strlen(termcap->history[termcap->history_count]));
@@ -47,6 +51,8 @@ int	t_key_back(t_termcap *termcap, char **history, int *history_count, int curso
 		termcap->history[termcap->history_count][strlen(termcap->history[termcap->history_count]) - 1] = '\0';
 		termcap->cursor--;
 	}
+	else
+		write(1, "\a", 1);
 	return (termcap->cursor);
 }
 
@@ -57,6 +63,8 @@ int	t_key_right(t_termcap *termcap, char **history, int *history_count, int curs
 		write(STDOUT_FILENO, str, strlen(str));
 		termcap->cursor++;
 	}
+	else
+		write(1, "\a", 1);
 	return (termcap->cursor);
 }
 
@@ -67,6 +75,8 @@ int	t_key_left(t_termcap *termcap, char **history, int *history_count, int curso
 		write(STDOUT_FILENO, str, strlen(str));
 		termcap->cursor--;
 	}
+	else
+		write(1, "\a", 1);
 	return (termcap->cursor);
 }
 
@@ -196,6 +206,8 @@ int	t_string_handle(t_termcap *termcap, char *str, int l)
 			move_cursor_right_c(termcap->temp);
 			return (0);
 		}
+		else if (l == 1 && str[0] == '\t')
+			return (0);
 	}
 	return (1);
 }
