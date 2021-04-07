@@ -30,7 +30,7 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 	command_table_count = 0;
 	pipe_variables->fdpipe[0] = dup(pipe_variables->tmpin);		//	input
 
-	while (common->command.simple_commands[command_table_count])
+	while (common->command.simple_commands && common->command.simple_commands[command_table_count])
 	{
 		simple_command = common->command.simple_commands[command_table_count];
 

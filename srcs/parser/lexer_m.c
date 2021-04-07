@@ -314,8 +314,6 @@ int			get_spec_token(char *line, char **token)
 		else
 			*token = strdup(GREATLESS);
 	}
-//	else if (line[0] == '\'' || line[0] == '"')
-//		*token = get_braced_token(line);
 	return (get_spec_token_length(line, *token));
 }
 
@@ -332,7 +330,7 @@ char		**lexer(char *line, t_common *common)
 	if (NULL == (result = malloc(sizeof(char *) * 100)))
 		return (NULL);
 	result[0] = NULL;
-	while(line[count] && line[count] != ';')
+	while(line && line[count] && line[count] != ';')
 	{
 		if (!is_spec_symbol(line[count]))
 			count += get_token3(&line[count], &token, common);

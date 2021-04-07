@@ -44,7 +44,7 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 	{
 		temp = ft_itoa(getpid());
 		strlcat(*result, temp, MAX_PATH);
-		count_token = 1 + (int)ft_strlen(temp);
+		count_token = 2;
 	}
 	else
 	{
@@ -155,62 +155,6 @@ char		*expand_braces(char *token, t_common *common)
 	}
 	return (result);
 }
-
-//char		*expand_braces(char *token, t_common *common)
-//{
-//	int		count_token;
-//	int		count_result;
-//	char	*result;
-//	char	brace_flag;
-//	char	*env_variable = NULL;
-//	int		temp = 0;
-//
-//	if (NULL == (result = malloc(sizeof(char) * MAX_PATH)))
-//		return (NULL);
-//	result[0] = '\0';
-//	brace_flag = '\0';
-//	count_token = 0;
-//	count_result = 0;
-//	while (token[count_token])
-//	{
-//		if (token[count_token] == '"' || token[count_token] == '\'')
-//			if (token[count_token] == brace_flag || brace_flag == '\0')
-//			{
-//				brace_flag = toggle_brace_flag(token[count_token], brace_flag);
-//				count_token++;
-//			}
-//		if (token[count_token] && '\'' == brace_flag)
-//		{
-//			result[count_result] = token[count_token];
-//			count_token++;
-//			count_result++;
-//			result[count_result] = '\0';
-//		}
-//		else if (token[count_token] && '\'' != brace_flag)	// else if (token[count_token] && '"' == brace_flag)
-//		{
-//			if (token[count_token] == '$')
-//			{
-//				count_token += get_env_variable_name(&token[count_token], &env_variable);
-//				if (env_variable && get_envp_var_pointer(common, env_variable))
-//					count_result = strlcat(result, get_envp_var_pointer(common, env_variable), MAX_PATH);
-//				continue ;
-//			}
-//			result[count_result] = token[count_token];
-//			count_token++;
-//			count_result++;
-//			result[count_result] = '\0';
-//		}
-//		else if (token[count_token] && token[count_token] != '"' && token[count_token] != '\'')
-//		{
-//			result[count_result] = token[count_token];
-//			count_token++;
-//			count_result++;
-//			result[count_result] = '\0';
-//		}
-//	}
-//	free(token);
-//	return (result);
-//}
 
 char		**braces_expander(char **lexer_result, t_common *common)
 {
