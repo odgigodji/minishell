@@ -55,11 +55,11 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command)
 	char	command[MAX_PATH];
 
 	temp_envp = make_envp(common);
-	path = split_path(common->env_variables);
+	path = split_path(common);
 	count = 0;
 	command[0] = '\0';
 	execve(simple_command->arguments[0], simple_command->arguments, temp_envp);
-	while (path[count])
+	while (path && path[count])
 	{
 		ft_strlcat(command, path[count], MAX_PATH);
 		ft_strlcat(command, "/", MAX_PATH);

@@ -12,17 +12,51 @@ int		env_list_length(t_common *common)
 	return (count);
 }
 
+void	print_export_line(char **line)
+{
+	if (line[1])
+		printf("declare -x %s=\"%s\"\n", line[0], line[1]);
+	else
+		printf("declare -x %s\n", line[0]);
+}
+
+int		get_next_export_index(char ***envp, int	current)
+{
+	int count;
+	int count_2;
+	int temp;
+
+	count = 0;
+	count_2 = 0;
+	temp = current;
+	while (envp[count])
+	{
+		if (0 < ft_strncmp(envp[count][0], envp[current][0], ft_strlen(envp[current][0])))
+		{
+			count_2 = 0;
+			while (envp[count_2])
+			{
+				if (0 > ft_strncmp(envp[count_2][0], envp[temp][0], ft_strlen(envp[temp][0])))
+					temp = count;
+				count_2++;
+			}
+		}
+		count++;
+	}
+	return (temp);
+}
+
 void	print_export(t_common *common)
 {
 	int	count;
+	int	next;
 
 	count = 0;
+	next = 0;
 	while (common->env_variables_list[count])
 	{
-		if (common->env_variables_list[count][1])
-			printf("declare -x %s=\"%s\"\n", common->env_variables_list[count][0], common->env_variables_list[count][1]);
-		else
-			printf("declare -x %s\n", common->env_variables_list[count][0]);
+		next = get_next_export_index(common->env_variables_list, count);
+		print_export_line(common->env_variables_list[next]);
 		count++;
 	}
 }

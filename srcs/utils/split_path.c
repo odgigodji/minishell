@@ -28,18 +28,16 @@ void	ft_free_list(char ***split_list)
 	free(*split_list);
 }
 
-char	**split_path(char **envp)
+//char	*get_envp_var_pointer(t_common *common, char *var);
+
+char	**split_path(t_common *common)
 {
-	char 	**path;
-	int		count;
 	char	link[MAX_PATH];
+	char	*path_p;
 
-	count = 0;
 	link[0] = '\0';
-
-	while (ft_strncmp(envp[count], "PATH", 4))
-		count++;
-	ft_strlcpy(link, ft_strrchr(envp[count], '=') + 1, MAX_PATH);
-	path = ft_split(link, ':');
-	return (path);
+	path_p = get_envp_var_pointer(common, "PATH");
+	if (path_p)
+		return (ft_split(path_p, ':'));
+	return (NULL);
 }

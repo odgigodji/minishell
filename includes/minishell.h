@@ -258,7 +258,7 @@ size_t				list_len(const char **list);
 void				ft_putenv(char **envp);
 void				ft_putenv_arg(char *line);
 
-char				**split_path(char **envp);
+char				**split_path(t_common *common);
 void				ft_free_list(char ***split_list);
 
 void				free_line_list(char **split_list);
