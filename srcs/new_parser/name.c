@@ -64,5 +64,8 @@ int invalid_line(char *line)
 //			return (1);
 		i++;
 	}
+//	printf(MAG"I %d\n"RESET, i);
+	if (i == 0)
+		return (1);
 	return (0);
 }

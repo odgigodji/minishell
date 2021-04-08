@@ -146,13 +146,13 @@ void ft_do_command(t_common *common)
 			mini_exit(common);
 //		get_next_line(0, &line);
 
-//		if (invalid_line(line))
-//		{
-//			printf(RED"ERROR line\n"RESET);
+		if (invalid_line(line))
+		{
+			printf(RED"ERROR line\n"RESET);
 //			free(line);
-//			line = NULL;
-//			return ;
-//		}
+			line = NULL;
+			return ;
+		}
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 	t_term_to_cannon(common->termcap);
@@ -162,13 +162,13 @@ void ft_do_command(t_common *common)
 		line = shift_line_2(line);
 		return ;
 	}
-//	if (invalid_lexer_result(lexer_result))
-//	{
-//		printf(RED"error in lexer_result\n"RESET);
+	if (invalid_lexer_result(lexer_result))
+	{
+		printf(RED"error in lexer_result\n"RESET);
 //		free(line);
-//		line = NULL;
-//		return ;
-//	}
+		line = NULL;
+		return ;
+	}
 	ft_print_lexer_result(lexer_result);
 //	while(lexer_result[i])
 //	{
