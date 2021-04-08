@@ -27,12 +27,20 @@ void	mini_cd(char **simple_command, t_common *common)
 		if (NULL == simple_command[1] || '\0' == simple_command[1][0])
 		{
 			if (-1 == chdir(new_pwd))
+			{
+				errno = ENOENT;
+				printf("cd: no such file or directory: %s\n", new_pwd);
 				return;
+			}
 		}
 		else
 		{
 			if (-1 == chdir(simple_command[1]))
+			{
+				errno = ENOENT;
+				printf("cd: no such file or directory: %s\n", simple_command[1]);
 				return;
+			}
 		}
 		if (NULL == (getcwd(new_pwd, MAX_PATH)))
 			return;
