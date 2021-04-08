@@ -121,6 +121,10 @@ void	execute_test_01(t_common *common)
 	char	*line_26 = "echo \\\\\\\"";
 	char	*test_result_26[] = {"echo", "\\\"", NULL};
 	execute_test_screening(26, line_26, test_result_26, common);
+
+	char	*line_27 = "echo ~";
+	char	*test_result_27[] = {"echo", "~", NULL};
+	execute_test_screening(27, line_27, test_result_27, common);
 }
 
 void	execute_test_screening(int test_num, char *line, char **test_result, t_common *common)

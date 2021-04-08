@@ -58,12 +58,13 @@ set(SOURCE_FILES
         srcs/parser/parser_idea.c
         srcs/parser/utils1.c
         srcs/new_parser/name.c
+        srcs/utils/prompt.c
         )
 
 add_executable(minishell
         srcs/main.c
         ${SOURCE_FILES}
-        srcs/utils/prompt.c)
+        )
 
 add_executable(executor_tests
         ${SOURCE_FILES}
@@ -77,7 +78,8 @@ add_executable(lexer_tests
         srcs/parser/lexer_tests/test_lexer_00.c
         srcs/parser/lexer_tests/test_lexer_00.h
         srcs/parser/lexer_tests/main_test.c
-        srcs/parser/lexer_tests/test_lexer_01.c)
+        srcs/parser/lexer_tests/test_lexer_01.c
+        )
 
 target_link_libraries(minishell LINK_PUBLIC
         m
