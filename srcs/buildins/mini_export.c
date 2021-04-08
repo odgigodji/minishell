@@ -78,7 +78,7 @@ int		is_key_valid(char *key)
 	int	count;
 
 	count = 0;
-	if (NULL == key || key[0] == '=')
+	if (NULL == key || key[0] == '=' || ft_isdigit(key[0]))
 		return (0);
 	while (key[count] && key[count] != '=')
 	{
@@ -106,9 +106,7 @@ void	mini_export(t_common *common, char **simple_command)
 	count = 1;
 
 	if (NULL == simple_command[1])
-	{
 		print_export(common);
-	}
 	else
 	{
 		while (simple_command[count])
@@ -122,7 +120,7 @@ void	mini_export(t_common *common, char **simple_command)
 				free(key_value[1]);
 			}
 			else
-				printf("%s: export: %s not a valid identifier\n", SHELL_NAME, ft_strchr(simple_command[count], '='));
+				printf("%s: export: `%s' not a valid identifier\n", SHELL_NAME, ft_strchr(simple_command[count], '='));
 			count++;
 		}
 	}
