@@ -121,7 +121,7 @@ t_termcap	*t_termcap_init(void)
 	result->history_len = 100;
 	tcgetattr(0, &(result->term));
 	result->history = calloc(result->history_len, sizeof(char *));
-	result->history[0] = calloc(2048, sizeof(char));
+	result->history[0] = calloc(MAX_PATH, sizeof(char));
 	result->history_count = 0;
 	result->term_name = strdup("xterm-256color");
 	tgetent(0, result->term_name);
