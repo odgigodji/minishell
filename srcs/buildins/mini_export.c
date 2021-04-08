@@ -78,11 +78,21 @@ int		is_key_valid(char *key)
 	int	count;
 
 	count = 0;
-	while (key[count])
+	if (NULL == key || key[0] == '=')
+		return (0);
+	while (key[count] && key[count] != '=')
 	{
 		if (!(ft_isalnum(key[count]) || key[count] == '_'))
 			return (0);
 		count++;
+	}
+	if (key[count] == '\0' || key[count + 1] == '\0')
+		return (1);
+	count++;
+	while (key[count])
+	{
+		if (ft_strchr("()<;|`", key[count]))
+			return (0);
 	}
 	return (1);
 }
@@ -101,15 +111,15 @@ void	mini_export(t_common *common, char **simple_command)
 	{
 		while (simple_command[count])
 		{
-			key_value = get_key_and_value(simple_command[count]);
-			if (!is_key_valid(key_value[0]))
+			if (is_key_valid(simple_command[count]))
 			{
-				printf("%s: export: %s not a valid identifier\n", SHELL_NAME, key_value[0]);
-				continue ;
+				key_value = get_key_and_value(simple_command[count]);
+				update_envp_var(common, key_value[0], key_value[1], is_append(simple_command[count]));
+				free(key_value[0]);
+				free(key_value[1]);
 			}
-			update_envp_var(common, key_value[0], key_value[1], is_append(simple_command[count]));
-			free(key_value[0]);
-			free(key_value[1]);
+			else
+				printf("%s: export: %s not a valid identifier\n", SHELL_NAME, ft_strchr(simple_command[count], '='));
 			count++;
 		}
 	}
