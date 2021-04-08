@@ -225,7 +225,7 @@ int			get_token3(char *line, char **token, t_common *common)
 		{
 			break;
 		}
-		if (line[count_line] == '$' && !flag_brace_single && !flag_back_slash)
+		if (ft_strchr("$~", line[count_line]) && !flag_brace_single && !flag_back_slash)
 		{
 			count_line += expand_variable(&line[count_line], common, &buffer_token, &count_token);
 			continue ;
