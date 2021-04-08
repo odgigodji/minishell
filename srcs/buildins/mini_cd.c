@@ -22,7 +22,6 @@ void	mini_cd(char **simple_command, t_common *common)
 			if (NULL == (get_envp_var_pointer(common, "HOME")))
 				return ;
 			ft_strlcpy(new_pwd, get_envp_var_pointer(common, "HOME"), MAX_PATH);
-			puts(new_pwd);
 		}
 		update_envp_var(common, "OLDPWD", old_pwd, 0);
 		if (NULL == simple_command[1] || '\0' == simple_command[1][0])
