@@ -29,21 +29,23 @@ int		get_next_export_index(char ***envp, int	current)
 	count = 0;
 	count_2 = 0;
 	temp = current;
-	while (envp[count])
-	{
-		if (0 < ft_strncmp(envp[count][0], envp[current][0], ft_strlen(envp[current][0])))
-		{
-			count_2 = 0;
-			while (envp[count_2])
-			{
-				if (0 > ft_strncmp(envp[count_2][0], envp[temp][0], ft_strlen(envp[temp][0])))
-					temp = count;
-				count_2++;
-			}
-		}
-		count++;
-	}
-	return (temp);
+//	while (envp[count])
+//	{
+//		if (0 > ft_strncmp(envp[count][0], envp[current][0], ft_strlen(envp[current][0])))
+//		{
+//			count_2 = 0;
+//			while (envp[count_2])
+//			{
+//				if (0 < ft_strncmp(envp[count_2][0], envp[count][0], ft_strlen(envp[count_2][0]))
+//					&& 0 > ft_strncmp(envp[count][0], envp[current][0], ft_strlen(envp[current][0])))
+//					temp = count;
+//				count_2++;
+//			}
+//		}
+//		count++;
+//	}
+//	return (temp);
+	return (current);
 }
 
 void	print_export(t_common *common)
