@@ -186,7 +186,7 @@ void ft_do_command(t_common *common)
 //	while (1);
 //	free(lexer_result);
 //	printf(GRN"----------%s\n"RESET, line);
-//	executor(common);
+	executor(common);
 
 }
 
