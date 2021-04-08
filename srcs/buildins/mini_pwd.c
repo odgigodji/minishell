@@ -15,11 +15,7 @@
 
 void	mini_pwd(t_common *common)
 {
-	int		count;
-
-	count = 0;
-//	while (common->env_variables_list[count] && ft_strncmp(common->env_variables_list[count][0], "PWD", 3))
-//		count++;
+	(void)common;
 	ft_putstr_fd(getcwd(NULL, 0), 1);
 	ft_putchar_fd('\n', 1);
 }

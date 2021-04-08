@@ -55,6 +55,6 @@ void	signal_handler(int num)
 
 void	signal_processor()
 {
-	signal(SIGINT, signal_handler);	// int	Ctrl+C	завершение ввода без выполнение запуск ввода с начала
-	signal(SIGQUIT, signal_handler);	// int	Ctrl+C	завершение ввода без выполнение запуск ввода с начала
+	signal(SIGINT, signal_handler);		// int	Ctrl+C	завершение ввода без выполнение запуск ввода с начала
+	signal(SIGQUIT, signal_handler);	// int	Ctrl+"\"
 }
