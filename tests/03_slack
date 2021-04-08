@@ -1,11 +1,11 @@
 ;; +
 ;  +
+ls;;        -
+ls; ;       -
 |   +
 ||  +
 ;@@;   +
 | |     +
-ls;;        -
-ls; ;       -
 ;;          +
 ls||        +
 ls | |      +
@@ -33,6 +33,7 @@ export = ;
 export = ; echo $?                                                           -сега(+)
 echo $?                                                 +
 export str1 2str = _3str str4=str5                                            -сега/подвисает
+<a cat <b <c                                                                  -подвисает
  'e'"x"p'o'r't'                                                     +
 ec"ho" $str1 $str4                              +
  'export' 'q'=e "w"=c e="h" r='o' 't'='x' "y"="p" u=r i=t

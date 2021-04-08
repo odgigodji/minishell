@@ -78,7 +78,7 @@ void pass_redirect_files(char **lexer_result, int *current_token)
 	{
 //		printf(MAG"-%d\n"RESET, *current_token);
 		printf(GRN"%s\n"RESET, lexer_result[*current_token]);
-		if ((token_after_file && (!is_redirect(token_after_file)) || !token_after_file))
+		if (((token_after_file && (!is_redirect(token_after_file))) || !token_after_file))
 		{
 			*current_token += 2;
 			return ;

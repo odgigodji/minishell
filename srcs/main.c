@@ -153,7 +153,7 @@ void ft_do_command(t_common *common)
 		{
 			printf(RED"ERROR line\n"RESET);
 //			free(line);
-			line = NULL;
+//			line = NULL;
 			return ;
 		}
 //		printf("-----------------------------line from gnl - |%s|\n", line);
@@ -181,7 +181,7 @@ void ft_do_command(t_common *common)
 
 //	fixme раскомментить
 	common->command = get_command_table(lexer_result);
-//	ft_print_all_command(common->command.simple_commands);
+	ft_print_all_command(common->command.simple_commands);
 	line = shift_line_2(line);
 //	fixme раскомментить
 

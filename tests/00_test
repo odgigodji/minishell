@@ -132,15 +132,15 @@ echo 1 < 2 > 3 < 4 > hello a b c > 5
 echo a < 2 > 3 < 4 < 5 > 6 < 7 < 8 > 9 >> 10 >> 11 >> 12 < 13 > hello b c d
 echo 0 > outfile-0-0 1 2 3 4 5 > a 6 > b > c > d > e > f > g > h > j 7 8 9 10 11 > k | echo 1
 cat -e < file | sort | cat -e
-cat -e < file | sort | cat -e | cat -e > file | sort | cat -e | cat -e >> file | sort | cat -e
+cat -e < file | sort | cat -e | cat -e > file | sort | cat -e | cat -e >> file | sort | cat -e (-) виснет когда нет файла или дериктории
 
 -------------------------------invalid_lines------------------------------------
 echo 1 >> 2
-echo 1 > < 2
-cat > file > test
-cat < file < test
-1  2 3 | a b c  | # # # | 7 7
-echo 1 > 2 a
+echo 1 > < 2                            +
+cat > file > test                                                                         (-)  виснет cat
+cat < file < test                                                                       (-)
+1  2 3 | a b c  | # # # | 7 7                               +
+echo 1 > 2 a                                        +
 
 -------------------------------------is valid&----------------------------------
 [passed]
@@ -157,29 +157,29 @@ ls |       +                                                                 -
 echo < > 123      + син кррор надо
 echo aaa < > 123   +    син еррор
 | | подряд   +
-\   син еррор +
-
+\                                   син еррор +
+echo \'                                                                             -
 
 [is_valid_line]
-echo 1 2 3 ;                                |           ;лоыит сегу
- echo '$PWD"                                    валидация строки нужна синт еррор
- echo '' сега
+echo 1 2 3 ;                                |           ;                            (-)
+ echo '$PWD"              (+)                      валидация строки нужна синт еррор
+ echo '' сега (+)
 
 [lexer_result]
-echo 1 2 3 ;; син еррор
-    >                   -
+echo 1 2 3 ;; син еррор                                                             (-)
+    >                   -(+)
 
  > her          должкен создать пустой файл
 echo 1 2 3 | < her
 echo $                                          вывод доллара долже н а у нас сега
-e''cho       -
+e''cho       -(+)
  echo                                           сега , а должная быть пустая строка
     на всех редиректах
  \\\\>\\\>\\ - дичь какая
 echo aaa<>123      создает файл 123 и выводит
 
 -no subject
-echo ~                  должная обрабатываться
+echo ~          (+)        должная обрабатываться
 
 ------------------------------errors now-----------------
 cntrl+D                                                                                     +
