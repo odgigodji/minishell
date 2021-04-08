@@ -13,6 +13,17 @@ void	mini_unset(t_common *common, char **keys)
 	count = 0;
 	flag = 0;
 	count_keys = 1;
+	// fixme
+	if (!ft_strncmp(keys[count_keys], "all", 4))
+	{
+		while (common->env_variables_list[count])
+		{
+			common->env_variables_list[count] = NULL;
+			count++;
+		}
+		return ;
+	}
+	// fixme
 	while (keys[count_keys])
 	{
 		while (common->env_variables_list[count])
