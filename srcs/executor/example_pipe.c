@@ -68,6 +68,6 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 		command_table_count++;
 	}
 //	for (int i = 0; i < command_table_count; i++)
-	while (command_table_count--)
+	while (command_table_count && --command_table_count)
 		wait(0);
 }

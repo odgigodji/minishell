@@ -69,8 +69,6 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command)
 		command[0] = '\0';
 	}
 	errno = 1;
-	ft_putstr_fd("minishell: command not found: ", 1);
-	ft_putstr_fd(simple_command->arguments[0], 1);
-	ft_putstr_fd("\n", 1);
+	printf("%s: command not found: %s\n", SHELL_NAME, simple_command->arguments[0]);
 	exit(0);
 }
