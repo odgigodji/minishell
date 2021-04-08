@@ -46,6 +46,7 @@ void	execute_test_01(t_common *common)
 	char	*line_09 = "echo \"hel$?\"'$?lo'";
 	char	*test_result_09[] = {"echo", "hel0$?lo", NULL};
 	execute_test_screening(9, line_09, test_result_09, common);
+	printf("\n						");
 
 	char	*line_10 = "echo $SHELL";
 	char	*test_result_10[] = {"echo", "/bin/zsh", NULL};
@@ -86,6 +87,7 @@ void	execute_test_01(t_common *common)
 	char	*line_19 = "echo '\\'";
 	char	*test_result_19[] = {"echo", "\\", NULL};
 	execute_test_screening(19, line_19, test_result_19, common);
+	printf("\n						");
 
 	//	echo '\\'
 	char	*line_20 = "echo '\\\\'";
@@ -122,9 +124,22 @@ void	execute_test_01(t_common *common)
 	char	*test_result_26[] = {"echo", "\\\"", NULL};
 	execute_test_screening(26, line_26, test_result_26, common);
 
-	char	*line_27 = "echo ~";
+	char	*line_27 = "echo ~\"\"";
 	char	*test_result_27[] = {"echo", "~", NULL};
 	execute_test_screening(27, line_27, test_result_27, common);
+
+	char	*line_28 = "echo ~";
+	char	*test_result_28[] = {"echo", get_envp_var_pointer(common, "HOME"), NULL};
+	execute_test_screening(28, line_28, test_result_28, common);
+
+	char	*line_29 = "echo \\n";
+	char	*test_result_29[] = {"echo", "n", NULL};
+	execute_test_screening(29, line_29, test_result_29, common);
+
+	char	*line_30 = "echo \"\\n\"";
+	char	*test_result_30[] = {"echo", "\\n", NULL};
+	execute_test_screening(30, line_30, test_result_30, common);
+	printf("\n						");
 }
 
 void	execute_test_screening(int test_num, char *line, char **test_result, t_common *common)

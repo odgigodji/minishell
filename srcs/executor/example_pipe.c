@@ -35,7 +35,8 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 		simple_command = common->command.simple_commands[command_table_count];
 
 		//	выбираем откуда читать
-		simple_command_in_out_fd(simple_command->infiles, pipe_variables, IS_READ, simple_command->is_cat);
+		if (-1 == (simple_command_in_out_fd(simple_command->infiles, pipe_variables, IS_READ, simple_command->is_cat)))
+			return ;
 		close(pipe_variables->fdpipe[0]);	// fixme
 		dup2(pipe_variables->fdin, STDIN_FILENO);
 		close(pipe_variables->fdin);		// fixme
@@ -49,7 +50,8 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 		}
 		else
 			pipe(pipe_variables->fdpipe);
-		simple_command_in_out_fd(simple_command->outfiles, pipe_variables, IS_WRITE, simple_command->is_cat);
+		if (-1 == (simple_command_in_out_fd(simple_command->outfiles, pipe_variables, IS_WRITE, simple_command->is_cat)))
+			return ;
 		close(pipe_variables->fdpipe[1]);	//	fixme
 		dup2(pipe_variables->fdout, STDOUT_FILENO);
 		close(pipe_variables->fdout);		//	fixme

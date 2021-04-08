@@ -77,6 +77,8 @@ void	execute_test_00(t_common *common)
 	char	*test_result_09[] = {"echo", "a", GREAT, "out01", "b", "c", NULL};
 	execute_test(9, line_09, test_result_09, common);
 
+	printf("\n						");
+
 	char	*line_10 = "echo hello> outfile-0-0 1 2 | echo world >outfile-1-0 3 4";
 	char	*test_result_10[] = {"echo", "hello", GREAT, "outfile-0-0", "1", "2", PIPE, "echo", "world", GREAT, "outfile-1-0", "3", "4", NULL};
 	execute_test(10, line_10, test_result_10, common);
@@ -117,6 +119,7 @@ void	execute_test_00(t_common *common)
 	char	*test_result_19[] = {"echo", "-n", "-n", "-n", "-n", "test", NULL};
 	execute_test(19, line_19, test_result_19, common);
 
+	printf("\n						");
 	char	*line_20 = "echo kitty|cat -e";
 	char	*test_result_20[] = {"echo", "kitty", PIPE, "cat", "-e", NULL};
 	execute_test(20, line_20, test_result_20, common);
@@ -150,7 +153,8 @@ void	execute_test_00(t_common *common)
 	execute_test(27, line_27, test_result_27, common);
 
 	//echo "\n \n \n"
-	char	*line_26_1 = "echo \"\\n \\n \\n\"";
-	char	*test_result_26_1[] = {"echo", "\\n \\n \\n", NULL};
-	execute_test(26, line_26_1, test_result_26_1, common);
+	char	*line_28 = "echo \"\\n \\n \\n\"";
+	char	*test_result_28[] = {"echo", "\\n \\n \\n", NULL};
+	execute_test(28, line_28, test_result_28, common);
+	printf("\n						");
 }
