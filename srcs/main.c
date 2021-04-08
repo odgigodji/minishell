@@ -142,11 +142,14 @@ void ft_do_command(t_common *common)
 	if (line == NULL || *line == '\0')
 	{
 		prompt();
-		if (13 == t_get_next_line(&line, common->termcap))
+		if (-13 == t_get_next_line(&line, common->termcap))
+		{
+			printf("miniexit\n");
 			mini_exit(common);
+		}
 //		get_next_line(0, &line);
 
-		if (invalid_line(line))
+		if (!line || invalid_line(line))
 		{
 			printf(RED"ERROR line\n"RESET);
 //			free(line);
@@ -178,7 +181,7 @@ void ft_do_command(t_common *common)
 
 //	fixme раскомментить
 	common->command = get_command_table(lexer_result);
-	ft_print_all_command(common->command.simple_commands);
+//	ft_print_all_command(common->command.simple_commands);
 	line = shift_line_2(line);
 //	fixme раскомментить
 

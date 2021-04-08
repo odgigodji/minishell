@@ -230,7 +230,7 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 		if (0 > (l = read(0, str, 100)))
 			return (l);
 		if (!ft_strncmp(str, "\4", 1))
-			return (13);
+			return (-13);
 		str[l] = '\0';
 		if (0 == l || !t_string_handle(termcap, str, l))  // || !strcmp(str, "\n")
 			break ;
