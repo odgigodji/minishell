@@ -24,6 +24,7 @@ int	t_key_up(t_termcap *termcap, char **history, int *history_count)
 		write(1, "\a", 1);
 	tputs(restore_cursor, 1, ft_putchar_term);
 	tputs(tigetstr("ed"), 1, ft_putchar_term);
+	prompt();
 	write(1, termcap->history[termcap->history_count], strlen(termcap->history[termcap->history_count]));
 	termcap->cursor = strlen(termcap->history[termcap->history_count]);
 	return (termcap->cursor);
@@ -37,6 +38,7 @@ int	t_key_down(t_termcap *termcap, char **history, int *history_count)
 		write(1, "\a", 1);
 	tputs(restore_cursor, 1, ft_putchar_term);
 	tputs(tigetstr("ed"), 1, ft_putchar_term);
+	prompt();
 	write(1, termcap->history[termcap->history_count], strlen(termcap->history[termcap->history_count]));
 	termcap->cursor = strlen(termcap->history[termcap->history_count]);
 	return (termcap->cursor);
@@ -220,13 +222,13 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 	t_term_to_icannon(termcap);
 	str[0] = '\0';
 	termcap->history[termcap->history_count] = calloc(MAX_PATH, sizeof(char));
-	tputs(save_cursor, 1, ft_putchar_term);
 //	while (str[0] != '\n')					// 004 eot
+//	tputs(save_cursor, 1, ft_putchar_term);
 	while (0 != strcmp(str, "\4"))			// 004 eot
 	{
 		if (0 > (l = read(0, str, 100)))
 			return (l);
-		if (!strcmp(str, "\4"))
+		if (!ft_strncmp(str, "\4", 1))
 			return (13);
 		str[l] = '\0';
 		if (0 == l || !t_string_handle(termcap, str, l))  // || !strcmp(str, "\n")

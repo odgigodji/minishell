@@ -254,6 +254,7 @@ void				ft_pipe(char ***command_table, char **envp);
 ** utils
 */
 
+void				prompt(void);
 char				**copy_envp(char **envp);
 size_t				list_len(const char **list);
 void				ft_putenv(char **envp);

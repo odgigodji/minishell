@@ -82,12 +82,10 @@ void ft_do_command(t_common *common)
 	int 		i = 0;
 	static char *line;
 	char		**lexer_result;
-	int			count;
 
-	count = 0;
 	if (line == NULL || *line == '\0')
 	{
-		ft_putstr_fd("\033[35mminishell$ \033[0m", 0);
+		prompt();
 		t_get_next_line(&line, common->termcap);
 //		get_next_line(0, &line);
 
@@ -102,8 +100,6 @@ void ft_do_command(t_common *common)
 	}
 	t_term_to_cannon(common->termcap);
 
-//	if (!strncmp(line, "exit", 5))
-//		exit(0);
 	lexer_result = lexer(line, common);
 	if (invalid_lexer_result(lexer_result))
 	{
