@@ -1,0 +1,95 @@
+ echo bonjour ; |                               -не синтакс еррор
+ echo bonjour | |                               -cега  без защиты
+ |                                              +
+ echo bonjour |;
+ echo bonjour ; ls                              +
+ echo bonjour > test\ 1
+ cat 'test 1'                                   -
+ cd $HOME/Documents                                    +
+ echo "\s" & echo "\s"                             +
+ echo >                                                   +
+ echo -n -n -nnnn -nnnnm                                    -??
+ cat /dev/random | head -n 1 | cat -e                       - подвисает
+ unset var1 # with undefined var1                           -
+ export "" et unset ""                                      -
+ echo test > file test1
+ $                                                          -
+ echo $                                                     -
+ not_cmd bonjour > salut                                                        -
+ env puis export puis env # vars aren't sorted               +
+ echo bonjour >>> test                                          +
+ echo bonjour > > out                   +
+ echo 2 >> out1 > out2                      +
+ echo 2 > out1 >> out2                  +
+ cat < test # with non-existent test                        -       ?
+ export var; export var=test                                +
+ echo bonjour > $test # with test not defined
+ file_name_in_current_dir
+ cd ../../../../../.. ; pwd                                 +
+ ctrl-\ .131 sur bin                                        -+
+ echo "bip | bip ; coyotte > < " "                          -
+ cat | cat | cat | ls # check outputs order
+ $bla # with bla not defined                            просто ничего
+ export var ="cat Makefile | grep >"                                                    -сега
+ export "test=ici"=coucou                                       +
+ c$var Makefile # with var=at
+ $LESS$VAR
+ /bin/echo bonjour                          +
+ not_cmd                                    +
+ sleep 5 | exit                                                     --
+ echo bonjour > $test w/ t                  +
+ "exit retour a la ligne"                       +
+ minishell # binary not in path without "./" before
+ cat diufosgid # check exit code                    +
+ exit # should return the last exit code value
+ exit -10
+ exit +10
+ ;
+ echo coucou | ;
+ echo "$HOME"           +
+ echo '$HOME'             -выходит почему то
+ export ; env # display is different for both commands          -выходит почему то
+ echo $HOME
+ > log echo coucou              +
+ echo hudifg d | | hugdfihd         +
+ echo
+ echo simple
+ echo -n simple                         -
+ echo ''                +
+ echo ""            +
+ echo "\"           +
+ echo "\n \n \n"        +
+ echo "\n \n \\n"           +
+ echo ;;
+ echo hi";"  hihi               +
+ echo hi " ; " hihi             +
+ cd                         +
+ cd .                         +
+ cd ~                                               - ломается2, сега
+ cd /
+ cd no_file     +
+ cd a b c d         +
+ pwd a                          +
+ pwd a b c d                        +
+ export LOL=lala ROR=rara               +
+ unset LOL ROR                                          -внезапно выходит
+ export "HI= hi"
+ export "HI =hi"
+ /bin/ls
+ # write something the press ctrl+c
+ # write something then press ctrl+d
+ # write something then press ctrl+\
+ echo $?
+ l^Ds
+ echo |
+ | echo
+ sort | ls # check output order
+ cat < >
+ cat < <
+ cat > >
+ > a ls > b < Makefile
+ echo > a Hello World!
+ > a echo Hello World!
+ cat < Makefile | grep gcc > output
+ exit 0 | exit 1
+ exit 1 | exit 0
