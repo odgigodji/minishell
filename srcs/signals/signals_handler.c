@@ -47,7 +47,7 @@ void	signal_handler(int num)
 	if (num == SIGINT)
 	{
 		ft_putstr_fd("\n", 1);
-		ft_putstr_fd(MAG "\rminishell$ " RESET, 0);
+		prompt();
 		errno = 1;	// fixme
 		signal(SIGINT, signal_handler);
 	}
@@ -56,4 +56,5 @@ void	signal_handler(int num)
 void	signal_processor()
 {
 	signal(SIGINT, signal_handler);	// int	Ctrl+C	завершение ввода без выполнение запуск ввода с начала
+	signal(SIGQUIT, signal_handler);	// int	Ctrl+C	завершение ввода без выполнение запуск ввода с начала
 }

@@ -31,21 +31,21 @@ int incorrect_quotes(char *line)
 	return (0);
 }
 
-int incorrect_pipe(const char *line)
-{
-	int i;
-
-	i = 1;
-	while(line[i])
-	{
-		if (ft_empty_line(line))
-			return 1;
-		if(line[i] != '|' || (line[i + 1] && line[i] == ' ' && line[i + 1] != '|'))
-			return(0);
-		i++;
-	}
-	return(1);
-}
+//int incorrect_pipe(const char *line)
+//{
+//	int i;
+//
+//	i = 1;
+//	while(line[i])
+//	{
+//		if (ft_empty_line(line))
+//			return 1;
+//		if(line[i] != '|' || (line[i + 1] && line[i] == ' ' && line[i + 1] != '|'))
+//			return(0);
+//		i++;
+//	}
+//	return(1);
+//}
 
 int invalid_line(char *line)
 {

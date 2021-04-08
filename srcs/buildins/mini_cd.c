@@ -11,19 +11,37 @@ void	mini_cd(char **simple_command, t_common *common)
 	char	*old_pwd;
 	char	*new_pwd;
 
-	if (ft_strncmp(simple_command[1], "-", 2))
+	if (NULL == simple_command[1] || '\0' == simple_command[1][0] || ft_strncmp(simple_command[1], "-", 2))
 	{
 		if (NULL == (old_pwd = malloc(sizeof(char) * MAX_PATH))
 			|| NULL == (new_pwd = malloc(sizeof(char) * MAX_PATH))
 			|| NULL == (getcwd(old_pwd, MAX_PATH)))
-			return ;
+			return;
+		if (NULL == simple_command[1] || '\0' == simple_command[1][0])
+		{
+			if (NULL == (get_envp_var_pointer(common, "HOME")))
+				return ;
+			ft_strlcpy(new_pwd, get_envp_var_pointer(common, "HOME"), MAX_PATH);
+			puts(new_pwd);
+		}
 		update_envp_var(common, "OLDPWD", old_pwd, 0);
-		if (-1 == chdir(simple_command[1]))
-			return ;
+		if (NULL == simple_command[1] || '\0' == simple_command[1][0])
+		{
+			if (-1 == chdir(new_pwd))
+				return;
+		}
+		else
+		{
+			if (-1 == chdir(simple_command[1]))
+				return;
+		}
 		if (NULL == (getcwd(new_pwd, MAX_PATH)))
-			return ;
+		{
+			return;
+		}
 		update_envp_var(common, "PWD", new_pwd, 0);
 	}
+
 	else // "cd -"
 	{
 		if (-1 != get_envp_var_index(common, "OLDPWD")

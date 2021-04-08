@@ -42,14 +42,13 @@
 #define RESET "\x1B[0m"
 
 # define SHELL_NAME "minishell"
-# define PROMT "minishell$"
 
 # define IS_READ 1
 # define IS_WRITE 0
 # define IS_CAT 1
 # define IS_NOT_CAT 0
 
-# define SPEC_SYMBOL "|<>;"
+# define SPEC_SYMBOL "|<>;~"
 //# define SPEC_SYMBOL " '|\"$\t<>"
 # define GREAT "<GREAT>"				// ">"
 # define GREATGREAT "<GREATGREAT>"		// ">>"
@@ -215,7 +214,6 @@ char **init_args(char **lexer_result, char *spec_token);
 
 
 char				**lexer(char *line, t_common *common);
-char				**braces_expander(char **lexer_result, t_common *common);
 char				toggle_brace_flag_lexer(char flag, char current_char);
 int					toggle_back_slash_flag(int flag, char *line, int count);
 int					expand_variable(char *token, t_common *common, char **result, int *count_result);

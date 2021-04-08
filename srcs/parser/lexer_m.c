@@ -238,6 +238,11 @@ int			get_token3(char *line, char **token, t_common *common)
 	}
 	buffer_token[count_token] = '\0';
 	*token = strdup(buffer_token);
+	if (flag_brace_single || flag_brace_double || flag_back_slash)
+	{
+		ft_putstr_fd("syntax error (lexer)\n", 1);
+		return (-1);
+	}
 	return (count_line);
 }
 
@@ -323,6 +328,7 @@ char		**lexer(char *line, t_common *common)
 	int		count_result;
 	char	*token;
 	char	**result;
+	int		gt_rv;
 
 	count = 0;
 	count_result = 0;
@@ -333,7 +339,11 @@ char		**lexer(char *line, t_common *common)
 	while(line && line[count] && line[count] != ';')
 	{
 		if (!is_spec_symbol(line[count]))
-			count += get_token3(&line[count], &token, common);
+		{
+			if (-1 == (gt_rv = get_token3(&line[count], &token, common)))
+				return (NULL);
+			count += gt_rv;
+		}
 		else
 			if (line[count] != ' ')
 				count += get_spec_token(&line[count], &token);
