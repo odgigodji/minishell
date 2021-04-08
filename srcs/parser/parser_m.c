@@ -46,7 +46,7 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 		strlcat(*result, temp, MAX_PATH);
 		count_token = 2;
 	}
-	else if (token[0] == '~' && token[1] == '\0')
+	else if (token[0] == '~' && (ft_strchr(" ", token[1]) || token[1] == '\0'))
 	{
 		strlcat(*result, get_envp_var_pointer(common, "HOME"), MAX_PATH);
 		count_token = 1;
