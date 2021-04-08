@@ -124,23 +124,26 @@ cat | cat | ls | cat | cat
 
 test=test ; env | grep test ; export test ; env | grep test
 
+unset PWD
+pwd                                 -сега(+)
+
 --------------------------------m_test------------------------------------------
                                             //вывод в 5: 1 1 2 3
-echo 1 > 2 > 3 > 4 > hello 1 2 3 > 5
-echo 1 < 2 > 3 < 4 > hello a b c > 5
-echo 1 < 2 > 3 < 4 > hello a b c > 5
-echo a < 2 > 3 < 4 < 5 > 6 < 7 < 8 > 9 >> 10 >> 11 >> 12 < 13 > hello b c d
-echo 0 > outfile-0-0 1 2 3 4 5 > a 6 > b > c > d > e > f > g > h > j 7 8 9 10 11 > k | echo 1
-cat -e < file | sort | cat -e
-cat -e < file | sort | cat -e | cat -e > file | sort | cat -e | cat -e >> file | sort | cat -e (-) виснет когда нет файла или дериктории
+echo 1 > 2 > 3 > 4 > hello 1 2 3 > 5                                    +
+echo 1 < 2 > 3 < 4 > hello a b c > 5                                    +
+echo 1 < 2 > 3 < 4 > hello a b c > 5                                        + no such file
+echo a < 2 > 3 < 4 < 5 > 6 < 7 < 8 > 9 >> 10 >> 11 >> 12 < 13 > hello b c d             + no such file
+echo 0 > outfile-0-0 1 2 3 4 5 > a 6 > b > c > d > e > f > g > h > j 7 8 9 10 11 > k | echo 1   +
+cat -e < file | sort | cat -e               +
+cat -e < file | sort | cat -e | cat -e > file | sort | cat -e | cat -e >> file | sort | cat -e (+) виснет когда нет файла или дериктории
 
 -------------------------------invalid_lines------------------------------------
-echo 1 >> 2
-echo 1 > < 2                            +
-cat > file > test                                                                         (-)  виснет cat
-cat < file < test                                                                       (-)
+echo 1 >> 2                                                 +
+echo 1 > < 2                                                +
+cat > file > test                                           (+)  виснет cat
+cat < file < test                                           (+)
 1  2 3 | a b c  | # # # | 7 7                               +
-echo 1 > 2 a                                        +
+echo 1 > 2 a                                                +
 
 -------------------------------------is valid&----------------------------------
 [passed]
@@ -151,29 +154,24 @@ echo '$PWD' +
 echo "\\n"      +
  export t=u; echo $t  отбраотало +
 echo "\n"               выводит просто н а должен \n +
-echo 1 2 3 |            +                              ; долже нсинаткс еррор -
-ls |       +                                                                 -
   >> не должно быть сеги +
 echo < > 123      + син кррор надо
 echo aaa < > 123   +    син еррор
 | | подряд   +
 \                                   син еррор +
-echo \'                                                                             -
+unset all   +
+pwd                                                     (+)
 
 [is_valid_line]
-echo 1 2 3 ;                                |           ;                            (-)
  echo '$PWD"              (+)                      валидация строки нужна синт еррор
  echo '' сега (+)
 
 [lexer_result]
-echo 1 2 3 ;; син еррор                                                             (-)
+echo 1 2 3 | < her                                                                  -??
     >                   -(+)
 
- > her          должкен создать пустой файл
-echo 1 2 3 | < her
-echo $                                          вывод доллара долже н а у нас сега
-e''cho       -(+)
- echo                                           сега , а должная быть пустая строка
+e''cho       (+)
+ echo       +                                    сега , а должная быть пустая строка
     на всех редиректах
  \\\\>\\\>\\ - дичь какая
 echo aaa<>123      создает файл 123 и выводит
@@ -184,3 +182,6 @@ echo ~          (+)        должная обрабатываться
 ------------------------------errors now-----------------
 cntrl+D                                                                                     +
 empty line + enter
+
+
+

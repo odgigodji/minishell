@@ -153,7 +153,7 @@ void ft_do_command(t_common *common)
 		{
 			printf(RED"ERROR line\n"RESET);
 //			free(line);
-//			line = NULL;
+			line = NULL;
 			return ;
 		}
 //		printf("-----------------------------line from gnl - |%s|\n", line);
