@@ -35,12 +35,9 @@ void	mini_cd(char **simple_command, t_common *common)
 				return;
 		}
 		if (NULL == (getcwd(new_pwd, MAX_PATH)))
-		{
 			return;
-		}
 		update_envp_var(common, "PWD", new_pwd, 0);
 	}
-
 	else // "cd -"
 	{
 		if (-1 != get_envp_var_index(common, "OLDPWD")

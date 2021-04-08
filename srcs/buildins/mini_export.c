@@ -37,6 +37,20 @@ int		is_append(char *arg)
 		return (0);
 }
 
+int		is_key_valid(char *key)
+{
+	int	count;
+
+	count = 0;
+	while (key[count])
+	{
+		if (!(ft_isalnum(key[count]) || key[count] == '_'))
+			return (0);
+		count++;
+	}
+	return (1);
+}
+
 void	mini_export(t_common *common, char **simple_command)
 {
 	char	**key_value;
@@ -52,6 +66,11 @@ void	mini_export(t_common *common, char **simple_command)
 		while (simple_command[count])
 		{
 			key_value = get_key_and_value(simple_command[count]);
+			if (!is_key_valid(key_value[0]))
+			{
+				printf("%s: export: %s not a valid identifier\n", SHELL_NAME, key_value[0]);
+				continue ;
+			}
 			update_envp_var(common, key_value[0], key_value[1], is_append(simple_command[count]));
 			free(key_value[0]);
 			free(key_value[1]);
