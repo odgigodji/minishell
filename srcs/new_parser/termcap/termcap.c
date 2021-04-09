@@ -126,9 +126,16 @@ int	t_key_handle(char *buffer, t_termcap *termcap, char **line)
 
 int		t_input_handle(char *buffer, t_termcap *termcap, char **line)
 {
+//	printf("%d %d %d\n", termcap->cursor, buffer[0], (termcap->cursor > 0 && buffer[0] == 4));
+	if (termcap->cursor > 0 && buffer[0] == 4)
+	{
+		buffer[0] = '\0';
+		return (-1);
+	}
 	if (buffer[0] != '\n')
 	{
-		if (!ft_strchr("\t\v\f\r", buffer[0]))
+//		puts("check");
+		if (!ft_strchr("\t\v\f\r\4", buffer[0]))
 		{
 			termcap->cursor = strlcat(termcap->history[termcap->history_count], buffer, MAX_PATH);
 			write(1, buffer, strlen(buffer));

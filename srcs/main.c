@@ -162,8 +162,6 @@ void ft_do_command(t_common *common)
 			line = NULL;
 			return ;
 		}
-
-
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 //	t_term_to_cannon(common->termcap);
