@@ -150,15 +150,25 @@ void ft_do_command(t_common *common)
 //		}
 		gnl_rv = get_next_line(0, &line);
 
+		next_symbol_after_space(line);
+
 		if (0 == gnl_rv)
 			mini_exit(common);
-		else if (!line || invalid_line(line))
+		if (syntax_error(line))
 		{
-			printf(RED"ERROR line\n"RESET);
-//			free(line);
+//			errno = 258;
 			line = NULL;
 			return ;
 		}
+		if (!line || ft_empty_line(line))
+		{
+//			printf(RED"ERROR line\n"RESET);
+//			free(line);
+			line = NULL;
+//			errno = 0;
+			return ;
+		}
+
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 //	t_term_to_cannon(common->termcap);
@@ -214,6 +224,7 @@ int main(int argc, char const **argv, char const **envp)
 {
 	(void)argc;
 	(void)argv;
+	errno = 0;
 	setbuf(stdout, NULL);
 	minishell_loop((char **)envp);
 	return (0);

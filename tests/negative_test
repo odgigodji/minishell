@@ -1,13 +1,8 @@
  > her                                                                           -SEG!  должкен создать пустой файл
+ echo $?                                                                          -SEG
  ctrl + D                                                                        -SEG(+-)
  много enter подряд                                                              -SEG
-ls |       +                                                                     -
 echo \'                                                                          -
-echo 1 2 3 ;; син еррор                                                          (-)
-echo 1 2 3 ;                                |           ;                        (-) syn error need
-echo 1 2 3 |            +                                ;                       долже нсинаткс еррор -
- echo bonjour ; |                                                               -не синтакс еррор
- echo bonjour | |                                                               -не синтакс еррор
  cat /dev/random | head -n 1 | cat -e                                            ?- подвисает
  echo -n -n -nnnn -nnnnm                                                         -??
  $                                                                               -  должен счититаь просто как символ
@@ -19,15 +14,9 @@ echo 1 2 3 |            +                                ;                      
  echo $?                                                                            -?
  # write something then press ctrl+\                                                 -
  echo "$     a"                                                                    -
- echo ;;                                                                             -
  sort | ls # check output order                                                  --заново печатет минишел после ввода
-;;                                                                                  -check echo $? after this
 cat < input.txt | ps                                                                -зависает а потом печатает еще раз minishell
- export "" et unset ""                                                             -  должен быть нот валид идентифаер
- ;;                                                                                  -
- ;                                                                                   -
- ls;;                                                                                 -
- ls; ;                                                                                - syntax error needed
+ export "" et unset ""                                                             -  должен быть нот валид идентифаер                                                                              - syntax error needed
  echo \hello \$PWD                                                                    - не экранирует первый символ
  exit                                                                               -не выходит иногда
  ctrl+D                                                                           - ломается баш бывает

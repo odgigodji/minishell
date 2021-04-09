@@ -80,6 +80,18 @@ echo "\s" ; echo "\\s"                                          +
 echo "12\""                                                     +
 echo "bip | bip ; coyotte > < \" "                              +
 export test="  foo    bar  " ; echo "ab"$test                   +
-
-
+$?                                                              +
+echo 1 2 3 ;; син еррор                                       (+)
+echo 1 2 3 ;                                |           ;     (+)
+echo 1 2 3 |                                           ;     (+)
+ echo bonjour ; |                                              (+)
+ echo bonjour | |                                              (+)
+ ;;                                        (+)   -check echo $? after this
+ ;                                                            (+)
+ ls;;                                                          (+)
+ ls; ;                                                         (+)
+ ls |                                                          (+)
+ echo ;;                                                       (+)
+echo 1 ; echo 2             +
+echo 1 ; ; echo 2           +
 

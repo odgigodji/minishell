@@ -31,35 +31,27 @@ int incorrect_quotes(char *line)
 	return (0);
 }
 
-int next_character(const char *line, int *i)
-{
-	printf(RED"|%s|\n"RESET, line);
-
-
-	while (line[*i])
-	{
-		if(line[*i] == ' ' || line[*i] == ';')
-			i++;
-		else
-		{
-			printf(BLU"|%c|\n"RESET, line[*i]);
-			return (line[*i]);
-		}
-	}
-	return ('\0');
-}
-
 int semi_column_error(const char *line)
 {
+	printf("sem\n");
 	int i;
 	int j;
+	int flag = 0;
+	int res = 0;
 
 	i = 0;
 	while(line[i])
 	{
-		if(line[i] == ';' && (next_character(line, &i) != ';'
-		|| next_character(line, &i) != '|' || next_character(line, &i) != '\0'))
-			return (1);
+		if (line[i] == ';'  )
+		{
+			flag = 1;
+			res++;
+		}
+		else
+		{
+			flag = 0;
+			res = 0;
+		}
 		i++;
 	}
 	return (0);
@@ -81,28 +73,52 @@ int semi_column_error(const char *line)
 //	return(1);
 //}
 
-int invalid_line(char *line)
+int next_symbol_after_space(const char *line)
 {
 	int i;
-	int res;
 
-	res = 0;
-	i = 0;
-	if (ft_strlen(line) == 0)
+	i = -1;
+	while(line[++i])
+	{
+//		printf("++|%c|+\n", line[i]);
+		if (line[i] != ' ')
+			break;
+	}
+	printf("------|%c|-----\n", line[i]);
+	return (line[i]);
+}
+
+int syntax_error(const char *line)
+{
+//	printf("SE\n");
+	int i;
+	int is_syntax_error;
+	int quotes_flag;
+
+	quotes_flag = 0;
+	i = -1;
+	is_syntax_error = 0;
+	while(line[++i])
+	{
+//		if (line[i] == '\'' || line[i] == '\"')
+//		{
+//			quotes_flag = 1;
+//			while(line[++i] != )
+//		}
+		if(line[i] == ';' && (next_symbol_after_space(line + i + 1) == ';'
+		|| next_symbol_after_space(line + i + 1) == '|') )
+			is_syntax_error++;
+		if(line[i] == '|' && ( next_symbol_after_space(line + i + 1) == ';'
+		|| next_symbol_after_space(line + i + 1) == '|' || next_symbol_after_space(line + i + 1) == '\0'))
+			is_syntax_error++;
+//		if(line[i] == ';' && (line[i + 1] == ';' || line[i + 1] == '|'))
+//			is_syntax_error++;
+	}
+	if(is_syntax_error)
+	{
+		printf(RED"syn error\n"RESET);
+		errno = 258;
 		return (1);
-//	if (semi_column_error(line))
-//		return (1);
+	}
 	return (0);
-//	while(line[i])
-//	{
-////		if(line[i] == ' ')
-////			;
-////		if (line[i] == '\'' && incorrect_quotes(line + i))
-////			return (1);
-////		if (line[i] == '|' && incorrect_pipe(line + i))
-////			return (1);
-//
-//		i++;
-//	}
-//	printf(MAG"I %d\n"RESET, i);
 }
