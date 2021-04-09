@@ -47,7 +47,7 @@ void	signal_handler(int num)
 	if (num == SIGINT)
 	{
 //		ft_putstr_fd("sigint\n", 1);
-		prompt();
+//		prompt();
 //		errno = 1;	// fixme
 //		signal(SIGINT, signal_handler);
 	}
@@ -58,7 +58,7 @@ void	handle_sigint(int sig)
 	if (sig == SIGINT)
 		puts("!");
 	else if (sig == SIGQUIT)
-		printf("%s: quit\n", SHELL_NAME);
+		write(1, "minishell: quit\n", strlen("minishell: quit\n"));
 //	kill(0, SIGKILL);
 }
 

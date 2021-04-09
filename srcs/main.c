@@ -142,7 +142,7 @@ void ft_do_command(t_common *common)
 
 	if (line == NULL || *line == '\0')
 	{
-		prompt();
+//		prompt();
 //		if (-13 == t_get_next_line(&line, common->termcap))
 //		{
 //			printf("miniexit\n");

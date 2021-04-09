@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+
+#define MAG   "\x1B[35m" //violet
+#define RESET "\x1B[0m"
 
 /*
 ** get_next_line function:
@@ -49,6 +53,14 @@ void			check_rem(char **rem, char **line, int bytes)
 	}
 }
 
+
+
+void	prompt_q(void)
+{
+//	ft_putstr_fd("%s$ ", STDIN_FILENO);
+	printf(MAG "%s$ " RESET, "minishell$ ");
+}
+
 static int		ret_res(int bytes_was_read, char *line)
 {
 	if (line == NULL)
@@ -70,6 +82,7 @@ int				get_next_line(int fd, char **line)
 		while (1)
 		{
 //			printf(RED"ggg\n"RESET);
+			prompt_q();
 			if ((bytes_was_read = read(fd, buf, BUFFER_SIZE)) <= 0)
 				break;
 			buf[bytes_was_read] = '\0';
