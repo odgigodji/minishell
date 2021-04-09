@@ -17,7 +17,7 @@ int	ft_empty_line(const char *line)
 	int i;
 
 	i = 0;
-	while (line[i])
+	while (line && line[i])
 	{
 		if (!ft_isspace(line[i]))
 			return (0);

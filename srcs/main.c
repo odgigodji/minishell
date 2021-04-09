@@ -143,16 +143,10 @@ void ft_do_command(t_common *common)
 	if (line == NULL || *line == '\0')
 	{
 		prompt();
-//		if (-13 == t_get_next_line(&line, common->termcap))
-//		{
-//			printf("miniexit\n");
-//			mini_exit(common);
-//		}
-
 		gnl_rv = t_get_next_line(&line, common->termcap);
 		to_cannon();
 
-		if (line == NULL && 1 == gnl_rv)
+		if ((line == NULL || line[0] == 0) && 1 == gnl_rv)
 			mini_exit(common);
 		if (ft_empty_line(line))
 		{
