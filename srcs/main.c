@@ -151,6 +151,7 @@ void ft_do_command(t_common *common)
 
 //		gnl_rv = get_next_line(0, &line);
 		gnl_rv = t_get_next_line(&line, common->termcap);
+		to_cannon();
 //		next_symbol_after_space(line);
 
 		if (0 == gnl_rv)
