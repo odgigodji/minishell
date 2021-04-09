@@ -1,5 +1,4 @@
  > her                                                                           -SEG!  должкен создать пустой файл
- echo $?                                                                          -SEG
  ctrl + D                                                                        -SEG(+-)
  много enter подряд                                                              -SEG
 echo \'                                                                          -
@@ -21,3 +20,6 @@ cat < input.txt | ps                                                            
  exit                                                                               -не выходит иногда
  ctrl+D                                                                           - ломается баш бывает
 
+echo \; \; \;
+echo \; \; \;  ;
+echo \; \;\;\|\|;                   +

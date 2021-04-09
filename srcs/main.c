@@ -150,28 +150,30 @@ void ft_do_command(t_common *common)
 //		}
 		gnl_rv = get_next_line(0, &line);
 
-		next_symbol_after_space(line);
+//		next_symbol_after_space(line);
 
 		if (0 == gnl_rv)
 			mini_exit(common);
+		if (ft_empty_line(line))
+		{
+			printf(RED"empty_line\n"RESET);
+//			free(line);
+			line = NULL;
+			errno = 0;
+			return ;
+		}
 		if (syntax_error(line))
 		{
 //			errno = 258;
 			line = NULL;
 			return ;
 		}
-		if (!line || ft_empty_line(line))
-		{
-//			printf(RED"ERROR line\n"RESET);
-//			free(line);
-			line = NULL;
-//			errno = 0;
-			return ;
-		}
+
 
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 //	t_term_to_cannon(common->termcap);
+
 
 	if (NULL == (lexer_result = lexer(line, common)))
 	{
@@ -180,7 +182,7 @@ void ft_do_command(t_common *common)
 	}
 	if (invalid_lexer_result(lexer_result))
 	{
-		printf(RED"error in lexer_result\n"RESET);
+		printf(RED"syn error (in lexer_result)\n"RESET);
 //		free(line);
 		line = NULL;
 		return ;

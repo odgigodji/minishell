@@ -1,0 +1,25 @@
+-------------syntax----------
+|                                   +
+echo bonjour ; |                    +
+echo bonjour > > out                +
+echo bonjour > $test                         +- код ошибки 1 должен быть
+echo bonjour > $test w/ test="o1 o2"
+echo bonjour >>> test               +
+echo bonjour | |                    +
+echo bonjour |;                     +
+
+----------------------------redirects
+<a cat <b <c
+<a cat <b <c      avec b n'existe pas (ou pas les droits)
+> test | echo blabla; rm test
+>a cat <b >>c
+>a ls >b >>c >d
+>a ls <machin >>c >d     avec machin n'exite pas
+>file
+cat -e > test1 < test2
+cat < test
+echo 2 > out1 >> out2
+echo 2 >> out1 > out2
+echo bonjour > test\ 1
+echo test > file test1
+not_cmd bonjour > salut
