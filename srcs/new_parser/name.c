@@ -11,7 +11,7 @@ int next_symbol_after_space(const char *line)
 		if (line[i] != ' ' || line[i] == '\\')
 			break;
 	}
-	printf("------|%c|-----\n", line[i]);
+//	printf("------|%c|-----\n", line[i]);
 	return (line[i]);
 }
 
@@ -43,7 +43,7 @@ char check_line_2(const char *line, int i, int quotes_flag, char quote_type)
 		}
 		else if (line[i] == quote_type && quotes_flag == 1)
 			quotes_flag = 0;
-		if (line[i + 2] && line[i] == '>' && line[i + 1] == '>' && line[i + 2] == '>' && quotes_flag == 0)
+		if (quotes_flag == 0 && line[i + 1] && line[i + 2] && line[i] == '>' && line[i + 1] == '>' && line[i + 2] == '>')
 			break;
 	}
 	return (line[i]);

@@ -210,7 +210,10 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 		else
 		{
 			if (0 <= (input_rv = t_input_handle(buffer, termcap, line)))
+			{
+				termcap->cursor = 0;
 				return (input_rv);
+			}
 		}
 	}
 	return (0);
