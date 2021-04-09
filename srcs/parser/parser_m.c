@@ -38,7 +38,7 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 	{
 		temp = ft_itoa(errno);
 		strlcat(*result, temp, MAX_PATH);
-		count_token = 1 + (int)ft_strlen(temp);
+		count_token = 2;
 	}
 	else if (token[0] == '~')
 	{

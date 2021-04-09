@@ -8,16 +8,6 @@ Ctrl+C (^C) - [SIGINT] means “interrupt”, i.e., stop what you're doing. Tech
 Ctrl+\ (^\) - [SIGQUIT] try If a program doesn't respond to ^C, you can. This sends the QUIT signal, which by default terminates an application, and which not so many programs intercept.
  */
 
-void	handler_c(int num)
-{
-	int temp;
-
-	temp = num + 48;
-	write(STDOUT_FILENO, &temp, 7);
-	write(STDOUT_FILENO, " ctrl_c", 7);
-//	exit(0);
-}
-
 //void	signals_handler(void)
 //{
 //	signal(SIGINT, handler);
@@ -31,16 +21,6 @@ void	handler_c(int num)
 ** @param		num		The signal number
 ** @return		N/A
 */
-
-void	signal_handler_command(int num)
-{
-	if (num == SIGINT)
-	{
-		ft_putstr_fd("\n", 1);
-		errno = 130;	// fixme не знаю насколько это корректное назначение errno
-		signal(SIGINT, signal_handler);
-	}
-}
 
 void	signal_handler(int num)
 {
@@ -71,7 +51,7 @@ void	signal_handler(int num)
 	}
 }
 
-void	signal_processor()
+void	signal_processor(void)
 {
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);

@@ -148,6 +148,12 @@ void	execute_test_01(t_common *common)
 	char	*line_32 = "echo $";
 	char	*test_result_32[] = {"echo", "$", NULL};
 	execute_test_screening(32, line_32, test_result_32, common);
+
+	errno = 130;
+	char	*line_33 = "echo $?";
+	char	*test_result_33[] = {"echo", "130", NULL};
+	execute_test_screening(33, line_33, test_result_33, common);
+	errno = 0;
 }
 
 void	execute_test_screening(int test_num, char *line, char **test_result, t_common *common)
