@@ -182,11 +182,9 @@ void ft_do_command(t_common *common)
 //		i++;
 //	}
 
-//	fixme раскомментить
 	common->command = get_command_table(lexer_result);
 	ft_print_all_command(common->command.simple_commands);
 	line = shift_line_2(line);
-//	fixme раскомментить
 
 //	i = 0;
 //	while (1);

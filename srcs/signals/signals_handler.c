@@ -46,10 +46,10 @@ void	signal_handler(int num)
 {
 	if (num == SIGINT)
 	{
-		ft_putstr_fd("\n", 1);
+//		ft_putstr_fd("sigint\n", 1);
 		prompt();
-		errno = 1;	// fixme
-		signal(SIGINT, signal_handler);
+//		errno = 1;	// fixme
+//		signal(SIGINT, signal_handler);
 	}
 }
 
@@ -57,15 +57,17 @@ void	handle_sigint(int sig)
 {
 	if (sig == SIGINT)
 		puts("!");
+	else if (sig == SIGQUIT)
+		printf("%s: quit\n", SHELL_NAME);
 //	kill(0, SIGKILL);
 }
 
 void	signal_processor()
 {
-//	signal(SIGINT, signal_handler);		// int	Ctrl+C	завершение ввода без выполнение запуск ввода с начала
-//	signal(SIGQUIT, signal_handler);	// int	Ctrl+"\"
-	struct sigaction sa;
-	puts("signal!");
-	sa.sa_handler = &handle_sigint;
-	sigaction(SIGINT, &sa, NULL);
+	signal(SIGINT, signal_handler);		// int	Ctrl+C	завершение ввода без выполнение запуск ввода с начала
+	signal(SIGQUIT, signal_handler);	// int	Ctrl+"\"
+//	struct sigaction sa;
+//	puts("signal!");
+//	sa.sa_handler = &handle_sigint;
+//	sigaction(SIGINT, &sa, NULL);
 }
