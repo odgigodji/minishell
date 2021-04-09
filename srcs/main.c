@@ -139,6 +139,7 @@ void ft_do_command(t_common *common)
 	static char *line;
 	char		**lexer_result;
 	int 		gnl_rv;
+//	static int j = 0;
 
 	if (line == NULL || *line == '\0')
 	{
@@ -154,6 +155,9 @@ void ft_do_command(t_common *common)
 //			free(line);
 			line = NULL;
 			errno = 0;
+//			j++;
+//			if (j > 20)
+//				exit(42);
 			return ;
 		}
 		if (syntax_error(line))

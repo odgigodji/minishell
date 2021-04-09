@@ -1,6 +1,6 @@
  > her                                                                           -SEG!  должкен создать пустой файл
  ctrl + D                                                                        -SEG(+-)
- много enter подряд                                                              -SEG
+
 echo \'                                                                          -
  cat /dev/random | head -n 1 | cat -e                                            ?- подвисает
  echo -n -n -nnnn -nnnnm                                                         -??
@@ -18,20 +18,18 @@ cat < input.txt | ps                                                            
  export "" et unset ""                                                             -  должен быть нот валид идентифаер                                                                              - syntax error needed
  echo \hello \$PWD                                                                    - не экранирует первый символ
  exit                                                                               -не выходит иногда
- ctrl+D                                                                           - ломается баш бывает
+ ctrl+D                                                                           не должен выходить коода что то напечатано
 
 echo \; \; \;
-echo \; \; \;  ;
-echo \; \;\;\|\|;                   +
-unset                                                                            SEGA
-unset ""                                                                          SEG
+echo \; \; \;  ;                                                                  -syn error in lexer_result
+echo \; \;\;\|\|;                                                               -syn error in lexer_result
+
 ls | grep t                                  (+)
-ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls
-                                                                                    SEGA
-echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e| cat -e| cat -e| cat -e| cat -e| cat -e| cat -e| cat -e| cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e
-                                                                                    SEGA
+
+
 cat /dev/random | head -c 100 | wc -c                                            -завис
  cat /dev/random | head -n 1 | cat -e                                            -виснет
  заходим в минишел несоклько раз нажимаем килл                                   -бесконечный цыкл с пустой линией а должно ничего не происходить
-
+echo \' ; ; \'                                                                  SEG
+ echo \\\\\'
 
