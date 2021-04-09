@@ -47,7 +47,7 @@ void	signal_handler(int num)
 			ft_putstr_fd("Quit: 3\n", 1);
 		}
 		else
-			ft_putstr_fd("\b\b  \b\b", 1);
+			ft_putstr_fd("  \b\b", 1);
 	}
 }
 
