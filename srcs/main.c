@@ -213,8 +213,8 @@ void	minishell_loop(char **envp)
 
 	i = 0;
 	common = common_init((char **)envp);
-	g_signal_process_status = 0;
 	signal_processor();
+	g_signal_process_status = 0;
 //	signal(SIGQUIT, handler_s);	// quit	Ctrl+|	выход из приложенияя
 	while (1)
 	{

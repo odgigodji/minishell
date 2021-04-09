@@ -6,9 +6,10 @@ void	execute_preprocessing(t_common *common)
 
 	pipe_variables.tmpin = dup(STDIN_FILENO);
 	pipe_variables.tmpout = dup(STDOUT_FILENO);
-
+	g_signal_process_status = 1;
 	execute_processor(common, &pipe_variables);
 
+	g_signal_process_status = 0;
 	dup2(pipe_variables.tmpin, STDIN_FILENO);
 	dup2(pipe_variables.tmpout, STDOUT_FILENO);
 	close(pipe_variables.tmpin);
@@ -59,7 +60,7 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 
 
 		//	выполняем команду
-		g_signal_process_status = 0;
+
 		if (is_buildin(common->command.simple_commands[command_table_count]))
 			execute_simple_command_buildin(common, simple_command);
 		else if (0 == (ret = fork()))											//	создаём дочерний процесс
@@ -69,7 +70,6 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 				execute_simple_command(common, simple_command);
 			}
 		}
-		g_signal_process_status = 1;
 //		else
 //		{
 //			wait(NULL);

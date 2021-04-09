@@ -35,6 +35,7 @@ void	signal_handler(int num)
 		else
 		{
 			ft_putstr_fd("  \n", 1);
+			g_signal_process_status = 0;
 			prompt();
 		}
 	}
