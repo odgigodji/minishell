@@ -176,13 +176,13 @@ void ft_do_command(t_common *common)
 		line = shift_line_2(line);
 		return ;
 	}
-	if (invalid_lexer_result(lexer_result))
-	{
-		printf(RED"syn error (in lexer_result)\n"RESET);
-//		free(line);
-		line = NULL;
-		return ;
-	}
+//	if (invalid_lexer_result(lexer_result))
+//	{
+//		printf(RED"syn error (in lexer_result)\n"RESET);
+////		free(line);
+//		line = NULL;
+//		return ;
+//	}
 	ft_print_lexer_result(lexer_result);
 //	while(lexer_result[i])
 //	{

@@ -25,8 +25,8 @@ int with_error(const int unexpected_token)
 	}
 	else
 	{
-		printf(RED"\nsyntax error near unexpected token "RESET);
-		printf(BLU"'%c'\n"RESET, unexpected_token);
+		printf("\nsyntax error near unexpected token ");
+		printf("'%c'\n", unexpected_token);
 		errno = 258;
 	}
 	return (1);
