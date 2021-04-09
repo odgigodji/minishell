@@ -154,7 +154,7 @@ void ft_do_command(t_common *common)
 		to_cannon();
 //		next_symbol_after_space(line);
 
-		if (0 == gnl_rv)
+		if (line == NULL && 1 == gnl_rv)
 			mini_exit(common);
 		if (ft_empty_line(line))
 		{

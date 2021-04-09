@@ -219,5 +219,5 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 			}
 		}
 	}
-	return (0);
+	return (read_rv);
 }
