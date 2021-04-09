@@ -128,8 +128,11 @@ int		t_input_handle(char *buffer, t_termcap *termcap, char **line)
 {
 	if (buffer[0] != '\n')
 	{
-		termcap->cursor = strlcat(termcap->history[termcap->history_count], buffer, MAX_PATH);
-		write(1, buffer, strlen(buffer));
+		if (!ft_strchr("\t\v\f\r", buffer[0]))
+		{
+			termcap->cursor = strlcat(termcap->history[termcap->history_count], buffer, MAX_PATH);
+			write(1, buffer, strlen(buffer));
+		}
 //		termcap->history_cursor = termcap->history_count;
 		return (-1);
 	}
