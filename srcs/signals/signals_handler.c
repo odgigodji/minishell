@@ -46,28 +46,33 @@ void	signal_handler(int num)
 {
 	if (num == SIGINT)
 	{
-//		ft_putstr_fd("sigint\n", 1);
-//		prompt();
-//		errno = 1;	// fixme
-//		signal(SIGINT, signal_handler);
+		if (g_signal_process_status)
+		{
+			ft_putstr_fd("\r", 1);
+			g_signal_process_status = 0;
+			errno = 130;
+		}
+		else
+		{
+			ft_putstr_fd("\b\b  \n", 1);
+			prompt();
+		}
 	}
-}
-
-void	handle_sigint(int sig)
-{
-	if (sig == SIGINT)
-		puts("!");
-	else if (sig == SIGQUIT)
-		write(1, "minishell: quit\n", strlen("minishell: quit\n"));
-//	kill(0, SIGKILL);
+	if (num == SIGQUIT)
+	{
+		if (g_signal_process_status)
+		{
+			g_signal_process_status = 0;
+			errno = 3;
+			ft_putstr_fd("Quit: 3\n", 1);
+		}
+		else
+			ft_putstr_fd("\b\b  \b\b", 1);
+	}
 }
 
 void	signal_processor()
 {
-	signal(SIGINT, signal_handler);		// int	Ctrl+C	завершение ввода без выполнение запуск ввода с начала
-	signal(SIGQUIT, signal_handler);	// int	Ctrl+"\"
-//	struct sigaction sa;
-//	puts("signal!");
-//	sa.sa_handler = &handle_sigint;
-//	sigaction(SIGINT, &sa, NULL);
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
 }

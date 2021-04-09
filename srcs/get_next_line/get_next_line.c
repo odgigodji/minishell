@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
+# include "minishell.h"
 
 #define MAG   "\x1B[35m" //violet
 #define RESET "\x1B[0m"
@@ -53,12 +53,9 @@ void			check_rem(char **rem, char **line, int bytes)
 	}
 }
 
-
-
 void	prompt_q(void)
 {
-//	ft_putstr_fd("%s$ ", STDIN_FILENO);
-	printf(MAG "%s$ " RESET, "minishell$ ");
+	ft_putstr_fd(MAG SHELL_NAME "$ " RESET, STDIN_FILENO);
 }
 
 static int		ret_res(int bytes_was_read, char *line)

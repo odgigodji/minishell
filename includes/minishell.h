@@ -144,6 +144,8 @@ typedef struct			s_pipe
 	int fdpipe[2];
 }						t_pipe;
 
+int	g_signal_process_status;
+
 //t_simple_command *get_simple_command1(char **lexer_result, int *current_token);
 
 
