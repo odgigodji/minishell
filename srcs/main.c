@@ -161,7 +161,7 @@ void ft_do_command(t_common *common)
 		}
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
-	t_term_to_cannon(common->termcap);
+//	t_term_to_cannon(common->termcap);
 
 	if (NULL == (lexer_result = lexer(line, common)))
 	{
