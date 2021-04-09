@@ -17,12 +17,21 @@ int next_symbol_after_space(const char *line)
 
 int with_error(const int unexpected_token)
 {
-	printf(RED"syntax error near unexpected token '%c'\n"RESET, unexpected_token);
-	errno = 258;
+	if (unexpected_token == '\"' || unexpected_token == '\'')
+	{
+		printf(RED"syntax error : unclosed quote "RESET);
+		printf(BLU"'%c'\n"RESET, unexpected_token);
+		errno = 42;
+	}
+	else
+	{
+		printf(RED"syntax error near unexpected token '%c'\n"RESET, unexpected_token);
+		errno = 258;
+	}
 	return (1);
 }
 
-char ft_check_line(const char *line, int i, int quotes_flag, char quote_type)
+char check_line_1(const char *line, int i, int quotes_flag, char quote_type)
 {
 	while(line[++i])
 	{
@@ -47,6 +56,8 @@ char ft_check_line(const char *line, int i, int quotes_flag, char quote_type)
 				|| next_symbol_after_space(line + i + 1) == '\0'))
 			break ;
 	}
+	if (quote_type && quotes_flag == 1 )
+		return (quote_type);
 	return (line[i]);
 }
 
@@ -69,7 +80,7 @@ int syntax_error(const char *line)
 			return (with_error(';'));
 		return (with_error('|'));
 	}
-	if ((res = ft_check_line(line, i, quotes_flag, quote_type)))
+	if ((res = check_line_1(line, i, quotes_flag, quote_type)))
 		return (with_error(res));
 	return (0);
 }
