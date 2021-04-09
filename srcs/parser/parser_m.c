@@ -54,7 +54,7 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 			strlcat(*result, "~", MAX_PATH);
 		count_token = 1;
 	}
-	else
+	else	// if (ft_isalnum(token[1]) || token[1] == '_')
 	{
 		count_token = 1 + get_env_variable_name(token, &temp);    // + 1 на знак доллара
 		if (temp && get_envp_var_pointer(common, temp))

@@ -136,10 +136,18 @@ void	execute_test_01(t_common *common)
 	char	*test_result_29[] = {"echo", "n", NULL};
 	execute_test_screening(29, line_29, test_result_29, common);
 
+	printf("\n						");
 	char	*line_30 = "echo \"\\n\"";
 	char	*test_result_30[] = {"echo", "\\n", NULL};
 	execute_test_screening(30, line_30, test_result_30, common);
-	printf("\n						");
+
+	char	*line_31 = "echo \\\'";
+	char	*test_result_31[] = {"echo", "'", NULL};
+	execute_test_screening(31, line_31, test_result_31, common);
+//	echo $
+	char	*line_32 = "echo $";
+	char	*test_result_32[] = {"echo", "$", NULL};
+	execute_test_screening(32, line_32, test_result_32, common);
 }
 
 void	execute_test_screening(int test_num, char *line, char **test_result, t_common *common)
@@ -158,12 +166,11 @@ int	test_lexer_01_screening(char *line, char **test_result, t_common *common)
 	int		flag;
 
 	lexer_result = lexer(line, common);
-//	braces_expander(lexer_result, common);
 	count = 0;
 	flag = 0;
 	while(lexer_result[count] && test_result[count])
 	{
-		if (ft_strncmp(lexer_result[count], test_result[count], ft_strlen(lexer_result[count]) + 1))
+		if (ft_strncmp(lexer_result[count], test_result[count], ft_strlen(test_result[count]) + 1))
 		{
 			printf("%s "RED"!="RESET" %s | ", lexer_result[count], test_result[count]);
 			flag = 1;

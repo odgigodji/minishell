@@ -232,7 +232,7 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 		if (!ft_strncmp(str, "\4", 1))
 			return (-13);
 		str[l] = '\0';
-		if (ft_strchr("\t\v\f\r", str[0]))
+		if (ft_strchr("\t\v\f\r", str[0])) // \t\v\f\r
 			continue ;
 		if (0 == l || !t_string_handle(termcap, str, l))  // || !strcmp(str, "\n")
 			break ;

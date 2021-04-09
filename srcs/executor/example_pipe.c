@@ -64,8 +64,14 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 		else if (0 == (ret = fork()))											//	создаём дочерний процесс
 		{
 			if (simple_command->arguments && simple_command->arguments[0])
+			{
 				execute_simple_command(common, simple_command);
+			}
 		}
+//		else
+//		{
+//			wait(NULL);
+//		}
 //		waitpid(ret, NULL, WUNTRACED);
 //		waitpid(ret, NULL, WNOHANG);	// сигналы работают
 //		waitpid(ret, NULL, 0);

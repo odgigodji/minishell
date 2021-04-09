@@ -138,18 +138,21 @@ void ft_do_command(t_common *common)
 	int 		i = 0;
 	static char *line;
 	char		**lexer_result;
+	int 		gnl_rv;
 
 	if (line == NULL || *line == '\0')
 	{
 		prompt();
-		if (-13 == t_get_next_line(&line, common->termcap))
-		{
-			printf("miniexit\n");
-			mini_exit(common);
-		}
-//		get_next_line(0, &line);
+//		if (-13 == t_get_next_line(&line, common->termcap))
+//		{
+//			printf("miniexit\n");
+//			mini_exit(common);
+//		}
+		gnl_rv = get_next_line(0, &line);
 
-		if (!line || invalid_line(line))
+		if (0 == gnl_rv)
+			mini_exit(common);
+		else if (!line || invalid_line(line))
 		{
 			printf(RED"ERROR line\n"RESET);
 //			free(line);

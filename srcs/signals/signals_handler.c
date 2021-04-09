@@ -53,8 +53,19 @@ void	signal_handler(int num)
 	}
 }
 
+void	handle_sigint(int sig)
+{
+	if (sig == SIGINT)
+		puts("!");
+//	kill(0, SIGKILL);
+}
+
 void	signal_processor()
 {
-	signal(SIGINT, signal_handler);		// int	Ctrl+C	завершение ввода без выполнение запуск ввода с начала
-	signal(SIGQUIT, signal_handler);	// int	Ctrl+"\"
+//	signal(SIGINT, signal_handler);		// int	Ctrl+C	завершение ввода без выполнение запуск ввода с начала
+//	signal(SIGQUIT, signal_handler);	// int	Ctrl+"\"
+	struct sigaction sa;
+	puts("signal!");
+	sa.sa_handler = &handle_sigint;
+	sigaction(SIGINT, &sa, NULL);
 }
