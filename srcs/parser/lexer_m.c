@@ -333,7 +333,7 @@ char		**lexer(char *line, t_common *common)
 	count = 0;
 	count_result = 0;
 	token = NULL;
-	if (NULL == (result = malloc(sizeof(char *) * 100)))
+	if (NULL == (result = malloc(sizeof(char *) * MAX_PATH + 1)))
 		return (NULL);
 	result[0] = NULL;
 	while(line && line[count] && line[count] != ';')
