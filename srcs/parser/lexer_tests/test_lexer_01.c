@@ -154,6 +154,23 @@ void	execute_test_01(t_common *common)
 	char	*test_result_33[] = {"echo", "130", NULL};
 	execute_test_screening(33, line_33, test_result_33, common);
 	errno = 0;
+
+	char    *line_34 = "echo \"\\ \\\\ \\\\\\\\\"";
+	char   *test_result_34[] = {"echo", "\\ \\ \\\\", NULL};
+	execute_test_screening(34, line_34, test_result_34, common);
+
+	char   *line_35 = "echo $%$% %$%$";
+	char   *test_result_35[] = {"echo", "$%$%", "%$%$", NULL};
+	execute_test_screening(35, line_35, test_result_35, common);
+
+	char    *line_36 = "echo \"test \\'\"";
+	char   *test_result_36[] = {"echo", "test \\\'", NULL};
+	execute_test_screening(36, line_36, test_result_36, common);
+
+	char    *line_37 = "echo $qwe$SHELL";
+	char   *test_result_37[] = {"echo", "/bin/zsh", NULL};
+	execute_test_screening(37, line_37, test_result_37, common);
+	printf("\n");
 }
 
 void	execute_test_screening(int test_num, char *line, char **test_result, t_common *common)
