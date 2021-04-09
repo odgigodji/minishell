@@ -142,14 +142,15 @@ void ft_do_command(t_common *common)
 
 	if (line == NULL || *line == '\0')
 	{
-//		prompt();
+		prompt();
 //		if (-13 == t_get_next_line(&line, common->termcap))
 //		{
 //			printf("miniexit\n");
 //			mini_exit(common);
 //		}
-		gnl_rv = get_next_line(0, &line);
 
+//		gnl_rv = get_next_line(0, &line);
+		gnl_rv = t_get_next_line(&line, common->termcap);
 //		next_symbol_after_space(line);
 
 		if (0 == gnl_rv)

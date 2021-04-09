@@ -119,6 +119,7 @@ typedef struct	s_termcap
 
 	char				**history;
 	int					history_count;
+	int					history_cursor;
 	int					history_len;
 
 	int					cursor;

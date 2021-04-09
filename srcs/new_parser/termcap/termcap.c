@@ -1,3 +1,7 @@
+//
+// Created by Mariam Scot on 4/9/21.
+//
+
 #include "minishell.h"
 
 int	ft_putchar_term(int c)
@@ -6,262 +10,208 @@ int	ft_putchar_term(int c)
 	return c;
 }
 
-//int	main(void)
-//{
-//	char	str[2048];
-//	int		l;
-//
-//	l = read(0, str, 100);
-//	write(1, str, l);
-//	return (0);
-//}
-
-int	t_key_up(t_termcap *termcap, char **history, int *history_count)
-{
-	if (0 < termcap->history_count)
-		termcap->history_count--;
-	else
-		write(1, "\a", 1);
-	tputs(restore_cursor, 1, ft_putchar_term);
-	tputs(tigetstr("ed"), 1, ft_putchar_term);
-	write(1, "\r", 1);
-	prompt();
-	write(1, termcap->history[termcap->history_count], strlen(termcap->history[termcap->history_count]));
-	termcap->cursor = strlen(termcap->history[termcap->history_count]);
-	return (termcap->cursor);
-}
-
-int	t_key_down(t_termcap *termcap, char **history, int *history_count)
-{
-	if (NULL != termcap->history[termcap->history_count + 1])
-		termcap->history_count++;
-	else
-		write(1, "\a", 1);
-	tputs(restore_cursor, 1, ft_putchar_term);
-	tputs(tigetstr("ed"), 1, ft_putchar_term);
-	write(1, "\r", 1);
-	prompt();
-	write(1, termcap->history[termcap->history_count], strlen(termcap->history[termcap->history_count]));
-	termcap->cursor = strlen(termcap->history[termcap->history_count]);
-	return (termcap->cursor);
-}
-
-int	t_key_back(t_termcap *termcap, char **history, int *history_count, int cursor)
-{
-	if (termcap->cursor > 0)
-	{
-		tputs(cursor_left, 2, ft_putchar_term);
-		tputs(tgetstr("dc", 0), 1, ft_putchar_term);
-		termcap->history[termcap->history_count][strlen(termcap->history[termcap->history_count]) - 1] = '\0';
-		termcap->cursor--;
-	}
-	else
-		write(1, "\a", 1);
-	return (termcap->cursor);
-}
-
-int	t_key_right(t_termcap *termcap, char **history, int *history_count, int cursor, char *str)
-{
-	if (termcap->cursor < strlen(termcap->history[termcap->history_count]))
-	{
-		write(STDOUT_FILENO, str, strlen(str));
-		termcap->cursor++;
-	}
-	else
-		write(1, "\a", 1);
-	return (termcap->cursor);
-}
-
-int	t_key_left(t_termcap *termcap, char **history, int *history_count, int cursor, char *str)
-{
-	if (termcap->cursor > 0)
-	{
-		write(STDOUT_FILENO, str, strlen(str));
-		termcap->cursor--;
-	}
-	else
-		write(1, "\a", 1);
-	return (termcap->cursor);
-}
-
-int	t_key_handle(t_termcap *termcap, char **history, int *history_count, int cursor, char *str)
-{
-	if (!strcmp(str, "\e[A"))			// верх
-		termcap->cursor = t_key_up(termcap, history, history_count);
-	else if (!strcmp(str, "\e[B"))		// низ
-		termcap->cursor = t_key_down(termcap, history, history_count);
-	else if (!strcmp(str, key_backspace) || !strcmp(str, "\177") || !strcmp(str, "\010"))
-		termcap->cursor = t_key_back(termcap, history, history_count, cursor);
-	else if (!strcmp(str, "\e[C"))		//право
-		termcap->cursor = t_key_right(termcap, history, history_count, cursor, str);
-	else if (!strcmp(str, "\e[D"))		//лево
-		termcap->cursor = t_key_left(termcap, history, history_count, cursor, str);
-	return (termcap->cursor);
-}
-
-int	t_is_key(char *str)
-{
-	if (!strcmp(str, "\e[A")
-		|| !strcmp(str, "\e[B")
-		|| !strcmp(str, key_backspace)
-		|| !strcmp(str, "\177")
-		|| !strcmp(str, "\010")
-		|| !strcmp(str, "\e[C")
-		|| !strcmp(str, "\e[D")
-			)
-		return (1);
-	return (0);
-}
-
 t_termcap	*t_termcap_init(void)
 {
 	t_termcap	*result;
 
 	result = malloc(sizeof(t_termcap));
-	result->history_len = 100;
+	result->history_len = 10;
 	tcgetattr(0, &(result->term));
-	result->history = calloc(result->history_len, sizeof(char *));
-	result->history[0] = calloc(MAX_PATH, sizeof(char));
+	result->history = calloc(result->history_len + 1, sizeof(char *));
 	result->history_count = 0;
+	result->history_cursor = 0;
 	result->term_name = strdup("xterm-256color");
 	tgetent(0, result->term_name);
 	result->cursor = 0;
 	return (result);
 }
 
-void	t_term_to_icannon(t_termcap *termcap) // в неканнонический режим
+void	to_icannon(void)
 {
-	tcgetattr(0, &(termcap->term));
-	termcap->term.c_lflag &= ~(ECHO);
-	termcap->term.c_lflag &= ~(ICANON);
-	tcsetattr(0, TCSANOW, &(termcap->term));
+	struct termios	term;
+
+	tcgetattr(0, &term);
+	term.c_lflag &= ~(ECHO);
+	term.c_lflag &= ~(ICANON);
+	tcsetattr(0, TCSANOW, &term);
 }
 
-void	t_term_to_cannon(t_termcap *termcap)
+void	to_cannon(void)
 {
-	tcgetattr(0, &(termcap->term));
-	termcap->term.c_lflag |= ECHO;			// восстановление предыдущих (стандартных, каннонических) параметров
-	termcap->term.c_lflag |= ICANON;
-	tcsetattr(0, TCSANOW, &(termcap->term));
+	struct termios	term;
+
+	tcgetattr(0, &term);
+	term.c_lflag |= ECHO;			// восстановление предыдущих (стандартных) параметров
+	term.c_lflag |= ICANON;
+	tcsetattr(0, TCSANOW, &term);
 }
 
-void	t_print_history(t_termcap *termcap)
+int	is_key(char *line)
 {
-	int	count;
+	char *keys_list[] = {"\e[A", "\e[B", "\010", "\177", "\e[C", "\e[D", NULL};
+	int count;
 
 	count = 0;
-	while (termcap->history[count])
+	while (keys_list[count])
 	{
-		printf("[%2d] %s\n", count, termcap->history[count]);
+		if (!strncmp(line, "\e", 1) || !strncmp(line, keys_list[count], strlen(keys_list[count])))
+		{
+			return (1);
+		}
 		count++;
+	}
+	return (0);
+}
+
+void	t_key_handle_up(char *buffer, t_termcap *termcap, char **line)
+{
+	if (0 < termcap->history_cursor)
+	{
+		termcap->history_cursor--;
+		tputs(restore_cursor, 1, ft_putchar_term);
+		tputs(tigetstr("ed"), 1, ft_putchar_term);
+		write(1, termcap->history[termcap->history_cursor], strlen(termcap->history[termcap->history_cursor]));
+		termcap->cursor = strlcpy(termcap->history[termcap->history_count], termcap->history[termcap->history_cursor], MAX_PATH);
+	}
+	else
+		write(1, "\a", 1);
+}
+
+void	t_key_handle_down(char *buffer, t_termcap *termcap, char **line)
+{
+	if (NULL != termcap->history[termcap->history_cursor + 2])
+	{
+		termcap->history_cursor++;
+		tputs(restore_cursor, 1, ft_putchar_term);
+		tputs(tigetstr("ed"), 1, ft_putchar_term);
+		write(1, termcap->history[termcap->history_cursor], strlen(termcap->history[termcap->history_cursor]));
+		termcap->cursor = strlcpy(termcap->history[termcap->history_count], termcap->history[termcap->history_cursor], MAX_PATH);
+	}
+	else if (NULL != termcap->history[termcap->history_cursor + 1])
+	{
+		tputs(restore_cursor, 1, ft_putchar_term);
+		tputs(tigetstr("ed"), 1, ft_putchar_term);
+		termcap->cursor = strlcpy(termcap->history[termcap->history_count], "", MAX_PATH);
+	}
+	else
+		write(1, "\a", 1);
+}
+
+int	t_key_handle(char *buffer, t_termcap *termcap, char **line)
+{
+	if (!strcmp(buffer, "\e[A"))				// верх
+	{
+		t_key_handle_up(buffer, termcap, line);
+	}
+	else if (!strcmp(buffer, "\e[B"))			// низ
+		t_key_handle_down(buffer, termcap, line);
+	else if (!strcmp(buffer, key_backspace) || !strcmp(buffer, "\177") || !strcmp(buffer, "\010"))
+	{
+		if (termcap->cursor > 0)
+		{
+			termcap->cursor--;
+			termcap->history[termcap->history_count][termcap->cursor] = '\0';
+			tputs(cursor_left, 2, ft_putchar_term);
+			tputs(tgetstr("dc", 0), 1, ft_putchar_term);
+		}
+	}
+	else if (!strcmp(buffer, "\e[C"))			//право
+		write(1, "right\n", 0);
+	else if (!strcmp(buffer, "\e[D"))			//лево
+		write(1, "left\n", 0);
+	else
+		write(1, "another\n", 0);
+	return (0);
+}
+
+int		t_input_handle(char *buffer, t_termcap *termcap, char **line)
+{
+	if (buffer[0] != '\n')
+	{
+		termcap->cursor = strlcat(termcap->history[termcap->history_count], buffer, MAX_PATH);
+		write(1, buffer, strlen(buffer));
+//		termcap->history_cursor = termcap->history_count;
+		return (-1);
+	}
+	else		// если \n, то записать buffer в конец истории
+	{
+		termcap->history[termcap->history_count][termcap->cursor] = '\0';
+		termcap->history_cursor = termcap->history_count;
+		*line = strdup(termcap->history[termcap->history_count]);
+		return ((int)strlen(*line));
 	}
 }
 
-void	move_cursor_right_c(char *line)
+int	get_history_len(char **history)
 {
 	int count;
 
 	count = 0;
-	while (count < strlen(line))
-	{
-		write(1, "\e[C", strlen("\e[C"));
+	while (history[count])
 		count++;
-	}
+	return (count);
 }
 
-void	move_cursor_left_d(char *line)
+int	t_history_memory_processing(t_termcap *termcap)
 {
-	int	count;
+	int		history_len;
+	char	**history_realloc;
+	int 	count;
 
+	history_len = get_history_len(termcap->history);
 	count = 0;
-	while (count < strlen(line))
+	if (history_len < termcap->history_len)
 	{
-		write(1, "\e[D", strlen("\e[D"));
-		count++;
+		if (history_len > 0 && termcap->history[history_len - 1][0] == '\0')
+		{
+			free(termcap->history[history_len - 1]);
+			termcap->history[history_len - 1] = NULL;
+			termcap->history_count = history_len - 1;
+		}
+		else
+			termcap->history_count = history_len;
 	}
-}
-
-void	t_not_cr(t_termcap *termcap, int l, char *str)
-{
-	termcap->cursor += l;
-	termcap->temp = strdup((termcap->history[termcap->history_count] + termcap->cursor - 1));
-	termcap->history[termcap->history_count][termcap->cursor - 1] = '\0';
-	strncat(termcap->history[termcap->history_count], str, MAX_PATH);
-	strncat(termcap->history[termcap->history_count], termcap->temp, MAX_PATH);
-	write(1, str, l);
-	write(1, termcap->temp, strlen(termcap->temp));
-}
-
-int	t_string_handle(t_termcap *termcap, char *str, int l)
-{
-	termcap->temp = strdup("");
-	if (t_is_key(str))
-		termcap->cursor = t_key_handle(termcap, termcap->history,
-									   &(termcap->history_count), termcap->cursor, str);
 	else
 	{
-		if (l > 0 && str[0] != '\n')
+		termcap->history_len += 10;
+		history_realloc = calloc(termcap->history_len + 1, sizeof(char *));
+		while (termcap->history[count])
 		{
-			t_not_cr(termcap, l, str);
-			move_cursor_left_d(termcap->temp);
+			history_realloc[count] = termcap->history[count];
+			count++;
 		}
-		else if (l == 1 && str[0] == '\n')
-		{
-			move_cursor_right_c(termcap->temp);
-			return (0);
-		}
-		else if (l == 1 && str[0] == '\t')
-			return (0);
+		free(termcap->history);
+		termcap->history = history_realloc;
+		termcap->history_count = count;
 	}
-	return (1);
+	termcap->history_cursor = termcap->history_count;
+	termcap->history[termcap->history_count] = calloc(MAX_PATH + 1, sizeof(char));
+	return (0);
 }
 
 int	t_get_next_line(char **line, t_termcap *termcap)
 {
-	char	str[MAX_PATH];
-	int		l;
+	char	*term_name = "xterm-256color";
+	char	buffer[MAX_PATH];
+	int		read_rv;
+	int		input_rv;
 
-	str[0] = '\0';
-	termcap->history[termcap->history_count] = calloc(MAX_PATH, sizeof(char));
-	t_term_to_icannon(termcap);
+	to_icannon();
+	tgetent(0, term_name);
+	buffer[0] = '\0';
+	t_history_memory_processing(termcap);
 	tputs(save_cursor, 1, ft_putchar_term);
-	while (0 != strcmp(str, "\4"))			// 004 eot
+	while (0 != strncmp(buffer, "\4", 1))
 	{
-		if (0 > (l = read(0, str, 100)))
-			return (l);
-		if (!ft_strncmp(str, "\4", 1))
-			return (-13);
-		str[l] = '\0';
-		if (ft_strchr("\t\v\f\r", str[0])) // \t\v\f\r
-			continue ;
-		if (0 == l || !t_string_handle(termcap, str, l))  // || !strcmp(str, "\n")
-			break ;
+		read_rv = read(0, buffer, MAX_PATH);
+		buffer[read_rv] = '\0';
+		if (is_key(buffer))
+			t_key_handle(buffer, termcap, line);
+		else
+		{
+			if (0 <= (input_rv = t_input_handle(buffer, termcap, line)))
+				return (input_rv);
+		}
 	}
-	termcap->cursor = 0;
-	if (str[0] != '\n' && 0 <= termcap->history_count) //
-		*line = strdup(termcap->history[termcap->history_count]);   //termcap->history_count - 1
-	else
-	{
-		*line = strdup(termcap->history[termcap->history_count]);
-		write(1, "\n", 1);
-	}
-	if (termcap->history_len > termcap->history_count)
-		termcap->history_count++;
-	return ((int)strlen(*line));
+	return (0);
 }
-
-//int main(void)
-//{
-//	char		*line;
-//	t_termcap	*termcap;
-//	int			rv;
-//
-//	termcap = t_termcap_init();
-//	rv = 1;
-//	while (rv)
-//	{
-//		rv = t_get_next_line(&line, termcap);
-//		printf("<<<%s>>>\n", line);
-//	}
-//	return (0);
-//}
