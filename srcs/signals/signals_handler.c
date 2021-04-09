@@ -28,13 +28,13 @@ void	signal_handler(int num)
 	{
 		if (g_signal_process_status)
 		{
-			ft_putstr_fd("\r", 1);
+			ft_putstr_fd("\r^C\n", 1);
 			g_signal_process_status = 0;
 			errno = 130;
 		}
 		else
 		{
-			ft_putstr_fd("\b\b  \n", 1);
+			ft_putstr_fd("  \n", 1);
 			prompt();
 		}
 	}

@@ -149,10 +149,8 @@ void ft_do_command(t_common *common)
 //			mini_exit(common);
 //		}
 
-//		gnl_rv = get_next_line(0, &line);
 		gnl_rv = t_get_next_line(&line, common->termcap);
 		to_cannon();
-//		next_symbol_after_space(line);
 
 		if (line == NULL && 1 == gnl_rv)
 			mini_exit(common);
