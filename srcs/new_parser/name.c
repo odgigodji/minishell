@@ -22,23 +22,8 @@ int with_error(const int unexpected_token)
 	return (1);
 }
 
-int syntax_error(const char *line)
+char ft_check_line(const char *line, int i, int quotes_flag, char quote_type)
 {
-//	printf("SE\n");
-	int i;
-	char is_syntax_error;
-	int quotes_flag;
-	char quote_type;
-
-	quotes_flag = 0;
-	i = -1;
-	is_syntax_error = 0;
-	if (next_symbol_after_space(line) == ';' || next_symbol_after_space(line) == '|')
-	{
-		if (next_symbol_after_space(line) == ';')
-			return (with_error(';'));
-		return (with_error('|'));
-	}
 	while(line[++i])
 	{
 		if ((line[i] == '\'' || line[i] == '\"') && quotes_flag == 0)
@@ -49,24 +34,42 @@ int syntax_error(const char *line)
 		else if (line[i] == quote_type && quotes_flag == 1)
 			quotes_flag = 0;
 		if (line[i + 2] && line[i] == '>' && line[i + 1] == '>' && line[i + 2] == '>' && quotes_flag == 0)
-			return (with_error(line[i]));
+			break ;
 		if (ft_strchr("{}()&`", line[i]) && quotes_flag == 0)
-			return (with_error(line[i]));
+			break ;
 		if(i > 1 && line[i - 1] != '\\' && line[i] == ';' && quotes_flag == 0
-		&& (next_symbol_after_space(line + i + 1) == ';'
-		|| next_symbol_after_space(line + i + 1) == '|') )
-			return (with_error(line[i]));
+		   && (next_symbol_after_space(line + i + 1) == ';'
+			   || next_symbol_after_space(line + i + 1) == '|') )
+			break ;
 		if(i > 1 && line[i - 1] != '\\' && line[i] == '|' && quotes_flag == 0
-		&& ( next_symbol_after_space(line + i + 1) == ';'
-		|| next_symbol_after_space(line + i + 1) == '|'
-		|| next_symbol_after_space(line + i + 1) == '\0'))
-			return (with_error(line[i]));
+		   && ( next_symbol_after_space(line + i + 1) == ';'
+				|| next_symbol_after_space(line + i + 1) == '|'
+				|| next_symbol_after_space(line + i + 1) == '\0'))
+			break ;
 	}
-//	if(is_syntax_error)
-//	{
-//		printf(RED"syntax error near unexpected token '%c'\n"RESET, is_syntax_error);
-//		errno = 258;
-//		return (1);
-//	}
+	return (line[i]);
+}
+
+int syntax_error(const char *line)
+{
+//	printf("SE\n");
+	int i;
+	char is_syntax_error;
+	int quotes_flag;
+	char quote_type;
+	char res;
+
+	quotes_flag = 0;
+	quote_type = 0;
+	i = -1;
+	is_syntax_error = 0;
+	if (next_symbol_after_space(line) == ';' || next_symbol_after_space(line) == '|')
+	{
+		if (next_symbol_after_space(line) == ';')
+			return (with_error(';'));
+		return (with_error('|'));
+	}
+	if ((res = ft_check_line(line, i, quotes_flag, quote_type)))
+		return (with_error(res));
 	return (0);
 }
