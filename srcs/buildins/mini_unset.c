@@ -14,7 +14,7 @@ void	mini_unset(t_common *common, char **keys)
 	flag = 0;
 	count_keys = 1;
 	// fixme
-	if (!ft_strncmp(keys[count_keys], "all", 4))
+	if (keys[count_keys] && !ft_strncmp(keys[count_keys], "all", 4))
 	{
 		while (common->env_variables_list[count])
 		{

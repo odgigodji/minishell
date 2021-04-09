@@ -169,7 +169,7 @@ int		ft_array_len(char	**arg_list); // fixme удалить
 int invalid_lexer_result(char **lexer_result);
 int syntax_error(const char *line);
 int next_symbol_after_space(const char *line);
-
+int	ft_empty_line(const char *line);
 /*
 ** parser
 */
