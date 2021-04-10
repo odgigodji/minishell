@@ -143,6 +143,7 @@ int is_incorrect_line(char **line)
 	return (0);
 }
 
+
 void ft_do_command(t_common *common)
 {
 	static char *line;
@@ -155,11 +156,11 @@ void ft_do_command(t_common *common)
 		prompt();
 		gnl_rv = t_get_next_line(&line, common->termcap);
 		to_cannon();
-
 		if ((line == NULL || line[0] == 0) && 1 == gnl_rv)
 			mini_exit(common);
 		if (syntax_error(line))
 		{
+			free(line);
 			line = NULL;
 			return;
 		}
@@ -174,13 +175,12 @@ void ft_do_command(t_common *common)
 		line = shift_line_2(line);
 		return ;
 	}
-//	if (invalid_lexer_result(lexer_result))
-//	{
-//		printf(RED"syn error (in lexer_result)\n"RESET);
-////		free(line);
-//		line = NULL;
-//		return ;
-//	}
+	if (invalid_lexer_result(lexer_result))
+	{
+		free(line);
+		line = NULL;
+		return ;
+	}
 //	ft_print_lexer_result(lexer_result);
 	common->command = get_command_table(lexer_result);
 //	printf("\n");

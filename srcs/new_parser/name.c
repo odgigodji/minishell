@@ -19,13 +19,20 @@ int with_error(const int unexpected_token)
 {
 	if (unexpected_token == '\"' || unexpected_token == '\'')
 	{
-		printf(RED"\nsyntax error : unclosed quotes "RESET);
-		printf(BLU"'%c'\n"RESET, unexpected_token);
+		printf(RED"\nsyntax error : unclosed quotes %c'"RESET, unexpected_token);
 		errno = 42;
 	}
+//	if (unexpected_token == 'r')
+//	{
+//		printf("\nsyntax error near redirects\n");
+//		errno = 258;
+//	}
 	else
 	{
-		printf("\nsyntax error near unexpected token '%c'\n", unexpected_token);
+		if (unexpected_token == 'r')
+			printf("minishell: syntax error near redirect\n");
+		else
+			printf("\nminishell: syntax error near unexpected token '%c'\n", unexpected_token);
 		errno = 258;
 	}
 	return (1);
@@ -42,8 +49,10 @@ char check_line_2(const char *line, int i, int quotes_flag, char quote_type)
 		}
 		else if (line[i] == quote_type && quotes_flag == 1)
 			quotes_flag = 0;
+		if (quotes_flag == 0 && line[i + 1]  && line[i] == '<' && line[i + 1] == '<')
+			break ;
 		if (quotes_flag == 0 && line[i + 1] && line[i + 2] && line[i] == '>' && line[i + 1] == '>' && line[i + 2] == '>')
-			break;
+			break ;
 	}
 	return (line[i]);
 }
