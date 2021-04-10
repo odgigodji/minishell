@@ -133,14 +133,23 @@ char	*shift_line_2(char *line)
 	return (line);
 }
 
+int is_incorrect_line(char **line)
+{
+	if (syntax_error(*line))
+	{
+		*line = NULL;
+		return (1);
+	}
+	return (0);
+}
+
 void ft_do_command(t_common *common)
 {
-	int 		i = 0;
 	static char *line;
 	char		**lexer_result;
 	int 		gnl_rv;
-//	static int j = 0;
 
+//	printf("%d", (int)getpid());
 	if (line == NULL || *line == '\0')
 	{
 		prompt();
@@ -149,23 +158,12 @@ void ft_do_command(t_common *common)
 
 		if ((line == NULL || line[0] == 0) && 1 == gnl_rv)
 			mini_exit(common);
-		if (ft_empty_line(line))
-		{
-			printf(RED"empty_line\n"RESET);
-//			free(line);
-			line = NULL;
-			errno = 0;
-//			j++;
-//			if (j > 20)
-//				exit(42);
-			return ;
-		}
 		if (syntax_error(line))
 		{
-//			errno = 258;
 			line = NULL;
-			return ;
+			return;
 		}
+		printf("\n");
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 //	t_term_to_cannon(common->termcap);
@@ -183,21 +181,11 @@ void ft_do_command(t_common *common)
 //		line = NULL;
 //		return ;
 //	}
-	ft_print_lexer_result(lexer_result);
-//	while(lexer_result[i])
-//	{
-//		free(lexer_result[i]);
-//		i++;
-//	}
-
+//	ft_print_lexer_result(lexer_result);
 	common->command = get_command_table(lexer_result);
-	ft_print_all_command(common->command.simple_commands);
+//	printf("\n");
+//	ft_print_all_command(common->command.simple_commands);
 	line = shift_line_2(line);
-
-//	i = 0;
-//	while (1);
-//	free(lexer_result);
-//	printf(GRN"----------%s\n"RESET, line);
 	executor(common);
 
 }

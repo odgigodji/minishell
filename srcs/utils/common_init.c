@@ -30,13 +30,6 @@ void		command_init(t_common *common)
 //	common->command.num_of_simple_commands = 0;
 
 	common->command.simple_commands = NULL;
-
-	common->command.out_file = NULL;
-	common->command.infile = NULL;
-	common->command.err_file = NULL;
-
-	common->command.background = 0;
-	common->command.current_simple_command = 0;
 }
 
 /*

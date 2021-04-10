@@ -21,15 +21,6 @@
 
 # define MAX_PATH 4096
 # define MAX_NAME 255
-# define DEBUG 				1//0 if debug off ; 1 is on
-# define DEBUG_ARG 			0
-# define DEBUG_INFILE 		0
-# define DEBUG_OUTFILE 		0
-# define DOUBLE_REDIR   	0
-#define DEB_COUNTER			0
-# define DEB_QOUTES			0
-# define DEB_DOLLAR			0
-# define FINAL_PRINT 		1
 
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"
@@ -56,8 +47,6 @@
 # define GREATLESS "<GREATLESS>"		// "<<"
 # define PIPE "<PIPE>"					// "|"
 # define VAR "<VAR>"					// "$"
-//# define TOKEN_IS_PIPE !ft_strncmp(PIPE, lexer_result[counter], ft_strlen(PIPE))
-# define TOKEN_IS_NOT_PIPE ft_strncmp(PIPE, lexer_result[count], ft_strlen(PIPE))
 # define ACTUAL_POSITION_IN_LEXER_RESULT lexer_result + *current_token
 # define NOT_LAST_TOKEN current_token < last_token //?=
 # define ACTUAL_TOKEN lexer_result[*current_token]
@@ -76,18 +65,6 @@ typedef struct			s_simple_command
 	char				**outfiles;		// путь к файлу для записи в него результата (редирект ">")
 	char				**infiles;		// путь к файлу для записи в него результата (редирект ">")
 	int					is_cat;
-
-
-
-//	char				**outfile_can; // путь к файлу для записи в него результата (редирект ">>")
-//	int 				arg_count; // количество аргументов = number_of_available_arguments
-//	int 				current_arg;			//	Number of argument
-//	int 				num_of_outfiles;
-//	int 				current_outfile;
-//	int 				num_of_infiles;
-//	int 				current_infile;
-//	int 				num_of_outfiles_can;
-//	int 				current_outfile_can;
 }						t_simple_command;
 
 /*
@@ -98,24 +75,13 @@ typedef struct			s_simple_command
 typedef struct			s_command
 {
 	t_simple_command	**simple_commands;	//fixme
-
-	int					current_simple_command; // текущая симпл команда( для движения по массиву **simple_commands)
-	int 				num_of_simple_commands;  // количество симпл команд
-
-
-//	int 				space_after_redirect;
-	char				**out_file;		// путь к файлу для записи в него результата (редирект ">")
-	char 				*infile; // путь к файлу для чтения из него ввода (редирект "<")
-	char				*outfile_cat;		// путь к файлу для записи в него результата (редирект ">")
-	char 				*err_file;		// путь к файлу для записи в него вывода ошибки (редирект >&)
-	int 				background;// ?
 }						t_command;
 
 typedef struct	s_termcap
 {
 	struct termios		term;
 	char				*term_name;
-	char				*temp;
+//	char				*temp;
 
 	char				**history;
 	int					history_count;
@@ -123,7 +89,7 @@ typedef struct	s_termcap
 	int					history_len;
 
 	int					cursor;
-	struct winsize		win;
+//	struct winsize		win;
 }				t_termcap;
 
 typedef struct			s_common
@@ -147,9 +113,6 @@ typedef struct			s_pipe
 
 int	g_signal_process_status;
 
-//t_simple_command *get_simple_command1(char **lexer_result, int *current_token);
-
-
 /*
 **	Временные функции
 */
@@ -161,57 +124,26 @@ void 				ft_print_args(char **arguments);
 void 				ft_print_simple_comand(t_simple_command *simple_command);
 void				ft_print_all_command(t_simple_command **command_table);
 
-int		ft_array_len(char	**arg_list); // fixme удалить
+//int		ft_array_len(char	**arg_list); // fixme удалить
 
 /*
 ** is_valid
 */
 
-int invalid_lexer_result(char **lexer_result);
-int syntax_error(const char *line);
-int next_symbol_after_space(const char *line);
-int	ft_empty_line(const char *line);
+int					invalid_lexer_result(char **lexer_result);
+int					syntax_error(const char *line);
+int					next_symbol_after_space(const char *line);
+//int					ft_empty_line(const char *line);
 /*
 ** parser
 */
 
 int					get_next_line(int fd, char **line);
-//int					ft_parser(t_common *common, char *line);
-////int					pars(t_common *common, char *line);
-//int					new_pars(t_common *common, char *line);
 size_t				ft_strlen_to_char(const char *s, char c);
-//int					make_arg(char *f_line , t_simple_command *sc);
-//int 				make_args(char *line, t_common *common, int increment);
-//void				ft_init_current_command(t_common *common, char *line);
-int					ft_arg_counter(const char *s);
-//int 				do_all_spec(t_common *common, char *line, char curent_char, int increment);
-int					ft_redirect_counter(const char *line, char redirect_char);
-//int					do_redirect(t_common *common, char *line);
-void				do_pipe(t_common *common, char *line);
-int					ft_simple_command_counter(const char *line);
-void				ft_init_simple_commands(t_common *common, char *line, int current_command);
-//void				ft_init_outfiles(t_common *common, char *line, int current_command);
-//int					do_reverse_redirect(t_common *common, char *line);
-//int					do_r_redirect(t_common *common, char *line);
-//void				ft_init_infiles(t_common *common, char *line, int current_command);
-//int					ft_double_redir(t_common *common, char *line);
-//void 				ft_init_outfiles_can(t_common *common, char *line, int current_command);
-int 				ft_double_redir_counter(char *line);
-int 				do_quotes(t_common *common, char *line);
-int 				len_for_calloc(char *line, t_common *common, int increment, char *spec);
-int					do_arg(t_common *common, char *line, int len_for_calloc, int increment);
-//int					ft_quotes_counter(t_common *common, char *line);
-int					ft_double_quotes(t_common *common, char *line);
-int 				ft_do_dollar(t_common *common, char *line);
-void				ft_do_arg_and_switch_to_next_arg(t_common *common, char *res, int len_for_calloc);
 int is_redirect(char *actual_token);
 
-int					get_token(char *line, char **token);
-char				*token_to_simple_command(char *token_to_arg);
 t_command get_command_table(char **lexer_result);
 t_simple_command *get_simple_command(char **lexer_result, int *current_token);
-//char				*get_token(char *line);
-int					is_token(char *token);
 t_simple_command	*one_simple_command_init(char **lexer_result);
 t_simple_command	**command_table_init(char **lexer_result);
 char **init_args(char **lexer_result, char *spec_token);

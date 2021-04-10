@@ -11,3 +11,18 @@ size_t	ft_strlen_to_char(const char *s, char c)
 		len++;
 	return ((size_t)len);
 }
+
+int	ft_empty_line(const char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isspace(line[i]))
+			return (0);
+		else
+			i++;
+	}
+	return (1);
+}

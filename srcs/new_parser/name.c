@@ -25,8 +25,7 @@ int with_error(const int unexpected_token)
 	}
 	else
 	{
-		printf("\nsyntax error near unexpected token ");
-		printf("'%c'\n", unexpected_token);
+		printf("\nsyntax error near unexpected token '%c'\n", unexpected_token);
 		errno = 258;
 	}
 	return (1);
@@ -93,7 +92,7 @@ char check_line_1(const char *line)
 		shield_flag = 0;
 		if (line[i] == '\\' && !we_are_in_quotes(line, i))
 			shield_flag = next_char_is_shielded(line, &i);
-		if (!we_are_in_quotes(line, i) && !shield_flag)
+		if (!shield_flag && !we_are_in_quotes(line, i))
 		{
 			if (ft_strchr("{}()&`", line[i]) && !we_are_in_quotes(line, i))
 				break ;
@@ -120,6 +119,12 @@ int syntax_error(const char *line)
 	quotes_flag = 0;
 	quote_type = 0;
 	i = -1;
+	if (ft_empty_line(line))
+	{
+		printf("\n");
+		errno = 0;
+		return (1);
+	}
 	if (next_symbol_after_space(line) == ';' || next_symbol_after_space(line) == '|')
 	{
 		if (next_symbol_after_space(line) == ';')

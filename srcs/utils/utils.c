@@ -69,7 +69,7 @@ t_simple_command	**command_table_init(char **lexer_result)
 	command_table = malloc((num_of_simple_commands(lexer_result) + 1) * sizeof(t_simple_command *));
 	//ft_calloc(num_of_simple_commands(lexer_result) + 1, sizeof(t_simple_command *));
 	command_table[num_of_simple_commands(lexer_result)] = NULL;
-	printf(RED"COUNT_SC %d\n"RESET, num_of_simple_commands(lexer_result));
+//	printf(RED"COUNT_SC %d\n"RESET, num_of_simple_commands(lexer_result));
 	return (command_table);
 }
 
