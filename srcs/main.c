@@ -164,7 +164,7 @@ void ft_do_command(t_common *common)
 			line = NULL;
 			return;
 		}
-		printf("\n");
+		write(1, "\n", 1);											//печатает пустую строку, без него не переходит
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
 //	t_term_to_cannon(common->termcap);

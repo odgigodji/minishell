@@ -40,23 +40,27 @@ int with_error(const int unexpected_token)
 
 char check_line_2(const char *line, int i, int quotes_flag, char quote_type)
 {
+	int shield_flag;
+
 	while(line[++i])
 	{
-		if ((line[i] == '\'' || line[i] == '\"') && quotes_flag == 0)
+		shield_flag = 0;
+		if (line[i] == '\\')
+			shield_flag = next_char_is_shielded(line, &i);
+		if ((line[i] == '\'' || line[i] == '\"') && quotes_flag == 0 && !shield_flag)
 		{
 			quote_type = line[i];
 			quotes_flag = 1;
 		}
-		else if (line[i] == quote_type && quotes_flag == 1)
+		else if (line[i] == quote_type && quotes_flag == 1 && !shield_flag)
 			quotes_flag = 0;
-		if (quotes_flag == 0 && line[i + 1]  && line[i] == '<' && line[i + 1] == '<')
+		if (quotes_flag == 0 && !shield_flag && line[i + 1]  && line[i] == '<' && line[i + 1] == '<')
 			break ;
-		if (quotes_flag == 0 && line[i + 1] && line[i + 2] && line[i] == '>' && line[i + 1] == '>' && line[i + 2] == '>')
+		if (quotes_flag == 0 && !shield_flag && line[i + 1] && line[i + 2] && line[i] == '>' && line[i + 1] == '>' && line[i + 2] == '>')
 			break ;
 	}
 	return (line[i]);
 }
-
 
 int we_are_in_quotes(const char *line, int i)
 {
