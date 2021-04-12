@@ -40,7 +40,6 @@ set(SOURCE_FILES
         #        srcs/new_parser/new_pars.c
         #        srcs/new_parser/make_args.c
         #        srcs/new_parser/do_spec
-        srcs/new_parser/pars_utils.c
         #        srcs/new_parser/do_pipe.c
         #        srcs/new_parser/do_redirect.c
         #        srcs/new_parser/ft_init_command.c
@@ -61,19 +60,19 @@ set(SOURCE_FILES
         srcs/utils/prompt.c
 #        srcs/parser/ft_empty_line.c
         srcs/new_parser/utils_3.c
-        )
+        srcs/parser/get_command.c)
 
 add_executable(minishell
         srcs/main.c
         ${SOURCE_FILES}
-        srcs/buildins/mini_hello.c)
+        srcs/buildins/mini_hello.c srcs/parser/get_command.c)
 
 add_executable(executor_tests
         ${SOURCE_FILES}
         srcs/executor/executor_tests/00_main_test.c
         srcs/executor/executor_tests/01_test_get_envp_var_pointer.c
         srcs/executor/executor_tests/executor_tests.h
-        srcs/new_parser/name.c)
+        srcs/new_parser/name.c srcs/parser/get_command.c)
 
 add_executable(lexer_tests
         ${SOURCE_FILES}
@@ -81,7 +80,7 @@ add_executable(lexer_tests
         srcs/parser/lexer_tests/test_lexer_00.h
         srcs/parser/lexer_tests/main_test.c
         srcs/parser/lexer_tests/test_lexer_01.c
-        )
+        srcs/parser/get_command.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m

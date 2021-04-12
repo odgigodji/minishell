@@ -38,17 +38,3 @@ int invalid_lexer_result(char **lexer_result)
 	}
 	return (0);
 }
-
-void ft_kitty(char *line_is_kitty)
-{
-	if (!ft_strcmp(line_is_kitty, "kitty"))
-		printf(CYN"\n"
-			   "	  ／＞　  フ\n"
-			   "　　　　　| 　_　 _|\n"
-			   "　 　　　／`ミ _x 彡\n"
-			   "　　 　 /　　　 　 |\n"
-			   "　　　 /　 ヽ　　 ﾉ\n"
-			   "　／￣|　　 |　|　|\n"
-			   "　| (￣ヽ＿_ヽ_)_)\n"
-			   "　＼二つ"RESET);
-}

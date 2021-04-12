@@ -134,7 +134,7 @@ int		ft_array_len(char	**arg_list); // fixme удалить
 
 int					invalid_lexer_result(char **lexer_result);
 int					syntax_error(const char *line);
-int					next_symbol_after_space(const char *line);
+int					next_after_space(const char *line);
 //int					ft_empty_line(const char *line);
 int 				with_error(const int unexpected_token);
 int next_char_is_shielded(const char *line, int *i);
@@ -154,6 +154,9 @@ t_simple_command *get_simple_command(char **lexer_result, int *current_token);
 t_simple_command	*one_simple_command_init(char **lexer_result);
 t_simple_command	**command_table_init(char **lexer_result);
 char **init_args(char **lexer_result, char *spec_token);
+char **get_outfiles(char **lexer_result, int *is_cat);
+char **get_infiles(char **lexer_result);
+void pass_redirect_files(char **lexer_result, int *current_token);
 
 
 char				**lexer(char *line, t_common *common);

@@ -61,25 +61,6 @@ void ft_print_lexer_result(char **lexer_result)
 	printf("----------------lexer-result-------------------\n");
 }
 
-char *shift_line(char *line)
-{
-	int len_to_shift;
-	char *new_line;
-
-	new_line = NULL;
-	if (line && line[0])
-	{
-		len_to_shift = ft_strlen_to_char(line, ';');
-		if (line[len_to_shift] == '\0')
-			return (NULL);
-//	printf("-[%d]\n", len_to_shift);
-//	printf("=%s\n", line + len_to_shift + 1);
-		if (line + len_to_shift + 1)
-			new_line = line + len_to_shift + 1;
-	}
-	return (new_line);
-}
-
 int		get_semicolon_index(char *line)
 {
 	int		count;
@@ -190,17 +171,6 @@ void	free_command_table(t_common *common)
 	free(common->command.simple_commands);
 }
 
-//void	ft_do_command(t_common *common)
-int is_incorrect_line(char **line)
-{
-	if (syntax_error(*line))
-	{
-		return (1);
-	}
-	return (0);
-}
-
-
 void ft_do_command(t_common *common)
 {
 	char		**lexer_result;
@@ -217,7 +187,7 @@ void ft_do_command(t_common *common)
 //		ft_hello(common->termcap->line);		//ft_hello :)
 		if (syntax_error(common->termcap->line))
 		{
-			shift_line_2(common->termcap->line);
+			common->termcap->line[0] = '\0';
 			return ;
 		}
 		write(1, "\n", 1);											//печатает пустую строку, без него не переходит
@@ -230,6 +200,7 @@ void ft_do_command(t_common *common)
 	}
 	if (invalid_lexer_result(lexer_result))
 	{
+		common->termcap->line[0] = '\0';
 		return ;
 	}
 //	ft_print_lexer_result(lexer_result);
@@ -261,7 +232,7 @@ int main(int argc, char const **argv, char const **envp)
 {
 	(void)argc;
 	(void)argv;
-	errno = 0;
+//	errno = 0;
 	setbuf(stdout, NULL);
 
 	minishell_loop((char **)envp);

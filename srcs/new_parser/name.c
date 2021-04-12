@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	next_symbol_after_space(const char *line)
+int	next_after_space(const char *line)
 {
 	int	i;
 
