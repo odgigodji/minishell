@@ -17,7 +17,8 @@ t_termcap	*t_termcap_init(void)
 	result = malloc(sizeof(t_termcap));
 	result->history_len = 10;
 	tcgetattr(0, &(result->term));
-	result->history = ft_calloc(result->history_len + 1, sizeof(char *));
+//	result->history = ft_calloc(result->history_len + 1, sizeof(char *));
+	result->history = calloc(result->history_len + 1, sizeof(char *));
 	result->history_count = 0;
 	result->history_cursor = 0;
 	result->term_name = ft_strdup("xterm-256color");

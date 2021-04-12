@@ -73,8 +73,8 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command, 
 		command[0] = '\0';
 	}
 	errno = 1;
-	free_argument_list(&temp_envp);		// fixme не влияет на утечки
-	free_argument_list(&path);			// fixme не влияет на утечки
+//	free_argument_list(&temp_envp);		// fixme не влияет на утечки
+//	free_argument_list(&path);			// fixme не влияет на утечки
 	printf("%s: command not found: %s\n", SHELL_NAME, simple_command->arguments[0]);
 	exit(1);
 }
