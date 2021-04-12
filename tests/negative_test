@@ -13,19 +13,11 @@ echo \'                                                                         
  echo $?                                                                            -?
  # write something then press ctrl+\                                                 -
  echo "$     a"                                                                    -
- sort | ls # check output order                                                  --заново печатет минишел после ввода
-cat < input.txt | ps                                                                -зависает а потом печатает еще раз minishell
- export "" et unset ""                                                             -  должен быть нот валид идентифаер                                                                              - syntax error needed
- echo \hello \$PWD                                                                    - не экранирует первый символ
+ sort | ls # check output order                                                  SEGA при ctrl + C была--заново печатет минишел после ввода
+
+ export "" et unset ""                                                             -  должен быть нот валид идентифаер
  exit                                                                               -не выходит иногда
  ctrl+D                                                                           не должен выходить коода что то напечатано
-
-echo \; \; \;
-echo \; \; \;  ;                                                                  -syn error in lexer_result
-echo \; \;\;\|\|;                                                               -syn error in lexer_result
-
-ls | grep t                                  (+)
-
 
 cat /dev/random | head -c 100 | wc -c                                            -завис
  cat /dev/random | head -n 1 | cat -e                                            -виснет

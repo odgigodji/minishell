@@ -1,4 +1,3 @@
-#include <tcl.h>
 #include "minishell.h"
 
 char	**get_infiles(char **lexer_result)
