@@ -55,7 +55,6 @@ set(SOURCE_FILES
         srcs/parser/parser_m.c
         srcs/utils/utils.c
         srcs/parser/parser_idea.c
-        srcs/parser/utils1.c
         srcs/new_parser/name.c
         srcs/utils/prompt.c
 #        srcs/parser/ft_empty_line.c

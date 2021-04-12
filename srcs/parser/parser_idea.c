@@ -1,54 +1,58 @@
 #include <tcl.h>
 #include "minishell.h"
 
-char **get_infiles(char **lexer_result)
+char	**get_infiles(char **lexer_result)
 {
-	char **infiles;
-	int counter;
+	char	**infiles;
+	int		counter;
 
 	counter = 0;
 	infiles = NULL;
 	infiles = init_args(lexer_result, LESS);
-	while(lexer_result && *lexer_result && ft_strcmp(*lexer_result, PIPE))
+	while (lexer_result && *lexer_result && ft_strcmp(*lexer_result, PIPE))
 	{
-		if(!ft_strcmp(*lexer_result, LESS))
+		if (!ft_strcmp(*lexer_result, LESS))
 		{
-			if ((!(infiles[counter] = ft_strdup(*(++lexer_result)))))
+			infiles[counter] = ft_strdup(*(++lexer_result));
+			if (!infiles[counter])
 				break ;
 			counter++;
 		}
 		lexer_result++;
 	}
 	infiles[counter] = NULL;
-	return(infiles);
+	return (infiles);
 }
 
-char **get_outfiles(char **lexer_result, int *is_cat)
+char	**get_outfiles(char **lexer_result, int *is_cat)
 {
-	char **outfiles;
+	char	**outfiles;
+	int		counter;
 
-	int counter = 0;
+	counter = 0;
 	outfiles = NULL;
 	outfiles = init_args(lexer_result, GREAT);
-	while(lexer_result && *lexer_result && ft_strcmp(*lexer_result, PIPE))
+	while (lexer_result && *lexer_result && ft_strcmp(*lexer_result, PIPE))
 	{
-		if(!ft_strcmp(*lexer_result, GREAT) || !ft_strcmp(*lexer_result, GREATGREAT))
+		if (!ft_strcmp(*lexer_result, GREAT)
+			|| !ft_strcmp(*lexer_result, GREATGREAT))
 		{
 			if (!ft_strcmp(*lexer_result, GREATGREAT))
 				*is_cat = 1;
 			else
 				*is_cat = 0;
-			if ((!(outfiles[counter] = ft_strdup(*(++lexer_result)))))
+			outfiles[counter] = ft_strdup(*(++lexer_result));
+			if (!outfiles[counter])
 				break ;
 			counter++;
 		}
 		lexer_result++;
 	}
 	outfiles[counter] = NULL;
-	return(outfiles);
+	return (outfiles);
 }
 
-void avoid_redirects_without_args(char **lexer_result, int *current_token)
+void	avoid_redirects_without_args(char **lexer_result, int *current_token)
 {
 	while ((lexer_result[*current_token + 2] && (is_redirect(ACTUAL_TOKEN))) \
 	|| (!lexer_result[*current_token + 2] && (is_redirect(ACTUAL_TOKEN))))
@@ -59,7 +63,7 @@ void avoid_redirects_without_args(char **lexer_result, int *current_token)
 	}
 }
 
-int is_redirect(char *actual_token)
+int	is_redirect(char *actual_token)
 {
 	if (!ft_strcmp(actual_token, GREAT) || !ft_strcmp(actual_token, GREATGREAT) || \
 	!ft_strcmp(actual_token, LESS))
@@ -68,17 +72,15 @@ int is_redirect(char *actual_token)
 		return (0);
 }
 
-void pass_redirect_files(char **lexer_result, int *current_token)
+void	pass_redirect_files(char **lexer_result, int *current_token)
 {
-//	printf(MAG"%s\n"RESET, lexer_result[*current_token]);
-	char *token_after_file;
+	char	*token_after_file;
 
 	token_after_file = lexer_result[*current_token + 2];
 	if (is_redirect(ACTUAL_TOKEN))
 	{
-//		printf(MAG"-%d\n"RESET, *current_token);
-//		printf(GRN"%s\n"RESET, lexer_result[*current_token]);
-		if (((token_after_file && (!is_redirect(token_after_file))) || !token_after_file))
+		if (((token_after_file && (!is_redirect(token_after_file)))
+				|| !token_after_file))
 		{
 			*current_token += 2;
 			return ;

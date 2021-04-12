@@ -1,5 +1,21 @@
 #include "minishell.h"
 
+int	check_start(const char *line)
+{
+	if (ft_empty_line(line))
+	{
+		printf("\n");
+		return (1);
+	}
+	if (next_after_space(line) == ';' || next_after_space(line) == '|')
+	{
+		if (next_after_space(line) == ';')
+			return (with_error(';'));
+		return (with_error('|'));
+	}
+	return (0);
+}
+
 char	check_line_1(const char *line)
 {
 	int	shield_flag;
@@ -29,22 +45,6 @@ char	check_line_1(const char *line)
 	return (line[i]);
 }
 
-int	check_start(const char *line)
-{
-	if (ft_empty_line(line))
-	{
-		printf("\n");
-		return (1);
-	}
-	if (next_after_space(line) == ';' || next_after_space(line) == '|')
-	{
-		if (next_after_space(line) == ';')
-			return (with_error(';'));
-		return (with_error('|'));
-	}
-	return (0);
-}
-
 int	syntax_error(const char *line)
 {
 	int		i;
@@ -66,14 +66,24 @@ int	syntax_error(const char *line)
 	return (0);
 }
 
-size_t	ft_strlen_to_char(const char *s, char c)
+int	invalid_lexer_result(char **lexer_result)
 {
-	unsigned long	len;
+	int	counter;
 
-	len = 0;
-	while (s[len] && s[len] != c)
-		len++;
-	return ((size_t)len);
+	counter = 0;
+	while (lexer_result[counter])
+	{
+		if (lexer_result[counter + 1]
+			&& (!ft_strcmp(lexer_result[counter], PIPE)
+				|| is_redirect(lexer_result[counter]))
+			&& (!ft_strcmp(lexer_result[counter + 1], PIPE)
+				|| is_redirect(lexer_result[counter + 1])))
+			return (with_error('r'));
+		if (!lexer_result[counter + 1] && is_redirect(lexer_result[counter]))
+			return (with_error('r'));
+		counter++;
+	}
+	return (0);
 }
 
 int	ft_empty_line(const char *line)
