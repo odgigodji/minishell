@@ -140,6 +140,7 @@ int next_char_is_shielded(const char *line, int *i);
 ** parser
 */
 
+void ft_hello(char *hello_line);
 int					get_next_line(int fd, char **line);
 size_t				ft_strlen_to_char(const char *s, char c);
 int is_redirect(char *actual_token);

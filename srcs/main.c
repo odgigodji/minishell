@@ -158,6 +158,9 @@ void ft_do_command(t_common *common)
 		to_cannon();
 		if ((line == NULL || line[0] == 0) && 1 == gnl_rv)
 			mini_exit(common);
+
+		ft_hello(line);		//ft_hello :)
+
 		if (syntax_error(line))
 		{
 			free(line);
