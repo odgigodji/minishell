@@ -82,8 +82,10 @@ int		is_key_valid(char *key)
 		return (0);
 	while (key[count] && key[count] != '=')
 	{
-		if (!(ft_isalnum(key[count]) || key[count] == '_'))
+		if (!((ft_isalnum(key[count]) || key[count] == '_') || (key[count] == '+' && key[count + 1] == '=')))
+		{
 			return (0);
+		}
 		count++;
 	}
 	if (key[count] == '\0' || key[count + 1] == '\0')
@@ -112,13 +114,13 @@ void	mini_export(t_common *common, char **simple_command)
 		{
 			if (is_key_valid(simple_command[count]))
 			{
-
 				key_value = get_key_and_value(simple_command[count]);
 
 				update_envp_var(common, key_value[0],
 					key_value[1], is_append(simple_command[count]));
 				free(key_value[0]);
 				free(key_value[1]);
+				free(key_value);
 			}
 			else
 				printf("%s: export: `%s' not a valid identifier\n",

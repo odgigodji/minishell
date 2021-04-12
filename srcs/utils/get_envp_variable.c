@@ -48,9 +48,7 @@ char	**get_key_and_value(char *envp_line)
 	int		key_len;
 	int		append_flag;
 
-	if (NULL == envp_line)
-		return (NULL);
-	if (NULL == (var = malloc(sizeof(char *) * 3)))
+	if (NULL == envp_line || NULL == (var = malloc(sizeof(char *) * 3)))
 		return (NULL);
 	append_flag = 0;
 	if (ft_strchr(envp_line, '='))

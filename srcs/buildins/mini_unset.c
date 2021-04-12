@@ -18,6 +18,9 @@ void	mini_unset(t_common *common, char **keys)
 	{
 		while (common->env_variables_list[count])
 		{
+			free(common->env_variables_list[count][0]);
+			free(common->env_variables_list[count][1]);
+			free(common->env_variables_list[count]);
 			common->env_variables_list[count] = NULL;
 			count++;
 		}
