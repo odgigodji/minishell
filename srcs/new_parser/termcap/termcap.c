@@ -30,6 +30,16 @@ t_termcap	*t_termcap_init(void)
 	return (result);
 }
 
+int	get_history_len(char **history)
+{
+	int count;
+
+	count = 0;
+	while (history[count])
+		count++;
+	return (count);
+}
+
 void	to_icannon(void)
 {
 	struct termios	term;
@@ -86,25 +96,31 @@ void	t_key_handle_up(char *buffer, t_termcap *termcap, char **line)
 
 void	t_key_handle_down(char *buffer, t_termcap *termcap, char **line)
 {
-	if (NULL != termcap->history[termcap->history_cursor + 2])
+	if ((NULL != termcap->history[termcap->history_cursor + 1]) && termcap->history_cursor + 2 < get_history_len(termcap->history)) //NULL != termcap->history[termcap->history_cursor + 2]
 	{
 		termcap->history_cursor++;
 		tputs(restore_cursor, 1, ft_putchar_term);
 		tputs(tigetstr("ed"), 1, ft_putchar_term);
 		write(1, termcap->history[termcap->history_cursor],
-			ft_strlen(termcap->history[termcap->history_cursor]));
+			  ft_strlen(termcap->history[termcap->history_cursor]));
 		termcap->cursor = ft_strlcpy(termcap->history[termcap->history_count],
-			termcap->history[termcap->history_cursor], MAX_PATH);
+									 termcap->history[termcap->history_cursor], MAX_PATH);
 	}
-	else if (NULL != termcap->history[termcap->history_cursor + 1])
+//	else if (NULL == termcap->history[termcap->history_cursor + 1])
+//	{
+//		tputs(restore_cursor, 1, ft_putchar_term);
+//		tputs(tigetstr("ed"), 1, ft_putchar_term);
+//		termcap->cursor = ft_strlcpy(termcap->history[termcap->history_count],
+//									 "", MAX_PATH);
+//	}
+	else
 	{
 		tputs(restore_cursor, 1, ft_putchar_term);
 		tputs(tigetstr("ed"), 1, ft_putchar_term);
 		termcap->cursor = ft_strlcpy(termcap->history[termcap->history_count],
-							   "", MAX_PATH);
-	}
-	else
+									 "", MAX_PATH);
 		write(1, "\a", 1);
+	}
 }
 
 int	t_key_handle(char *buffer, t_termcap *termcap, char **line)
@@ -157,15 +173,7 @@ int		t_input_handle(char *buffer, t_termcap *termcap, char **line)
 	}
 }
 
-int	get_history_len(char **history)
-{
-	int count;
 
-	count = 0;
-	while (history[count])
-		count++;
-	return (count);
-}
 
 int	t_history_memory_processing(t_termcap *termcap)
 {

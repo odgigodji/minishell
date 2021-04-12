@@ -61,7 +61,6 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command, 
 	path = split_path(common);
 	count = 0;
 	command[0] = '\0';
-	close_fd(pipe_variables);
 	execve(simple_command->arguments[0], simple_command->arguments, temp_envp);
 	while (path && path[count])
 	{
@@ -73,8 +72,8 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command, 
 		command[0] = '\0';
 	}
 	errno = 1;
-//	free_argument_list(&temp_envp);		// fixme не влияет на утечки
-//	free_argument_list(&path);			// fixme не влияет на утечки
+	dup2(pipe_variables->tmpout, STDOUT_FILENO);
 	printf("%s: command not found: %s\n", SHELL_NAME, simple_command->arguments[0]);
+	close_fd(pipe_variables);
 	exit(1);
 }
