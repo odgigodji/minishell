@@ -18,13 +18,15 @@ t_termcap	*t_termcap_init(void)
 	result->history_len = 10;
 	tcgetattr(0, &(result->term));
 //	result->history = ft_calloc(result->history_len + 1, sizeof(char *));
-	result->history = calloc(result->history_len + 1, sizeof(char *));
+	result->history = malloc((result->history_len + 1) * sizeof(char *));
+	result->history[0] = NULL;
 	result->history_count = 0;
 	result->history_cursor = 0;
 	result->term_name = ft_strdup("xterm-256color");
 	tgetent(0, result->term_name);
 	result->cursor = 0;
-	result->line = ft_calloc(MAX_PATH, sizeof(char));
+	result->line = malloc((MAX_PATH + 1) * sizeof(char));
+	result->line[0] = '\0';
 	return (result);
 }
 
@@ -182,23 +184,28 @@ int	t_history_memory_processing(t_termcap *termcap)
 			termcap->history_count = history_len - 1;
 		}
 		else
+		{
 			termcap->history_count = history_len;
+		}
 	}
 	else
 	{
 		termcap->history_len += 10;
-		history_realloc = ft_calloc(termcap->history_len + 1, sizeof(char *));
+		history_realloc = malloc((termcap->history_len + 1) * sizeof(char *));
 		while (termcap->history[count])
 		{
 			history_realloc[count] = termcap->history[count];
 			count++;
 		}
+		history_realloc[count] = NULL;
 		free(termcap->history);
 		termcap->history = history_realloc;
 		termcap->history_count = count;
 	}
 	termcap->history_cursor = termcap->history_count;
-	termcap->history[termcap->history_count] = ft_calloc(MAX_PATH + 1, sizeof(char));
+	termcap->history[termcap->history_count] = malloc((MAX_PATH + 1) * sizeof(char));
+	termcap->history[termcap->history_count][0] = '\0';
+	termcap->history[termcap->history_count + 1] = NULL;
 	return (0);
 }
 
