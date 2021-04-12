@@ -195,7 +195,6 @@ int is_incorrect_line(char **line)
 {
 	if (syntax_error(*line))
 	{
-//		*line = NULL;
 		return (1);
 	}
 	return (0);
@@ -231,8 +230,6 @@ void ft_do_command(t_common *common)
 	}
 	if (invalid_lexer_result(lexer_result))
 	{
-		free(line);
-		line = NULL;
 		return ;
 	}
 //	ft_print_lexer_result(lexer_result);
