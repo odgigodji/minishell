@@ -96,7 +96,8 @@ void	t_key_handle_up(char *buffer, t_termcap *termcap, char **line)
 
 void	t_key_handle_down(char *buffer, t_termcap *termcap, char **line)
 {
-	if ((NULL != termcap->history[termcap->history_cursor + 1]) && termcap->history_cursor + 2 < get_history_len(termcap->history)) //NULL != termcap->history[termcap->history_cursor + 2]
+	if ((NULL != termcap->history[termcap->history_cursor + 1])
+			&& termcap->history_cursor + 2 < get_history_len(termcap->history)) //NULL != termcap->history[termcap->history_cursor + 2]
 	{
 		termcap->history_cursor++;
 		tputs(restore_cursor, 1, ft_putchar_term);
@@ -106,13 +107,14 @@ void	t_key_handle_down(char *buffer, t_termcap *termcap, char **line)
 		termcap->cursor = ft_strlcpy(termcap->history[termcap->history_count],
 									 termcap->history[termcap->history_cursor], MAX_PATH);
 	}
-//	else if (NULL == termcap->history[termcap->history_cursor + 1])
-//	{
-//		tputs(restore_cursor, 1, ft_putchar_term);
-//		tputs(tigetstr("ed"), 1, ft_putchar_term);
-//		termcap->cursor = ft_strlcpy(termcap->history[termcap->history_count],
-//									 "", MAX_PATH);
-//	}
+	else if (termcap->history_cursor + 1 < get_history_len(termcap->history))
+	{
+		termcap->history_cursor++;
+		tputs(restore_cursor, 1, ft_putchar_term);
+		tputs(tigetstr("ed"), 1, ft_putchar_term);
+		termcap->cursor = ft_strlcpy(termcap->history[termcap->history_count],
+									 "", MAX_PATH);
+	}
 	else
 	{
 		tputs(restore_cursor, 1, ft_putchar_term);
