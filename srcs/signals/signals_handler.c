@@ -22,7 +22,7 @@ Ctrl+\ (^\) - [SIGQUIT] try If a program doesn't respond to ^C, you can. This se
 ** @return		N/A
 */
 
-void	signal_handler(int num)
+void	signal_handler_int(int num)
 {
 	if (num == SIGINT)
 	{
@@ -35,12 +35,16 @@ void	signal_handler(int num)
 		}
 		else
 		{
+			errno = 1;
 			ft_putstr_fd("  \n", 1);
 			g_signal_process_status = 0;
 			prompt();
 		}
 		tputs(save_cursor, 1, ft_putchar_term);		//	fixme
 	}
+}
+void	signal_handler_quit(int num)
+{
 	if (num == SIGQUIT)
 	{
 		if (g_signal_process_status)
@@ -56,6 +60,7 @@ void	signal_handler(int num)
 
 void	signal_processor(void)
 {
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
+	signal(SIGINT, signal_handler_int);
+	signal(SIGQUIT, signal_handler_quit);
+	signal(SIGTERM, signal_handler_quit);
 }

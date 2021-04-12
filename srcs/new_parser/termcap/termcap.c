@@ -45,7 +45,7 @@ void	to_icannon(void)
 	struct termios	term;
 
 	tcgetattr(0, &term);
-	term.c_lflag &= ~(ECHO);
+	term.c_lflag &= ~(ECHO | ISIG);
 	term.c_lflag &= ~(ICANON);
 	tcsetattr(0, TCSANOW, &term);
 }
@@ -55,7 +55,7 @@ void	to_cannon(void)
 	struct termios	term;
 
 	tcgetattr(0, &term);
-	term.c_lflag |= ECHO;			// восстановление предыдущих (стандартных) параметров
+	term.c_lflag |= (ECHO | ISIG);			// восстановление предыдущих (стандартных) параметров
 	term.c_lflag |= ICANON;
 	tcsetattr(0, TCSANOW, &term);
 }
@@ -148,12 +148,18 @@ int	t_key_handle(char *buffer, t_termcap *termcap, char **line)
 	return (0);
 }
 
-int		t_input_handle(char *buffer, t_termcap *termcap, char **line)
+int		t_input_handle(char *buffer, t_termcap *termcap, char **line, int read_rv)
 {
 	if (termcap->cursor > 0 && buffer[0] == 4)
 	{
 		buffer[0] = '\0';
 		return (-1);
+	}
+	if (buffer[0] == 3)
+	{
+		to_cannon();
+		buffer[0] = '\0';
+		return (0);
 	}
 	if (buffer[0] != '\n')
 	{
@@ -235,11 +241,12 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 	{
 		read_rv = read(0, buffer, MAX_PATH);
 		buffer[read_rv] = '\0';
+//		printf("rv |%d| buf |%s|%d|\n", read_rv, buffer, buffer[0]);
 		if (is_key(buffer))
 			t_key_handle(buffer, termcap, line);
 		else
 		{
-			if (0 <= (input_rv = t_input_handle(buffer, termcap, line)))
+			if (0 <= (input_rv = t_input_handle(buffer, termcap, line, read_rv)))
 			{
 				termcap->cursor = 0;
 				return (input_rv);
