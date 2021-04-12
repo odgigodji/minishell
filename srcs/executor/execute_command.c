@@ -21,7 +21,7 @@ int		is_buildin(t_simple_command *simple_command)
 	count = 0;
 	while (simple_command->arguments && simple_command->arguments[0] && list[count])
 	{
-		if (!strncmp(list[count], simple_command->arguments[0], 100))
+		if (!strncmp(list[count], simple_command->arguments[0], ft_strlen(simple_command->arguments[0])))
 			return (1);
 		count++;
 	}
@@ -45,9 +45,10 @@ void	execute_simple_command_buildin(t_common *common, t_simple_command *simple_c
 		mini_unset(common, simple_command->arguments);
 	else if (!ft_strncmp("exit", simple_command->arguments[0], 6))
 		mini_exit(common);
+
 }
 
-void	execute_simple_command(t_common *common, t_simple_command *simple_command)
+void	execute_simple_command(t_common *common, t_simple_command *simple_command, t_pipe *pipe_variables)
 {
 	char	**path;
 	char	**temp_envp;
@@ -58,6 +59,7 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command)
 	path = split_path(common);
 	count = 0;
 	command[0] = '\0';
+	close_fd(pipe_variables);
 	execve(simple_command->arguments[0], simple_command->arguments, temp_envp);
 	while (path && path[count])
 	{

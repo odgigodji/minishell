@@ -15,9 +15,13 @@
 
 void	mini_pwd(t_common *common)
 {
+	char	*pwd;
 	(void)common;
-	ft_putstr_fd(getcwd(NULL, 0), 1);
+
+	pwd = getcwd(NULL, 0);
+	ft_putstr_fd(pwd, 1);
 	ft_putchar_fd('\n', 1);
+	free(pwd);
 }
 
 char	*get_pwd(char **envp)

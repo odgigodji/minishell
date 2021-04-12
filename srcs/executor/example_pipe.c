@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+void	close_fd(t_pipe *pipe_variables)
+{
+	close(pipe_variables->tmpin);
+	close(pipe_variables->tmpout);
+
+	close(pipe_variables->fdin);
+	close(pipe_variables->fdout);
+	close(pipe_variables->fdpipe[0]);
+	close(pipe_variables->fdpipe[1]);
+}
+
 void	execute_preprocessing(t_common *common)
 {
 	t_pipe	pipe_variables;
@@ -12,14 +23,14 @@ void	execute_preprocessing(t_common *common)
 	g_signal_process_status = 0;
 	dup2(pipe_variables.tmpin, STDIN_FILENO);
 	dup2(pipe_variables.tmpout, STDOUT_FILENO);
-	close(pipe_variables.tmpin);
-	close(pipe_variables.tmpout);
-
-	close(pipe_variables.fdin);
-	close(pipe_variables.fdout);
-	close(pipe_variables.fdpipe[0]);
-	close(pipe_variables.fdpipe[1]);
-
+	close_fd(&pipe_variables);
+//	close(pipe_variables.tmpin);
+//	close(pipe_variables.tmpout);
+//
+//	close(pipe_variables.fdin);
+//	close(pipe_variables.fdout);
+//	close(pipe_variables.fdpipe[0]);
+//	close(pipe_variables.fdpipe[1]);
 }
 
 void	execute_processor(t_common *common, t_pipe *pipe_variables)
@@ -60,25 +71,24 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 
 
 		//	выполняем команду
-
 		if (is_buildin(common->command.simple_commands[command_table_count]))
 			execute_simple_command_buildin(common, simple_command);
 		else if (0 == (ret = fork()))											//	создаём дочерний процесс
 		{
 			if (simple_command->arguments && simple_command->arguments[0])
 			{
-				execute_simple_command(common, simple_command);
+				execute_simple_command(common, simple_command, pipe_variables);
 			}
 		}
 //		else
 //		{
 //			wait(NULL);
 //		}
-//		waitpid(ret, NULL, WUNTRACED);
+		waitpid(ret, NULL, WUNTRACED);
 //		waitpid(ret, NULL, WNOHANG);	// сигналы работают
 //		waitpid(ret, NULL, 0);
 		command_table_count++;
 	}
-	while (command_table_count && command_table_count--)
-		wait(NULL);
+//	while (command_table_count && command_table_count--)
+//		wait(NULL);
 }

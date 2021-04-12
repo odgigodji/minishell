@@ -133,6 +133,58 @@ char	*shift_line_2(char *line)
 	return (line);
 }
 
+void	free_lexer_results(char ***lexer_results)
+{
+	int count;
+
+	count = 0;
+	while ((*lexer_results)[count])
+	{
+		free((*lexer_results)[count]);
+		count++;
+	}
+	free(*lexer_results);
+	*lexer_results = NULL;
+}
+
+void	free_argument_list(char ***list)
+{
+	int	count;
+
+	count = 0;
+	while ((*list)[count])
+	{
+		free((*list)[count]);
+		count++;
+	}
+	free(*list);
+	*list = NULL;
+}
+
+void	free_simple_command(t_simple_command *simple_command)
+{
+	free_argument_list(&simple_command->arguments);
+	free_argument_list(&simple_command->outfiles);
+	free_argument_list(&simple_command->infiles);
+}
+
+void	free_command_table(t_common *common)
+{
+	t_simple_command	**command_table;
+	int					count;
+
+	count = 0;
+	command_table = common->command.simple_commands;
+	while (command_table[count])
+	{
+		free_simple_command(command_table[count]);
+		free(command_table[count]);
+		count++;
+	}
+	free(common->command.simple_commands);
+}
+
+//void	ft_do_command(t_common *common)
 int is_incorrect_line(char **line)
 {
 	if (syntax_error(*line))
@@ -146,23 +198,32 @@ int is_incorrect_line(char **line)
 
 void ft_do_command(t_common *common)
 {
+	int 		i = 0;
 	static char *line;
 	char		**lexer_result;
 	int 		gnl_rv;
 
-//	printf("%d", (int)getpid());
 	if (line == NULL || *line == '\0')
 	{
 		prompt();
 		gnl_rv = t_get_next_line(&line, common->termcap);
 		to_cannon();
+
 		if ((line == NULL || line[0] == 0) && 1 == gnl_rv)
 			mini_exit(common);
+		if (ft_empty_line(line))
+		{
+			printf(RED"empty_line\n"RESET);
+//			free(line);
+			line = NULL;
+			errno = 0;
+			return ;
+		}
 		if (syntax_error(line))
 		{
 			free(line);
 			line = NULL;
-			return;
+			return ;
 		}
 		write(1, "\n", 1);											//печатает пустую строку, без него не переходит
 //		printf("-----------------------------line from gnl - |%s|\n", line);
@@ -183,11 +244,19 @@ void ft_do_command(t_common *common)
 	}
 //	ft_print_lexer_result(lexer_result);
 	common->command = get_command_table(lexer_result);
-//	printf("\n");
-//	ft_print_all_command(common->command.simple_commands);
+	ft_print_all_command(common->command.simple_commands);
 	line = shift_line_2(line);
-	executor(common);
+	line[0] = '\0';
 
+//	i = 0;
+//	while (1);
+//	free(lexer_result);
+//	printf(GRN"----------%s\n"RESET, line);
+	free(line);
+	line = NULL;
+	executor(common);
+	free_lexer_results(&lexer_result);
+	free_command_table(common);
 }
 
 void	minishell_loop(char **envp)
@@ -196,8 +265,10 @@ void	minishell_loop(char **envp)
 	int			i;
 
 	i = 0;
+
 	common = common_init((char **)envp);
 	signal_processor();
+
 	g_signal_process_status = 0;
 //	signal(SIGQUIT, handler_s);	// quit	Ctrl+|	выход из приложенияя
 	while (1)
@@ -212,6 +283,7 @@ int main(int argc, char const **argv, char const **envp)
 	(void)argv;
 	errno = 0;
 	setbuf(stdout, NULL);
+
 	minishell_loop((char **)envp);
 	return (0);
 }

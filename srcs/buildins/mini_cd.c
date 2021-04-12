@@ -13,9 +13,8 @@ void	mini_cd(char **simple_command, t_common *common)
 
 	if (NULL == simple_command[1] || '\0' == simple_command[1][0] || ft_strncmp(simple_command[1], "-", 2))
 	{
-		if (NULL == (old_pwd = malloc(sizeof(char) * MAX_PATH))
-			|| NULL == (new_pwd = malloc(sizeof(char) * MAX_PATH))
-			|| NULL == (getcwd(old_pwd, MAX_PATH)))
+		old_pwd = getcwd(NULL, MAX_PATH);
+		if (NULL == (new_pwd = malloc(sizeof(char) * MAX_PATH))) //NULL == (old_pwd = malloc(sizeof(char) * MAX_PATH))
 			return;
 		if (NULL == simple_command[1] || '\0' == simple_command[1][0])
 		{
@@ -30,6 +29,7 @@ void	mini_cd(char **simple_command, t_common *common)
 			{
 				errno = ENOENT;
 				printf("cd: no such file or directory: %s\n", new_pwd);
+				free(new_pwd);
 				return;
 			}
 		}
@@ -42,9 +42,11 @@ void	mini_cd(char **simple_command, t_common *common)
 				return;
 			}
 		}
-		if (NULL == (getcwd(new_pwd, MAX_PATH)))
+		new_pwd = getcwd(NULL, MAX_PATH);
+		if (NULL == new_pwd)
 			return;
 		update_envp_var(common, "PWD", new_pwd, 0);
+		free(new_pwd);
 	}
 	else // "cd -"
 	{

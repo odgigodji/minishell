@@ -172,11 +172,11 @@ void 				executor(t_common *common);
 void				execute_command(t_common *common, char **envp);
 
 void				execute_simple_command_buildin(t_common *common, t_simple_command *simple_command);
-void				execute_simple_command(t_common *common, t_simple_command *simple_command);
+void				execute_simple_command(t_common *common, t_simple_command *simple_command, t_pipe *pipe_variables);
 int					is_buildin(t_simple_command *simple_command);
 void				execute_processor(t_common *common, t_pipe *pipe_variables);
 void				execute_preprocessing(t_common *common);
-
+void	close_fd(t_pipe *pipe_variables);
 /*
  * pre_executor
  */
@@ -248,5 +248,10 @@ void				to_cannon(void);
 void				t_term_to_cannon(t_termcap *termcap);
 t_termcap			*t_termcap_init(void);
 int					ft_putchar_term(int c);
+
+/*
+ * free
+ */
+void				free_argument_list(char ***list);
 
 #endif

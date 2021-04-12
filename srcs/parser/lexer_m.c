@@ -238,6 +238,7 @@ int			get_token3(char *line, char **token, t_common *common)
 	}
 	buffer_token[count_token] = '\0';
 	*token = strdup(buffer_token);
+	free(buffer_token);
 	if (flag_brace_single || flag_brace_double || flag_back_slash)
 	{
 		ft_putstr_fd("syntax error (lexer)\n", 1);

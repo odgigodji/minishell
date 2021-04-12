@@ -39,6 +39,7 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 		temp = ft_itoa(errno);
 		strlcat(*result, temp, MAX_PATH);
 		count_token = 2;
+		free(temp);
 	}
 	else if (token[0] == '~')
 	{
@@ -53,6 +54,7 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 		count_token = 1 + get_env_variable_name(token, &temp);    // + 1 на знак доллара
 		if (temp && get_envp_var_pointer(common, temp))
 			strlcat(*result, get_envp_var_pointer(common, temp), MAX_PATH);
+		free(temp);
 	}
 	*count_result = (int)ft_strlen(*result);
 	return (count_token);
@@ -113,6 +115,7 @@ int			expand_double_quotes(char *token, t_common *common, char **result, int *co
 	temp[count_temp] = '\0';
 	if (temp[0])
 		strlcat(*result, temp, MAX_PATH);
+	free(temp);
 	return (count + 2);
 }
 
@@ -156,17 +159,4 @@ char		*expand_braces(char *token, t_common *common)
 		}
 	}
 	return (result);
-}
-
-char		**braces_expander(char **lexer_result, t_common *common)
-{
-	int	count;
-
-	count = 0;
-	while (lexer_result[count])
-	{
-		lexer_result[count] = expand_braces(lexer_result[count], common);
-		count++;
-	}
-	return (lexer_result);
 }
