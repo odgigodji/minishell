@@ -19,7 +19,8 @@
 ** Linux has a maximum filename length of 255 characters for most filesystems (including EXT4), and a maximum path of 4096 characters.
 */
 
-# define MAX_PATH 4096
+//# define MAX_PATH 4096
+# define MAX_PATH 4000
 # define MAX_NAME 255
 
 #define RED   "\x1B[31m"
@@ -82,6 +83,7 @@ typedef struct	s_termcap
 	struct termios		term;
 	char				*term_name;
 //	char				*temp;
+	char				*line;
 
 	char				**history;
 	int					history_count;
@@ -123,8 +125,8 @@ void				ft_print_lexer_result(char **lexer_result);
 void 				ft_print_args(char **arguments);
 void 				ft_print_simple_comand(t_simple_command *simple_command);
 void				ft_print_all_command(t_simple_command **command_table);
-
-//int		ft_array_len(char	**arg_list); // fixme удалить
+int					ft_empty_line(const char *line);
+int		ft_array_len(char	**arg_list); // fixme удалить
 
 /*
 ** is_valid
@@ -234,7 +236,7 @@ void				mini_env(t_common *common);
 void				mini_unset(t_common *common, char **keys);
 void				mini_exit(t_common *common);
 char				*get_pwd(char **envp);
-
+void				mini_hello(void);
 /*
 ** signals
 */

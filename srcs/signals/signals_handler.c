@@ -31,6 +31,7 @@ void	signal_handler(int num)
 			ft_putstr_fd("\r^C\n", 1);
 			g_signal_process_status = 0;
 			errno = 130;
+			to_cannon();
 		}
 		else
 		{
@@ -38,6 +39,7 @@ void	signal_handler(int num)
 			g_signal_process_status = 0;
 			prompt();
 		}
+		tputs(save_cursor, 1, ft_putchar_term);		//	fixme
 	}
 	if (num == SIGQUIT)
 	{

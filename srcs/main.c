@@ -143,6 +143,7 @@ void	free_lexer_results(char ***lexer_results)
 		free((*lexer_results)[count]);
 		count++;
 	}
+	free((*lexer_results)[count]);
 	free(*lexer_results);
 	*lexer_results = NULL;
 }
@@ -157,6 +158,7 @@ void	free_argument_list(char ***list)
 		free((*list)[count]);
 		count++;
 	}
+	free((*list)[count]);
 	free(*list);
 	*list = NULL;
 }
@@ -166,6 +168,9 @@ void	free_simple_command(t_simple_command *simple_command)
 	free_argument_list(&simple_command->arguments);
 	free_argument_list(&simple_command->outfiles);
 	free_argument_list(&simple_command->infiles);
+	free(simple_command->outfiles);
+	free(simple_command->infiles);
+	free(simple_command->arguments);
 }
 
 void	free_command_table(t_common *common)
@@ -181,6 +186,7 @@ void	free_command_table(t_common *common)
 		free(command_table[count]);
 		count++;
 	}
+	free(command_table[count]);
 	free(common->command.simple_commands);
 }
 
@@ -189,7 +195,7 @@ int is_incorrect_line(char **line)
 {
 	if (syntax_error(*line))
 	{
-		*line = NULL;
+//		*line = NULL;
 		return (1);
 	}
 	return (0);
@@ -198,36 +204,29 @@ int is_incorrect_line(char **line)
 
 void ft_do_command(t_common *common)
 {
-	static char *line;
 	char		**lexer_result;
 	int 		gnl_rv;
 
-	if (line == NULL || *line == '\0')
+	if (common->termcap->line[0] == '\0') //line == NULL ||
 	{
 		prompt();
-		gnl_rv = t_get_next_line(&line, common->termcap);
+		gnl_rv = t_get_next_line(&common->termcap->line, common->termcap);
 		to_cannon();
 
-		if ((line == NULL || line[0] == 0) && 1 == gnl_rv)
+		if ((common->termcap->line[0] == 0) && 1 == gnl_rv) // line == NULL ||
 			mini_exit(common);
-
-		ft_kitty(line);		//ft_kitty :)
-
-		if (syntax_error(line))
+//		ft_hello(common->termcap->line);		//ft_hello :)
+		if (syntax_error(common->termcap->line))
 		{
-			free(line);
-			line = NULL;
+			shift_line_2(common->termcap->line);
 			return ;
 		}
 		write(1, "\n", 1);											//печатает пустую строку, без него не переходит
 //		printf("-----------------------------line from gnl - |%s|\n", line);
 	}
-//	t_term_to_cannon(common->termcap);
-
-
-	if (NULL == (lexer_result = lexer(line, common)))
+	if (NULL == (lexer_result = lexer(common->termcap->line, common)))
 	{
-		line = shift_line_2(line);
+		shift_line_2(common->termcap->line); //line =
 		return ;
 	}
 	if (invalid_lexer_result(lexer_result))
@@ -237,26 +236,24 @@ void ft_do_command(t_common *common)
 		return ;
 	}
 //	ft_print_lexer_result(lexer_result);
+
 	common->command = get_command_table(lexer_result);
 //	printf("\n");
 //	ft_print_all_command(common->command.simple_commands);
-	line = shift_line_2(line);
+	shift_line_2(common->termcap->line);
 	executor(common);
 	free_lexer_results(&lexer_result);
+	free(lexer_result);
 	free_command_table(common);
 }
 
 void	minishell_loop(char **envp)
 {
 	t_common	*common;
-	int			i;
-
-	i = 0;
 
 	common = common_init((char **)envp);
 	signal_processor();
 	g_signal_process_status = 0;
-//	signal(SIGQUIT, handler_s);	// quit	Ctrl+|	выход из приложенияя
 	while (1)
 	{
 		ft_do_command(common);

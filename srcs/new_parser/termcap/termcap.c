@@ -7,7 +7,7 @@
 int	ft_putchar_term(int c)
 {
 	write(1, &c, 1);
-	return c;
+	return (c);
 }
 
 t_termcap	*t_termcap_init(void)
@@ -23,6 +23,7 @@ t_termcap	*t_termcap_init(void)
 	result->term_name = ft_strdup("xterm-256color");
 	tgetent(0, result->term_name);
 	result->cursor = 0;
+	result->line = ft_calloc(MAX_PATH, sizeof(char));
 	return (result);
 }
 
@@ -54,7 +55,8 @@ int	is_key(char *line)
 	count = 0;
 	while (keys_list[count])
 	{
-		if (!strncmp(line, "\e", 1) || !strncmp(line, keys_list[count], strlen(keys_list[count])))
+		if (!ft_strncmp(line, "\e", 1) || !ft_strncmp(line, keys_list[count],
+												ft_strlen(keys_list[count])))
 		{
 			return (1);
 		}
@@ -70,8 +72,10 @@ void	t_key_handle_up(char *buffer, t_termcap *termcap, char **line)
 		termcap->history_cursor--;
 		tputs(restore_cursor, 1, ft_putchar_term);
 		tputs(tigetstr("ed"), 1, ft_putchar_term);
-		write(1, termcap->history[termcap->history_cursor], strlen(termcap->history[termcap->history_cursor]));
-		termcap->cursor = strlcpy(termcap->history[termcap->history_count], termcap->history[termcap->history_cursor], MAX_PATH);
+		write(1, termcap->history[termcap->history_cursor],
+			ft_strlen(termcap->history[termcap->history_cursor]));
+		termcap->cursor = ft_strlcpy(termcap->history[termcap->history_count],
+			termcap->history[termcap->history_cursor], MAX_PATH);
 	}
 	else
 		write(1, "\a", 1);
@@ -84,14 +88,17 @@ void	t_key_handle_down(char *buffer, t_termcap *termcap, char **line)
 		termcap->history_cursor++;
 		tputs(restore_cursor, 1, ft_putchar_term);
 		tputs(tigetstr("ed"), 1, ft_putchar_term);
-		write(1, termcap->history[termcap->history_cursor], strlen(termcap->history[termcap->history_cursor]));
-		termcap->cursor = strlcpy(termcap->history[termcap->history_count], termcap->history[termcap->history_cursor], MAX_PATH);
+		write(1, termcap->history[termcap->history_cursor],
+			ft_strlen(termcap->history[termcap->history_cursor]));
+		termcap->cursor = ft_strlcpy(termcap->history[termcap->history_count],
+			termcap->history[termcap->history_cursor], MAX_PATH);
 	}
 	else if (NULL != termcap->history[termcap->history_cursor + 1])
 	{
 		tputs(restore_cursor, 1, ft_putchar_term);
 		tputs(tigetstr("ed"), 1, ft_putchar_term);
-		termcap->cursor = strlcpy(termcap->history[termcap->history_count], "", MAX_PATH);
+		termcap->cursor = ft_strlcpy(termcap->history[termcap->history_count],
+							   "", MAX_PATH);
 	}
 	else
 		write(1, "\a", 1);
@@ -99,13 +106,13 @@ void	t_key_handle_down(char *buffer, t_termcap *termcap, char **line)
 
 int	t_key_handle(char *buffer, t_termcap *termcap, char **line)
 {
-	if (!strcmp(buffer, "\e[A"))				// верх
+	if (!ft_strncmp(buffer, "\e[A", ft_strlen("\e[A")))				// верх
 	{
 		t_key_handle_up(buffer, termcap, line);
 	}
-	else if (!strcmp(buffer, "\e[B"))			// низ
+	else if (!ft_strncmp(buffer, "\e[B", ft_strlen("\e[B")))			// низ
 		t_key_handle_down(buffer, termcap, line);
-	else if (!strcmp(buffer, key_backspace) || !strcmp(buffer, "\177") || !strcmp(buffer, "\010"))
+	else if (!ft_strncmp(buffer, "\177", 1)) // !strcmp(buffer, key_backspace) || !ft_strncmp(buffer, "\177", 1) ||
 	{
 		if (termcap->cursor > 0)
 		{
@@ -115,10 +122,6 @@ int	t_key_handle(char *buffer, t_termcap *termcap, char **line)
 			tputs(tgetstr("dc", 0), 1, ft_putchar_term);
 		}
 	}
-	else if (!strcmp(buffer, "\e[C"))			//право
-		write(1, "right\n", 0);
-	else if (!strcmp(buffer, "\e[D"))			//лево
-		write(1, "left\n", 0);
 	else
 		write(1, "another\n", 0);
 	return (0);
@@ -126,7 +129,6 @@ int	t_key_handle(char *buffer, t_termcap *termcap, char **line)
 
 int		t_input_handle(char *buffer, t_termcap *termcap, char **line)
 {
-//	printf("%d %d %d\n", termcap->cursor, buffer[0], (termcap->cursor > 0 && buffer[0] == 4));
 	if (termcap->cursor > 0 && buffer[0] == 4)
 	{
 		buffer[0] = '\0';
@@ -134,21 +136,21 @@ int		t_input_handle(char *buffer, t_termcap *termcap, char **line)
 	}
 	if (buffer[0] != '\n')
 	{
-//		puts("check");
 		if (!ft_strchr("\t\v\f\r\4", buffer[0]))
 		{
-			termcap->cursor = strlcat(termcap->history[termcap->history_count], buffer, MAX_PATH);
-			write(1, buffer, strlen(buffer));
+			termcap->cursor = ft_strlcat(
+					termcap->history[termcap->history_count], buffer,
+					MAX_PATH);
+			write(1, buffer, ft_strlen(buffer));
 		}
-//		termcap->history_cursor = termcap->history_count;
 		return (-1);
 	}
 	else		// если \n, то записать buffer в конец истории
 	{
 		termcap->history[termcap->history_count][termcap->cursor] = '\0';
 		termcap->history_cursor = termcap->history_count;
-		*line = strdup(termcap->history[termcap->history_count]);
-		return ((int)strlen(*line));
+		ft_strlcpy(*line, termcap->history[termcap->history_count], MAX_PATH);
+		return ((int)ft_strlen(*line));
 	}
 }
 
@@ -184,7 +186,7 @@ int	t_history_memory_processing(t_termcap *termcap)
 	else
 	{
 		termcap->history_len += 10;
-		history_realloc = calloc(termcap->history_len + 1, sizeof(char *));
+		history_realloc = ft_calloc(termcap->history_len + 1, sizeof(char *));
 		while (termcap->history[count])
 		{
 			history_realloc[count] = termcap->history[count];
@@ -195,23 +197,23 @@ int	t_history_memory_processing(t_termcap *termcap)
 		termcap->history_count = count;
 	}
 	termcap->history_cursor = termcap->history_count;
-	termcap->history[termcap->history_count] = calloc(MAX_PATH + 1, sizeof(char));
+	termcap->history[termcap->history_count] = ft_calloc(MAX_PATH + 1, sizeof(char));
 	return (0);
 }
 
 int	t_get_next_line(char **line, t_termcap *termcap)
 {
-	char	*term_name = "xterm-256color";
 	char	buffer[MAX_PATH];
 	int		read_rv;
 	int		input_rv;
+	static int count;
 
 	to_icannon();
-	tgetent(0, term_name);
+	tgetent(0, "xterm-256color");
 	buffer[0] = '\0';
 	t_history_memory_processing(termcap);
 	tputs(save_cursor, 1, ft_putchar_term);
-	while (0 != strncmp(buffer, "\4", 1))
+	while (0 != ft_strncmp(buffer, "\4", 1))
 	{
 		read_rv = read(0, buffer, MAX_PATH);
 		buffer[read_rv] = '\0';

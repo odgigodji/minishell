@@ -66,7 +66,7 @@ set(SOURCE_FILES
 add_executable(minishell
         srcs/main.c
         ${SOURCE_FILES}
-        )
+        srcs/buildins/mini_hello.c)
 
 add_executable(executor_tests
         ${SOURCE_FILES}

@@ -6,10 +6,10 @@
 
 int		is_buildin(t_simple_command *simple_command)
 {
-	char	*list[8];
+	char	*list[9];
 	int 	count;
 
-	ft_bzero(list, 8);
+	ft_bzero(list, 9);
 	list[0] = "cd";
 	list[1] = "pwd";
 	list[2] = "echo";
@@ -17,11 +17,12 @@ int		is_buildin(t_simple_command *simple_command)
 	list[4] = "export";
 	list[5] = "unset";
 	list[6] = "exit";
-	list[7] = NULL;
+	list[7] = "hello";
+	list[8] = NULL;
 	count = 0;
 	while (simple_command->arguments && simple_command->arguments[0] && list[count])
 	{
-		if (!strncmp(list[count], simple_command->arguments[0], ft_strlen(simple_command->arguments[0])))
+		if (!strncmp(list[count], simple_command->arguments[0], ft_strlen(list[count]) + 1))
 			return (1);
 		count++;
 	}
@@ -43,9 +44,10 @@ void	execute_simple_command_buildin(t_common *common, t_simple_command *simple_c
 		mini_export(common, simple_command->arguments);
 	else if (!ft_strncmp("unset", simple_command->arguments[0], 6))
 		mini_unset(common, simple_command->arguments);
-	else if (!ft_strncmp("exit", simple_command->arguments[0], 6))
+	else if (!ft_strncmp("exit", simple_command->arguments[0], 5))
 		mini_exit(common);
-
+	else if (!ft_strncmp("hello", simple_command->arguments[0], 6))
+		mini_hello();
 }
 
 void	execute_simple_command(t_common *common, t_simple_command *simple_command, t_pipe *pipe_variables)
@@ -71,6 +73,8 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command, 
 		command[0] = '\0';
 	}
 	errno = 1;
+	free_argument_list(&temp_envp);		// fixme не влияет на утечки
+	free_argument_list(&path);			// fixme не влияет на утечки
 	printf("%s: command not found: %s\n", SHELL_NAME, simple_command->arguments[0]);
-	exit(0);
+	exit(1);
 }

@@ -354,6 +354,8 @@ char		**lexer(char *line, t_common *common)
 			count_result++;
 			result[count_result] = NULL;
 		}
+		else if (token[0] == '\0')
+			free(token);
 		if (line[count] == ' ' && '\0' != line[count])
 			count++;
 	}
