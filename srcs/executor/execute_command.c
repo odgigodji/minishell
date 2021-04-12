@@ -1,13 +1,9 @@
-//
-// Created by Mariam Scot on 3/10/21.
-//
-
 #include "minishell.h"
 
-int		is_buildin(t_simple_command *simple_command)
+int	is_buildin(t_simple_command *simple_command)
 {
 	char	*list[9];
-	int 	count;
+	int		count;
 
 	ft_bzero(list, 9);
 	list[0] = "cd";
@@ -20,18 +16,20 @@ int		is_buildin(t_simple_command *simple_command)
 	list[7] = "hello";
 	list[8] = NULL;
 	count = 0;
-	while (simple_command->arguments && simple_command->arguments[0] && list[count])
+	while (simple_command->arguments
+		&& simple_command->arguments[0] && list[count])
 	{
-		if (!strncmp(list[count], simple_command->arguments[0], ft_strlen(list[count]) + 1))
+		if (!strncmp(list[count], simple_command->arguments[0],
+				ft_strlen(list[count]) + 1))
 			return (1);
 		count++;
 	}
 	return (0);
 }
 
-void	execute_simple_command_buildin(t_common *common, t_simple_command *simple_command)
+void	execute_simple_command_buildin(t_common *common,
+									t_simple_command *simple_command)
 {
-//	printf(YEL "DEBUG: не системная функция mini_%s:\n"RESET, simple_command->arguments[0]);
 	if (!ft_strncmp("cd", simple_command->arguments[0], 3))
 		mini_cd(simple_command->arguments, common);
 	else if (!ft_strncmp("pwd", simple_command->arguments[0], 4))
@@ -50,11 +48,12 @@ void	execute_simple_command_buildin(t_common *common, t_simple_command *simple_c
 		mini_hello();
 }
 
-void	execute_simple_command(t_common *common, t_simple_command *simple_command, t_pipe *pipe_variables)
+void	execute_simple_command(t_common *common,
+			t_simple_command *simple_command, t_pipe *pipe_variables)
 {
 	char	**path;
 	char	**temp_envp;
-	int 	count;
+	int		count;
 	char	command[MAX_PATH];
 
 	temp_envp = make_envp(common);
@@ -73,7 +72,8 @@ void	execute_simple_command(t_common *common, t_simple_command *simple_command, 
 	}
 	errno = 1;
 	dup2(pipe_variables->tmpout, STDOUT_FILENO);
-	printf("%s: command not found: %s\n", SHELL_NAME, simple_command->arguments[0]);
+	printf("%s: command not found: %s\n", SHELL_NAME,
+		simple_command->arguments[0]);
 	close_fd(pipe_variables);
 	exit(1);
 }
