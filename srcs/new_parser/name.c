@@ -13,6 +13,10 @@ int	next_symbol_after_space(const char *line)
 	return (line[i]);
 }
 
+/*
+** set errno if error
+*/
+
 int	with_error(const int unexpected_token)
 {
 	if (unexpected_token == '\"' || unexpected_token == '\'')

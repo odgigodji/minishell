@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char check_line_1(const char *line)
+char	check_line_1(const char *line)
 {
 	int shield_flag;
 
