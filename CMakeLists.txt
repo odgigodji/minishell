@@ -60,6 +60,7 @@ set(SOURCE_FILES
         srcs/new_parser/name.c
         srcs/utils/prompt.c
 #        srcs/parser/ft_empty_line.c
+        srcs/new_parser/utils_3.c
         )
 
 add_executable(minishell

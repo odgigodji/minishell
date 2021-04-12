@@ -211,7 +211,7 @@ void ft_do_command(t_common *common)
 		if ((line == NULL || line[0] == 0) && 1 == gnl_rv)
 			mini_exit(common);
 
-		ft_hello(line);		//ft_hello :)
+		ft_kitty(line);		//ft_kitty :)
 
 		if (syntax_error(line))
 		{

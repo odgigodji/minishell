@@ -39,9 +39,9 @@ int invalid_lexer_result(char **lexer_result)
 	return (0);
 }
 
-void ft_hello(char *hello_line)
+void ft_kitty(char *line_is_kitty)
 {
-	if (!ft_strcmp(hello_line, "hello"))
+	if (!ft_strcmp(line_is_kitty, "kitty"))
 		printf(CYN"\n"
 			   "	  ／＞　  フ\n"
 			   "　　　　　| 　_　 _|\n"

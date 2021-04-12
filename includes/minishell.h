@@ -136,11 +136,12 @@ int					next_symbol_after_space(const char *line);
 //int					ft_empty_line(const char *line);
 int 				with_error(const int unexpected_token);
 int next_char_is_shielded(const char *line, int *i);
+int	we_are_in_quotes(const char *line, int i);
 /*
 ** parser
 */
 
-void ft_hello(char *hello_line);
+void ft_kitty(char *line_is_kitty);
 int					get_next_line(int fd, char **line);
 size_t				ft_strlen_to_char(const char *s, char c);
 int is_redirect(char *actual_token);
