@@ -2,10 +2,11 @@
 
 char	check_line_1(const char *line)
 {
-	int shield_flag;
+	int	shield_flag;
+	int	i;
 
-	int i = -1;
-	while(line[++i])
+	i = -1;
+	while (line[++i])
 	{
 		shield_flag = 0;
 		if (line[i] == '\\' && !we_are_in_quotes(line, i))
@@ -15,11 +16,11 @@ char	check_line_1(const char *line)
 			if (ft_strchr("{}()&`", line[i]) && !we_are_in_quotes(line, i))
 				break ;
 			if (line[i] == ';' && !we_are_in_quotes(line, i)
-			&& (next_symbol_after_space(line + i + 1) == ';'
+				&& (next_symbol_after_space(line + i + 1) == ';'
 					|| next_symbol_after_space(line + i + 1) == '|'))
 				break ;
 			if (line[i] == '|' && !we_are_in_quotes(line, i)
-			&& (next_symbol_after_space(line + i + 1) == ';'
+				&& (next_symbol_after_space(line + i + 1) == ';'
 					|| next_symbol_after_space(line + i + 1) == '|'
 					|| next_symbol_after_space(line + i + 1) == '\0'))
 				break ;
@@ -28,13 +29,12 @@ char	check_line_1(const char *line)
 	return (line[i]);
 }
 
-int syntax_error(const char *line)
+int	syntax_error(const char *line)
 {
-//	printf("SE\n");
-	int i;
-	int quotes_flag;
-	char quote_type;
-	char res;
+	int		i;
+	int		quotes_flag;
+	char	quote_type;
+	char	res;
 
 	quotes_flag = 0;
 	quote_type = 0;
@@ -46,14 +46,14 @@ int syntax_error(const char *line)
 		return (1);
 	}
 	if (next_symbol_after_space(line) == ';'
-	|| next_symbol_after_space(line) == '|')
+		|| next_symbol_after_space(line) == '|')
 	{
 		if (next_symbol_after_space(line) == ';')
 			return (with_error(';'));
 		return (with_error('|'));
 	}
 	if ((res = check_line_1(line))
-	|| (res = check_line_2(line, i, quotes_flag, quote_type)))
+		|| (res = check_line_2(line, i, quotes_flag, quote_type)))
 		return (with_error(res));
 	return (0);
 }
