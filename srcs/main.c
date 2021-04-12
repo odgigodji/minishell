@@ -198,7 +198,6 @@ int is_incorrect_line(char **line)
 
 void ft_do_command(t_common *common)
 {
-	int 		i = 0;
 	static char *line;
 	char		**lexer_result;
 	int 		gnl_rv;
@@ -211,14 +210,9 @@ void ft_do_command(t_common *common)
 
 		if ((line == NULL || line[0] == 0) && 1 == gnl_rv)
 			mini_exit(common);
-		if (ft_empty_line(line))
-		{
-			printf(RED"empty_line\n"RESET);
-//			free(line);
-			line = NULL;
-			errno = 0;
-			return ;
-		}
+
+		ft_hello(line);		//ft_hello :)
+
 		if (syntax_error(line))
 		{
 			free(line);
@@ -244,16 +238,9 @@ void ft_do_command(t_common *common)
 	}
 //	ft_print_lexer_result(lexer_result);
 	common->command = get_command_table(lexer_result);
-	ft_print_all_command(common->command.simple_commands);
+//	printf("\n");
+//	ft_print_all_command(common->command.simple_commands);
 	line = shift_line_2(line);
-	line[0] = '\0';
-
-//	i = 0;
-//	while (1);
-//	free(lexer_result);
-//	printf(GRN"----------%s\n"RESET, line);
-	free(line);
-	line = NULL;
 	executor(common);
 	free_lexer_results(&lexer_result);
 	free_command_table(common);
@@ -268,7 +255,6 @@ void	minishell_loop(char **envp)
 
 	common = common_init((char **)envp);
 	signal_processor();
-
 	g_signal_process_status = 0;
 //	signal(SIGQUIT, handler_s);	// quit	Ctrl+|	выход из приложенияя
 	while (1)

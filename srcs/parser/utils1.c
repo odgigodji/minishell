@@ -38,3 +38,17 @@ int invalid_lexer_result(char **lexer_result)
 	}
 	return (0);
 }
+
+void ft_hello(char *hello_line)
+{
+	if (!ft_strcmp(hello_line, "hello"))
+		printf(CYN"\n"
+			   "	  ／＞　  フ\n"
+			   "　　　　　| 　_　 _|\n"
+			   "　 　　　／`ミ _x 彡\n"
+			   "　　 　 /　　　 　 |\n"
+			   "　　　 /　 ヽ　　 ﾉ\n"
+			   "　／￣|　　 |　|　|\n"
+			   "　| (￣ヽ＿_ヽ_)_)\n"
+			   "　＼二つ"RESET);
+}
