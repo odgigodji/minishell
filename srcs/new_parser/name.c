@@ -19,19 +19,19 @@ int	next_after_space(const char *line)
 
 int	with_error(const int unexpected_token)
 {
-	if (unexpected_token == '\"' || unexpected_token == '\'')
+	if (unexpected_token == 'q')
 	{
-		printf(RED"\nsyntax error : unclosed quotes %c'"RESET, unexpected_token);
+		printf("minishell: unclosed quotes\n");
 		g_errno = 42;
+		return (-1);
 	}
+	if (unexpected_token == 'r')
+		printf("minishell: syntax error near redirect\n");
+	else if (unexpected_token == 'm')
+		printf("minishell: not support multiline command\n");
 	else
-	{
-		if (unexpected_token == 'r')
-			printf("minishell: syntax error near redirect\n");
-		else
-			printf("\nminishell: syntax error near '%c'\n", unexpected_token);
-		g_errno = 258;
-	}
+		printf("\nminishell: syntax error near '%c'\n", unexpected_token);
+	g_errno = 258;
 	return (1);
 }
 

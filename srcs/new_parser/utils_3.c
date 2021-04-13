@@ -81,6 +81,9 @@ int	invalid_lexer_result(char **lexer_result)
 			return (with_error('r'));
 		if (!lexer_result[counter + 1] && is_redirect(lexer_result[counter]))
 			return (with_error('r'));
+		if (lexer_result[counter + 1] && !ft_strcmp(lexer_result[counter], PIPE)
+			&& !ft_strcmp(lexer_result[counter + 1], "minishell"))
+			return (with_error('m'));
 		counter++;
 	}
 	return (0);

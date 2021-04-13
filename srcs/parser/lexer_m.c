@@ -240,10 +240,7 @@ int			get_token3(char *line, char **token, t_common *common)
 	*token = strdup(buffer_token);
 	free(buffer_token);
 	if (flag_brace_single || flag_brace_double || flag_back_slash)
-	{
-		ft_putstr_fd("syntax error (lexer)\n", 1);
-		return (-1);
-	}
+		return (with_error('q')); // добавил вывод ощибки и запись еррно
 	return (count_line);
 }
 
