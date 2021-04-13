@@ -18,7 +18,7 @@ void	flag_init(t_token_flag *f, int *count)
 	*count = 0;
 }
 
-int		get_semicolon_index(char *line)
+int	get_semicolon_index(char *line)
 {
 	int				count;
 	t_token_flag	f;

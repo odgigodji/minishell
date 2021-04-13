@@ -54,10 +54,6 @@ int	num_of_simple_commands(char **lexer_result)
 	return (count_of_simple_command);
 }
 
-/*
-** выделение памяти на simple_commands (simple_commands)
-*/
-
 t_simple_command	**command_table_init(char **lexer_result)
 {
 	t_simple_command	**command_table;
@@ -69,10 +65,6 @@ t_simple_command	**command_table_init(char **lexer_result)
 	command_table[num_of_simple_commands(lexer_result)] = NULL;
 	return (command_table);
 }
-
-/*
-** выделение памяти на одну simple_command (например на ["ls", "-l"])
-*/
 
 t_simple_command	*one_simple_command_init(char **lexer_result)
 {

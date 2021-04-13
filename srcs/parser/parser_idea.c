@@ -54,9 +54,9 @@ char	**get_outfiles(char **lexer_result, int *is_cat)
 void	avoid_redirects_without_args(char **lexer_result, int *current_token)
 {
 	while ((lexer_result[*current_token + 2]
-	&& (is_redirect(lexer_result[*current_token])))
+			&& (is_redirect(lexer_result[*current_token])))
 		|| (!lexer_result[*current_token + 2]
-	&& (is_redirect(lexer_result[*current_token]))))
+			&& (is_redirect(lexer_result[*current_token]))))
 	{
 		*current_token += 2;
 		if (!lexer_result[*current_token])

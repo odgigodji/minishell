@@ -8,10 +8,12 @@ char	**get_args(char **lexer_result, int *current_token)
 	arguments = NULL;
 	count = 0;
 	arguments = init_args((lexer_result + *current_token), PIPE);
-	while (lexer_result[*current_token] && ft_strcmp(lexer_result[*current_token], PIPE))
+	while (lexer_result[*current_token]
+		&& ft_strcmp(lexer_result[*current_token], PIPE))
 	{
 		pass_redirect_files(lexer_result, current_token);
-		if (lexer_result[*current_token] && (!ft_strcmp(lexer_result[*current_token], PIPE)))
+		if (lexer_result[*current_token]
+			&& (!ft_strcmp(lexer_result[*current_token], PIPE)))
 			break ;
 		arguments[count] = ft_strdup(lexer_result[*current_token]);
 		if (!arguments[count])

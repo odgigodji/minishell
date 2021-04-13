@@ -61,7 +61,6 @@ int	main(int argc, char const **argv, char const **envp)
 	(void)argc;
 	(void)argv;
 	g_errno = 0;
-//	setbuf(stdout, NULL);
 	minishell_loop((char **)envp);
 	return (0);
 }
