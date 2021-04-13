@@ -77,10 +77,10 @@ add_executable(minishell
 
 add_executable(lexer_tests
         ${SOURCE_FILES}
-        srcs/parser/lexer_tests/test_lexer_00.c
-        srcs/parser/lexer_tests/test_lexer_00.h
-        srcs/parser/lexer_tests/main_test.c
-        srcs/parser/lexer_tests/test_lexer_01.c
+        _void/lexer_tests/test_lexer_00.c
+        _void/lexer_tests/test_lexer_00.h
+        _void/lexer_tests/main_test.c
+        _void/lexer_tests/test_lexer_01.c
         srcs/parser/get_command.c)
 
 target_link_libraries(minishell LINK_PUBLIC
