@@ -37,7 +37,6 @@ void	ft_do_command(t_common *common)
 		return ;
 	}
 	common->command = get_command_table(lexer_result);
-	shift_line(common->termcap->line);
 	executor(common);
 	free_lexer_results(&lexer_result);
 	free(lexer_result);
