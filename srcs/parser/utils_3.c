@@ -9,7 +9,7 @@ int	check_start(const char *line)
 	}
 	if (line_only_with_quotes(line))
 	{
-		printf("\nminishell : command not found\n");
+		printf("\nminishell : only quotes in line\n");
 		g_errno = 51;
 		return (1);
 	}

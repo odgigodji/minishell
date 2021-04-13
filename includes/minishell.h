@@ -143,6 +143,7 @@ int					next_char_is_shielded(const char *line, int *i);
 int					we_are_in_quotes(const char *line, int i);
 char				check_line_2(const char *line, int i,
 						int quotes_flag, char quote_type);
+int					line_only_with_quotes(const char *line);
 
 /*
 **	Termcap

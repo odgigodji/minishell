@@ -47,7 +47,7 @@ set(SOURCE_FILES
         #        srcs/new_parser/do_reverse_redirect.c
         #        srcs/new_parser/do_r_redirect.c
         #        srcs/new_parser/double_redirect.c
-        srcs/new_parser/termcap/termcap.c
+        srcs/termcap/termcap.c
         #        srcs/new_parser/do_quotes.c
         #        srcs/new_parser/double_quotes.c
         #        srcs/new_parser/do_dollar.c
@@ -55,10 +55,10 @@ set(SOURCE_FILES
         srcs/parser/parser_m.c
         srcs/utils/utils.c
         srcs/parser/parser_idea.c
-        srcs/new_parser/name.c
+        srcs/parser/name.c
         srcs/utils/prompt.c
 #        srcs/parser/ft_empty_line.c
-        srcs/new_parser/utils_3.c
+        srcs/parser/utils_3.c
         srcs/parser/get_command.c
         srcs/buildins/mini_hello.c
         srcs/parser/get_command.c
@@ -75,10 +75,10 @@ set(SOURCE_FILES
 add_executable(minishell
         srcs/main.c
         ${SOURCE_FILES}
-        srcs/new_parser/termcap/termcap_history.c
-        srcs/new_parser/termcap/termcap_init.c
-        srcs/new_parser/termcap/termcap_key_handle.c
-        srcs/new_parser/termcap/termcap_input_signal.c
+        srcs/termcap/termcap_history.c
+        srcs/termcap/termcap_init.c
+        srcs/termcap/termcap_key_handle.c
+        srcs/termcap/termcap_input_signal.c
         srcs/prints.c
         srcs/utils/free_all.c)
 
