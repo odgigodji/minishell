@@ -1,5 +1,21 @@
 #include "minishell.h"
 
+int	not_valid_key_return(char *key, int count)
+{
+	if (NULL != key)
+	{
+		printf("%s: export: `"RED"%c"RESET"%s' not a valid identifier\n",
+			   SHELL_NAME, key[count], &key[count + 1]);
+	}
+	else
+	{
+		printf("%s: export: not a valid identifier\n",
+			   SHELL_NAME);
+	}
+	g_errno = 1;
+	return (0);
+}
+
 int	mini_unset_a_var(char ***var_list, char *key)
 {
 	int		count;
