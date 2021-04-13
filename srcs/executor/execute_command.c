@@ -70,10 +70,10 @@ void	execute_simple_command(t_common *common,
 		count++;
 		command[0] = '\0';
 	}
-	g_errno = 1;
 	dup2(pipe_variables->tmpout, STDOUT_FILENO);
 	printf("%s: command not found: %s\n", SHELL_NAME,
 		simple_command->arguments[0]);
 	close_fd(pipe_variables);
-	exit(1);
+	g_errno = 127;
+	exit(127);
 }

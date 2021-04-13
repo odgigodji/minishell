@@ -51,7 +51,7 @@ set(SOURCE_FILES
         #        srcs/new_parser/do_quotes.c
         #        srcs/new_parser/double_quotes.c
         #        srcs/new_parser/do_dollar.c
-        srcs/parser/lexer_m.c
+        srcs/lexer/lexer_m.c
         srcs/parser/parser_m.c
         srcs/utils/utils.c
         srcs/parser/parser_idea.c
@@ -63,12 +63,17 @@ set(SOURCE_FILES
         srcs/buildins/mini_hello.c
         srcs/parser/get_command.c
         srcs/utils/get_envp_variable_utils.c
+        srcs/utils/get_envp_variable_update.c
+        srcs/lexer/lexer_utils.c
+        srcs/utils/get_envp_variable_update.c
+        srcs/lexer/lexer_utils.c
+        srcs/lexer/lexer_get_token.c
         )
 
 add_executable(minishell
         srcs/main.c
         ${SOURCE_FILES}
-        srcs/utils/get_envp_variable_update.c)
+        )
 
 add_executable(lexer_tests
         ${SOURCE_FILES}

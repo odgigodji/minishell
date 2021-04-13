@@ -79,7 +79,7 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 			pipe_variables);
 		ret = execute_simple_command_processor(simple_command,
 				pipe_variables, common);
-		waitpid(ret, NULL, WUNTRACED);
+		waitpid(ret, &g_errno, WUNTRACED);
 		command_table_count++;
 	}
 }

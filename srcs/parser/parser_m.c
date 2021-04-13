@@ -139,9 +139,9 @@ char		*expand_braces(char *token, t_common *common)
 		if (token[count_token] && token[count_token] == '\\')
 		{
 			flag_back_slash = toggle_back_slash_flag(flag_back_slash, &token[count_token], count_token);
-//			if (flag_back_slash % 2 != 0)
+//			if (back_slash % 2 != 0)
 //			{
-//				flag_back_slash++;
+//				back_slash++;
 //				count_token++;
 //			}
 		}

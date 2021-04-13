@@ -114,8 +114,14 @@ typedef struct			s_pipe
 	int fdpipe[2];
 }						t_pipe;
 
-//int	g_signal_process_status;
-int		g_errno;
+typedef struct	s_token_flag
+{
+	char	brace_single;
+	char	brace_double;
+	char	back_slash;
+}				t_token_flag;
+
+int	g_errno;
 
 /*
 **	Временные функции
@@ -162,20 +168,34 @@ char **get_infiles(char **lexer_result);
 void pass_redirect_files(char **lexer_result, int *current_token);
 
 
-char				**lexer(char *line, t_common *common);
-char				toggle_brace_flag_lexer(char flag, char current_char);
-int					toggle_back_slash_flag(int flag, char *line, int count);
-int					expand_variable(char *token, t_common *common, char **result, int *count_result);
-int					get_token3(char *line, char **token, t_common *common);
+
 /*
 ** counters
 */
 int 				num_of_simple_commands(char **lexer_result);
 int 				num_of_args(char **lexer_result, char *spec_token);
 
+/*
+**	Lexer
+*/
+
+char				**lexer(char *line, t_common *common);
+char				toggle_brace_flag_lexer(char flag, char current_char);
+int					toggle_back_slash_flag(int flag, char *line, int count);
+int					expand_variable(char *token, t_common *common, char **result, int *count_result);
+int					get_token3(char *line, char **token, t_common *common);
+int					get_spec_token(char *line, char **token);
+int					is_spec_symbol(char c);
+
+void	get_token_char(char **buffer_token, char *line, int *count_token, int *count_line);
+int		get_token_ret(t_token_flag *f, char **buffer_token, int count_token, char **token);
+int		get_token_is_var(t_token_flag *f, char *line, int count_line);
+int		get_token_is_end(t_token_flag *f, char *line, int count_line);
+int		get_token_toggle_flag(t_token_flag *f, char *line, int *count_line);
+void	get_token_flag_init(t_token_flag *f, int *count_line, int *count_token);
 
 /*
-** executor
+**	Executor
 */
 
 void				pre_executor(int argc, char **argv, char **envp);
@@ -188,9 +208,10 @@ int					is_buildin(t_simple_command *simple_command);
 void				execute_processor(t_common *common, t_pipe *pipe_variables);
 void				execute_preprocessing(t_common *common);
 void				close_fd(t_pipe *pipe_variables);
+
 /*
- * pre_executor
- */
+**	Pre_executor
+*/
 
 void				fork_execution(char **command, char **envp);
 
@@ -198,7 +219,7 @@ char				***parser_temp(void);
 void				ft_pipe(char ***command_table, char **envp);
 
 /*
-** utils
+**	Utils
 */
 
 void				prompt(void);
@@ -231,7 +252,7 @@ int					simple_command_open_file(char *file, int is_read, int is_cat);
 int					simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_read, int is_cat);
 
 /*
-** buildins
+**	Buildins
 */
 
 void				mini_cd(char **simple_command, t_common *common);
@@ -245,8 +266,9 @@ void				mini_hello(void);
 
 int					is_key_valid(char *key);
 int					not_valid_key_return(char *key, int count);
+
 /*
-** signals
+**	Signals
 */
 
 void				signal_processor(void);
@@ -254,8 +276,9 @@ void				signal_handler(int num);
 void				signal_handler_command(int num);
 
 /*
-** termcap
+**	Termcap
 */
+
 int					t_get_next_line(char **line, t_termcap *termcap);
 void				to_cannon(void);
 void				t_term_to_cannon(t_termcap *termcap);
@@ -263,8 +286,9 @@ t_termcap			*t_termcap_init(void);
 int					ft_putchar_term(int c);
 
 /*
- * free
- */
+**	Free
+*/
+
 void				free_argument_list(char ***list);
 
 #endif
