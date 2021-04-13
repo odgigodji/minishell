@@ -1,28 +1,34 @@
 #include "minishell.h"
 
+int empty_or_error_line(t_common *common)
+{
+	int		gnl_rv;
+
+	prompt();
+	gnl_rv = t_get_next_line(&common->termcap->line, common->termcap);
+	to_cannon();
+
+	if ((common->termcap->line[0] == 0) && 1 == gnl_rv)
+		mini_exit(common);
+	if (syntax_error(common->termcap->line))
+	{
+		common->termcap->line[0] = '\0';
+		return (1);
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+
 void ft_do_command(t_common *common)
 {
 	char		**lexer_result;
-	int 		gnl_rv;
 
 	if (common->termcap->line[0] == '\0')
-	{
-		prompt();
-		gnl_rv = t_get_next_line(&common->termcap->line, common->termcap);
-		to_cannon();
-
-		if ((common->termcap->line[0] == 0) && 1 == gnl_rv)
-			mini_exit(common);
-		if (syntax_error(common->termcap->line))
-		{
-			common->termcap->line[0] = '\0';
-			return ;
-		}
-		write(1, "\n", 1);
-	}
+		if (empty_or_error_line(common))
+			return;
 	if (NULL == (lexer_result = lexer(common->termcap->line, common)))
 	{
-		shift_line(common->termcap->line); //line =
+		shift_line(common->termcap->line);
 		return ;
 	}
 	if (invalid_lexer_result(lexer_result))
