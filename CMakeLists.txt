@@ -66,13 +66,6 @@ add_executable(minishell
         ${SOURCE_FILES}
         srcs/buildins/mini_hello.c srcs/parser/get_command.c)
 
-add_executable(executor_tests
-        ${SOURCE_FILES}
-        srcs/executor/executor_tests/00_main_test.c
-        srcs/executor/executor_tests/01_test_get_envp_var_pointer.c
-        srcs/executor/executor_tests/executor_tests.h
-        srcs/new_parser/name.c srcs/parser/get_command.c)
-
 add_executable(lexer_tests
         ${SOURCE_FILES}
         srcs/parser/lexer_tests/test_lexer_00.c
@@ -82,12 +75,6 @@ add_executable(lexer_tests
         srcs/parser/get_command.c)
 
 target_link_libraries(minishell LINK_PUBLIC
-        m
-        termcap
-        ${CMAKE_SOURCE_DIR}/libft/libft.a
-        )
-
-target_link_libraries(executor_tests LINK_PUBLIC
         m
         termcap
         ${CMAKE_SOURCE_DIR}/libft/libft.a

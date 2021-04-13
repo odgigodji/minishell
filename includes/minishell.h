@@ -187,7 +187,7 @@ void				execute_simple_command(t_common *common, t_simple_command *simple_comman
 int					is_buildin(t_simple_command *simple_command);
 void				execute_processor(t_common *common, t_pipe *pipe_variables);
 void				execute_preprocessing(t_common *common);
-void	close_fd(t_pipe *pipe_variables);
+void				close_fd(t_pipe *pipe_variables);
 /*
  * pre_executor
  */
