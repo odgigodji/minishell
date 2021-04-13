@@ -6,7 +6,7 @@
 #    By: namerei <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 20:47:33 by namerei           #+#    #+#              #
-#    Updated: 2021/04/14 01:27:44 by mscot            ###   ########.fr        #
+#    Updated: 2021/04/14 01:32:46 by mscot            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ CFLAGS	= -Wall -Wextra -Werror
 all:		${NAME}
 
 %.o:	%.c libft.h
-			@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I libft.h
 
 $(NAME):	${OBJS} libft.h ${SRCS} Makefile
 			@ar -rc ${NAME} ${OBJS}

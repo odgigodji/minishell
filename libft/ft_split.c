@@ -12,71 +12,91 @@
 
 #include "libft.h"
 
-static int	ft_str_counter(char *s, int c)
+static void	ft_array_bzero(void *arr, size_t len)
+{
+	char	**arr_p;
+
+	arr_p = *((char ***)arr);
+	while (len--)
+	{
+		arr_p[len] = NULL;
+	}
+}
+
+static char	*ft_word_record(char ***split_list_pp, char **s, char sep)
+{
+	int		count;
+	char	**s_l_p;
+
+	count = 0;
+	s_l_p = *split_list_pp;
+	while (**s == sep && **s != '\0')
+		++*s;
+	while ((*s)[count] != sep && (*s)[count] != '\0')
+		count++;
+	if (**s)
+		*s_l_p = ft_substr(*s, 0, count);
+	*s += count;
+	return (*s_l_p);
+}
+
+static void	ft_free_list(char ***split_list)
 {
 	int		count;
 
 	count = 0;
-	while (*s)
+	while ((*split_list)[count] != NULL)
 	{
-		if ((*s != c && *(s + 1) == c) || (*s != c && (*(s + 1) == '\0')))
+		free((*split_list)[count]);
+		count++;
+	}
+	free((*split_list)[count]);
+	free(*split_list);
+}
+
+static int	ft_word_count(char const *s, char c)
+{
+	int	count;
+	int	sep_count;
+
+	count = 0;
+	sep_count = 0;
+	while (s[count] != '\0')
+	{
+		while (s[count] == c && s[count] != '\0')
 			count++;
-		s++;
+		if (s[count] != c && s[count] != '\0')
+			sep_count++;
+		while (s[count] != c && s[count] != '\0')
+			count++;
 	}
-	return (count);
-}
-
-static char	**ft_free_str(char **res, int i)
-{
-	if (!i)
-	{
-		i--;
-		while (i >= 0)
-		{
-			free(res[i]);
-			i--;
-		}
-	}
-	free(res);
-	return (res);
-}
-
-static char	**ft_result(const char *s, char **q, char c)
-{
-	int		i;
-	int		k;
-	int		symb_count;
-
-	i = -1;
-	k = 0;
-	symb_count = 0;
-	while (k < (int)ft_strlen(s) && i < ft_str_counter((char *)s, c))
-	{
-		if (s[k] != c)
-		{
-			while (s[k] != c && s[k])
-			{
-				symb_count++;
-				k++;
-			}
-			q[++i] = ft_substr(s, k - symb_count, symb_count);
-			if (!q[i])
-				return (ft_free_str(q, i));
-			symb_count = 0;
-		}
-		k++;
-	}
-	q[i] = NULL;
-	return (q);
+	return (sep_count);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**q;
+	char	**split_list;
+	char	**split_list_p;
+	char	*s_p;
+	int		words;
 
-	q = (char **)malloc(sizeof(char *) * \
-	(ft_str_counter((char *)s, c) + 1))
-		if (!s || !q)
+	s_p = (char *)s;
+	if (!s)
 		return (NULL);
-	return (ft_result(s, q, c));
+	words = ft_word_count(s, c);
+	split_list = (char **)malloc((words + 1) * sizeof(char *));
+	if (split_list == NULL)
+		return (NULL);
+	split_list_p = split_list;
+	ft_array_bzero(&split_list, words + 1);
+	while (words--)
+	{
+		if (ft_word_record(&split_list_p, &s_p, c) == NULL)
+		{
+			ft_free_list(&split_list);
+			return (NULL);
+		}
+		split_list_p++;
+	}
+	return (split_list);
 }
