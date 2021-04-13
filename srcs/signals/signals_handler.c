@@ -26,20 +26,20 @@ void	signal_handler_int(int num)
 {
 	if (num == SIGINT)
 	{
-		if (g_signal_process_status)
-		{
+//		if (g_signal_process_status)
+//		{
 			ft_putstr_fd("\r^C\n", 1);
-			g_signal_process_status = 0;
+//			g_signal_process_status = 0;
 			errno = 130;
 			to_cannon();
-		}
-		else
-		{
-			errno = 1;
-			ft_putstr_fd("  \n", 1);
-			g_signal_process_status = 0;
-			prompt();
-		}
+//		}
+//		else
+//		{
+//			errno = 1;
+//			ft_putstr_fd("  \n", 1);
+//			g_signal_process_status = 0;
+//			prompt();
+//		}
 		tputs(save_cursor, 1, ft_putchar_term);		//	fixme
 	}
 }
@@ -47,14 +47,14 @@ void	signal_handler_quit(int num)
 {
 	if (num == SIGQUIT)
 	{
-		if (g_signal_process_status)
-		{
-			g_signal_process_status = 0;
+//		if (g_signal_process_status)
+//		{
+//			g_signal_process_status = 0;
 			errno = 3;
 			ft_putstr_fd("Quit: 3\n", 1);
-		}
-		else
-			ft_putstr_fd("  \b\b", 1);
+//		}
+//		else
+//			ft_putstr_fd("  \b\b", 1);
 	}
 }
 

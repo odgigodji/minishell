@@ -18,9 +18,9 @@ void	execute_preprocessing(t_common *common)
 
 	pipe_variables.tmpin = dup(STDIN_FILENO);
 	pipe_variables.tmpout = dup(STDOUT_FILENO);
-	g_signal_process_status = 1;
+//	g_signal_process_status = 1;
 	execute_processor(common, &pipe_variables);
-	g_signal_process_status = 0;
+//	g_signal_process_status = 0;
 	dup2(pipe_variables.tmpin, STDIN_FILENO);
 	dup2(pipe_variables.tmpout, STDOUT_FILENO);
 	close_fd(&pipe_variables);

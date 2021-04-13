@@ -114,7 +114,7 @@ typedef struct			s_pipe
 	int fdpipe[2];
 }						t_pipe;
 
-int	g_signal_process_status;
+//int	g_signal_process_status;
 
 /*
 **	Временные функции

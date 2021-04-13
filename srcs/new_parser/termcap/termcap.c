@@ -157,9 +157,13 @@ int		t_input_handle(char *buffer, t_termcap *termcap, char **line, int read_rv)
 	}
 	if (buffer[0] == 3)
 	{
-		to_cannon();
 		buffer[0] = '\0';
 		return (0);
+	}
+	if (buffer[0] == 28)
+	{
+		buffer[0] = '\0';
+		return (-1);
 	}
 	if (buffer[0] != '\n')
 	{

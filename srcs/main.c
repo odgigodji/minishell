@@ -221,7 +221,7 @@ void	minishell_loop(char **envp)
 
 	common = common_init((char **)envp);
 	signal_processor();
-	g_signal_process_status = 0;
+//	g_signal_process_status = 0;
 	while (1)
 	{
 		ft_do_command(common);
