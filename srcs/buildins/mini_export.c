@@ -54,13 +54,13 @@ void	print_export(t_common *common)
 	int	next;
 
 	count = 0;
-	next = 0;
 	while (common->env_variables_list[count])
 	{
 		next = get_next_export_index(common->env_variables_list, count);
 		print_export_line(common->env_variables_list[next]);
 		count++;
 	}
+	g_errno = 0;
 }
 
 int		is_append(char *arg)
@@ -73,19 +73,34 @@ int		is_append(char *arg)
 		return (0);
 }
 
+int		not_valid_key_return(char *key, int count)
+{
+	if (NULL != key)
+	{
+		printf("%s: export: `"RED"%c"RESET"%s' not a valid identifier\n",
+			   SHELL_NAME, key[count], &key[count + 1]);
+	}
+	else
+	{
+		printf("%s: export: not a valid identifier\n",
+			   SHELL_NAME);
+	}
+	g_errno = 1;
+	return (0);
+}
+
 int		is_key_valid(char *key)
 {
 	int	count;
 
 	count = 0;
 	if (NULL == key || key[0] == '=' || ft_isdigit(key[0]))
-		return (0);
+		return (not_valid_key_return(key, count));
 	while (key[count] && key[count] != '=')
 	{
-		if (!((ft_isalnum(key[count]) || key[count] == '_') || (key[count] == '+' && key[count + 1] == '=')))
-		{
-			return (0);
-		}
+		if (!((ft_isalnum(key[count]) || key[count] == '_')
+				|| (key[count] == '+' && key[count + 1] == '=')))
+			return (not_valid_key_return(key, count));
 		count++;
 	}
 	if (key[count] == '\0' || key[count + 1] == '\0')
@@ -94,7 +109,7 @@ int		is_key_valid(char *key)
 	while (key[count])
 	{
 		if (ft_strchr("()<;|`", key[count]))
-			return (0);
+			return (not_valid_key_return(key, count));
 		count++;
 	}
 	return (1);
@@ -115,16 +130,15 @@ void	mini_export(t_common *common, char **simple_command)
 			if (is_key_valid(simple_command[count]))
 			{
 				key_value = get_key_and_value(simple_command[count]);
-
 				update_envp_var(common, key_value[0],
 					key_value[1], is_append(simple_command[count]));
 				free(key_value[0]);
 				free(key_value[1]);
 				free(key_value);
+				g_errno = 0;
 			}
 			else
-				printf("%s: export: `%s' not a valid identifier\n",
-		   			SHELL_NAME, ft_strchr(simple_command[count], '='));
+				g_errno = 1;
 			count++;
 		}
 	}

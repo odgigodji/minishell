@@ -115,6 +115,7 @@ typedef struct			s_pipe
 }						t_pipe;
 
 //int	g_signal_process_status;
+int		g_errno;
 
 /*
 **	Временные функции
@@ -141,6 +142,7 @@ int 				with_error(const int unexpected_token);
 int next_char_is_shielded(const char *line, int *i);
 int	we_are_in_quotes(const char *line, int i);
 char	check_line_2(const char *line, int i, int quotes_flag, char quote_type);
+
 /*
 ** parser
 */
@@ -241,6 +243,7 @@ void				mini_unset(t_common *common, char **keys);
 void				mini_exit(t_common *common);
 char				*get_pwd(char **envp);
 void				mini_hello(void);
+int					is_key_valid(char *key);
 /*
 ** signals
 */

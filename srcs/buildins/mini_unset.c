@@ -3,6 +3,21 @@
 //
 #include "minishell.h"
 
+//// fixme
+//if (keys[count_keys] && !ft_strncmp(keys[count_keys], "all", 4))
+//{
+//while (common->env_variables_list[count])
+//{
+//free(common->env_variables_list[count][0]);
+//free(common->env_variables_list[count][1]);
+//free(common->env_variables_list[count]);
+//common->env_variables_list[count] = NULL;
+//count++;
+//}
+//return ;
+//}
+//// fixme
+
 void	mini_unset(t_common *common, char **keys)
 {
 	int		count;
@@ -13,22 +28,14 @@ void	mini_unset(t_common *common, char **keys)
 	count = 0;
 	flag = 0;
 	count_keys = 1;
-	// fixme
-	if (keys[count_keys] && !ft_strncmp(keys[count_keys], "all", 4))
-	{
-		while (common->env_variables_list[count])
-		{
-			free(common->env_variables_list[count][0]);
-			free(common->env_variables_list[count][1]);
-			free(common->env_variables_list[count]);
-			common->env_variables_list[count] = NULL;
-			count++;
-		}
-		return ;
-	}
-	// fixme
+
 	while (keys[count_keys])
 	{
+		if (!is_key_valid(keys[count_keys]))
+		{
+
+			return ;
+		}
 		while (common->env_variables_list[count])
 		{
 			if (!ft_strncmp(common->env_variables_list[count][0], keys[count_keys], ft_strlen(keys[count_keys]) + 1))
@@ -48,4 +55,5 @@ void	mini_unset(t_common *common, char **keys)
 		count = 0;
 		count_keys++;
 	}
+	g_errno = 0;
 }

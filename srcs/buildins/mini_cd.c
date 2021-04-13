@@ -47,7 +47,7 @@ void	mini_cd(char **simple_command, t_common *common)
 	}
 	if (-1 == chdir(new_pwd))
 	{
-		errno = ENOENT;
+		g_errno = ENOENT;
 		printf(RED "cd: no such file or directory: %s\n" RESET, new_pwd);
 		free(old_pwd);
 		free(new_pwd);
@@ -59,6 +59,7 @@ void	mini_cd(char **simple_command, t_common *common)
 		update_envp_var(common, "PWD", new_pwd, 0);
 		free(old_pwd);
 		free(new_pwd);
+		g_errno = 0;
 	}
 }
 

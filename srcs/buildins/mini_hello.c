@@ -11,4 +11,5 @@ void mini_hello(void)
 			  "　／￣|　　 |　|　|\n"
 			  "　| (￣ヽ＿_ヽ_)_)\n"
 			  "　＼二つ"RESET);
+	g_errno = 0;
 }

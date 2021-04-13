@@ -35,5 +35,6 @@ void	mini_echo(char **simple_command)
 	{
 		return;
 	}
+	g_errno = 0;
 	ft_putchar_fd('\n', 1);
 }

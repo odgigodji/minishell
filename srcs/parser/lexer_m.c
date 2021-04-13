@@ -225,7 +225,7 @@ int			get_token3(char *line, char **token, t_common *common)
 		{
 			break;
 		}
-		if ((line[count_line] == '~' || (line[count_line] == '$' && ft_isalnum(line[count_line + 1]))) && !flag_brace_single && !flag_back_slash) // && (ft_isalnum(line[count_line + 1]) || ft_strchr("_$?", line[count_line + 1]))
+		if ((line[count_line] == '~' || (line[count_line] == '$' && (ft_isalnum(line[count_line + 1]) || ft_strchr("?_", line[count_line + 1])))) && !flag_brace_single && !flag_back_slash) // && (ft_isalnum(line[count_line + 1]) || ft_strchr("_$?", line[count_line + 1]))
 		{
 			count_line += expand_variable(&line[count_line], common, &buffer_token, &count_token);
 			continue ;

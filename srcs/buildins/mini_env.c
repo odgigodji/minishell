@@ -11,4 +11,5 @@ void	mini_env(t_common *common)
 			printf("%s=%s\n", common->env_variables_list[count][0], common->env_variables_list[count][1]);
 		count++;
 	}
+	g_errno = 0;
 }

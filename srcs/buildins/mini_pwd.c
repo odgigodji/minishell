@@ -22,6 +22,7 @@ void	mini_pwd(t_common *common)
 	ft_putstr_fd(pwd, 1);
 	ft_putchar_fd('\n', 1);
 	free(pwd);
+	g_errno = 0;
 }
 
 char	*get_pwd(char **envp)

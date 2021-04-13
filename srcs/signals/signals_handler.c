@@ -30,7 +30,7 @@ void	signal_handler_int(int num)
 //		{
 			ft_putstr_fd("\r^C\n", 1);
 //			g_signal_process_status = 0;
-			errno = 130;
+			g_errno = 130;
 			to_cannon();
 //		}
 //		else
@@ -50,7 +50,7 @@ void	signal_handler_quit(int num)
 //		if (g_signal_process_status)
 //		{
 //			g_signal_process_status = 0;
-			errno = 3;
+			g_errno = 3;
 			ft_putstr_fd("Quit: 3\n", 1);
 //		}
 //		else

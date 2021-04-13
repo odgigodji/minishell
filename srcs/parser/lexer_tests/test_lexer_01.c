@@ -149,11 +149,11 @@ void	execute_test_01(t_common *common)
 	char	*test_result_32[] = {"echo", "$", NULL};
 	execute_test_screening(32, line_32, test_result_32, common);
 
-	errno = 130;
+	g_errno = 130;
 	char	*line_33 = "echo $?";
 	char	*test_result_33[] = {"echo", "130", NULL};
 	execute_test_screening(33, line_33, test_result_33, common);
-	errno = 0;
+	g_errno = 0;
 
 	char    *line_34 = "echo \"\\ \\\\ \\\\\\\\\"";
 	char   *test_result_34[] = {"echo", "\\ \\ \\\\", NULL};

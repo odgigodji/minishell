@@ -36,7 +36,7 @@ int			expand_variable(char *token, t_common *common, char **result, int *count_r
 
 	if (token[1] == '?')
 	{
-		temp = ft_itoa(errno);
+		temp = ft_itoa(g_errno);
 		strlcat(*result, temp, MAX_PATH);
 		count_token = 2;
 		free(temp);

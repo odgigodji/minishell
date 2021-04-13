@@ -22,7 +22,7 @@ int	with_error(const int unexpected_token)
 	if (unexpected_token == '\"' || unexpected_token == '\'')
 	{
 		printf(RED"\nsyntax error : unclosed quotes %c'"RESET, unexpected_token);
-		errno = 42;
+		g_errno = 42;
 	}
 	else
 	{
@@ -30,7 +30,7 @@ int	with_error(const int unexpected_token)
 			printf("minishell: syntax error near redirect\n");
 		else
 			printf("\nminishell: syntax error near '%c'\n", unexpected_token);
-		errno = 258;
+		g_errno = 258;
 	}
 	return (1);
 }
