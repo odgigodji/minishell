@@ -18,11 +18,11 @@ set(SOURCE_FILES
         #        srcs/new_parser/parser.c
         #        srcs/parser/make_arguments.c
         srcs/executor/executor.c
-        srcs/executor/example_pipe.c
+        srcs/executor/executor_pipe.c
         srcs/executor/execute_command.c
         srcs/signals/signals_handler.c
-        srcs/get_next_line/get_next_line.c
-        srcs/get_next_line/get_next_line_utils.c
+#        srcs/get_next_line/get_next_line.c
+#        srcs/get_next_line/get_next_line_utils.c
         _void/copy_envp.c
         srcs/utils/split_path.c
         _void/free_line_list.c
@@ -82,14 +82,14 @@ add_executable(minishell
         _void/prints.c
         srcs/utils/free_all.c)
 
-add_executable(lexer_tests
-        ${SOURCE_FILES}
-        _void/lexer_tests/test_lexer_00.c
-        _void/lexer_tests/test_lexer_00.h
-        _void/lexer_tests/main_test.c
-        _void/lexer_tests/test_lexer_01.c
-        srcs/parser/get_command.c _void/prints.c
-        srcs/utils/free_all.c)
+#add_executable(lexer_tests
+#        ${SOURCE_FILES}
+#        _void/lexer_tests/test_lexer_00.c
+#        _void/lexer_tests/test_lexer_00.h
+#        _void/lexer_tests/main_test.c
+#        _void/lexer_tests/test_lexer_01.c
+#        srcs/parser/get_command.c _void/prints.c
+#        srcs/utils/free_all.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m
@@ -97,8 +97,8 @@ target_link_libraries(minishell LINK_PUBLIC
         ${CMAKE_SOURCE_DIR}/libft/libft.a
         )
 
-target_link_libraries(lexer_tests LINK_PUBLIC
-        m
-        termcap
-        ${CMAKE_SOURCE_DIR}/libft/libft.a
-        )
+#target_link_libraries(lexer_tests LINK_PUBLIC
+#        m
+#        termcap
+#        ${CMAKE_SOURCE_DIR}/libft/libft.a
+#        )
