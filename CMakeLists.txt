@@ -26,7 +26,7 @@ set(SOURCE_FILES
         _void/copy_envp.c
         srcs/utils/split_path.c
         _void/free_line_list.c
-        srcs/utils/common_init.c
+        srcs/utils/common_init_and_shift_line.c
         srcs/utils/make_envp.c
         srcs/utils/get_envp_variable.c
         srcs/utils/open_file.c
@@ -68,12 +68,12 @@ set(SOURCE_FILES
         srcs/utils/get_envp_variable_update.c
         srcs/lexer/lexer_utils.c
         srcs/lexer/lexer_get_token.c
-        )
+        srcs/prints.c srcs/free_all.c)
 
 add_executable(minishell
         srcs/main.c
         ${SOURCE_FILES}
-        srcs/new_parser/termcap/termcap_history.c srcs/new_parser/termcap/termcap_init.c srcs/new_parser/termcap/termcap_key_handle.c srcs/new_parser/termcap/termcap_input_signal.c)
+        srcs/new_parser/termcap/termcap_history.c srcs/new_parser/termcap/termcap_init.c srcs/new_parser/termcap/termcap_key_handle.c srcs/new_parser/termcap/termcap_input_signal.c srcs/prints.c srcs/free_all.c)
 
 add_executable(lexer_tests
         ${SOURCE_FILES}
@@ -81,7 +81,7 @@ add_executable(lexer_tests
         _void/lexer_tests/test_lexer_00.h
         _void/lexer_tests/main_test.c
         _void/lexer_tests/test_lexer_01.c
-        srcs/parser/get_command.c)
+        srcs/parser/get_command.c srcs/prints.c srcs/free_all.c)
 
 target_link_libraries(minishell LINK_PUBLIC
         m

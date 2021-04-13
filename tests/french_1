@@ -54,3 +54,5 @@ ls | minishell  это мультилайн команда типо сделал
 # write something then press ctrl+\                                     (+))
 exit                                                                    (+)
  ctrl+D   не должен выходить коода что то напечатано                     (+)
+ctrl + \                            +
+"/bin/ls"                           +

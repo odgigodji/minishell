@@ -278,7 +278,9 @@ char				**make_envp(t_common *common);
 
 int					simple_command_open_file(char *file, int is_read, int is_cat);
 int					simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_read, int is_cat);
-
+void	free_lexer_results(char ***lexer_results);
+void	free_command_table(t_common *common);
+char	*shift_line(char *line);
 /*
 **	Buildins
 */

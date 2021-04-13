@@ -103,3 +103,4 @@ int	ft_empty_line(const char *line)
 	}
 	return (1);
 }
+
