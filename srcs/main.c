@@ -7,7 +7,7 @@ int	empty_or_error_line(t_common *common)
 	prompt();
 	gnl_rv = t_get_next_line(&common->termcap->line, common->termcap);
 	to_cannon();
-	if ((common->termcap->line[0] == 0) && 1 == gnl_rv)
+	if (common->termcap->line[0] == 0 && 1 == gnl_rv)
 		mini_exit(common);
 	if (syntax_error(common->termcap->line))
 	{
@@ -61,7 +61,7 @@ int	main(int argc, char const **argv, char const **envp)
 	(void)argc;
 	(void)argv;
 	g_errno = 0;
-	setbuf(stdout, NULL);
+//	setbuf(stdout, NULL);
 	minishell_loop((char **)envp);
 	return (0);
 }

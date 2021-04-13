@@ -311,10 +311,9 @@ void				signal_handler_command(int num);
 */
 
 int					t_get_next_line(char **line, t_termcap *termcap);
-void				to_cannon(void);
 void				t_term_to_cannon(t_termcap *termcap);
-t_termcap			*t_termcap_init(void);
-int					ft_putchar_term(int c);
+//t_termcap			*t_termcap_init(void);
+//int					ft_putchar_term(int c);
 
 /*
 **	Free

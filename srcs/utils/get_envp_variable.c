@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /*
-** первращает строку типа "USER=mscot" в массив [["USER"], ["mscot"]]
+** converts string type of "USER=mscot" into [["USER"], ["mscot"]]
 */
 
 char	**get_key_and_value(char *envp_line)
@@ -33,7 +33,7 @@ char	**get_key_and_value(char *envp_line)
 }
 
 /*
-** возвращает список переменных env в виде массива массивов строк
+**	Returns environment variables list type of char ***
 */
 
 char	***get_envp(char **envp)
@@ -62,8 +62,8 @@ char	***get_envp(char **envp)
 }
 
 /*
-** возвращает индекс переменой в списке (char ***) envp
-** или -1 если такой переменной нет
+** returns index of values in array (char ***) envp
+** or -1 in case of absence of such variable
 */
 
 int	get_envp_var_index(t_common *common, char *var)

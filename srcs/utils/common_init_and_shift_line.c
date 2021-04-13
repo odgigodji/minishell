@@ -10,33 +10,37 @@ t_common	*common_init(char **envp)
 	return (common);
 }
 
+void	flag_init(t_token_flag *f, int *count)
+{
+	f->back_slash = 0;
+	f->brace_double = 0;
+	f->brace_single = 0;
+	*count = 0;
+}
+
 int		get_semicolon_index(char *line)
 {
-	int		count;
-	int		flag_brace_single;
-	int		flag_brace_double;
-	int		flag_slash;
+	int				count;
+	t_token_flag	f;
 
-	count = 0;
-	flag_brace_double = 0;
-	flag_brace_single = 0;
-	flag_slash = 0;
+	flag_init(&f, &count);
 	while (line[count])
 	{
 		if (line[count] == '\\')
 		{
-			flag_slash = 1;
+			f.back_slash = 1;
 			count++;
 			continue ;
 		}
-		if (line[count] == '"' && !flag_brace_single && !flag_slash)
-			flag_brace_double = !flag_brace_double;
-		if (line[count] == '\'' && !flag_brace_double && !flag_slash)
-			flag_brace_single = !flag_brace_single;
-		if (line[count] == ';' && !flag_slash && !flag_brace_single && !flag_brace_double)
+		if (line[count] == '"' && !f.brace_single && !f.back_slash)
+			f.brace_double = !f.brace_double;
+		if (line[count] == '\'' && !f.brace_double && !f.back_slash)
+			f.brace_single = !f.brace_single;
+		if (line[count] == ';' && !f.back_slash
+			&& !f.brace_single && !f.brace_double)
 			break ;
 		count++;
-		flag_slash = 0;
+		f.back_slash = 0;
 	}
 	while (ft_isspace(line[count]))
 		count++;
