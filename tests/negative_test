@@ -1,7 +1,5 @@
 cat /dev/random | head -n 1 | cat -e                                            ?- подвисает
 
- $                                                                               -  должен счититаь просто как символ
-
  cat | cat | cat | ls # check outputs order                               +     вывод еррно = 130
 
  export "" et unset ""                                                             -  должен быть нот валид идентифаер ??

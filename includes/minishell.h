@@ -22,16 +22,16 @@
 */
 
 //# define MAX_PATH 4096
-# define MAX_PATH 4000
-# define MAX_NAME 255
+# define MAX_PATH 	4000
+# define MAX_NAME 	255
 
-# define RED	"\x1B[31m"
-# define GRN   	"\x1B[32m"
-# define YEL   	"\x1B[33m"
-# define BLU   	"\x1B[34m"
-# define MAG   	"\x1B[35m"
-# define CYN   	"\x1B[36m"
-# define RESET 	"\x1B[0m"
+# define RED		"\x1B[31m"
+# define GRN   		"\x1B[32m"
+# define YEL   		"\x1B[33m"
+# define BLU   		"\x1B[34m"
+# define MAG   		"\x1B[35m"
+# define CYN   		"\x1B[36m"
+# define RESET 		"\x1B[0m"
 
 # define SHELL_NAME "minishell"
 
@@ -42,11 +42,11 @@
 
 # define SPEC_SYMBOL "|<>;"
 //# define SPEC_SYMBOL " '|\"$\t<>"
-# define GREAT "<GREAT>"				// ">"
+# define GREAT 		"<GREAT>"				// ">"
 # define GREATGREAT "<GREATGREAT>"		// ">>"
-# define LESS "<LESS>"					// "<"
+# define LESS 		"<LESS>"					// "<"
 # define GREATLESS "<GREATLESS>"		// "<<"
-# define PIPE "<PIPE>"					// "|"
+# define PIPE 		"<PIPE>"					// "|"
 # define VAR "<VAR>"					// "$"
 //# define ACTUAL_TOKEN lexer_result[*current_token]
 
@@ -88,7 +88,7 @@ typedef struct s_termcap
 	int					history_len;
 
 	int					cursor;
-}				t_termcap;
+}						t_termcap;
 
 typedef struct s_common
 {
@@ -99,21 +99,21 @@ typedef struct s_common
 
 typedef struct s_pipe
 {
-	int	tmpin;
-	int	tmpout;
+	int					tmpin;
+	int					tmpout;
 
-	int	fdin;
-	int	fdout;
+	int					fdin;
+	int					fdout;
 
-	int	fdpipe[2];
+	int					fdpipe[2];
 }						t_pipe;
 
 typedef struct s_token_flag
 {
-	char	brace_single;
-	char	brace_double;
-	char	back_slash;
-}				t_token_flag;
+	char				brace_single;
+	char				brace_double;
+	char				back_slash;
+}						t_token_flag;
 
 int	g_errno;
 
@@ -153,7 +153,6 @@ int					t_history_memory_pr_realloc(t_termcap *termcap);
 void				t_history_memory_pr_no_realloc(t_termcap *termcap,
 						int history_len);
 int					get_history_len(char **history);
-
 void				to_icannon(void);
 void				to_cannon(void);
 t_termcap			*t_termcap_init(void);
@@ -181,7 +180,6 @@ int					t_is_signal(char *buffer, t_termcap *termcap);
 int					get_next_line(int fd, char **line);
 size_t				ft_strlen_to_char(const char *s, char c);
 int					is_redirect(char *actual_token);
-
 t_command			get_command_table(char **lexer_result);
 t_simple_command	*get_simple_command(char **lexer_result,
 						int *current_token);
