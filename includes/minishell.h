@@ -159,18 +159,16 @@ void				to_cannon(void);
 t_termcap			*t_termcap_init(void);
 int					ft_putchar_term(int c);
 
-int					t_key_handle(char *buffer, t_termcap *termcap, char **line);
-void				t_key_handle_down(char *buffer, t_termcap *termcap,
-						char **line);
-void				t_key_handle_up(char *buffer, t_termcap *termcap,
-						char **line);
+int					t_key_handle(char *buffer, t_termcap *termcap);
+void				t_key_handle_down(t_termcap *termcap);
+void				t_key_handle_up(t_termcap *termcap);
 int					is_key(char *line);
 
 int					t_termcap_input_handle(char *buffer, t_termcap *termcap,
-						char **line, int read_rv);
+						char **line);
 int					t_termcap_pre(t_termcap *termcap);
 int					t_input_handle(char *buffer, t_termcap *termcap,
-						char **line, int read_rv);
+						char **line);
 int					t_handle_signal(char *buffer, t_termcap *termcap);
 int					t_is_signal(char *buffer, t_termcap *termcap);
 

@@ -26,7 +26,7 @@ int	is_key(char *line)
 	return (0);
 }
 
-void	t_key_handle_up(char *buffer, t_termcap *termcap, char **line)
+void	t_key_handle_up(t_termcap *termcap)
 {
 	if (0 < termcap->history_cursor)
 	{
@@ -43,7 +43,7 @@ void	t_key_handle_up(char *buffer, t_termcap *termcap, char **line)
 		write(1, "\a", 1);
 }
 
-void	t_key_handle_down(char *buffer, t_termcap *termcap, char **line)
+void	t_key_handle_down(t_termcap *termcap)
 {
 	tputs(restore_cursor, 1, ft_putchar_term);
 	tputs(tigetstr("ed"), 1, ft_putchar_term);
@@ -67,14 +67,14 @@ void	t_key_handle_down(char *buffer, t_termcap *termcap, char **line)
 		write(1, "\a", 1);
 }
 
-int	t_key_handle(char *buffer, t_termcap *termcap, char **line)
+int	t_key_handle(char *buffer, t_termcap *termcap)
 {
 	if (!ft_strncmp(buffer, "\e[A", ft_strlen("\e[A")))
 	{
-		t_key_handle_up(buffer, termcap, line);
+		t_key_handle_up(termcap);
 	}
 	else if (!ft_strncmp(buffer, "\e[B", ft_strlen("\e[B")))
-		t_key_handle_down(buffer, termcap, line);
+		t_key_handle_down(termcap);
 	else if (!ft_strncmp(buffer, "\177", 1))
 	{
 		if (termcap->cursor > 0)

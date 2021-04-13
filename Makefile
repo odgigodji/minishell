@@ -72,16 +72,15 @@ HEADER	=	minishell.h
 OBJ		=	$(SRC:.c=.o)
 
 #	-Wall -Wextra -Werror
-CC		=	gcc -Iincludes -Ilibft 
+CC		=	gcc -Wall -Wextra -Werror -Iincludes -Ilibft 
 
-.PHONY:		all clean fclean re libft/libft.a
+.PHONY:	all clean fclean re
+all:	$(NAME)
 
-all			:$(NAME)
+.o			:	.c $(HEADER)
 
-%.o			:%.c $(HEADER)
-
-libft/libft.a:
-			$(MAKE) -C $(LFT_DIR)
+libft/libft.a:	libft/Makefile libft/libft.h
+			make -C $(LFT_DIR)
 
 $(NAME):	$(OBJ) $(LFT_DIR)/$(LFT) includes/$(HEADER) Makefile
 			$(CC) -L$(LFT_DIR) -lft -ltermcap -o $(NAME) $(OBJ) $(LFT_DIR)/$(LFT)
@@ -95,3 +94,4 @@ fclean:		clean
 			-rm -f $(NAME)
 
 re:			fclean all
+

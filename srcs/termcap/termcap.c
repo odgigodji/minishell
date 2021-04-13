@@ -5,7 +5,6 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 	char		buffer[MAX_PATH];
 	int			read_rv;
 	int			input_rv;
-	static int	count;
 
 	buffer[0] = '\0';
 	*line[0] = '\0';
@@ -18,10 +17,10 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 			return (-1);
 		buffer[read_rv] = '\0';
 		if (is_key(buffer))
-			t_key_handle(buffer, termcap, line);
+			t_key_handle(buffer, termcap);
 		else
 		{
-			input_rv = t_termcap_input_handle(buffer, termcap, line, read_rv);
+			input_rv = t_termcap_input_handle(buffer, termcap, line);
 			if (0 <= input_rv)
 				return (input_rv);
 		}

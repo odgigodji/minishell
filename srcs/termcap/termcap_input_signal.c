@@ -31,7 +31,7 @@ int	t_handle_signal(char *buffer, t_termcap *termcap)
 	return (0);
 }
 
-int	t_input_handle(char *buffer, t_termcap *termcap, char **line, int read_rv)
+int	t_input_handle(char *buffer, t_termcap *termcap, char **line)
 {
 	if (t_is_signal(buffer, termcap))
 		return (t_handle_signal(buffer, termcap));
@@ -67,12 +67,11 @@ int	t_termcap_pre(t_termcap *termcap)
 
 int	t_termcap_input_handle(char *buffer,
 							  t_termcap *termcap,
-							  char **line,
-							  int read_rv)
+							  char **line)
 {
 	int	input_rv;
 
-	input_rv = t_input_handle(buffer, termcap, line, read_rv);
+	input_rv = t_input_handle(buffer, termcap, line);
 	if (0 <= input_rv)
 	{
 		termcap->cursor = 0;
