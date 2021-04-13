@@ -59,12 +59,16 @@ set(SOURCE_FILES
         srcs/utils/prompt.c
 #        srcs/parser/ft_empty_line.c
         srcs/new_parser/utils_3.c
-        srcs/parser/get_command.c)
+        srcs/parser/get_command.c
+        srcs/buildins/mini_hello.c
+        srcs/parser/get_command.c
+        srcs/utils/get_envp_variable_utils.c
+        )
 
 add_executable(minishell
         srcs/main.c
         ${SOURCE_FILES}
-        srcs/buildins/mini_hello.c srcs/parser/get_command.c)
+        srcs/utils/get_envp_variable_update.c)
 
 add_executable(lexer_tests
         ${SOURCE_FILES}

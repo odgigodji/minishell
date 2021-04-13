@@ -1,7 +1,3 @@
-//
-// Created by Mariam Scot on 4/8/21.
-//
-
 #include "minishell.h"
 
 void	prompt(void)
