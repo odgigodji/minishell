@@ -34,7 +34,7 @@ t_simple_command	*get_simple_command(char **lexer_result, int *current_token)
 {
 	t_simple_command	*simple_command;
 
-	simple_command = one_simple_command_init((lexer_result + *current_token));
+	simple_command = one_simple_command_init();
 	if (*current_token > ft_array_len(lexer_result))
 		return (simple_command);
 	simple_command->outfiles = get_outfiles(

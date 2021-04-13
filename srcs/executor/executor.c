@@ -14,9 +14,9 @@ int	is_valid_command_table(t_common *common)
 {
 	if (NULL != common->command.simple_commands[0]
 		&& ((NULL != common->command.simple_commands[0]->arguments
-			&& NULL != common->command.simple_commands[0]->arguments[0])
+				&& NULL != common->command.simple_commands[0]->arguments[0])
 			|| (NULL != common->command.simple_commands[0]->infiles
-			&& NULL != common->command.simple_commands[0]->infiles[0])
+				&& NULL != common->command.simple_commands[0]->infiles[0])
 			   || (NULL != common->command.simple_commands[0]->outfiles
 				   && NULL != common->command.simple_commands[0]->outfiles[0])))
 		return (1);
