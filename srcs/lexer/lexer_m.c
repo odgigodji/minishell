@@ -70,6 +70,7 @@ char	**lexer(char *line, t_common *common)
 	count_result = 0;
 	token = NULL;
 	result = malloc(sizeof(char *) * MAX_PATH + 1);
+	result[0] = NULL;
 	while (result && line && line[count] && line[count] != ';')
 	{
 		if (!is_spec_symbol(line[count]))

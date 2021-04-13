@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.17)
 project(minishell C)
 set(CMAKE_C_STANDARD 99)
 
-#set(CMAKE_C_FLAGS "-fsanitize=address")
-set(CMAKE_C_FLAGS "")
+set(CMAKE_C_FLAGS "-fsanitize=address")
+#set(CMAKE_C_FLAGS "")
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/libft
