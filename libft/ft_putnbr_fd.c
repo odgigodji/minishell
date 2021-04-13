@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void		q(int nb, int fd)
+void	q(int nb, int fd)
 {
 	char	a;
 
@@ -23,11 +23,14 @@ void		q(int nb, int fd)
 	write(fd, &a, 1);
 }
 
-void		ft_putnbr_fd(int nb, int fd)
+void	ft_putnbr_fd(int nb, int fd)
 {
 	if (nb == 0 || nb == -2147483648)
 	{
-		write(fd, (nb == 0) ? "0" : "-2147483648", (nb == 0) ? 1 : 11);
+		if (nb == 0)
+			write(1, "0", 1);
+		else
+			write(fd, "-2147483648", 11);
 		return ;
 	}
 	if (nb < 0)

@@ -14,7 +14,7 @@
 
 int	ft_array_len(char **res)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (res[i])

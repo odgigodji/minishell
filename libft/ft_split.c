@@ -47,7 +47,7 @@ static char	**ft_result(const char *s, char **q, char c)
 	int		k;
 	int		symb_count;
 
-	i = 0;
+	i = -1;
 	k = 0;
 	symb_count = 0;
 	while (k < (int)ft_strlen(s) && i < ft_str_counter((char *)s, c))
@@ -59,10 +59,10 @@ static char	**ft_result(const char *s, char **q, char c)
 				symb_count++;
 				k++;
 			}
-			if (!(q[i] = ft_substr(s, k - symb_count, symb_count)))
+			q[++i] = ft_substr(s, k - symb_count, symb_count);
+			if (!q[i])
 				return (ft_free_str(q, i));
 			symb_count = 0;
-			i++;
 		}
 		k++;
 	}
@@ -70,12 +70,13 @@ static char	**ft_result(const char *s, char **q, char c)
 	return (q);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**q;
 
-	if (!s || !(q = (char **)malloc(sizeof(char *) * \
-	(ft_str_counter((char *)s, c) + 1))))
+	q = (char **)malloc(sizeof(char *) * \
+	(ft_str_counter((char *)s, c) + 1))
+		if (!s || !q)
 		return (NULL);
 	return (ft_result(s, q, c));
 }
