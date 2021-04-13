@@ -73,7 +73,7 @@ set(SOURCE_FILES
 add_executable(minishell
         srcs/main.c
         ${SOURCE_FILES}
-        )
+        srcs/new_parser/termcap/termcap_history.c srcs/new_parser/termcap/termcap_init.c srcs/new_parser/termcap/termcap_key_handle.c srcs/new_parser/termcap/termcap_input_signal.c)
 
 add_executable(lexer_tests
         ${SOURCE_FILES}

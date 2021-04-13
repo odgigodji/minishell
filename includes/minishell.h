@@ -150,6 +150,34 @@ int	we_are_in_quotes(const char *line, int i);
 char	check_line_2(const char *line, int i, int quotes_flag, char quote_type);
 
 /*
+**	Termcap
+*/
+
+int			t_history_memory_processing(t_termcap *termcap);
+int			t_history_memory_pr_realloc(t_termcap *termcap);
+void		t_history_memory_pr_no_realloc(t_termcap *termcap, int history_len);
+int			get_history_len(char **history);
+
+void		to_icannon(void);
+void		to_cannon(void);
+t_termcap	*t_termcap_init(void);
+int			ft_putchar_term(int c);
+
+int			t_key_handle(char *buffer, t_termcap *termcap, char **line);
+void		t_key_handle_down(char *buffer, t_termcap *termcap, char **line);
+void		t_key_handle_up(char *buffer, t_termcap *termcap, char **line);
+int			is_key(char *line);
+
+int			t_termcap_input_handle(char *buffer, t_termcap *termcap,
+							 char **line, int read_rv);
+int			t_termcap_pre(t_termcap *termcap);
+int			t_input_handle(char *buffer, t_termcap *termcap, char **line,
+					int read_rv);
+int			t_handle_signal(char *buffer, t_termcap *termcap);
+int			t_is_signal(char *buffer, t_termcap *termcap);
+
+
+/*
 ** parser
 */
 
