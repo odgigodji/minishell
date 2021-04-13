@@ -68,7 +68,7 @@ set(SOURCE_FILES
         srcs/utils/get_envp_variable_update.c
         srcs/lexer/lexer_utils.c
         srcs/lexer/lexer_get_token.c
-        srcs/prints.c
+        _void/prints.c
         srcs/utils/free_all.c
         srcs/utils/common_init_and_shift_line.c)
 
@@ -79,7 +79,7 @@ add_executable(minishell
         srcs/termcap/termcap_init.c
         srcs/termcap/termcap_key_handle.c
         srcs/termcap/termcap_input_signal.c
-        srcs/prints.c
+        _void/prints.c
         srcs/utils/free_all.c)
 
 add_executable(lexer_tests
@@ -88,7 +88,7 @@ add_executable(lexer_tests
         _void/lexer_tests/test_lexer_00.h
         _void/lexer_tests/main_test.c
         _void/lexer_tests/test_lexer_01.c
-        srcs/parser/get_command.c srcs/prints.c
+        srcs/parser/get_command.c _void/prints.c
         srcs/utils/free_all.c)
 
 target_link_libraries(minishell LINK_PUBLIC
