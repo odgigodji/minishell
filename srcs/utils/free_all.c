@@ -2,7 +2,7 @@
 
 void	free_lexer_results(char ***lexer_results)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while ((*lexer_results)[count])
