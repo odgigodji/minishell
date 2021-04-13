@@ -26,11 +26,9 @@ void	ft_do_command(t_common *common)
 		if (empty_or_error_line(common))
 			return ;
 	lexer_result = lexer(common->termcap->line, common);
+	shift_line(common->termcap->line);
 	if (NULL == lexer_result)
-	{
-		shift_line(common->termcap->line);
 		return ;
-	}
 	if (invalid_lexer_result(lexer_result))
 	{
 		common->termcap->line[0] = '\0';

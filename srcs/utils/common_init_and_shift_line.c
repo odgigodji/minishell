@@ -6,7 +6,6 @@ t_common	*common_init(char **envp)
 
 	common = malloc(sizeof(t_common));
 	common->env_variables_list = get_envp(envp);
-	common->env_variables = envp;
 	common->termcap = t_termcap_init();
 	return (common);
 }
@@ -39,6 +38,8 @@ int		get_semicolon_index(char *line)
 		count++;
 		flag_slash = 0;
 	}
+	while (ft_isspace(line[count]))
+		count++;
 	return (count);
 }
 

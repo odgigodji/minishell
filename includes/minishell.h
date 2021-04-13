@@ -223,7 +223,7 @@ int					get_token_is_end(t_token_flag *f, char *line,
 int					get_token_toggle_flag(t_token_flag *f, char *line,
 						int *count_line);
 void				get_token_flag_init(t_token_flag *f, int *count_line,
-						int *count_token);
+						int *count_token, char **buffer_token);
 
 /*
 **	Executor

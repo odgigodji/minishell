@@ -105,7 +105,7 @@ int			expand_double_quotes(char *token, t_common *common, char **result, int *co
 			count += expand_variable(&token[count + 1], common, &temp, &count_temp);
 		else
 		{
-			if (token_p[count] == '"' && flag_back_slash % 2 == 0) //token_p[count - 1] != '\\'
+			if (token_p[count] == '"' && flag_back_slash % 2 == 0)
 				break ;
 			temp[count_temp] = token_p[count];
 			count++;

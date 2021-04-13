@@ -38,6 +38,5 @@ char	**make_envp(t_common *common)
 		count++;
 	}
 	envp[count] = NULL;
-	common->env_variables = envp;
 	return (envp);
 }

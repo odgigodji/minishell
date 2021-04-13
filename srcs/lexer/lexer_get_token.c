@@ -1,12 +1,18 @@
 #include "minishell.h"
 
-void	get_token_flag_init(t_token_flag *f, int *count_line, int *count_token)
+void	get_token_flag_init(t_token_flag *f,
+						 int *count_line,
+						 int *count_token,
+						 char **buffer_token)
 {
 	f->brace_single = 0;
 	f->brace_double = 0;
 	f->back_slash = 0;
 	*count_line = 0;
 	*count_token = 0;
+	*buffer_token = malloc(MAX_PATH * sizeof(char));
+	if (*buffer_token)
+		(*buffer_token)[0] = '\0';
 }
 
 int	get_token_is_end(t_token_flag *f, char *line, int count_line)
@@ -25,6 +31,8 @@ int	get_token_is_var(t_token_flag *f, char *line, int count_line)
 {
 	if ((line[count_line] == '~'
 			|| (line[count_line] == '$'
+				&& !(line[count_line + 1] == '\0'
+					|| line[count_line + 1] == ' ')
 				&& (ft_isalnum(line[count_line + 1])
 					|| ft_strchr("?_", line[count_line + 1]))))
 		&& !f->brace_single

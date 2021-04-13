@@ -7,8 +7,7 @@ int	get_token3(char *line, char **token, t_common *common)
 	char			*buffer_token;
 	t_token_flag	f;
 
-	get_token_flag_init(&f, &count_line, &count_token);
-	buffer_token = calloc(MAX_PATH, sizeof(char));
+	get_token_flag_init(&f, &count_line, &count_token, &buffer_token);
 	while (buffer_token && line[count_line])
 	{
 		if (get_token_toggle_flag(&f, line, &count_line))
@@ -45,9 +44,7 @@ void	lexer_token_post_processing(char **token,
 	}
 }
 
-int	get_token_result_proces(char *line,
-							int *count,
-							char **token,
+int	get_token_result_proces(char *line, int *count, char **token,
 							t_common *common)
 {
 	int	gt_rv;
