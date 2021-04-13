@@ -25,7 +25,7 @@ char	**get_args(char **lexer_result, int *current_token)
 }
 
 /*
-** функция которая собирает simple_command из токенов
+** do simple_command from tokens
 */
 
 t_simple_command	*get_simple_command(char **lexer_result, int *current_token)
@@ -43,7 +43,7 @@ t_simple_command	*get_simple_command(char **lexer_result, int *current_token)
 }
 
 /*
-** функция которая собирает из simple_command command_table (simple_commands)
+** function that make simple_command command_table (simple_commands)
 */
 
 t_command	get_command_table(char **lexer_result)
@@ -67,4 +67,28 @@ t_command	get_command_table(char **lexer_result)
 	}
 	command.simple_commands = command_table;
 	return (command);
+}
+
+int	ft_isquote(int a)
+{
+	if (a == '\n' || a == '\v' || a == '\r'\
+		|| a == '\t' || a == '\f' || a == ' '
+		|| a == '\'' || a == '\"')
+		return (1);
+	return (0);
+}
+
+int	line_only_with_quotes(const char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isquote(line[i]))
+			return (0);
+		else
+			i++;
+	}
+	return (1);
 }

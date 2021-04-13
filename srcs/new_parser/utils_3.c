@@ -7,6 +7,12 @@ int	check_start(const char *line)
 		printf("\n");
 		return (1);
 	}
+	if (line_only_with_quotes(line))
+	{
+		printf("\nminishell : command not found\n");
+		g_errno = 51;
+		return (1);
+	}
 	if (next_after_space(line) == ';' || next_after_space(line) == '|')
 	{
 		if (next_after_space(line) == ';')
