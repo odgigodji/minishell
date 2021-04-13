@@ -8,6 +8,7 @@ int	t_get_next_line(char **line, t_termcap *termcap)
 	static int	count;
 
 	buffer[0] = '\0';
+	*line[0] = '\0';
 	if (-1 == t_termcap_pre(termcap))
 		return (-1);
 	while (0 != ft_strncmp(buffer, "\4", 1))
