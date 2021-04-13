@@ -236,14 +236,15 @@ int					simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int 
 
 void				mini_cd(char **simple_command, t_common *common);
 void				mini_echo(char **simple_command);
-void				mini_pwd(t_common *common);
+void				mini_pwd(void);
 void				mini_export(t_common *common, char **simple_command);
 void				mini_env(t_common *common);
 void				mini_unset(t_common *common, char **keys);
 void				mini_exit(t_common *common);
-char				*get_pwd(char **envp);
 void				mini_hello(void);
+
 int					is_key_valid(char *key);
+int					not_valid_key_return(char *key, int count);
 /*
 ** signals
 */

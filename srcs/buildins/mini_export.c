@@ -63,7 +63,7 @@ void	print_export(t_common *common)
 	g_errno = 0;
 }
 
-int		is_append(char *arg)
+int	is_append(char *arg)
 {
 	if (NULL == arg || NULL == ft_strchr(arg, '='))
 		return (0);
@@ -73,7 +73,7 @@ int		is_append(char *arg)
 		return (0);
 }
 
-int		not_valid_key_return(char *key, int count)
+int	not_valid_key_return(char *key, int count)
 {
 	if (NULL != key)
 	{
@@ -89,7 +89,7 @@ int		not_valid_key_return(char *key, int count)
 	return (0);
 }
 
-int		is_key_valid(char *key)
+int	is_key_valid(char *key)
 {
 	int	count;
 

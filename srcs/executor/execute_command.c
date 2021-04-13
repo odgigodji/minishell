@@ -33,7 +33,7 @@ void	execute_simple_command_buildin(t_common *common,
 	if (!ft_strncmp("cd", simple_command->arguments[0], 3))
 		mini_cd(simple_command->arguments, common);
 	else if (!ft_strncmp("pwd", simple_command->arguments[0], 4))
-		mini_pwd(common);
+		mini_pwd();
 	else if (!ft_strncmp("echo", simple_command->arguments[0], 5))
 		mini_echo(simple_command->arguments);
 	else if (!ft_strncmp("env", simple_command->arguments[0], 4))

@@ -1,58 +1,42 @@
-//
-// Created by Mariam Scot on 3/16/21.
-//
 #include "minishell.h"
 
-//// fixme
-//if (keys[count_keys] && !ft_strncmp(keys[count_keys], "all", 4))
-//{
-//while (common->env_variables_list[count])
-//{
-//free(common->env_variables_list[count][0]);
-//free(common->env_variables_list[count][1]);
-//free(common->env_variables_list[count]);
-//common->env_variables_list[count] = NULL;
-//count++;
-//}
-//return ;
-//}
-//// fixme
-
-void	mini_unset(t_common *common, char **keys)
+int	mini_unset_a_var(char ***var_list, char *key)
 {
 	int		count;
-	int		count_keys;
 	char	**temp;
 	int		flag;
 
 	count = 0;
 	flag = 0;
-	count_keys = 1;
+	if (!is_key_valid(key))
+		return (-1);
+	while (var_list[count])
+	{
+		if (!ft_strncmp(var_list[count][0],
+			key, ft_strlen(key) + 1))
+		{
+			temp = var_list[count];
+			free(temp[0]);
+			free(temp[1]);
+			free(temp);
+			flag = 1;
+		}
+		if (flag)
+			var_list[count] = var_list[count + 1];
+		count++;
+	}
+	var_list[count] = NULL;
+	return (flag);
+}
 
+void	mini_unset(t_common *common, char **keys)
+{
+	int		count_keys;
+
+	count_keys = 1;
 	while (keys[count_keys])
 	{
-		if (!is_key_valid(keys[count_keys]))
-		{
-
-			return ;
-		}
-		while (common->env_variables_list[count])
-		{
-			if (!ft_strncmp(common->env_variables_list[count][0], keys[count_keys], ft_strlen(keys[count_keys]) + 1))
-			{
-				temp = common->env_variables_list[count];
-				free(temp[0]);
-				free(temp[1]);
-				free(temp);
-				flag = 1;
-			}
-			if (flag)
-				common->env_variables_list[count] = common->env_variables_list[count + 1];
-			count++;
-		}
-		common->env_variables_list[count] = NULL;
-		flag = 0;
-		count = 0;
+		mini_unset_a_var(common->env_variables_list, keys[count_keys]);
 		count_keys++;
 	}
 	g_errno = 0;
