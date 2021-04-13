@@ -51,7 +51,10 @@ int	get_token_result_proces(char *line, int *count, char **token,
 
 	gt_rv = get_token3(&line[*count], token, common);
 	if (-1 == gt_rv)
+	{
+		free(*token);
 		return (-1);
+	}
 	*count += gt_rv;
 	return (0);
 }
@@ -72,7 +75,7 @@ char	**lexer(char *line, t_common *common)
 		if (!is_spec_symbol(line[count]))
 		{
 			if (-1 == get_token_result_proces(line, &count, &token, common))
-				return (NULL);
+				return (result);
 		}
 		else
 			if (line[count] != ' ')

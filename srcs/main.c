@@ -5,6 +5,7 @@ int	empty_or_error_line(t_common *common)
 	int		gnl_rv;
 
 	prompt();
+	to_icannon();
 	gnl_rv = t_get_next_line(&common->termcap->line, common->termcap);
 	to_cannon();
 	if ((common->termcap->line[0] == 0) && 1 == gnl_rv)
@@ -28,7 +29,7 @@ void	ft_do_command(t_common *common)
 	lexer_result = lexer(common->termcap->line, common);
 	shift_line(common->termcap->line);
 	if (NULL == lexer_result)
-		return ;
+		return;
 	if (invalid_lexer_result(lexer_result))
 	{
 		common->termcap->line[0] = '\0';
