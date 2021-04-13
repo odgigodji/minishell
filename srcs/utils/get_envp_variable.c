@@ -1,44 +1,6 @@
 #include "minishell.h"
 
 /*
-** возвращает содержимое переменной var из envp или (null) если такой строки нет
-*/
-
-char	*get_envp_variable(t_common *common, char *var)
-{
-	int		count;
-
-	count = 0;
-	while (common->env_variables[count])
-	{
-		if (!ft_strncmp(common->env_variables[count], var, ft_strlen(var))
-			&& common->env_variables[count][ft_strlen(var)] == '=')
-			break ;
-		count++;
-		if (NULL == common->env_variables[count])
-			return (NULL);
-	}
-	return (ft_strrchr(common->env_variables[count], '=') + 1);
-}
-
-char	*get_envp_variable_from_char(char **envp, char *var)
-{
-	int		count;
-
-	count = 0;
-	while (envp[count])
-	{
-		if (!ft_strncmp(envp[count], var, ft_strlen(var))
-			&& envp[count][ft_strlen(var)] == '=')
-			break ;
-		count++;
-		if (NULL == envp[count])
-			return (NULL);
-	}
-	return (ft_strrchr(envp[count], '=') + 1);
-}
-
-/*
 ** первращает строку типа "USER=mscot" в массив [["USER"], ["mscot"]]
 */
 
@@ -48,16 +10,18 @@ char	**get_key_and_value(char *envp_line)
 	int		key_len;
 	int		append_flag;
 
-	if (NULL == envp_line || NULL == (var = malloc(sizeof(char *) * 3)))
+	var = malloc(sizeof(char *) * 3);
+	if (NULL == envp_line || NULL == var)
 		return (NULL);
 	append_flag = 0;
 	if (ft_strchr(envp_line, '='))
 	{
-		key_len = (int) (ft_strchr(envp_line, '=') - envp_line);
+		key_len = (int)(ft_strchr(envp_line, '=') - envp_line);
 		if (envp_line[key_len - 1] == '+')
 			append_flag = 1;
 		var[0] = ft_substr(envp_line, 0, key_len - append_flag);
-		var[1] = ft_substr(envp_line, key_len + 1, ft_strlen(envp_line) - key_len);
+		var[1] = ft_substr(envp_line, key_len + 1,
+				ft_strlen(envp_line) - key_len);
 	}
 	else
 	{
@@ -79,7 +43,8 @@ char	***get_envp(char **envp)
 	int		list_length;
 
 	list_length = list_len((const char **)envp);
-	if (NULL == (result = malloc(sizeof(char **) * (list_length + 1))))
+	result = malloc(sizeof(char **) * (list_length + 1));
+	if (NULL == result)
 		return (NULL);
 	count = 0;
 	while (envp[count])
@@ -97,39 +62,19 @@ char	***get_envp(char **envp)
 }
 
 /*
-** возвращает строку из envp начинающуюся с line или (null) если такой строки нет
-*/
-
-char	*get_envp_line(t_common *common, char *line)
-{
-	int		count;
-
-	count = 0;
-	while (common->env_variables[count])
-	{
-		if (!ft_strncmp(common->env_variables[count], line, ft_strlen(line))
-			&& common->env_variables[count][ft_strlen(line)] == '=')
-			break ;
-		count++;
-		if (NULL == common->env_variables[count])
-			return (NULL);
-	}
-	return (common->env_variables[count]);
-}
-
-/*
 ** возвращает индекс переменой в списке (char ***) envp
 ** или -1 если такой переменной нет
 */
 
-int		get_envp_var_index(t_common *common, char *var)
+int	get_envp_var_index(t_common *common, char *var)
 {
 	int	count;
 
 	count = 0;
 	while (common->env_variables_list[count])
 	{
-		if (!ft_strncmp(common->env_variables_list[count][0], var, ft_strlen(var) + 1))
+		if (!ft_strncmp(common->env_variables_list[count][0],
+			var, ft_strlen(var) + 1))
 			return (count);
 		count++;
 	}
@@ -139,22 +84,44 @@ int		get_envp_var_index(t_common *common, char *var)
 char	*get_envp_var_pointer(t_common *common, char *var)
 {
 	int	count;
-	int count_index;
+	int	count_index;
 
 	count = 0;
 	count_index = 0;
-	while (var[count_index] && var[count] && (var[count] == '_' || ft_isalnum(var[count])))	//var[count_index] != '='
+	while (var[count_index] && var[count]
+		&& (var[count] == '_' || ft_isalnum(var[count])))
 		count_index++;
 	while (common->env_variables_list[count])
 	{
-		if (!ft_strncmp(common->env_variables_list[count][0], var, count_index + 1))
+		if (!ft_strncmp(common->env_variables_list[count][0],
+			var, count_index + 1))
 			return (common->env_variables_list[count][1]);
 		count++;
 	}
 	return (NULL);
 }
 
-int		args_list_len(char	***arg_list)
+size_t	list_len(const char **list)
+{
+	size_t	count;
+
+	count = 0;
+	while (list[count])
+		count++;
+	return (count);
+}
+
+int	args_list_len(char	***arg_list)
+{
+	int	count;
+
+	count = 0;
+	while (arg_list[count])
+		count++;
+	return (count);
+}
+
+int	ft_array_len(char	**arg_list)
 {
 	int	count;
 
@@ -166,8 +133,8 @@ int		args_list_len(char	***arg_list)
 
 void	free_arg_list(char ****arg_list)
 {
-	int count;
-	int arg_count;
+	int	count;
+	int	arg_count;
 
 	count = 0;
 	arg_count = 0;
@@ -195,7 +162,9 @@ char	***add_argument(t_common *common, char *new_key, char *new_value)
 	char	***result;
 	int		count;
 
-	if (NULL == (result = malloc(sizeof(char **) * (args_list_len(common->env_variables_list) + 2))))
+	result = malloc(
+			sizeof(char **) * (args_list_len(common->env_variables_list) + 2));
+	if (NULL == result)
 		return (NULL);
 	count = 0;
 	while (common->env_variables_list[count])
@@ -220,19 +189,22 @@ char	***add_argument(t_common *common, char *new_key, char *new_value)
 ** назначение нового значения переменной в список char ***
 */
 
-int		update_envp_var(t_common *common, char *key, char *new_value, int append)
+int	update_envp_var(t_common *common,
+					 char *key,
+					 char *new_value,
+					 int append)
 {
 	int		index;
 	char	*temp;
 
 	index = get_envp_var_index(common, key);
-
 	if (-1 != index)
 	{
 		if (append)
 		{
 			temp = common->env_variables_list[index][1];
-			common->env_variables_list[index][1] = ft_strjoin(common->env_variables_list[index][1], new_value);
+			common->env_variables_list[index][1] = ft_strjoin(
+					common->env_variables_list[index][1], new_value);
 			free(temp);
 		}
 		else
@@ -247,14 +219,4 @@ int		update_envp_var(t_common *common, char *key, char *new_value, int append)
 		add_argument(common, key, new_value);
 		return (0);
 	}
-}
-
-int		ft_array_len(char	**arg_list)
-{
-	int	count;
-
-	count = 0;
-	while (arg_list[count])
-		count++;
-	return (count);
 }

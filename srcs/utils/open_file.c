@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int		simple_command_open_file(char *file, int is_read, int is_cat)
+int	simple_command_open_file(char *file, int is_read, int is_cat)
 {
 	int	fd;
 
@@ -21,9 +21,41 @@ int		simple_command_open_file(char *file, int is_read, int is_cat)
 	return (fd);
 }
 
-int		simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_read, int is_cat)
+int	open_file(t_pipe *pipe_variables, char *file_name, int is_read, int is_cat)
 {
-	int count;
+	int	fd;
+
+	fd = simple_command_open_file(file_name, is_read, is_cat);
+	if (-1 == fd)
+		return (fd);
+	if (is_read)
+		pipe_variables->fdin = fd;
+	else
+		pipe_variables->fdout = fd;
+	return (fd);
+}
+
+int	open_not_file(t_pipe *pipe_variables, int is_read)
+{
+	if (is_read)
+	{
+		pipe_variables->fdin = dup(pipe_variables->fdpipe[0]);
+		return (pipe_variables->fdin);
+	}
+	else
+	{
+		pipe_variables->fdout = dup(pipe_variables->fdpipe[1]);
+		return (pipe_variables->fdout);
+	}
+}
+
+int	simple_command_in_out_fd(
+			char **files_list,
+			t_pipe *pipe_variables,
+			int is_read,
+			int is_cat)
+{
+	int	count;
 	int	fd;
 
 	count = 0;
@@ -31,14 +63,7 @@ int		simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_
 	{
 		while (files_list[count])
 		{
-			if (-1 == (fd = simple_command_open_file(files_list[count], is_read, is_cat)))
-			{
-				return (fd);
-			}
-			if (is_read)
-				pipe_variables->fdin = fd;
-			else
-				pipe_variables->fdout = fd;
+			fd = open_file(pipe_variables, files_list[count], is_read, is_cat);
 			count++;
 			if (NULL != files_list[count])
 				close(fd);
@@ -47,15 +72,6 @@ int		simple_command_in_out_fd(char **files_list, t_pipe *pipe_variables, int is_
 	}
 	else
 	{
-		if (is_read)
-		{
-			pipe_variables->fdin = dup(pipe_variables->fdpipe[0]);
-			return (pipe_variables->fdin);
-		}
-		else
-		{
-			pipe_variables->fdout = dup(pipe_variables->fdpipe[1]);
-			return (pipe_variables->fdout);
-		}
+		return (open_not_file(pipe_variables, is_read));
 	}
 }

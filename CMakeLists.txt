@@ -23,9 +23,9 @@ set(SOURCE_FILES
         srcs/signals/signals_handler.c
         srcs/get_next_line/get_next_line.c
         srcs/get_next_line/get_next_line_utils.c
-        srcs/utils/copy_envp.c
+        _void/copy_envp.c
         srcs/utils/split_path.c
-        srcs/utils/free_line_list.c
+        _void/free_line_list.c
         srcs/utils/common_init.c
         srcs/utils/make_envp.c
         srcs/utils/get_envp_variable.c
