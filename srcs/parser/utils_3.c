@@ -6,7 +6,7 @@
 /*   By: namerei <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:52:16 by namerei           #+#    #+#             */
-/*   Updated: 2021/04/14 13:52:17 by namerei          ###   ########.fr       */
+/*   Updated: 2021/04/14 14:46:53 by namerei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ char	check_line_1(const char *line)
 		if (!shield_flag && !we_are_in_quotes(line, i))
 		{
 			if (ft_strchr("{}()&`", line[i]) && !we_are_in_quotes(line, i))
-				break ;
+				return (line[i]);
 			if (line[i] == ';' && !we_are_in_quotes(line, i)
 				&& (next_after_space(line + i + 1) == ';'
 					|| next_after_space(line + i + 1) == '|'))
-				break ;
+				return (line[i]);
 			if (line[i] == '|' && !we_are_in_quotes(line, i)
 				&& (next_after_space(line + i + 1) == ';'
 					|| next_after_space(line + i + 1) == '|'
 					|| next_after_space(line + i + 1) == '\0'))
-				break ;
+				return (line[i]);
 		}
 	}
-	return (line[i]);
+	return (0);
 }
 
 int	syntax_error(const char *line)
