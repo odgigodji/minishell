@@ -44,6 +44,13 @@ void	lexer_token_post_processing(char **token,
 	}
 }
 
+char	**error_return(char ***result)
+{
+	free_lexer_results(result);
+	free(*result);
+	return (NULL);
+}
+
 int	get_token_result_proces(char *line, int *count, char **token,
 							t_common *common)
 {
@@ -76,7 +83,7 @@ char	**lexer(char *line, t_common *common)
 		if (!is_spec_symbol(line[count]))
 		{
 			if (-1 == get_token_result_proces(line, &count, &token, common))
-				return (result);
+				return (error_return(&result));
 		}
 		else
 			if (line[count] != ' ')
