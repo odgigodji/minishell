@@ -7,6 +7,7 @@ LFT_DIR	=	libft
 SRC_CMN	:=	$(addprefix srcs/,				\
 						main.c				\
 						)
+						
 
 SRC_BLD :=	$(addprefix srcs/buildins/,		\
 						mini_cd.c			\
@@ -17,7 +18,7 @@ SRC_BLD :=	$(addprefix srcs/buildins/,		\
 						mini_hello.c		\
 						mini_pwd.c			\
 						mini_unset.c		\
-           			)
+						)
 
 SRC_EXR :=	$(addprefix srcs/executor/,		\
 						execute_command.c	\
@@ -71,19 +72,18 @@ HEADER	=	minishell.h
 
 OBJ		=	$(SRC:.c=.o)
 
-#	-Wall -Wextra -Werror
 CC		=	gcc -Wall -Wextra -Werror -Iincludes -Ilibft 
 
 .PHONY:	all clean fclean re
 all:	$(NAME)
 
-.o			:	.c $(HEADER)
+$(NAME):	$(OBJ) $(LFT_DIR)/$(LFT) Makefile
+			$(CC) -L$(LFT_DIR) -lft -ltermcap -o $@ $(OBJ) 
 
-libft/libft.a:	libft/Makefile libft/libft.h
+%.o			:	%.c $(HEADER)
+
+libft/libft.a:
 			make -C $(LFT_DIR)
-
-$(NAME):	$(OBJ) $(LFT_DIR)/$(LFT) includes/$(HEADER) Makefile
-			$(CC) -L$(LFT_DIR) -lft -ltermcap -o $(NAME) $(OBJ) $(LFT_DIR)/$(LFT)
 
 clean:
 			make clean -C $(LFT_DIR)
