@@ -6,7 +6,7 @@
 /*   By: mscot <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:08 by mscot             #+#    #+#             */
-/*   Updated: 2021/04/14 13:41:09 by mscot            ###   ########.fr       */
+/*   Updated: 2021/04/14 14:18:30 by mscot            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 			pipe_variables);
 		ret = execute_simple_command_processor(simple_command,
 				pipe_variables, common);
-		waitpid(ret, &g_errno, WUNTRACED);
 		command_table_count++;
 	}
+	while (command_table_count && command_table_count--)
+		wait(&g_errno);
 }
