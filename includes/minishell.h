@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mscot <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/14 13:55:28 by mscot             #+#    #+#             */
+/*   Updated: 2021/04/14 13:56:11 by mscot            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -182,7 +194,7 @@ int					is_redirect(char *actual_token);
 t_command			get_command_table(char **lexer_result);
 t_simple_command	*get_simple_command(char **lexer_result,
 						int *current_token);
-t_simple_command *one_simple_command_init(void);
+t_simple_command	*one_simple_command_init(void);
 t_simple_command	**command_table_init(char **lexer_result);
 char				**init_args(char **lexer_result, char *spec_token);
 char				**get_outfiles(char **lexer_result, int *is_cat);
