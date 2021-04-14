@@ -66,7 +66,7 @@ t_simple_command	**command_table_init(char **lexer_result)
 	return (command_table);
 }
 
-t_simple_command *one_simple_command_init(void)
+t_simple_command	*one_simple_command_init(void)
 {
 	t_simple_command	*simple_command;
 
