@@ -1,2 +1,0 @@
-cat -e < file | sort | cat -e
-cat -e file | sort | cat -e
