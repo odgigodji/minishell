@@ -1,10 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_envp_variable_update.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mscot <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/14 13:53:23 by mscot             #+#    #+#             */
+/*   Updated: 2021/04/14 13:53:26 by mscot            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-** копирование с выделением памяти списка char ***
-** и занесением нового аргумента в список
-** память выделяется на len + 2 аргументов для нового аргумента
-*/
+#include "minishell.h"
 
 char	***add_argument(t_common *common, char *new_key, char *new_value)
 {
@@ -33,10 +39,6 @@ char	***add_argument(t_common *common, char *new_key, char *new_value)
 	common->env_variables_list = result;
 	return (result);
 }
-
-/*
-** назначение нового значения переменной в список char ***
-*/
 
 int	update_envp_var(t_common *common,
 					   char *key,
