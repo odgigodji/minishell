@@ -24,18 +24,19 @@ void	execute_preprocessing(t_common *common)
 	close_fd(&pipe_variables);
 }
 
-void	switch_stdin(t_simple_command *simple_command, t_pipe *pipe_variables)
+int	switch_stdin(t_simple_command *simple_command, t_pipe *pipe_variables)
 {
 	if (-1 == (simple_command_in_out_fd(simple_command->infiles,
 				pipe_variables, IS_READ,
 				simple_command->is_cat)))
-		return ;
+		return (1);
 	close(pipe_variables->fdpipe[0]);
 	dup2(pipe_variables->fdin, STDIN_FILENO);
 	close(pipe_variables->fdin);
+	return (0);
 }
 
-void	switch_stdout(t_simple_command *simple_command,
+int	switch_stdout(t_simple_command *simple_command,
 				t_simple_command *next_simple_command,
 				t_pipe *pipe_variables)
 {
@@ -46,10 +47,11 @@ void	switch_stdout(t_simple_command *simple_command,
 	if (-1 == (simple_command_in_out_fd(simple_command->outfiles,
 				pipe_variables, IS_WRITE,
 				simple_command->is_cat)))
-		return ;
+		return (1);
 	close(pipe_variables->fdpipe[1]);
 	dup2(pipe_variables->fdout, STDOUT_FILENO);
 	close(pipe_variables->fdout);
+	return (0);
 }
 
 int	execute_simple_command_processor(t_simple_command *simple_command,
@@ -75,10 +77,12 @@ int	execute_simple_command_processor(t_simple_command *simple_command,
 
 void	execute_processor(t_common *common, t_pipe *pipe_variables)
 {
-	int					ret;
 	int					command_table_count;
 	t_simple_command	*simple_command;
+	int					ret;
+	int					count;
 
+	count = 1;
 	command_table_count = 0;
 	pipe_variables->fdpipe[0] = dup(pipe_variables->tmpin);
 	while (common->command.simple_commands
@@ -93,6 +97,6 @@ void	execute_processor(t_common *common, t_pipe *pipe_variables)
 				pipe_variables, common);
 		command_table_count++;
 	}
-	while (command_table_count && command_table_count--)
-		wait(&g_errno);
+	while (count > 0)
+		count = wait(&g_errno);
 }
