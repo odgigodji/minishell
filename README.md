@@ -1,2 +1,2 @@
-#minishell
+# minishell
 our version of bash 
