@@ -31,3 +31,8 @@ Minishell запускает исполняемые файлы из абсолю
 
 Некоторые функции являются «встроенными», то есть мы не вызываем исполняемый файл, мы перекодировали их напрямую. Это касается ``echo``, ``pwd``, ``cd``, ``env``, ``export``, ``unset`` и ``exit``.
 
+### Статьи и источники
+
+* [Структуры программы](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf)
+* [Shellsyntax](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html)
+* [Unix Processes in C](https://www.youtube.com/watch?v=cex9XrZCU14&list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY&ab_channel=CodeVault)
