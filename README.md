@@ -3,7 +3,7 @@
 Наш собственный маленький bash. 
 
 <p align="center">
-  <img src="https://i.imgur.com/En13A7p.png" width="100%" />
+  <img src="https://i.ibb.co/hmbKcfp/Screen-Shot-2021-05-16-at-6-29-47-PM.png" width="100%" />
 </p>
 
 
