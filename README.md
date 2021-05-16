@@ -1,6 +1,6 @@
 # minishell
 
-42 project, recoding our own little bash. A program capable of parsing a prompt and launching executables with arguments, along with a few built-in functions.
+Наш собственный маленький bash. 
 
 <p align="center">
   <img src="https://i.imgur.com/En13A7p.png" width="100%" />
@@ -17,17 +17,17 @@
 ./minishell
 ```
 
-### Available options
+### Возможности 
 
-Minishell runs executables from an absolute, relative or environment PATH (``/bin/ls`` or ``ls``), including arguments or options. ``'`` and ``"`` work the same as bash, except for multiline commands.
+Minishell запускает исполняемые файлы из абсолютного, относительного или окружения PATH (`` / bin / ls '' или `` ls ''), включая аргументы или параметры. `'` `и` `" `работают так же, как bash, за исключением многострочных команд.
 
-You can separate commands with ``;``, as well as use redirections ``>`` ``>>`` ``<`` and pipes ``|``.
+Вы можете разделять команды с помощью ``;``, а также использовать редиректы ``> `` `` >> `` `` <`` и пайпы `` | ``.
 
-Environment variables are handled, like ``$HOME``, including the return code ``$?``.
+Переменные среды обрабатываются, как $ HOME, включая код возврата $?
 
-Finally, you can use ``Ctrl-C`` to interrupt and ``Ctrl-\`` to quit a program, as well as ``Ctrl-D`` to throw an EOF, same as in bash.
+Наконец, вы можете использовать Ctrl-C для прерывания и Ctrl- \ для выхода из программы, а также Ctrl-D для вызова EOF, как в bash.
 
-A few of the functions are "built-in", meaning we don't call the executable, we re-coded them directly. It's the case for ``echo``, ``pwd``, ``cd``, ``env``, ``export``, ``unset`` and ``exit``.
+Некоторые функции являются «встроенными», то есть мы не вызываем исполняемый файл, мы перекодировали их напрямую. Это касается echo, pwd, cd, env, export, unset и exit.
 
 ### Credit
 
